@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date Created in 2019-10-31
  */
 @SpringBootApplication
+@tk.mybatis.spring.annotation.MapperScan(basePackages = "tzc.badminton.mapper")
 public class Application {
 
     /**

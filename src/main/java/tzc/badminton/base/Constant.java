@@ -1,7 +1,7 @@
-package tzc.badminton.common;
+package tzc.badminton.base;
 
 /**
- * 常量接口类
+ * 常量接口类，所有魔法值需写在此类中
  * @author Planeswalker23
  * @date Created in 2019-11-01
  */

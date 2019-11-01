@@ -1,4 +1,4 @@
-package tzc.badminton.common;
+package tzc.badminton.base.log;
 
 import com.alibaba.fastjson.JSON;
 import org.aspectj.lang.ProceedingJoinPoint;

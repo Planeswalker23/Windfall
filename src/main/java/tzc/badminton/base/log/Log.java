@@ -1,4 +1,4 @@
-package tzc.badminton.common;
+package tzc.badminton.base.log;
 
 import java.lang.annotation.*;
 

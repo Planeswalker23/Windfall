@@ -1,4 +1,4 @@
-package tzc.badminton.common;
+package tzc.badminton.base;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

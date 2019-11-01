@@ -2,6 +2,7 @@ package tzc.badminton.base.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import tzc.badminton.base.Constant;
@@ -25,7 +26,7 @@ public class WindfallExceptionHandler {
      * @return {@link tzc.badminton.base.Response}
      */
     @ExceptionHandler(value = LoginException.class)
-    public Response loginExceptionHandler(Exception e) {
+    public Response loginExceptionHandler(LoginException e) {
         // 登录自定义异常
         log.warn(LOGIN_SERVICE + e.getClass() + e.getMessage());
         return Response.failed(e.getMessage());
@@ -37,8 +38,15 @@ public class WindfallExceptionHandler {
      * @return {@link tzc.badminton.base.Response}
      */
     @ExceptionHandler(value = WindfallException.class)
-    public Response windfallExceptionHandler(Exception e) {
+    public Response windfallExceptionHandler(WindfallException e) {
         // 业务性自定义异常
+        log.warn(e.getMessage(), e);
+        return Response.failed(e.getMessage());
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public Response methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+        // 参数校验异常
         log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
     }

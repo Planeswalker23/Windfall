@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
 import tzc.badminton.base.log.Log;
-import tzc.badminton.dto.LoginDto;
-import tzc.badminton.dto.RegisterDto;
-import tzc.badminton.entity.User;
+import tzc.badminton.module.dto.LoginDto;
+import tzc.badminton.module.dto.RegisterDto;
+import tzc.badminton.module.entity.User;
 import tzc.badminton.service.LoginService;
 
 import javax.validation.Valid;
@@ -34,7 +34,7 @@ public class LoginController {
 
     /**
      * 注册
-     * @param register {@link RegisterDto}
+     * @param register {@link tzc.badminton.module.dto.RegisterDto}
      *                 {"account":"dd","password":"1","email":"123@qq.com"}
      * @return {@link tzc.badminton.base.Response}
      */
@@ -50,7 +50,7 @@ public class LoginController {
 
     /**
      * 修改个人信息
-     * @param newUser {@link tzc.badminton.entity.User}
+     * @param newUser {@link tzc.badminton.module.entity.User}
      * {
      *     "userId": "c68c512b-55c5-456a-9832-783070166c40",
      *     "userName": "Planeswalker1101002",
@@ -74,7 +74,7 @@ public class LoginController {
 
     /**
      * 登录
-     * @param loginDto {@link LoginDto}
+     * @param loginDto {@link tzc.badminton.module.dto.LoginDto}
      *                 {"email": "1101001@qq.com","password": "123"}
      * @return {@link tzc.badminton.base.Response}
      */

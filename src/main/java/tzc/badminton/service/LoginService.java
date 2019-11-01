@@ -11,8 +11,8 @@ import tzc.badminton.base.Constant;
 import tzc.badminton.base.exception.WindfallException;
 import tzc.badminton.base.utils.CheckUtil;
 import tzc.badminton.base.utils.NumberUtil;
-import tzc.badminton.dto.LoginDto;
-import tzc.badminton.entity.User;
+import tzc.badminton.module.dto.LoginDto;
+import tzc.badminton.module.entity.User;
 import tzc.badminton.mapper.UserMapper;
 
 import java.util.Date;
@@ -102,7 +102,7 @@ public class LoginService {
     /**
      * 登录服务
      * @param loginDto
-     * @return {@link tzc.badminton.entity.User}
+     * @return {@link tzc.badminton.module.entity.User}
      */
     public User login(LoginDto loginDto) {
         // 根据「邮箱」查询

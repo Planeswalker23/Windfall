@@ -1,7 +1,7 @@
 package tzc.badminton.mapper;
 
 import tk.mybatis.mapper.common.Mapper;
-import tzc.badminton.entity.User;
+import tzc.badminton.module.entity.User;
 
 /**
  * user表 持久层

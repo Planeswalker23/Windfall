@@ -1,4 +1,4 @@
-package tzc.badminton.entity;
+package tzc.badminton.module.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;

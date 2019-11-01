@@ -1,4 +1,4 @@
-package tzc.badminton.dto;
+package tzc.badminton.module.dto;
 
 import lombok.Data;
 

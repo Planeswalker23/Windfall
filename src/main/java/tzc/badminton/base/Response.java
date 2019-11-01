@@ -62,13 +62,6 @@ public class Response<T> {
         return res;
     }
 
-    public static Response success(String message) {
-        Response res = new Response();
-        res.setSuccess(true);
-        res.setMessage(message);
-        return res;
-    }
-
     public static Response success(Integer num) {
         Response res = new Response();
         res.setSuccess(true);

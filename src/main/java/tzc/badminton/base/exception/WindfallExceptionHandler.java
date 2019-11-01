@@ -27,7 +27,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = LoginException.class)
     public Response loginExceptionHandler(Exception e) {
         // 登录自定义异常
-        log.error(LOGIN_SERVICE + e.getClass() + e.getMessage());
+        log.warn(LOGIN_SERVICE + e.getClass() + e.getMessage());
         return Response.failed(e.getMessage());
     }
 
@@ -39,7 +39,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = WindfallException.class)
     public Response windfallExceptionHandler(Exception e) {
         // 业务性自定义异常
-        log.error(e.getMessage(), e);
+        log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 

@@ -1,9 +1,10 @@
-package tzc.badminton.module;
+package tzc.badminton.entity;
 
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * user表 用户实体类
@@ -32,7 +33,7 @@ public class User {
     private String password;
 
     /**
-     * 邮箱号
+     * 邮箱，不可修改
      */
     private String email;
 
@@ -40,7 +41,7 @@ public class User {
      * 创建记录的时间
      */
     @Column(name = "create_time")
-    private String createTime;
+    private Date createTime;
 
     /**
      * 操作时间，写入数据库时自动更新

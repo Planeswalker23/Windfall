@@ -1,5 +1,6 @@
 package tzc.badminton.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -47,6 +48,15 @@ public class User {
      * 操作时间，写入数据库时自动更新
      */
     @Column(name = "update_time")
-    private String updateTime;
+    private Date updateTime;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 }

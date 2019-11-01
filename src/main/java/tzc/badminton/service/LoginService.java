@@ -1,18 +1,19 @@
 package tzc.badminton.service;
 
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import tk.mybatis.mapper.entity.Example;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.exception.WindfallException;
 import tzc.badminton.base.utils.CheckUtil;
 import tzc.badminton.base.utils.NumberUtil;
-import tzc.badminton.mapper.UserMapper;
+import tzc.badminton.dto.LoginDto;
 import tzc.badminton.entity.User;
+import tzc.badminton.mapper.UserMapper;
 
 import java.util.Date;
 import java.util.List;
@@ -46,8 +47,8 @@ public class LoginService {
             throw new WindfallException(Constant.WRONG_MAIL);
         }
         // 根据「邮箱」查询所有匹配的用户
-        Example selectByEmail = new Example(User.class);
-        selectByEmail.createCriteria().andEqualTo("email", email);
+        User selectByEmail = new User();
+        selectByEmail.setEmail(newUser.getEmail());
         List<User> resultByEmail = userMapper.selectByExample(selectByEmail);
         if (!CollectionUtils.isEmpty(resultByEmail) && resultByEmail.size() > 0) {
             // 若存在邮箱不相等，且userId不相等的情况，说明想要修改或注册的邮箱已经被使用
@@ -77,9 +78,9 @@ public class LoginService {
             return newUser.getUserId();
         } else {
             // 根据「邮箱」查询所有匹配的用户
-            Example selectByUserId = new Example(User.class);
-            selectByUserId.createCriteria().andEqualTo("userId", newUser.getUserId());
-            User resultByUserId = userMapper.selectOneByExample(selectByUserId);
+            User selectByUserId = new User();
+            selectByUserId.setUserId(newUser.getUserId());
+            User resultByUserId = userMapper.selectOne(selectByUserId);
             // 若根据userId无法查询到数据，数据错误
             if (resultByUserId == null) {
                 throw new WindfallException(Constant.USER_NOT_EXIST);
@@ -96,5 +97,28 @@ public class LoginService {
             logger.info("日志信息 => 修改个人信息成功");
             return null;
         }
+    }
+
+    /**
+     * 登录服务
+     * @param loginDto
+     * @return {@link tzc.badminton.entity.User}
+     */
+    public User login(LoginDto loginDto) {
+        // 根据「邮箱」查询
+        User selectByEmail = new User();
+        selectByEmail.setEmail(loginDto.getEmail());
+        User selectByEmailUser = userMapper.selectOne(selectByEmail);
+        // 该邮箱尚未注册
+        if (selectByEmailUser == null) {
+            throw new WindfallException(Constant.MAIL_NOT_REGIST);
+        }
+        // 验证密码
+        if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
+            throw new WindfallException(Constant.WRONG_PASSWORD);
+        }
+        logger.info("日志信息 => 登录成功 ***** " + JSON.toJSONString(selectByEmailUser));
+        // todo 将已登录用户信息放入session
+        return selectByEmailUser;
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
 import tzc.badminton.base.log.Log;
+import tzc.badminton.dto.LoginDto;
 import tzc.badminton.dto.RegisterDto;
 import tzc.badminton.entity.User;
 import tzc.badminton.service.LoginService;
@@ -69,5 +70,17 @@ public class LoginController {
         logger.info("日志信息 => 开始修改个人信息业务");
         loginService.applyUser(newUser);
         return Response.success();
+    }
+
+    /**
+     * 登录
+     * @param loginDto {@link LoginDto}
+     *                 {"email": "1101001@qq.com","password": "123"}
+     * @return {@link tzc.badminton.base.Response}
+     */
+    @Log("登录")
+    @PostMapping("/login")
+    public Response login(@Valid @RequestBody LoginDto loginDto) {
+        return Response.success(loginService.login(loginDto));
     }
 }

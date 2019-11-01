@@ -45,7 +45,7 @@ CREATE TABLE `mail` (
   `validation_code` varchar(45) DEFAULT NULL COMMENT 'md5加密后的值',
   `out_time` datetime DEFAULT NULL COMMENT '邮件过期时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`mailid`) USING BTREE
+  PRIMARY KEY (`mail_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 COMMENT='邮箱更改密码表';
 
 SET FOREIGN_KEY_CHECKS = 1;

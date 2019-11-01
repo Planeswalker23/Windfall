@@ -14,7 +14,7 @@ public class CheckUtil {
     /**
      * 验证邮箱格式
      * @param email
-     * @return ture 正确 false 不正确
+     * @return true 正确 false 不正确
      */
     public static boolean checkEmail(String email) {
         String rule = "^[A-Za-zd0-9]+([-_.][A-Za-zd0-9]+)*@([A-Za-zd0-9]+[-.])+[A-Za-zd]{2,5}$";
@@ -26,7 +26,7 @@ public class CheckUtil {
     /**
      * 判断时间是否过期
      * @param lastMailOutTime 过期时间
-     * @return ture-安全码已过期 false-安全码未过期
+     * @return true-安全码已过期 false-安全码未过期
      */
     public static boolean isEmailOutTime(Date lastMailOutTime) {
         // 若安全码已过期，返回true

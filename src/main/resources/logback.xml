@@ -9,7 +9,7 @@
     <springProperty scope="context" name="APPLICATION_NAME" source="spring.application.name"/>
     <property  name="LOG_HOME" value="logs" />
     <!--<property  name="LOG_HOME" value="logs" />-->
-    <property name="APPLICATION_NAME" value="sanwei"/>
+    <property name="APPLICATION_NAME" value="Windfall"/>
 
     <!-- INFO级别 -->
     <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">

@@ -140,10 +140,12 @@ public class LoginService {
         // 根据「userId」获取用户信息
         User selectByUserIdCondition = new User();
         selectByUserIdCondition.setUserId(userId);
-        User selectByUserIdEntity = userMapper.selectOneByExample(selectByUserIdCondition);
+        User selectByUserIdEntity = userMapper.selectOne(selectByUserIdCondition);
         if (selectByUserIdEntity == null) {
             throw new LoginException(Constant.USER_NOT_EXIST);
         }
+        // 获取个人信息禁止返回密码
+        selectByUserIdCondition.setPassword(null);
         logger.info("日志信息 => 用户个人信息: {} " + JSON.toJSONString(selectByUserIdEntity));
         return selectByUserIdEntity;
     }

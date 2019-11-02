@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,6 @@ import tzc.badminton.module.dto.RegisterDto;
 import tzc.badminton.module.entity.User;
 import tzc.badminton.service.LoginService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -83,5 +83,22 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@Valid @RequestBody LoginDto loginDto) {
         return Response.success(loginService.login(loginDto));
+    }
+
+    /**
+     * 获取用户个人信息
+     * @param userId 用户id {"userId":"1"}
+     * @return cn.fyd.common.Response
+     * @throws Exception
+     */
+    @Log("获取用户个人信息")
+    @GetMapping("/userInfo")
+    public String info(String userId) {
+        // 验证参数是否为空
+        if (StringUtils.isEmpty(userId)) {
+            return Response.failed(Constant.EMPTY_PARAMS);
+        }
+        return Response.success(loginService.getUserInfo(userId));
+
     }
 }

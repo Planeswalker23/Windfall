@@ -130,4 +130,21 @@ public class LoginService {
         // 登录成功后返回用户信息
         return selectByEmailUser;
     }
+
+    /**
+     * 根据userId获取用户个人信息
+     * @param userId
+     * @return
+     */
+    public User getUserInfo(String userId) {
+        // 根据「userId」获取用户信息
+        User selectByUserIdCondition = new User();
+        selectByUserIdCondition.setUserId(userId);
+        User selectByUserIdEntity = userMapper.selectOneByExample(selectByUserIdCondition);
+        if (selectByUserIdEntity == null) {
+            throw new LoginException(Constant.USER_NOT_EXIST);
+        }
+        logger.info("日志信息 => 用户个人信息: {} " + JSON.toJSONString(selectByUserIdEntity));
+        return selectByUserIdEntity;
+    }
 }

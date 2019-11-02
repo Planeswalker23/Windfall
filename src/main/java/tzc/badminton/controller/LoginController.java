@@ -17,6 +17,7 @@ import tzc.badminton.module.dto.RegisterDto;
 import tzc.badminton.module.entity.User;
 import tzc.badminton.service.LoginService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -36,12 +37,12 @@ public class LoginController {
      * 注册
      * @param register {@link tzc.badminton.module.dto.RegisterDto}
      *                 {"account":"dd","password":"1","email":"123@qq.com"}
-     * @return {@link tzc.badminton.base.Response}
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @Log("注册")
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public Response register(@Valid @RequestBody RegisterDto register) {
+    public String register(@Valid @RequestBody RegisterDto register) {
         logger.info("日志信息 => 开始注册业务");
         User newUser = new User();
         BeanUtils.copyProperties(register, newUser);
@@ -57,12 +58,12 @@ public class LoginController {
      *     "password": "1101001",
      *     "email": "1101001@qq.com"
      * }
-     * @return {@link tzc.badminton.base.Response}
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @Log("修改个人信息")
     @PostMapping("/modify")
     @Transactional(rollbackFor = Exception.class)
-    public Response modifyUser(@RequestBody User newUser) {
+    public String modifyUser(@RequestBody User newUser) {
         // 参数验证
         if (newUser==null || StringUtils.isEmpty(newUser.getUserId())) {
             return Response.failed(Constant.EMPTY_PARAMS);
@@ -76,11 +77,11 @@ public class LoginController {
      * 登录
      * @param loginDto {@link tzc.badminton.module.dto.LoginDto}
      *                 {"email": "1101001@qq.com","password": "123"}
-     * @return {@link tzc.badminton.base.Response}
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @Log("登录")
     @PostMapping("/login")
-    public Response login(@Valid @RequestBody LoginDto loginDto) {
+    public String login(@Valid @RequestBody LoginDto loginDto) {
         return Response.success(loginService.login(loginDto));
     }
 }

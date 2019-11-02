@@ -11,10 +11,12 @@ import tzc.badminton.base.Constant;
 import tzc.badminton.base.exception.WindfallException;
 import tzc.badminton.base.utils.CheckUtil;
 import tzc.badminton.base.utils.NumberUtil;
+import tzc.badminton.base.utils.SessionUtil;
+import tzc.badminton.mapper.UserMapper;
 import tzc.badminton.module.dto.LoginDto;
 import tzc.badminton.module.entity.User;
-import tzc.badminton.mapper.UserMapper;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -117,8 +119,15 @@ public class LoginService {
         if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
             throw new WindfallException(Constant.WRONG_PASSWORD);
         }
-        logger.info("日志信息 => 登录成功 ***** " + JSON.toJSONString(selectByEmailUser));
-        // todo 将已登录用户信息放入session
+        logger.info("日志信息 => 登录成功，用户信息: {}", JSON.toJSONString(selectByEmailUser));
+        // 将已登录用户信息放入session
+        HttpSession session = SessionUtil.getSession();
+        session.setAttribute(Constant.USER_BEAN, selectByEmailUser);
+        logger.info("日志信息 => 登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
+                Constant.USER_BEAN, session.getId(), JSON.toJSONString(selectByEmailUser));
+        // 将用户密码置空
+        selectByEmailUser.setPassword(null);
+        // 登录成功后返回用户信息
         return selectByEmailUser;
     }
 }

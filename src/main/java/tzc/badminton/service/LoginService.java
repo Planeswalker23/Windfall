@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import tzc.badminton.base.Constant;
+import tzc.badminton.base.exception.LoginException;
 import tzc.badminton.base.exception.WindfallException;
 import tzc.badminton.base.utils.CheckUtil;
 import tzc.badminton.base.utils.NumberUtil;
@@ -38,9 +39,8 @@ public class LoginService {
      * @param newUser
      * @return 注册成功返回userId
      *         修改成功返回null
-     * @throws WindfallException
      */
-    public String applyUser(User newUser) throws WindfallException {
+    public String applyUser(User newUser) {
         String email = newUser.getEmail();
         // 邮箱是否为空
         boolean isEmailEmpty = StringUtils.isEmpty(email);
@@ -59,9 +59,9 @@ public class LoginService {
                 if (email.equals(resultEntity.getEmail()) && !resultEntity.getUserId().equals(newUser.getUserId())) {
                     // 若传入userId为空是注册报错，否则是修改个人信息的报错
                     if (StringUtils.isEmpty(newUser.getUserId())) {
-                        throw new WindfallException(Constant.MAIL_EXIST);
+                        throw new LoginException(Constant.MAIL_EXIST);
                     } else {
-                        throw new WindfallException(Constant.USER_NOT_EXIST);
+                        throw new LoginException(Constant.USER_NOT_EXIST);
                     }
                 }
             });
@@ -74,7 +74,7 @@ public class LoginService {
             newUser.setCreateTime(new Date());
             if(userMapper.insertSelective(newUser) == 0) {
                 logger.warn("日志信息 => 注册失败");
-                throw new WindfallException(Constant.FAILED);
+                throw new LoginException(Constant.FAILED);
             }
             logger.info("日志信息 => 注册成功");
             return newUser.getUserId();
@@ -85,7 +85,7 @@ public class LoginService {
             User resultByUserId = userMapper.selectOne(selectByUserId);
             // 若根据userId无法查询到数据，数据错误
             if (resultByUserId == null) {
-                throw new WindfallException(Constant.USER_NOT_EXIST);
+                throw new LoginException(Constant.USER_NOT_EXIST);
             }
             // 若修改了密码，将密码加密
             if (!StringUtils.isEmpty(newUser.getPassword())) {
@@ -94,7 +94,7 @@ public class LoginService {
             // 修改信息
             if (userMapper.updateByPrimaryKeySelective(newUser) == 0) {
                 logger.warn("日志信息 => 修改个人信息失败");
-                throw new WindfallException(Constant.EDIT_FAILED);
+                throw new LoginException(Constant.EDIT_FAILED);
             }
             logger.info("日志信息 => 修改个人信息成功");
             return null;
@@ -113,11 +113,11 @@ public class LoginService {
         User selectByEmailUser = userMapper.selectOne(selectByEmail);
         // 该邮箱尚未注册
         if (selectByEmailUser == null) {
-            throw new WindfallException(Constant.MAIL_NOT_REGIST);
+            throw new LoginException(Constant.MAIL_NOT_REGIST);
         }
         // 验证密码
         if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
-            throw new WindfallException(Constant.WRONG_PASSWORD);
+            throw new LoginException(Constant.WRONG_PASSWORD);
         }
         logger.info("日志信息 => 登录成功，用户信息: {}", JSON.toJSONString(selectByEmailUser));
         // 将已登录用户信息放入session

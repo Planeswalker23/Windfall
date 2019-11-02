@@ -51,7 +51,7 @@ public class LoginService {
         // 根据「邮箱」查询所有匹配的用户
         User selectByEmail = new User();
         selectByEmail.setEmail(newUser.getEmail());
-        List<User> resultByEmail = userMapper.selectByExample(selectByEmail);
+        List<User> resultByEmail = userMapper.select(selectByEmail);
         if (!CollectionUtils.isEmpty(resultByEmail) && resultByEmail.size() > 0) {
             // 若存在邮箱不相等，且userId不相等的情况，说明想要修改或注册的邮箱已经被使用
             // 注册时根据已存在邮箱查询到的结果userId不等于传参userId:null

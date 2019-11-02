@@ -88,8 +88,7 @@ public class LoginController {
     /**
      * 获取用户个人信息
      * @param userId 用户id {"userId":"1"}
-     * @return cn.fyd.common.Response
-     * @throws Exception
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @Log("获取用户个人信息")
     @GetMapping("/userInfo")

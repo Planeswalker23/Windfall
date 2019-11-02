@@ -1,7 +1,6 @@
 package tzc.badminton.base;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
  * 返回公用类
@@ -51,36 +50,35 @@ public class Response<T> {
 
     @Override
     public String toString() {
-        //返回json时只返回不为null的字段
-        return JSON.toJSONString(this, SerializerFeature.WriteMapNullValue);
+        return JSON.toJSONString(this);
     }
 
-    public static Response success() {
+    public static String success() {
         Response res = new Response();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
-        return res;
+        return res.toString();
     }
 
-    public static Response success(Integer num) {
+    public static String success(Integer num) {
         Response res = new Response();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
-        return res;
+        return res.toString();
     }
 
-    public static <T> Response success(T data) {
+    public static <T> String success(T data) {
         Response<T> res = new Response<T>();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
         res.setData(data);
-        return res;
+        return res.toString();
     }
 
-    public static Response failed(String reason) {
+    public static String failed(String reason) {
         Response res = new Response();
         res.setSuccess(false);
         res.setMessage(reason);
-        return res;
+        return res.toString();
     }
 }

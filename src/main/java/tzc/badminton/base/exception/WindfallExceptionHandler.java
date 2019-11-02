@@ -23,29 +23,34 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉登录自定义异常 LoginException.class
      * @param e 登录自定义异常
-     * @return {@link tzc.badminton.base.Response}
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @ExceptionHandler(value = LoginException.class)
-    public Response loginExceptionHandler(LoginException e) {
+    public String loginExceptionHandler(LoginException e) {
         // 登录自定义异常
         log.warn(LOGIN_SERVICE + e.getClass() + e.getMessage());
         return Response.failed(e.getMessage());
     }
 
     /**
-     * 拦截捕捉登录业务性自定义异常 Exception.class
+     * 拦截捕捉登录业务性自定义异常 WindfallException.class
      * @param e 业务性自定义异常
-     * @return {@link tzc.badminton.base.Response}
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @ExceptionHandler(value = WindfallException.class)
-    public Response windfallExceptionHandler(WindfallException e) {
+    public String windfallExceptionHandler(WindfallException e) {
         // 业务性自定义异常
         log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 
+    /**
+     * 拦截捕捉参数校验异常 MethodArgumentNotValidException.class
+     * @param e 参数校验异常
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public Response methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+    public String methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         // 参数校验异常
         log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
@@ -54,10 +59,10 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉所有异常 Exception.class
      * @param e 所有异常
-     * @return {@link tzc.badminton.base.Response}
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @ExceptionHandler(value = Exception.class)
-    public Response allExceptionHandler(Exception e) {
+    public String allExceptionHandler(Exception e) {
         // 其他未知异常
         log.error(e.getMessage(), e);
         return Response.failed(Constant.SYSTEM_ERROR);

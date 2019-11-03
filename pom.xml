@@ -12,7 +12,7 @@
 
     <groupId>tzc.badminton</groupId>
     <artifactId>Windfall</artifactId>
-    <version>1.0</version>
+    <version>1.0.0.Release</version>
     <packaging>jar</packaging>
 
     <properties>

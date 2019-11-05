@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import tzc.badminton.base.Constant;
@@ -27,6 +28,7 @@ import java.util.List;
  * @date Created in 2019-11-01
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class LoginService {
 
     private static Logger logger = LoggerFactory.getLogger(LoginService.class);

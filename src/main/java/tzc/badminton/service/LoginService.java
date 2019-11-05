@@ -147,7 +147,7 @@ public class LoginService {
             throw new LoginException(Constant.USER_NOT_EXIST);
         }
         // 获取个人信息禁止返回密码
-        selectByUserIdCondition.setPassword(null);
+        selectByUserIdEntity.setPassword(null);
         logger.info("日志信息 => 用户个人信息: {} " + JSON.toJSONString(selectByUserIdEntity));
         return selectByUserIdEntity;
     }

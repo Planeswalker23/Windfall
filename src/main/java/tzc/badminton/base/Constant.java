@@ -23,10 +23,16 @@ public interface Constant {
     Integer TWENTY_FOUR = 24;
 
     /**
-     * `
+     * 状态码
      */
     Integer REQUEST_SUCCESS_CODE = 200;
     Integer REQUEST_FAILED_CODE = 500;
+
+    /**
+     * 符号
+     */
+    String MAO_HAO = "：";
+    String DOU_HAO = "，";
 
     String GET = "get";
 
@@ -98,6 +104,8 @@ public interface Constant {
     String DO = ".do";
 
     String POST_PARAMS_FORMAT_ERROR = "Post请求参数格式不符合要求";
+
+    String VALID_ERROR = "参数校验失败";
 
 
 }

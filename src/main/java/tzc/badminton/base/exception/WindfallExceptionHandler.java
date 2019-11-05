@@ -58,9 +58,9 @@ public class WindfallExceptionHandler {
         // 获取校验失败信息
         BindingResult bindingResult = e.getBindingResult();
         // 拼接校验异常信息
-        StringBuilder errorMessage = new StringBuilder("校验失败:");
+        StringBuilder errorMessage = new StringBuilder(Constant.VALID_ERROR).append(Constant.MAO_HAO);
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            errorMessage.append(fieldError.getDefaultMessage()).append(",");
+            errorMessage.append(fieldError.getDefaultMessage()).append(Constant.DOU_HAO);
         }
         return Response.failed(errorMessage.toString());
     }

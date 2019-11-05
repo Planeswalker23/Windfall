@@ -2,6 +2,8 @@ package tzc.badminton.base.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -53,7 +55,14 @@ public class WindfallExceptionHandler {
     public String methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         // 参数校验异常
         log.warn(e.getMessage(), e);
-        return Response.failed(e.getMessage());
+        // 获取校验失败信息
+        BindingResult bindingResult = e.getBindingResult();
+        // 拼接校验异常信息
+        StringBuilder errorMessage = new StringBuilder("校验失败:");
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+            errorMessage.append(fieldError.getDefaultMessage()).append(",");
+        }
+        return Response.failed(errorMessage.toString());
     }
 
     /**

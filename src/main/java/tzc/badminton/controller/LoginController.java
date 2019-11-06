@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
 import tzc.badminton.base.log.Log;
+import tzc.badminton.base.log.Login;
 import tzc.badminton.module.dto.LoginDto;
 import tzc.badminton.module.dto.RegisterDto;
 import tzc.badminton.module.entity.User;
@@ -60,6 +61,7 @@ public class LoginController {
      * }
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
+    @Login
     @Log("修改个人信息")
     @PostMapping("/modify")
     @Transactional(rollbackFor = Exception.class)
@@ -90,6 +92,7 @@ public class LoginController {
      * @param userId 用户id {"userId":"1"}
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
+    @Login
     @Log("获取用户个人信息")
     @GetMapping("/userInfo")
     public String info(String userId) {

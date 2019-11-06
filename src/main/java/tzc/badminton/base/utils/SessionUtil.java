@@ -40,7 +40,7 @@ public class SessionUtil {
             return null;
         } else {
             // 已登录，返回登录信息
-            logger.info("==>  获取登录信息成功，用户信息: {}", JSON.toJSONString(user));
+            logger.info("获取登录信息成功，用户信息: {}", JSON.toJSONString(user));
             return user;
         }
     }

@@ -69,7 +69,7 @@ public class LoginController {
         if (newUser==null || StringUtils.isEmpty(newUser.getUserId())) {
             return Response.failed(Constant.EMPTY_PARAMS);
         }
-        logger.info("==>  开始修改个人信息业务");
+        logger.info("开始修改个人信息业务");
         loginService.applyUser(newUser);
         return Response.success();
     }

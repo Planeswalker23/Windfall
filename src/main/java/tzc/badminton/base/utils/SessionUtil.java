@@ -36,11 +36,11 @@ public class SessionUtil {
     public static User getUserBean() {
         User user = (User) getSession().getAttribute(Constant.USER_BEAN);
         if (user == null) {
-            // todo 未登录，返回到登录页
+            // 未登录，返回到登录页（返回到未登录页由aop完成）
             return null;
         } else {
             // 已登录，返回登录信息
-            logger.info("日志信息 => 获取登录信息成功，用户信息: {}", JSON.toJSONString(user));
+            logger.info("==>  获取登录信息成功，用户信息: {}", JSON.toJSONString(user));
             return user;
         }
     }

@@ -75,10 +75,10 @@ public class LoginService {
             newUser.setUserId(NumberUtil.createUUId());
             newUser.setCreateTime(new Date());
             if(userMapper.insertSelective(newUser) == 0) {
-                logger.warn("日志信息 => 注册失败");
+                logger.warn("==>  注册失败");
                 throw new LoginException(Constant.FAILED);
             }
-            logger.info("日志信息 => 注册成功");
+            logger.info("==>  注册成功");
             return newUser.getUserId();
         } else {
             // 根据「邮箱」查询所有匹配的用户
@@ -95,10 +95,10 @@ public class LoginService {
             }
             // 修改信息
             if (userMapper.updateByPrimaryKeySelective(newUser) == 0) {
-                logger.warn("日志信息 => 修改个人信息失败");
+                logger.warn("==>  修改个人信息失败");
                 throw new LoginException(Constant.EDIT_FAILED);
             }
-            logger.info("日志信息 => 修改个人信息成功");
+            logger.info("==>  修改个人信息成功");
             return null;
         }
     }
@@ -121,11 +121,11 @@ public class LoginService {
         if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
             throw new LoginException(Constant.WRONG_PASSWORD);
         }
-        logger.info("日志信息 => 登录成功，用户信息: {}", JSON.toJSONString(selectByEmailUser));
+        logger.info("==>  登录成功，用户信息: {}", JSON.toJSONString(selectByEmailUser));
         // 将已登录用户信息放入session
         HttpSession session = SessionUtil.getSession();
         session.setAttribute(Constant.USER_BEAN, selectByEmailUser);
-        logger.info("日志信息 => 登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
+        logger.info("==>  登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
                 Constant.USER_BEAN, session.getId(), JSON.toJSONString(selectByEmailUser));
         // 将用户密码置空
         selectByEmailUser.setPassword(null);
@@ -148,7 +148,7 @@ public class LoginService {
         }
         // 获取个人信息禁止返回密码
         selectByUserIdEntity.setPassword(null);
-        logger.info("日志信息 => 用户个人信息: {} " + JSON.toJSONString(selectByUserIdEntity));
+        logger.info("==>  用户个人信息: {} " + JSON.toJSONString(selectByUserIdEntity));
         return selectByUserIdEntity;
     }
 }

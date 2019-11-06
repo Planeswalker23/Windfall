@@ -43,7 +43,7 @@ public class LoginController {
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
     public String register(@Valid @RequestBody RegisterDto register) {
-        logger.info("日志信息 => 开始注册业务");
+        logger.info("==>  开始注册业务");
         User newUser = new User();
         BeanUtils.copyProperties(register, newUser);
         return Response.success(loginService.applyUser(newUser));
@@ -68,7 +68,7 @@ public class LoginController {
         if (newUser==null || StringUtils.isEmpty(newUser.getUserId())) {
             return Response.failed(Constant.EMPTY_PARAMS);
         }
-        logger.info("日志信息 => 开始修改个人信息业务");
+        logger.info("==>  开始修改个人信息业务");
         loginService.applyUser(newUser);
         return Response.success();
     }

@@ -16,19 +16,19 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class LogAop {
+public class WindfallAop {
 
-    private static Logger logger = LoggerFactory.getLogger(LogAop.class);
+    private static Logger logger = LoggerFactory.getLogger(WindfallAop.class);
 
     /**
-     * 输出日志aop
+     * 在接口前后输出日志aop
      * @param pjp
      * @param log
      * @return
      * @throws Throwable
      */
     @Around(value = "@annotation(log)")
-    public Object outPutLogBeforeDoMethods(ProceedingJoinPoint pjp, Log log) throws Throwable {
+    public Object outPutLogBeforeAndAfterDoMethods(ProceedingJoinPoint pjp, Log log) throws Throwable {
         logger.info("——————————Start: {}", log.value());
         // 接口类型
         logger.info("连接点类型: {}", pjp.getKind());

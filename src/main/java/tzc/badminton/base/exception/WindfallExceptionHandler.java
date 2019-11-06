@@ -35,7 +35,7 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉登录业务性自定义异常 WindfallException.class
+     * 拦截捕捉业务性自定义异常 WindfallException.class
      * @param e 业务性自定义异常
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
@@ -67,7 +67,7 @@ public class WindfallExceptionHandler {
 
     /**
      * 拦截捕捉所有异常 Exception.class
-     * @param e 所有异常
+     * @param e 其他所有未定义的异常
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @ExceptionHandler(value = Exception.class)

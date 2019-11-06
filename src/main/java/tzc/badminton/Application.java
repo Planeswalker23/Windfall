@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * springboot启动器
+ * ServletComponentScan注解 开启WebFilter注解扫描
+ * tk.mybatis.spring.annotation.MapperScan tkMybatis工具的mapper扫描
  * @author Planeswalker23
  * @date Created in 2019-10-31
  */

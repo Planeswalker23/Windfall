@@ -2,6 +2,7 @@ package tzc.badminton.base.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -30,7 +31,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = LoginException.class)
     public String loginExceptionHandler(LoginException e) {
         // 登录自定义异常
-        log.warn(LOGIN_SERVICE + e.getClass() + e.getMessage());
+        log.warn("{}: {}",LOGIN_SERVICE, e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 
@@ -53,16 +54,44 @@ public class WindfallExceptionHandler {
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public String methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
-        // 参数校验异常
-        log.warn(e.getMessage(), e);
+        return Response.failed(this.getValidErrorMessage(e));
+    }
+
+    /**
+     * 拦截捕捉参数校验异常 BindException.class
+     * 若与MethodArgumentNotValidException异常一起处理，会产生直接抛出BindException的错误返回
+     * @param e 参数校验异常
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     */
+    @ExceptionHandler({BindException.class})
+    public String bindExceptionHandler(BindException e) {
+        return Response.failed(this.getValidErrorMessage(e));
+    }
+
+    /**
+     * 从参数校验异常中获取校验失败信息
+     * @param e BindException or MethodArgumentNotValidException
+     * @return String
+     */
+    private String getValidErrorMessage(Exception e) {
         // 获取校验失败信息
-        BindingResult bindingResult = e.getBindingResult();
+        BindingResult bindingResult;
+        if (e instanceof BindException) {
+            bindingResult = ((BindException) e).getBindingResult();
+        } else if (e instanceof MethodArgumentNotValidException) {
+            bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
+        } else {
+            log.warn(e.getMessage(), e);
+            return null;
+        }
         // 拼接校验异常信息
         StringBuilder errorMessage = new StringBuilder(Constant.VALID_ERROR).append(Constant.MAO_HAO);
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             errorMessage.append(fieldError.getDefaultMessage()).append(Constant.DOU_HAO);
         }
-        return Response.failed(errorMessage.toString());
+        // 参数校验异常
+        log.warn(errorMessage.toString(), e);
+        return errorMessage.toString();
     }
 
     /**

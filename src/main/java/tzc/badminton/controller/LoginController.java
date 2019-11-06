@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
@@ -43,8 +42,8 @@ public class LoginController {
     @Log("注册")
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public String register(@Valid @RequestBody RegisterDto register) {
-        logger.info("==>  开始注册业务");
+    public String register(@Valid RegisterDto register) {
+        logger.info("开始注册业务");
         User newUser = new User();
         BeanUtils.copyProperties(register, newUser);
         return Response.success(loginService.applyUser(newUser));
@@ -65,7 +64,7 @@ public class LoginController {
     @Log("修改个人信息")
     @PostMapping("/modify")
     @Transactional(rollbackFor = Exception.class)
-    public String modifyUser(@RequestBody User newUser) {
+    public String modifyUser(User newUser) {
         // 参数验证
         if (newUser==null || StringUtils.isEmpty(newUser.getUserId())) {
             return Response.failed(Constant.EMPTY_PARAMS);
@@ -83,24 +82,21 @@ public class LoginController {
      */
     @Log("登录")
     @PostMapping("/login")
-    public String login(@Valid @RequestBody LoginDto loginDto) {
+    public String login(@Valid LoginDto loginDto) {
         return Response.success(loginService.login(loginDto));
     }
 
     /**
      * 获取用户个人信息
-     * @param userId 用户id {"userId":"1"}
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @Login
     @Log("获取用户个人信息")
     @GetMapping("/userInfo")
-    public String info(String userId) {
-        // 验证参数是否为空
-        if (StringUtils.isEmpty(userId)) {
-            return Response.failed(Constant.EMPTY_PARAMS);
-        }
-        return Response.success(loginService.getUserInfo(userId));
+    public String userInfo() {
+        // 直接获取登录信息的userId，用以获取个人信息
+        User user = SessionUtil.getUserBean();
+        return Response.success(loginService.getUserInfo(user.getUserId()));
 
     }
 }

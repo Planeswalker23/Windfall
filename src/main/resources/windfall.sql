@@ -33,19 +33,3 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 SET FOREIGN_KEY_CHECKS = 1;
-
-
--- ----------------------------
--- Table structure for mail
--- ----------------------------
-DROP TABLE IF EXISTS `mail`;
-CREATE TABLE `mail` (
-  `mail_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(45) DEFAULT NULL COMMENT 'userId用作与user表关联',
-  `validation_code` varchar(45) DEFAULT NULL COMMENT 'md5加密后的值',
-  `out_time` datetime DEFAULT NULL COMMENT '邮件过期时间',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`mail_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 COMMENT='邮箱更改密码表';
-
-SET FOREIGN_KEY_CHECKS = 1;

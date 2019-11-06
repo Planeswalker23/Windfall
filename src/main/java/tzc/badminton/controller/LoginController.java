@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
-import tzc.badminton.base.log.Log;
-import tzc.badminton.base.log.Login;
+import tzc.badminton.base.utils.SessionUtil;
 import tzc.badminton.module.dto.LoginDto;
 import tzc.badminton.module.dto.RegisterDto;
 import tzc.badminton.module.entity.User;
@@ -39,7 +38,6 @@ public class LoginController {
      *                 {"userName":"dd","password":"1","email":"123@qq.com"}
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
-    @Log("注册")
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
     public String register(@Valid RegisterDto register) {
@@ -60,8 +58,6 @@ public class LoginController {
      * }
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
-    @Login
-    @Log("修改个人信息")
     @PostMapping("/modify")
     @Transactional(rollbackFor = Exception.class)
     public String modifyUser(User newUser) {
@@ -80,7 +76,6 @@ public class LoginController {
      *                 {"email": "1101001@qq.com","password": "123"}
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
-    @Log("登录")
     @PostMapping("/login")
     public String login(@Valid LoginDto loginDto) {
         return Response.success(loginService.login(loginDto));
@@ -90,8 +85,6 @@ public class LoginController {
      * 获取用户个人信息
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
-    @Login
-    @Log("获取用户个人信息")
     @GetMapping("/userInfo")
     public String userInfo() {
         // 直接获取登录信息的userId，用以获取个人信息

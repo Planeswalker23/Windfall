@@ -1,6 +1,8 @@
 package tzc.badminton.base;
 
 import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 返回公用类
@@ -8,6 +10,8 @@ import com.alibaba.fastjson.JSON;
  * @date Created in 2019-11-01
  */
 public class Response<T> {
+
+    private static Logger logger = LoggerFactory.getLogger(Response.class);
 
     /**
      * 返回结果是否成功
@@ -57,6 +61,7 @@ public class Response<T> {
         Response res = new Response();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
+        logger.info("接口返回内容: {}", res.toString());
         return res.toString();
     }
 
@@ -64,6 +69,7 @@ public class Response<T> {
         Response res = new Response();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
+        logger.info("接口返回内容: {}", res.toString());
         return res.toString();
     }
 
@@ -72,6 +78,7 @@ public class Response<T> {
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
         res.setData(data);
+        logger.info("接口返回内容: {}", res.toString());
         return res.toString();
     }
 
@@ -79,6 +86,7 @@ public class Response<T> {
         Response res = new Response();
         res.setSuccess(false);
         res.setMessage(reason);
+        logger.info("接口返回内容: {}", res.toString());
         return res.toString();
     }
 }

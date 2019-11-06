@@ -28,11 +28,11 @@ public interface Constant {
     String MAO_HAO = "：";
     String DOU_HAO = "，";
 
-    String GET = "get";
-
-    String POST = "post";
+    String GET = "GET";
+    String POST = "POST";
 
     String USER_BEAN = "userBean";
+    String USER_ID = "userId";
 
     /**
      * 返回message
@@ -64,6 +64,8 @@ public interface Constant {
     String SYSTEM_ERROR = "系统错误，请联系系统管理员";
 
     String DATE_FORMAT_TO_SECOND = "yyyy-MM-dd HH:mm:ss";
+
+    String WRONG_USER = "用户信息不一致，请刷新或重新登录后重试";
 
     /**
      * 服务名

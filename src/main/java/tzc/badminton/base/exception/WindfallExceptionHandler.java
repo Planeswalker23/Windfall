@@ -106,4 +106,15 @@ public class WindfallExceptionHandler {
         return Response.failed(Constant.SYSTEM_ERROR);
     }
 
+    /**
+     * 拦截捕捉用户未登录异常 NotLoginException.class
+     * @param e 用户未登录异常
+     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     */
+    @ExceptionHandler(value = NotLoginException.class)
+    public String notLoginExceptionHandler(NotLoginException e) {
+        // 用户未登录异常
+        log.warn("{}: {}", Constant.USER_NOT_LOGIN, e.getMessage(), e);
+        return Response.failed(Constant.USER_NOT_LOGIN);
+    }
 }

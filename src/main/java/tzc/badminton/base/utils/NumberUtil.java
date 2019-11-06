@@ -24,7 +24,7 @@ public class NumberUtil {
      * 生成UUID
      * @return
      */
-    public static String createUUId() {
+    public static String createUuId() {
         return UUID.randomUUID().toString();
     }
 }

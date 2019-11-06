@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import tzc.badminton.base.Constant;
+import tzc.badminton.base.exception.NotLoginException;
 import tzc.badminton.module.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +33,13 @@ public class SessionUtil {
     /**
      * 获取已登录的userBean信息
      * @return {@link javax.servlet.http.HttpSession}
+     * @throws NotLoginException
      */
-    public static User getUserBean() {
+    public static User getUserBean() throws NotLoginException {
         User user = (User) getSession().getAttribute(Constant.USER_BEAN);
         if (user == null) {
-            // 未登录，返回到登录页（返回到未登录页由aop完成）
-            return null;
+            // 未登录，抛出异常
+            throw new NotLoginException();
         } else {
             // 已登录，返回登录信息
             logger.info("获取登录信息成功，用户信息: {}", JSON.toJSONString(user));

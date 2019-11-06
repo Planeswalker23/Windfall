@@ -72,7 +72,7 @@ public class LoginService {
             // 密码使用md5加密
             newUser.setPassword(NumberUtil.md5(newUser.getPassword()));
             // 添加其他字段
-            newUser.setUserId(NumberUtil.createUUId());
+            newUser.setUserId(NumberUtil.createUuId());
             newUser.setCreateTime(new Date());
             if(userMapper.insertSelective(newUser) == 0) {
                 logger.warn("注册失败");

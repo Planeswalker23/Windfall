@@ -7,6 +7,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import tzc.badminton.base.Constant;
+import tzc.badminton.base.Response;
+import tzc.badminton.base.utils.SessionUtil;
+import tzc.badminton.module.entity.User;
 
 /**
  * 日志aop
@@ -55,5 +59,26 @@ public class WindfallAop {
         }
         logger.info("——————————End: {}\n", log.value());
         return retVal;
+    }
+
+    /**
+     * 使用Login注解需要做的处理
+     * 功能点:1、验证用户是否登录
+     *       2、验证是否操作本人数据
+     * @param pjp 连接点
+     * @param @Login 使用对应注解(@Login)的方法才进行验证 {@link tzc.badminton.base.log.Login}
+     * @return 通用格式返回
+     * @throws Throwable proceed方法抛出
+     */
+    @Around("@annotation(tzc.badminton.base.log.Login)")
+    public Object checkLogin(ProceedingJoinPoint pjp) throws Throwable {
+        Object[] args = pjp.getArgs();
+        // 若session中没有userBean变量，即未登录，则返回用户未登录
+        User userBean = SessionUtil.getUserBean();
+        if (userBean == null) {
+            return Response.failed(Constant.USER_NOT_LOGIN);
+        }
+        // 若已登录，放行，继续执行该方法
+        return pjp.proceed(args);
     }
 }

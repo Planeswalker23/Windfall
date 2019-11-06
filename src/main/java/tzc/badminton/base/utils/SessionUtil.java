@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * seesion工具类
+ * session工具类
  * @author Planeswalker23
  * @date Created in 2019-11-02
  */

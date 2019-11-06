@@ -36,7 +36,7 @@ public class LoginController {
     /**
      * 注册
      * @param register {@link tzc.badminton.module.dto.RegisterDto}
-     *                 {"account":"dd","password":"1","email":"123@qq.com"}
+     *                 {"userName":"dd","password":"1","email":"123@qq.com"}
      * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
      */
     @Log("注册")

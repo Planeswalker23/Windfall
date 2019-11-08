@@ -1,6 +1,5 @@
 package tzc.badminton.service;
 
-import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import tzc.badminton.base.Constant;
 import tzc.badminton.base.exception.LoginException;
 import tzc.badminton.base.exception.WindfallException;
 import tzc.badminton.base.utils.CheckUtil;
+import tzc.badminton.base.utils.JacksonUtil;
 import tzc.badminton.base.utils.NumberUtil;
 import tzc.badminton.base.utils.SessionUtil;
 import tzc.badminton.mapper.UserMapper;
@@ -121,12 +121,12 @@ public class LoginService {
         if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
             throw new LoginException(Constant.WRONG_PASSWORD);
         }
-        logger.info("登录成功，用户信息: {}", JSON.toJSONString(selectByEmailUser));
+        logger.info("登录成功，用户信息: {}", JacksonUtil.toJSON(selectByEmailUser));
         // 将已登录用户信息放入session
         HttpSession session = SessionUtil.getSession();
         session.setAttribute(Constant.USER_BEAN, selectByEmailUser);
         logger.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
-                Constant.USER_BEAN, session.getId(), JSON.toJSONString(selectByEmailUser));
+                Constant.USER_BEAN, session.getId(), JacksonUtil.toJSON(selectByEmailUser));
         // 将用户密码置空
         selectByEmailUser.setPassword(null);
         // 登录成功后返回用户信息
@@ -148,7 +148,7 @@ public class LoginService {
         }
         // 获取个人信息禁止返回密码
         selectByUserIdEntity.setPassword(null);
-        logger.info("用户个人信息: {} ", JSON.toJSONString(selectByUserIdEntity));
+        logger.info("用户个人信息: {} ", JacksonUtil.toJSON(selectByUserIdEntity));
         return selectByUserIdEntity;
     }
 }

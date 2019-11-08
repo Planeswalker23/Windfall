@@ -74,5 +74,7 @@ public interface Constant {
 
     String VALID_ERROR = "参数校验失败";
 
+    String TO_JSON_FAILED = "解析JSON失败";
+
 
 }

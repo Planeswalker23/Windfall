@@ -1,8 +1,8 @@
 package tzc.badminton.base;
 
-import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tzc.badminton.base.utils.JacksonUtil;
 
 /**
  * 返回公用类
@@ -54,7 +54,7 @@ public class Response<T> {
 
     @Override
     public String toString() {
-        return JSON.toJSONString(this);
+        return JacksonUtil.toJSON(this);
     }
 
     public static String success() {

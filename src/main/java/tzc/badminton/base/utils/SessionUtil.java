@@ -1,6 +1,5 @@
 package tzc.badminton.base.utils;
 
-import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -42,7 +41,7 @@ public class SessionUtil {
             throw new NotLoginException();
         } else {
             // 已登录，返回登录信息
-            logger.info("获取登录信息成功，用户信息: {}", JSON.toJSONString(user));
+            logger.info("获取登录信息成功，用户信息: {}", JacksonUtil.toJSON(user));
             return user;
         }
     }

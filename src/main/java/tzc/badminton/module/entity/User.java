@@ -49,12 +49,4 @@ public class User implements Serializable {
      */
     @Column(name = "update_time")
     private Date updateTime;
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
 }

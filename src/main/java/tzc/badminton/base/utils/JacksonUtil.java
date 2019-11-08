@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.exception.WindfallException;
 
@@ -17,11 +19,22 @@ import java.util.List;
  * @author Planeswalker23
  * @date Created in 2019-11-08
  */
+@Component
 public class JacksonUtil {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static ObjectMapper objectMapper;
 
     private static Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
+
+    /**
+     * setter注入static对象objectMapper
+     * @param objectMapperFromSpring 将spring容器自动根据配置文件new的ObjectMapper对象注入给util类中的objectMapper
+     *                               否则会因为静态类对象的NPE
+     */
+    @Autowired
+    public void setObjectMapper(ObjectMapper objectMapperFromSpring){
+        objectMapper = objectMapperFromSpring;
+    }
 
     /**
      * 将任意对象转换成json格式

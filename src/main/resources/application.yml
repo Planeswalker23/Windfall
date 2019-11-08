@@ -18,6 +18,15 @@ spring:
     # 显示sql语句
     jpa:
       dashow-sql: true
+  # jackson序列化反序列化相关配置
+  jackson:
+    #JsonInclude.Include.ALWAYS              即使属性为null，仍然也会输出这个key
+    #JsonInclude.Include.NON_DEFAULT         属性为默认值不序列化
+    #JsonInclude.Include.NON_EMPTY           属性为 空（””） 或者为 NULL 都不序列化
+    #JsonInclude.Include.NON_NULL            属性为NULL   不序列化
+    default-property-inclusion: ALWAYS
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
 
 # 设置日志输出级别
 logging:

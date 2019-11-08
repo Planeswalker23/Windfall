@@ -50,12 +50,10 @@ public class User implements Serializable {
     @Column(name = "update_time")
     private Date updateTime;
 
-//    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getCreateTime() {
         return createTime;
     }
 
-//    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     public Date getUpdateTime() {
         return updateTime;
     }

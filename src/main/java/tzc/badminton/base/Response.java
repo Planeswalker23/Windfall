@@ -1,5 +1,6 @@
 package tzc.badminton.base;
 
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tzc.badminton.base.utils.JacksonUtil;
@@ -9,6 +10,7 @@ import tzc.badminton.base.utils.JacksonUtil;
  * @author Planeswalker23
  * @date Created in 2019-11-01
  */
+@Data
 public class Response<T> {
 
     private static Logger logger = LoggerFactory.getLogger(Response.class);
@@ -27,30 +29,6 @@ public class Response<T> {
      * 返回数据
      */
     private T data;
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 
     @Override
     public String toString() {

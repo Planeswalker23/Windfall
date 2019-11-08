@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加日志拦截器，同事添加拦截路由 -> 所有路由
-        registry.addInterceptor(new LogInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new LoggerInterceptor()).addPathPatterns("/**");
         // 添加登录验证拦截器，在日志拦截器之后
         // 不经过登录拦截器的路由
         List<String> excludePath = new ArrayList<>();

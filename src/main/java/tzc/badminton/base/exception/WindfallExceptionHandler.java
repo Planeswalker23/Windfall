@@ -21,7 +21,7 @@ import static tzc.badminton.base.Constant.LOGIN_SERVICE;
 @RestControllerAdvice
 public class WindfallExceptionHandler {
 
-    private static Logger log = LoggerFactory.getLogger(WindfallExceptionHandler.class);
+    private static Logger logger = LoggerFactory.getLogger(WindfallExceptionHandler.class);
 
     /**
      * 拦截捕捉登录自定义异常 LoginException.class
@@ -31,7 +31,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = LoginException.class)
     public String loginExceptionHandler(LoginException e) {
         // 登录自定义异常
-        log.warn("{}: {}",LOGIN_SERVICE, e.getMessage(), e);
+        logger.warn("{}: {}",LOGIN_SERVICE, e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 
@@ -43,7 +43,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = WindfallException.class)
     public String windfallExceptionHandler(WindfallException e) {
         // 业务性自定义异常
-        log.warn(e.getMessage(), e);
+        logger.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 
@@ -81,7 +81,7 @@ public class WindfallExceptionHandler {
         } else if (e instanceof MethodArgumentNotValidException) {
             bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
         } else {
-            log.warn(e.getMessage(), e);
+            logger.warn(e.getMessage(), e);
             return null;
         }
         // 拼接校验异常信息
@@ -90,7 +90,7 @@ public class WindfallExceptionHandler {
             errorMessage.append(fieldError.getDefaultMessage()).append(Constant.DOU_HAO);
         }
         // 参数校验异常
-        log.warn(errorMessage.toString(), e);
+        logger.warn(errorMessage.toString(), e);
         return errorMessage.toString();
     }
 
@@ -102,7 +102,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public String allExceptionHandler(Exception e) {
         // 其他未知异常
-        log.error(e.getMessage(), e);
+        logger.error(e.getMessage(), e);
         return Response.failed(Constant.SYSTEM_ERROR);
     }
 
@@ -114,7 +114,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = NotLoginException.class)
     public String notLoginExceptionHandler(NotLoginException e) {
         // 用户未登录异常
-        log.warn("{}: {}", Constant.USER_NOT_LOGIN, e.getMessage(), e);
+        logger.warn("{}: {}", Constant.USER_NOT_LOGIN, e.getMessage(), e);
         return Response.failed(Constant.USER_NOT_LOGIN);
     }
 }

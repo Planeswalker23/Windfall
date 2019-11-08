@@ -14,9 +14,9 @@ import java.util.Map;
  * @author Planeswalker23
  * @date Created in 2019-11-06
  */
-public class LogInterceptor implements HandlerInterceptor {
+public class LoggerInterceptor implements HandlerInterceptor {
 
-    private static Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
+    private static Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

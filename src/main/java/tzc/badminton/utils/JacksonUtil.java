@@ -1,4 +1,4 @@
-package tzc.badminton.base.utils;
+package tzc.badminton.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import tzc.badminton.base.Constant;
-import tzc.badminton.base.exception.WindfallException;
+import tzc.badminton.exception.WindfallException;
 
 import java.io.IOException;
 import java.util.ArrayList;

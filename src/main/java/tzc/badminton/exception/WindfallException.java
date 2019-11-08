@@ -1,4 +1,4 @@
-package tzc.badminton.base.exception;
+package tzc.badminton.exception;
 
 /**
  * 自定义异常类

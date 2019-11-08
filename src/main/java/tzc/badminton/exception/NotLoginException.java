@@ -1,4 +1,4 @@
-package tzc.badminton.base.exception;
+package tzc.badminton.exception;
 
 /**
  * 未登录异常

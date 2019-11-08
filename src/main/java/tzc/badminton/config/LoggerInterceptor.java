@@ -1,4 +1,4 @@
-package tzc.badminton.base.config;
+package tzc.badminton.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

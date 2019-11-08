@@ -1,4 +1,4 @@
-package tzc.badminton.base.utils;
+package tzc.badminton.utils;
 
 import org.springframework.util.DigestUtils;
 

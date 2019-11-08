@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
-import tzc.badminton.base.utils.SessionUtil;
+import tzc.badminton.utils.SessionUtil;
 import tzc.badminton.module.dto.LoginDto;
 import tzc.badminton.module.dto.RegisterDto;
 import tzc.badminton.module.entity.User;

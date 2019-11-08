@@ -1,4 +1,4 @@
-package tzc.badminton.base.exception;
+package tzc.badminton.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

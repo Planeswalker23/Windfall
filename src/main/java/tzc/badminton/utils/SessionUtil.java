@@ -1,11 +1,11 @@
-package tzc.badminton.base.utils;
+package tzc.badminton.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import tzc.badminton.base.Constant;
-import tzc.badminton.base.exception.NotLoginException;
+import tzc.badminton.exception.NotLoginException;
 import tzc.badminton.module.entity.User;
 
 import javax.servlet.http.HttpServletRequest;

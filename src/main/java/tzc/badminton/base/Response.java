@@ -3,7 +3,7 @@ package tzc.badminton.base;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tzc.badminton.base.utils.JacksonUtil;
+import tzc.badminton.utils.JacksonUtil;
 
 /**
  * 返回公用类

@@ -1,4 +1,4 @@
-package tzc.badminton.base.exception;
+package tzc.badminton.exception;
 
 /**
  * 登录服务自定义异常

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  * @date Created in 2019-11-01
  */
 @Data
-public class User {
+public class User implements Serializable {
 
     /**
      * user表 主键

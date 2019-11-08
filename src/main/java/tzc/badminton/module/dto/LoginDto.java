@@ -3,6 +3,7 @@ package tzc.badminton.module.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 /**
  * 登录dto
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
  * @date Created in 2019-11-02
  */
 @Data
-public class LoginDto {
+public class LoginDto implements Serializable {
 
     /**
      * 邮箱

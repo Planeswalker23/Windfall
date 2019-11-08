@@ -121,12 +121,12 @@ public class LoginService {
         if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
             throw new LoginException(Constant.WRONG_PASSWORD);
         }
-        logger.info("登录成功，用户信息: {}", JacksonUtil.toJSON(selectByEmailUser));
+        logger.info("登录成功，用户信息: {}", JacksonUtil.toJson(selectByEmailUser));
         // 将已登录用户信息放入session
         HttpSession session = SessionUtil.getSession();
         session.setAttribute(Constant.USER_BEAN, selectByEmailUser);
         logger.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
-                Constant.USER_BEAN, session.getId(), JacksonUtil.toJSON(selectByEmailUser));
+                Constant.USER_BEAN, session.getId(), JacksonUtil.toJson(selectByEmailUser));
         // 将用户密码置空
         selectByEmailUser.setPassword(null);
         // 登录成功后返回用户信息
@@ -148,7 +148,7 @@ public class LoginService {
         }
         // 获取个人信息禁止返回密码
         selectByUserIdEntity.setPassword(null);
-        logger.info("用户个人信息: {} ", JacksonUtil.toJSON(selectByUserIdEntity));
+        logger.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));
         return selectByUserIdEntity;
     }
 }

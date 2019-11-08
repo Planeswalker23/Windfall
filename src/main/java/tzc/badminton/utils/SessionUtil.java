@@ -41,7 +41,7 @@ public class SessionUtil {
             throw new NotLoginException();
         } else {
             // 已登录，返回登录信息
-            logger.info("获取登录信息成功，用户信息: {}", JacksonUtil.toJSON(user));
+            logger.info("获取登录信息成功，用户信息: {}", JacksonUtil.toJson(user));
             return user;
         }
     }

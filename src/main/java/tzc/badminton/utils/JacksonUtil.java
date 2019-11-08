@@ -41,7 +41,7 @@ public class JacksonUtil {
      * @param object 任意对象
      * @return
      */
-    public static String toJSON(Object object) {
+    public static String toJson(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {

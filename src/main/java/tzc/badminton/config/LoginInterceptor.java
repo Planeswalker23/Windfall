@@ -3,12 +3,11 @@ package tzc.badminton.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import tzc.badminton.base.Constant;
 import tzc.badminton.exception.LoginException;
-import tzc.badminton.utils.SessionUtil;
 import tzc.badminton.module.entity.User;
+import tzc.badminton.utils.SessionUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +18,7 @@ import java.util.Map;
  * @author Planeswalker23
  * @date Created in 2019-11-06
  */
-public class LoginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     private static Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
@@ -41,13 +40,5 @@ public class LoginInterceptor implements HandlerInterceptor {
             throw new LoginException(Constant.WRONG_USER);
         }
         return true;
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    }
-
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
     }
 }

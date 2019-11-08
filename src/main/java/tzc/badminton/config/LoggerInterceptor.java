@@ -2,8 +2,7 @@ package tzc.badminton.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ import java.util.Map;
  * @author Planeswalker23
  * @date Created in 2019-11-06
  */
-public class LoggerInterceptor implements HandlerInterceptor {
+public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
     private static Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
@@ -30,10 +29,6 @@ public class LoggerInterceptor implements HandlerInterceptor {
         logger.info("Args参数: ");
         parameters.forEach((k, v)-> logger.info("\t==> input [{}]:\t{}", k, v));
         return true;
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
     }
 
     @Override

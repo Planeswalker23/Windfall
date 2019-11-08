@@ -34,3 +34,27 @@
 2. 修改个人信息`/modify`
 3. 登录`/login`
 3. 获取个人信息`/userInfo`
+
+- 目录结构
+```$xslt
+├── README.md
+├── pom.xml
+└── src
+    └── main
+        ├── java
+        │   └── tzc
+        │       └── badminton
+        │           ├── base （公用类包）
+        │           ├── config （配置相关包）
+        │           ├── controller （控制层）
+        │           ├── exception （异常相关包）
+        │           ├── mapper （tkMybatis要求mapper.java的包名是mapper）
+        │           ├── module （自定义对象包）
+        │           │   ├── dto （数据传输类包）
+        │           │   └── entity （实体类entity包）
+        │           ├── service （服务方法层）
+        │           └── utils （工具类包）
+        └── resources
+            ├── application.yml （springboot配置文件）
+            └── windfall.sql （数据库sql文件）
+```

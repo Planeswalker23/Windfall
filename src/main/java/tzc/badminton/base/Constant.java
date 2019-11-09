@@ -79,4 +79,6 @@ public interface Constant {
     String NOT_BELONG_TO_ANNOTATION = "不属于注解类型";
 
     String REFLECT_ERROR = "通过反射解析对象失败";
+
+    String EMPTY_COLLECTION = "集合为空";
 }

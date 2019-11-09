@@ -1,6 +1,7 @@
 package tzc.badminton.module.entity;
 
 import lombok.Data;
+import tzc.badminton.annotation.Encrypt;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -31,6 +32,7 @@ public class User implements Serializable {
     /**
      * 密码，使用md5加密，代码中加密
      */
+    @Encrypt
     private String password;
 
     /**

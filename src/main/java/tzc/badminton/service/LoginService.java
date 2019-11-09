@@ -10,10 +10,7 @@ import org.springframework.util.StringUtils;
 import tzc.badminton.base.Constant;
 import tzc.badminton.exception.LoginException;
 import tzc.badminton.exception.WindfallException;
-import tzc.badminton.utils.CheckUtil;
-import tzc.badminton.utils.JacksonUtil;
-import tzc.badminton.utils.NumberUtil;
-import tzc.badminton.utils.SessionUtil;
+import tzc.badminton.utils.*;
 import tzc.badminton.mapper.UserMapper;
 import tzc.badminton.module.dto.LoginDto;
 import tzc.badminton.module.entity.User;
@@ -107,11 +104,15 @@ public class LoginService {
         // 根据「邮箱」查询
         User selectByEmail = new User();
         selectByEmail.setEmail(loginDto.getEmail());
-        User selectByEmailUser = userMapper.selectOne(selectByEmail);
+        // selectOne方法若查询结果为空会报错
+        List<User> usersBySameEmail = userMapper.select(selectByEmail);
         // 该邮箱尚未注册
-        if (selectByEmailUser == null) {
+        if (CollectionUtils.isEmpty(usersBySameEmail)) {
             throw new LoginException(Constant.MAIL_NOT_REGIST);
         }
+        // 验证是否根据邮箱只查询出一条记录
+        CollectionUtil.isOneDate(usersBySameEmail);
+        User selectByEmailUser = usersBySameEmail.get(Constant.ZERO);
         // 验证密码
         if (!selectByEmailUser.getPassword().equals(loginDto.getPassword())) {
             throw new LoginException(Constant.WRONG_PASSWORD);

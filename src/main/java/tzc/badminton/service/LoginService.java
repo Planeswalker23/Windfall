@@ -69,8 +69,7 @@ public class LoginService {
             });
         }
         if (StringUtils.isEmpty(newUser.getUserId())) {
-            // 密码使用md5加密
-            newUser.setPassword(NumberUtil.md5(newUser.getPassword()));
+            newUser.setPassword(newUser.getPassword());
             // 添加其他字段
             newUser.setUserId(NumberUtil.createUuId());
             newUser.setCreateTime(new Date());
@@ -88,10 +87,6 @@ public class LoginService {
             // 若根据userId无法查询到数据，数据错误
             if (resultByUserId == null) {
                 throw new LoginException(Constant.USER_NOT_EXIST);
-            }
-            // 若修改了密码，将密码加密
-            if (!StringUtils.isEmpty(newUser.getPassword())) {
-                newUser.setPassword(NumberUtil.md5(newUser.getPassword()));
             }
             // 修改信息
             if (userMapper.updateByPrimaryKeySelective(newUser) == 0) {
@@ -118,7 +113,7 @@ public class LoginService {
             throw new LoginException(Constant.MAIL_NOT_REGIST);
         }
         // 验证密码
-        if (!selectByEmailUser.getPassword().equals(NumberUtil.md5(loginDto.getPassword()))) {
+        if (!selectByEmailUser.getPassword().equals(loginDto.getPassword())) {
             throw new LoginException(Constant.WRONG_PASSWORD);
         }
         logger.info("登录成功，用户信息: {}", JacksonUtil.toJson(selectByEmailUser));

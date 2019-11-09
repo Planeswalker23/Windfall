@@ -8,7 +8,6 @@ import tzc.badminton.exception.WindfallException;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,7 +44,8 @@ public class CollectionUtil {
     public static List<Object> transform2List(Object target) {
         List<Object> list = new ArrayList<>();
         if (target instanceof List) {
-            list.addAll(Collections.singletonList(target));
+            // fix 此方法入参是list时，返回是对象是List<List<Object>>
+            list = (List<Object>) target;
         } else {
             list.add(target);
         }

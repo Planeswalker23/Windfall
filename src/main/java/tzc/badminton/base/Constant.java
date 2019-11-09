@@ -76,5 +76,7 @@ public interface Constant {
 
     String TO_JSON_FAILED = "解析JSON失败";
 
+    String NOT_BELONG_TO_ANNOTATION = "不属于注解类型";
 
+    String REFLECT_ERROR = "通过反射解析对象失败";
 }

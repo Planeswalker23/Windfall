@@ -36,25 +36,36 @@
 3. 获取个人信息`/userInfo`
 
 - 目录结构
-```$xslt
+```aidl
 ├── README.md
 ├── pom.xml
-└── src
-    └── main
-        ├── java
-        │   └── tzc
-        │       └── badminton
-        │           ├── base （公用类包）
-        │           ├── config （配置相关包）
-        │           ├── controller （控制层）
-        │           ├── exception （异常相关包）
-        │           ├── mapper （tkMybatis要求mapper.java的包名是mapper）
-        │           ├── module （自定义对象包）
-        │           │   ├── dto （数据传输类包）
-        │           │   └── entity （实体类entity包）
-        │           ├── service （服务方法层）
-        │           └── utils （工具类包）
-        └── resources
-            ├── application.yml （springboot配置文件）
-            └── windfall.sql （数据库sql文件）
+├── src
+│   └── main
+│       ├── java
+│       │   └── tzc
+│       │       └── badminton
+│       │           ├── annotation
+│       │           ├── base
+│       │           ├── config
+│       │           │   └── crypt
+│       │           ├── controller
+│       │           ├── exception
+│       │           ├── mapper
+│       │           ├── module
+│       │           │   ├── dto
+│       │           │   └── entity
+│       │           ├── service
+│       │           └── utils
+│       └── resources
 ```
+
+> annotation: 注解类<br>
+> base: 公用基础类<br>
+> config: 配置包，crypt: 加密解密相关配置<br>
+> controller: 控制层<br>
+> exception: 异常类及全局异常控制器<br>
+> mapper: tkMybatis要求mapper.java的包名是mapper<br>
+> module: 自定义对象包，包括数据传输类及数据库实体类<br>
+> service: 服务层<br>
+> utils: 工具类<br>
+> resources: 资源文件<br>

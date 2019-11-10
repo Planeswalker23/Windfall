@@ -36,7 +36,7 @@
 3. 获取个人信息`/userInfo`
 
 - 目录结构
-```aidl
+```
 ├── README.md
 ├── pom.xml
 ├── src

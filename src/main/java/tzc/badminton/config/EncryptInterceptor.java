@@ -44,24 +44,22 @@ public class EncryptInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         // 拦截 ParameterHandler 的 setParameters 方法。动态设置参数，找到由@Encrypt注解修饰的属性，进行加密
-        if (invocation.getTarget() instanceof ParameterHandler) {
-            // Mybatis实现sql入参设置的对象
-            ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
-            // 反射获取 DefaultParameterHandler 对象的 parameterObject 属性，然后获取
-            Field parameterObjectField = parameterHandler.getClass().getDeclaredField(PARAMETER_OBJECT);
-            parameterObjectField.setAccessible(true);
-            // 此对象为为sql设置字段值的对象，即parameterType中声明的对象
-            Object paramObject = parameterObjectField.get(parameterHandler);
-            // 将结果集对象转换成集合对象，循环对集合中每个对象调用解密方法
-            // 这是为了应对出现批量sql的情况
-            List<Object> resultList = CollectionUtil.transform2List(paramObject);
-            // 若集合不为空，执行加密策略
-            if (!CollectionUtils.isEmpty(resultList)){
-                resultList.forEach((res)->cryptExecutor.cryptForSingleObject(res, EncryptStrategy.class));
-            }
-            // 改写的参数设置到原parameterHandler对象，未更新重新设置一遍不影响程序进行
-            parameterObjectField.set(parameterHandler, paramObject);
+        // Mybatis实现sql入参设置的对象
+        ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
+        // 反射获取 DefaultParameterHandler 对象的 parameterObject 属性，然后获取
+        Field parameterObjectField = parameterHandler.getClass().getDeclaredField(PARAMETER_OBJECT);
+        parameterObjectField.setAccessible(true);
+        // 此对象为为sql设置字段值的对象，即parameterType中声明的对象
+        Object paramObject = parameterObjectField.get(parameterHandler);
+        // 将结果集对象转换成集合对象，循环对集合中每个对象调用解密方法
+        // 这是为了应对出现批量sql的情况
+        List<Object> resultList = CollectionUtil.transform2List(paramObject);
+        // 若集合不为空，执行加密策略
+        if (!CollectionUtils.isEmpty(resultList)){
+            resultList.forEach((res)->cryptExecutor.cryptForSingleObject(res, EncryptStrategy.class));
         }
+        // 改写的参数设置到原parameterHandler对象，未更新重新设置一遍不影响程序进行
+        parameterObjectField.set(parameterHandler, paramObject);
         return invocation.proceed();
     }
 

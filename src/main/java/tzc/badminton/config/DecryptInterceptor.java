@@ -1,16 +1,15 @@
 package tzc.badminton.config;
 
+import com.google.common.collect.Lists;
 import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.plugin.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import tzc.badminton.config.crypt.CryptExecutor;
 import tzc.badminton.config.crypt.DecryptStrategy;
-import tzc.badminton.utils.CollectionUtil;
 
 import java.sql.Statement;
 import java.util.List;
@@ -46,12 +45,16 @@ public class DecryptInterceptor implements Interceptor {
             // 需要返回invocation.proceed()方法得到的结果集，否则会报NPE
             return result;
         }
-        // 将结果集对象转换成集合对象，循环对集合中每个对象调用解密方法
-        // 这是为了应对出现批量sql的情况
-        List<Object> resultList = CollectionUtil.transform2List(result);
-        // 若集合不为空，执行加密策略
-        if (!CollectionUtils.isEmpty(resultList)){
-            resultList.forEach((res)->cryptExecutor.cryptForSingleObject(res, DecryptStrategy.class));
+        if (result instanceof List) {
+            // 将paramObject对象使用list指代
+            List list = (List) result;
+            if (!list.isEmpty()) {
+                // 使用guava优化效率，返回大量数据可能会影响效率
+                result = Lists.transform(list, (res)->cryptExecutor.cryptForSingleObject(res, DecryptStrategy.class));
+            }
+        } else {
+            // 无须接收方法返回对象，因为此对象已经在方法中修改
+            cryptExecutor.cryptForSingleObject(result, DecryptStrategy.class);
         }
         return result;
     }

@@ -6,10 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import tzc.badminton.config.crypt.CryptExecutor;
 import tzc.badminton.config.crypt.EncryptStrategy;
-import tzc.badminton.utils.CollectionUtil;
 
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
@@ -51,15 +49,13 @@ public class EncryptInterceptor implements Interceptor {
         parameterObjectField.setAccessible(true);
         // 此对象为为sql设置字段值的对象，即parameterType中声明的对象
         Object paramObject = parameterObjectField.get(parameterHandler);
-        // 将结果集对象转换成集合对象，循环对集合中每个对象调用解密方法
-        // 这是为了应对出现批量sql的情况
-        List<Object> resultList = CollectionUtil.transform2List(paramObject);
-        // 若集合不为空，执行加密策略
-        if (!CollectionUtils.isEmpty(resultList)){
-            resultList.forEach((res)->cryptExecutor.cryptForSingleObject(res, EncryptStrategy.class));
+        // paramObject分为list和单个实体对象执行
+        if (paramObject instanceof List) {
+            ((List) paramObject).forEach((res)->cryptExecutor.cryptForSingleObject(res, EncryptStrategy.class));
+        } else {
+            // 无须接收paramObject对象，因为此对象已经在方法中修改
+            cryptExecutor.cryptForSingleObject(paramObject, EncryptStrategy.class);
         }
-        // 改写的参数设置到原parameterHandler对象，未更新重新设置一遍不影响程序进行
-        parameterObjectField.set(parameterHandler, paramObject);
         return invocation.proceed();
     }
 

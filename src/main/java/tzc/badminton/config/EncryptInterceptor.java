@@ -51,7 +51,11 @@ public class EncryptInterceptor implements Interceptor {
         Object paramObject = parameterObjectField.get(parameterHandler);
         // paramObject分为list和单个实体对象执行
         if (paramObject instanceof List) {
-            ((List) paramObject).forEach((res)->cryptExecutor.cryptForSingleObject(res, EncryptStrategy.class));
+            // 将paramObject对象使用list指代
+            List list = (List) paramObject;
+            if (!list.isEmpty()) {
+                list.forEach((res)->cryptExecutor.cryptForSingleObject(res, EncryptStrategy.class));
+            }
         } else {
             // 无须接收paramObject对象，因为此对象已经在方法中修改
             cryptExecutor.cryptForSingleObject(paramObject, EncryptStrategy.class);

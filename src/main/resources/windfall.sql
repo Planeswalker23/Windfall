@@ -29,7 +29,7 @@ CREATE TABLE `user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`user_id`) USING BTREE,
-  UNIQUE KEY `unique_key` (`user_name`,`email`)
+  UNIQUE KEY `unique_key_email` (`email`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 SET FOREIGN_KEY_CHECKS = 1;

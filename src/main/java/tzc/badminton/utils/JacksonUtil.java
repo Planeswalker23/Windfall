@@ -1,6 +1,7 @@
 package tzc.badminton.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -30,9 +31,12 @@ public class JacksonUtil {
      * setter注入static对象objectMapper
      * @param objectMapperFromSpring 将spring容器自动根据配置文件new的ObjectMapper对象注入给util类中的objectMapper
      *                               否则会因为静态类对象的NPE
+     *        FAIL_ON_UNKNOWN_PROPERTIES-false 忽略String中存在而实体类不存在的字段，防止报错
      */
     @Autowired
     public void setObjectMapper(ObjectMapper objectMapperFromSpring){
+        // String转化为实体类时，忽略String中存在而实体类不存在的字段，防止报错
+        objectMapperFromSpring.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper = objectMapperFromSpring;
     }
 

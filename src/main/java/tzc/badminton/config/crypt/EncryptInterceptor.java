@@ -1,16 +1,14 @@
-package tzc.badminton.config;
+package tzc.badminton.config.crypt;
 
 import org.apache.ibatis.executor.parameter.ParameterHandler;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import tzc.badminton.config.crypt.CryptExecutor;
-import tzc.badminton.config.crypt.EncryptStrategy;
 
 import java.lang.reflect.Field;
-import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,17 +16,14 @@ import java.util.Properties;
  * mybatis拦截器
  *      对数据库实体类中由@Encrypt修饰的字段进行加密(insert、update、where参数)
  *      依据：对setParameters方法进行拦截
+ * @deprecated 对数据的修改尽量不要放在拦截器中，可能会coder查不出问题（不知道此拦截器的话）
  * @author Planeswalker23
  * @date Created in 2019-11-08
  */
 
-@Component
-@Intercepts({
-        @Signature(
-                type = ParameterHandler.class,
-                method = "setParameters",
-                args = PreparedStatement.class)
-        })
+//@Component
+//@Intercepts({@Signature(type = ParameterHandler.class, method = "setParameters", args = PreparedStatement.class)})
+@Deprecated
 public class EncryptInterceptor implements Interceptor {
 
     private static Logger logger = LoggerFactory.getLogger(EncryptInterceptor.class);

@@ -1,17 +1,14 @@
-package tzc.badminton.config;
+package tzc.badminton.config.crypt;
 
 import com.google.common.collect.Lists;
-import org.apache.ibatis.executor.resultset.ResultSetHandler;
-import org.apache.ibatis.plugin.*;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import tzc.badminton.config.crypt.CryptExecutor;
-import tzc.badminton.config.crypt.DecryptStrategy;
 
-import java.sql.Statement;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,17 +16,14 @@ import java.util.Properties;
  * mybatis解密拦截器
  *      对数据库实体类中由@Encrypt修饰的字段进行解密(select)
  *      依据：handleResultSets
+ * @deprecated 对数据的修改尽量不要放在拦截器中，可能会coder查不出问题（不知道此拦截器的话）
  * @author Planeswalker23
  * @date Created in 2019-11-09
  */
 
-@Component
-@Intercepts({
-        @Signature(
-                type = ResultSetHandler.class,
-                method = "handleResultSets",
-                args = Statement.class)
-        })
+//@Component
+//@Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = Statement.class)})
+@Deprecated
 public class DecryptInterceptor implements Interceptor {
 
     private static Logger logger = LoggerFactory.getLogger(DecryptInterceptor.class);

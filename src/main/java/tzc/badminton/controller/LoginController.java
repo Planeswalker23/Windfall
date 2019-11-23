@@ -36,7 +36,7 @@ public class LoginController {
      * 注册
      * @param register {@link tzc.badminton.module.dto.RegisterDto}
      *                 {"userName":"dd","password":"1","email":"123@qq.com"}
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
@@ -56,7 +56,7 @@ public class LoginController {
      *     "password": "1101001",
      *     "email": "1101001@qq.com"
      * }
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @PostMapping("/modify")
     @Transactional(rollbackFor = Exception.class)
@@ -74,7 +74,7 @@ public class LoginController {
      * 登录
      * @param loginDto {@link tzc.badminton.module.dto.LoginDto}
      *                 {"email": "1101001@qq.com","password": "123"}
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @PostMapping("/login")
     public String login(@Valid LoginDto loginDto) {
@@ -83,7 +83,7 @@ public class LoginController {
 
     /**
      * 获取用户个人信息
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @GetMapping("/userInfo")
     public String userInfo() {

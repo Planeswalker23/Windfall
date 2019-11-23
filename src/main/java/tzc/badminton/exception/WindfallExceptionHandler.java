@@ -26,7 +26,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉登录自定义异常 LoginException.class
      * @param e 登录自定义异常
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @ExceptionHandler(value = LoginException.class)
     public String loginExceptionHandler(LoginException e) {
@@ -38,7 +38,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉业务性自定义异常 WindfallException.class
      * @param e 业务性自定义异常
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @ExceptionHandler(value = WindfallException.class)
     public String windfallExceptionHandler(WindfallException e) {
@@ -50,7 +50,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉参数校验异常 MethodArgumentNotValidException.class
      * @param e 参数校验异常
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public String methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
@@ -61,7 +61,7 @@ public class WindfallExceptionHandler {
      * 拦截捕捉参数校验异常 BindException.class
      * 若与MethodArgumentNotValidException异常一起处理，会产生直接抛出BindException的错误返回
      * @param e 参数校验异常
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @ExceptionHandler({BindException.class})
     public String bindExceptionHandler(BindException e) {
@@ -97,7 +97,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉所有异常 Exception.class
      * @param e 其他所有未定义的异常
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @ExceptionHandler(value = Exception.class)
     public String allExceptionHandler(Exception e) {
@@ -109,7 +109,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉用户未登录异常 NotLoginException.class
      * @param e 用户未登录异常
-     * @return {@link tzc.badminton.base.Response} JSON.toJSONString(Response)
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
     @ExceptionHandler(value = NotLoginException.class)
     public String notLoginExceptionHandler(NotLoginException e) {

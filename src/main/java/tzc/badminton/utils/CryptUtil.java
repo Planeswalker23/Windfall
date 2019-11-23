@@ -13,7 +13,7 @@ public class CryptUtil {
      * @return
      */
     public static Object encrypt(Object object) {
-        return encryptAlgorithm(object);
+        return object;
     }
 
     /**
@@ -22,24 +22,6 @@ public class CryptUtil {
      * @return
      */
     public static Object decrypt(Object object) {
-        return decryptAlgorithm(object);
-    }
-
-    /**
-     * todo 自己实现的加密算法
-     * @param object
-     * @return
-     */
-    private static Object encryptAlgorithm(Object object) {
-        return object;
-    }
-
-    /**
-     * todo 自己实现的解密算法
-     * @param object
-     * @return
-     */
-    private static Object decryptAlgorithm(Object object) {
         return object;
     }
 }

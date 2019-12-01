@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import tzc.badminton.base.Constant;
@@ -75,8 +76,10 @@ public class LoginController {
     @Transactional(rollbackFor = Exception.class)
     public String updateUserInfo(User newUser) {
         // 参数验证
-        if (newUser==null || StringUtils.isEmpty(newUser.getUserId())) {
-            return Response.failed(Constant.EMPTY_PARAMS);
+        Assert.notNull(newUser, Constant.EMPTY_PARAMS);
+        if (StringUtils.isEmpty(newUser.getUserId())) {
+            logger.warn("userId参数为空，修改个人信息失败");
+            return Response.failed(Constant.VALID_ERROR + Constant.MAO_HAO + "userId");
         }
         logger.info("开始修改个人信息业务");
         loginService.applyUser(newUser);

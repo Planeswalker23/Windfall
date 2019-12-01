@@ -69,6 +69,17 @@ public class WindfallExceptionHandler {
     }
 
     /**
+     * 拦截捕捉参数校验异常 IllegalArgumentException.class
+     * @param e 参数校验异常
+     * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
+     */
+    @ExceptionHandler({IllegalArgumentException.class})
+    public String illegalArgumentExceptionHandler(IllegalArgumentException e) {
+        logger.warn(e.getMessage(), e);
+        return Response.failed(Constant.EMPTY_PARAMS);
+    }
+
+    /**
      * 从参数校验异常中获取校验失败信息
      * @param e BindException or MethodArgumentNotValidException
      * @return String

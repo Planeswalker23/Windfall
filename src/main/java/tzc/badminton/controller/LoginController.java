@@ -29,8 +29,22 @@ public class LoginController {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    /**
+     * final没有意义，因为spring本身就是单例的，但这里加上final更容易让人理解
+     * 或许是为了防止在程序运行的时候，又执行一遍构造函数
+     */
+    private final LoginService loginService;
+
+    /**
+     * Spring建议："总是在您的bean中使用构造函数建立依赖注入"
+     * 推荐使用构造器注入，因为这会更加明确成员变量的加载顺序
+     * 同时构造器注入也不需要再使用@Autowird注解，因为本类已委托给Spring容器管理
+     * @param loginService 登录service
+     */
     @Autowired
-    private LoginService loginService;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     /**
      * 注册

@@ -10,10 +10,10 @@ import org.springframework.util.StringUtils;
 import tzc.badminton.base.Constant;
 import tzc.badminton.exception.LoginException;
 import tzc.badminton.exception.WindfallException;
-import tzc.badminton.utils.*;
 import tzc.badminton.mapper.UserMapper;
 import tzc.badminton.module.dto.LoginDto;
 import tzc.badminton.module.entity.User;
+import tzc.badminton.utils.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -30,8 +30,12 @@ public class LoginService {
 
     private static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
+    private final UserMapper userMapper;
+
     @Autowired(required = false)
-    private UserMapper userMapper;
+    public LoginService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     /**
      * 注册或修改用户信息

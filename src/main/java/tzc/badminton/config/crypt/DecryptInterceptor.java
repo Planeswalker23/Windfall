@@ -19,10 +19,10 @@ import java.util.Properties;
  * @deprecated 对数据的修改尽量不要放在拦截器中，可能会coder查不出问题（不知道此拦截器的话）
  * @author Planeswalker23
  * @date Created in 2019-11-09
+ * //@Component
+ * //@Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = Statement.class)})
  */
 
-//@Component
-//@Intercepts({@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = Statement.class)})
 @Deprecated
 public class DecryptInterceptor implements Interceptor {
 

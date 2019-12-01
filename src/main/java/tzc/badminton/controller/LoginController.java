@@ -6,9 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tzc.badminton.base.Constant;
 import tzc.badminton.base.Response;
 import tzc.badminton.utils.SessionUtil;
@@ -25,6 +23,7 @@ import javax.validation.Valid;
  * @date Created in 2019-11-01
  */
 @RestController
+@RequestMapping("/user")
 public class LoginController {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -54,7 +53,7 @@ public class LoginController {
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public String register(@Valid RegisterDto register) {
+    public String addUser(@Valid RegisterDto register) {
         logger.info("开始注册业务");
         User newUser = new User();
         BeanUtils.copyProperties(register, newUser);
@@ -72,9 +71,9 @@ public class LoginController {
      * }
      * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
-    @PostMapping("/modify")
+    @PutMapping("/info")
     @Transactional(rollbackFor = Exception.class)
-    public String modifyUser(User newUser) {
+    public String updateUserInfo(User newUser) {
         // 参数验证
         if (newUser==null || StringUtils.isEmpty(newUser.getUserId())) {
             return Response.failed(Constant.EMPTY_PARAMS);
@@ -99,8 +98,8 @@ public class LoginController {
      * 获取用户个人信息
      * @return {@link tzc.badminton.base.Response} JacksonUtil.toJson(Response)
      */
-    @GetMapping("/userInfo")
-    public String userInfo() {
+    @GetMapping("/info")
+    public String getUserInfo() {
         // 直接获取登录信息的userId，用以获取个人信息
         User user = SessionUtil.getUserBean();
         return Response.success(loginService.getUserInfo(user.getUserId()));

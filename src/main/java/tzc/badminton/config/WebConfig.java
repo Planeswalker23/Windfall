@@ -23,8 +23,8 @@ public class WebConfig implements WebMvcConfigurer {
         // 添加登录验证拦截器，在日志拦截器之后
         // 不经过登录拦截器的路由
         List<String> excludePath = new ArrayList<>();
-        excludePath.add("/register");
-        excludePath.add("/login");
+        excludePath.add("/user/register");
+        excludePath.add("/user/login");
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePath);
     }
 }

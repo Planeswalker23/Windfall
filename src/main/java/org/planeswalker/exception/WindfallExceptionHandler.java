@@ -1,15 +1,16 @@
 package org.planeswalker.exception;
 
+import org.planeswalker.base.Constant;
+import org.planeswalker.base.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.planeswalker.base.Constant;
-import org.planeswalker.base.Response;
 
 import static org.planeswalker.base.Constant.LOGIN_SERVICE;
 
@@ -24,7 +25,8 @@ public class WindfallExceptionHandler {
     private static Logger logger = LoggerFactory.getLogger(WindfallExceptionHandler.class);
 
     /**
-     * 拦截捕捉登录自定义异常 LoginException.class
+     * 拦截捕捉登录自定义异常 {@link LoginException}
+     * 包括未登录异常 {@link NotLoginException}
      * @param e 登录自定义异常
      * @return {@link Response} JacksonUtil.toJson(Response)
      */
@@ -118,14 +120,14 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉用户未登录异常 NotLoginException.class
-     * @param e 用户未登录异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * 请求方式异常
+     * @param e
+     * @return
      */
-    @ExceptionHandler(value = NotLoginException.class)
-    public String notLoginExceptionHandler(NotLoginException e) {
-        // 用户未登录异常
-        logger.warn("{}: {}", Constant.USER_NOT_LOGIN, e.getMessage(), e);
-        return Response.failed(Constant.USER_NOT_LOGIN);
+    @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
+    public String httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
+        // 请求方式异常
+        logger.warn("{}: {}",Constant.WRONG_REQUEST_METHOD, e.getMessage(), e);
+        return Response.failed(Constant.WRONG_REQUEST_METHOD + Constant.MAO_HAO + e.getMethod());
     }
 }

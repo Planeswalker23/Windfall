@@ -17,7 +17,7 @@
         
 - 创建完新项目后需要修改的内容：
     1. `pom.xml`文件中的`artifactId`节点修改为当前项目名，如`Book`
-    2. `tzc.badminton.Application`类的名字修改为当前项目名，如`BookApplication`
+    2. `org.planeswalker.Application`类的名字修改为当前项目名，如`BookApplication`
     3. `application.properties`文件中的`spring.application.name`修改为当前项目名，如`Book`
 ---
 - 基础架构包含登录服务接口
@@ -42,8 +42,8 @@
 ├── src
 │   └── main
 │       ├── java
-│       │   └── tzc
-│       │       └── badminton
+│       │   └── org
+│       │       └── planeswalker
 │       │           ├── annotation
 │       │           ├── base
 │       │           ├── config

@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tzc.badminton</groupId>
+    <groupId>org.planeswalker</groupId>
     <artifactId>Windfall</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>

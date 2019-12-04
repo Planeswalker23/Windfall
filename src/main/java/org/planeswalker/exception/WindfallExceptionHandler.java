@@ -3,6 +3,7 @@ package org.planeswalker.exception;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Response;
 import org.planeswalker.base.ServicesEnum;
+import org.planeswalker.base.Errors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -77,7 +78,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler({IllegalArgumentException.class})
     public String illegalArgumentExceptionHandler(IllegalArgumentException e) {
         logger.warn(e.getMessage(), e);
-        return Response.failed(Constant.EMPTY_PARAMS);
+        return Response.failed(Errors.EMPTY_PARAMS);
     }
 
     /**
@@ -97,7 +98,7 @@ public class WindfallExceptionHandler {
             return null;
         }
         // 拼接校验异常信息
-        StringBuilder errorMessage = new StringBuilder(Constant.VALID_ERROR).append(Constant.MAO_HAO);
+        StringBuilder errorMessage = new StringBuilder(Errors.VALID_ERROR).append(Constant.MAO_HAO);
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             errorMessage.append(fieldError.getDefaultMessage()).append(Constant.DOU_HAO);
         }
@@ -115,7 +116,7 @@ public class WindfallExceptionHandler {
     public String allExceptionHandler(Exception e) {
         // 其他未知异常
         logger.error(e.getMessage(), e);
-        return Response.failed(Constant.SYSTEM_ERROR);
+        return Response.failed(Errors.SYSTEM_ERROR);
     }
 
     /**
@@ -126,7 +127,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     public String httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
         // 请求方式异常
-        logger.warn("{}: {}",Constant.WRONG_REQUEST_METHOD, e.getMessage(), e);
-        return Response.failed(Constant.WRONG_REQUEST_METHOD + Constant.MAO_HAO + e.getMethod());
+        logger.warn("{}: {}", Errors.WRONG_REQUEST_METHOD, e.getMessage(), e);
+        return Response.failed(Errors.WRONG_REQUEST_METHOD + Constant.MAO_HAO + e.getMethod());
     }
 }

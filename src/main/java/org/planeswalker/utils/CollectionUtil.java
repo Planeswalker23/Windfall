@@ -1,10 +1,11 @@
 package org.planeswalker.utils;
 
+import org.planeswalker.base.Constant;
+import org.planeswalker.base.Errors;
+import org.planeswalker.exception.WindfallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
-import org.planeswalker.base.Constant;
-import org.planeswalker.exception.WindfallException;
 
 import java.util.Collection;
 
@@ -25,11 +26,11 @@ public class CollectionUtil {
      */
     public static void isOneDate(Collection collection) {
         if (CollectionUtils.isEmpty(collection)) {
-            throw new WindfallException(Constant.EMPTY_COLLECTION);
+            throw new WindfallException(Errors.EMPTY_COLLECTION);
         }
         if (collection.size() > Constant.ONE) {
             logger.error("查询结果大于一条记录，数据错误");
-            throw new WindfallException(Constant.WRONG_DATA);
+            throw new WindfallException(Errors.WRONG_DATA);
         }
     }
 }

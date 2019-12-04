@@ -1,5 +1,6 @@
 package org.planeswalker.config;
 
+import org.planeswalker.base.LoginErrors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -37,7 +38,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         // 若不存在userId参数，只进行是否登录校验
         if (!StringUtils.isEmpty(userId) && !user.getUserId().equals(userId)) {
             logger.warn("传入用户信息参数[{}]与登录用户信息[{}]不一致", userId, user.getUserId());
-            throw new LoginException(Constant.WRONG_USER);
+            throw new LoginException(LoginErrors.WRONG_USER);
         }
         return true;
     }

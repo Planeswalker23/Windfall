@@ -1,9 +1,9 @@
 package org.planeswalker.utils;
 
+import org.planeswalker.base.Errors;
+import org.planeswalker.exception.WindfallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.planeswalker.base.Constant;
-import org.planeswalker.exception.WindfallException;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -29,8 +29,8 @@ public class ClassUtil {
     public static List<Field> getAnnotationFieldsByAnnotation(Class clazz, Class annotationClass) {
         // 验证annotationClass是否属于注解类型
         if (!annotationClass.isAnnotation()) {
-            logger.error("[{}] {}", annotationClass.toString(), Constant.NOT_BELONG_TO_ANNOTATION);
-            throw new WindfallException(annotationClass.toString() + Constant.NOT_BELONG_TO_ANNOTATION);
+            logger.error("[{}] {}", annotationClass.toString(), Errors.NOT_BELONG_TO_ANNOTATION);
+            throw new WindfallException(annotationClass.toString() + Errors.NOT_BELONG_TO_ANNOTATION);
         }
         // 含有annotationClass注解的属性集合
         List<Field> annotationFields = new ArrayList<>();
@@ -58,7 +58,7 @@ public class ClassUtil {
             return field.get(object);
         } catch (IllegalAccessException e) {
             logger.error("获取属性对象值失败，Caused by: {}", e.getMessage(), e);
-            throw new WindfallException(Constant.REFLECT_ERROR);
+            throw new WindfallException(Errors.REFLECT_ERROR);
         }
     }
 
@@ -75,7 +75,7 @@ public class ClassUtil {
             field.set(object, newValue);
         } catch (IllegalAccessException e) {
             logger.error("为属性对象赋值，Caused by: {}", e.getMessage(), e);
-            throw new WindfallException(Constant.REFLECT_ERROR);
+            throw new WindfallException(Errors.REFLECT_ERROR);
         }
     }
 
@@ -94,7 +94,7 @@ public class ClassUtil {
             return field;
         } catch (NoSuchFieldException e) {
             logger.error("获取属性对象失败，Caused by: {}", e.getMessage(), e);
-            throw new WindfallException(Constant.REFLECT_ERROR);
+            throw new WindfallException(Errors.REFLECT_ERROR);
         }
     }
 }

@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.planeswalker.base.Errors;
+import org.planeswalker.exception.WindfallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.planeswalker.base.Constant;
-import org.planeswalker.exception.WindfallException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class JacksonUtil {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             logger.error(e.getMessage(), e);
-            throw new WindfallException(Constant.TO_JSON_FAILED);
+            throw new WindfallException(Errors.TO_JSON_FAILED);
         }
     }
 
@@ -66,7 +66,7 @@ public class JacksonUtil {
             return objectMapper.readValue(json, clazz);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
-            throw new WindfallException(Constant.TO_JSON_FAILED);
+            throw new WindfallException(Errors.TO_JSON_FAILED);
         }
     }
 
@@ -83,7 +83,7 @@ public class JacksonUtil {
             return objectMapper.readValue(json, javaType);
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
-            throw new WindfallException(Constant.TO_JSON_FAILED);
+            throw new WindfallException(Errors.TO_JSON_FAILED);
         }
     }
 }

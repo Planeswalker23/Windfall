@@ -1,9 +1,9 @@
 package org.planeswalker.config.crypt;
 
+import org.planeswalker.base.Errors;
+import org.planeswalker.exception.WindfallException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.planeswalker.base.Constant;
-import org.planeswalker.exception.WindfallException;
 
 /**
  * 生成具体加密解密策略类的工厂类
@@ -25,7 +25,7 @@ public class CryptFactory {
             strategy = (CryptStrategy) Class.forName(cryptStrategy.getName()).newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             logger.error("生成[{}]策略类失败: {}", cryptStrategy, e);
-            throw new WindfallException(Constant.REFLECT_ERROR);
+            throw new WindfallException(Errors.REFLECT_ERROR);
         }
         return strategy;
     }

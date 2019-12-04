@@ -1,6 +1,8 @@
 package org.planeswalker.service;
 
 import org.planeswalker.base.Constant;
+import org.planeswalker.base.LoginErrors;
+import org.planeswalker.base.Errors;
 import org.planeswalker.exception.LoginException;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.mapper.UserMapper;
@@ -49,7 +51,7 @@ public class LoginService {
         boolean isEmailEmpty = StringUtils.isEmpty(email);
         // 验证邮箱格式，邮箱用于找回密码
         if (!isEmailEmpty && !CheckUtil.checkEmail(email)) {
-            throw new WindfallException(Constant.WRONG_MAIL);
+            throw new WindfallException(LoginErrors.WRONG_MAIL);
         }
         // 根据「邮箱」查询所有匹配的用户
         User selectByEmail = new User();
@@ -62,9 +64,9 @@ public class LoginService {
                 if (email.equals(resultEntity.getEmail()) && !resultEntity.getUserId().equals(newUser.getUserId())) {
                     // 若传入userId为空是注册报错，否则是修改个人信息的报错
                     if (StringUtils.isEmpty(newUser.getUserId())) {
-                        throw new LoginException(Constant.MAIL_EXIST);
+                        throw new LoginException(LoginErrors.MAIL_EXIST);
                     } else {
-                        throw new LoginException(Constant.USER_NOT_EXIST);
+                        throw new LoginException(LoginErrors.USER_NOT_EXIST);
                     }
                 }
             });
@@ -87,12 +89,12 @@ public class LoginService {
             User resultByUserId = userMapper.selectOne(selectByUserId);
             // 若根据userId无法查询到数据，数据错误
             if (resultByUserId == null) {
-                throw new LoginException(Constant.USER_NOT_EXIST);
+                throw new LoginException(LoginErrors.USER_NOT_EXIST);
             }
             // 修改信息
             if (userMapper.updateByPrimaryKeySelective(newUser) == 0) {
                 logger.warn("修改个人信息失败");
-                throw new LoginException(Constant.EDIT_FAILED);
+                throw new LoginException(Errors.EDIT_FAILED);
             }
             logger.info("修改个人信息成功");
             return null;
@@ -112,14 +114,14 @@ public class LoginService {
         List<User> usersBySameEmail = userMapper.select(selectByEmail);
         // 该邮箱尚未注册
         if (CollectionUtils.isEmpty(usersBySameEmail)) {
-            throw new LoginException(Constant.MAIL_NOT_REGIST);
+            throw new LoginException(LoginErrors.MAIL_NOT_REGISTER);
         }
         // 验证是否根据邮箱只查询出一条记录
         CollectionUtil.isOneDate(usersBySameEmail);
         User selectByEmailUser = usersBySameEmail.get(Constant.ZERO);
         // 验证密码
         if (!selectByEmailUser.getPassword().equals(loginDto.getPassword())) {
-            throw new LoginException(Constant.WRONG_PASSWORD);
+            throw new LoginException(LoginErrors.WRONG_PASSWORD);
         }
         logger.info("登录成功，用户信息: {}", JacksonUtil.toJson(selectByEmailUser));
         // 将已登录用户信息放入session
@@ -144,7 +146,7 @@ public class LoginService {
         selectByUserIdCondition.setUserId(userId);
         User selectByUserIdEntity = userMapper.selectOne(selectByUserIdCondition);
         if (selectByUserIdEntity == null) {
-            throw new LoginException(Constant.USER_NOT_EXIST);
+            throw new LoginException(LoginErrors.USER_NOT_EXIST);
         }
         // 获取个人信息禁止返回密码
         selectByUserIdEntity.setPassword(null);

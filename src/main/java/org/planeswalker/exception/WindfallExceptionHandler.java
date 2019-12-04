@@ -2,6 +2,7 @@ package org.planeswalker.exception;
 
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Response;
+import org.planeswalker.base.ServicesEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -11,8 +12,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import static org.planeswalker.base.Constant.LOGIN_SERVICE;
 
 /**
  * 全局异常处理
@@ -33,7 +32,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = LoginException.class)
     public String loginExceptionHandler(LoginException e) {
         // 登录自定义异常
-        logger.warn("{}: {}",LOGIN_SERVICE, e.getMessage(), e);
+        logger.warn("[{}]: {}", ServicesEnum.LoginService.getServiceName(), e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 

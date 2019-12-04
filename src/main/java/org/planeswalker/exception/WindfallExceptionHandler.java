@@ -30,7 +30,7 @@ public class WindfallExceptionHandler {
      * @param e 登录自定义异常
      * @return {@link Response} JacksonUtil.toJson(Response)
      */
-    @ExceptionHandler(value = LoginException.class)
+    @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
     public String loginExceptionHandler(LoginException e) {
         // 登录自定义异常
         logger.warn("[{}]: {}", ServicesEnum.LoginService.getServiceName(), e.getMessage(), e);

@@ -19,12 +19,17 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加日志拦截器，同事添加拦截路由 -> 所有路由
-        registry.addInterceptor(new LoggerInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new LoggerInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/error");
         // 添加登录验证拦截器，在日志拦截器之后
         // 不经过登录拦截器的路由
-        List<String> excludePath = new ArrayList<>();
-        excludePath.add("/user/register");
-        excludePath.add("/user/login");
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePath);
+        List<String> loginInterceptorExcludePath = new ArrayList<>();
+        loginInterceptorExcludePath.add("/error");
+        loginInterceptorExcludePath.add("/user/register");
+        loginInterceptorExcludePath.add("/user/login");
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns(loginInterceptorExcludePath);
     }
 }

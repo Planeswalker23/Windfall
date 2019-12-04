@@ -38,7 +38,7 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉业务性自定义异常 WindfallException.class
+     * 拦截捕捉业务性自定义异常 {@link WindfallException}
      * @param e 业务性自定义异常
      * @return {@link Response} JacksonUtil.toJson(Response)
      */
@@ -50,7 +50,7 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉参数校验异常 MethodArgumentNotValidException.class
+     * 拦截捕捉参数校验异常 {@link MethodArgumentNotValidException}
      * @param e 参数校验异常
      * @return {@link Response} JacksonUtil.toJson(Response)
      */
@@ -60,7 +60,7 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉参数校验异常 BindException.class
+     * 拦截捕捉参数校验异常 {@link BindException}
      * 若与MethodArgumentNotValidException异常一起处理，会产生直接抛出BindException的错误返回
      * @param e 参数校验异常
      * @return {@link Response} JacksonUtil.toJson(Response)
@@ -71,7 +71,7 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉参数校验异常 IllegalArgumentException.class
+     * 拦截捕捉参数校验异常 {@link IllegalArgumentException}
      * @param e 参数校验异常
      * @return {@link Response} JacksonUtil.toJson(Response)
      */
@@ -108,7 +108,7 @@ public class WindfallExceptionHandler {
     }
 
     /**
-     * 拦截捕捉所有异常 Exception.class
+     * 拦截捕捉所有异常 {@link Exception}
      * @param e 其他所有未定义的异常
      * @return {@link Response} JacksonUtil.toJson(Response)
      */

@@ -14,16 +14,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @tk.mybatis.spring.annotation.MapperScan(basePackages = "org.planeswalker.mapper")
-public class Application {
+public class WindfallApplication {
 
-    private static Logger logger = LoggerFactory.getLogger(Application.class);
+    private static Logger logger = LoggerFactory.getLogger(WindfallApplication.class);
 
     /**
      * 启动springboot程序的主入口
      * @param args
      */
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(WindfallApplication.class, args);
         logger.info("==================启动成功================");
     }
 }

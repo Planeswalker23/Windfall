@@ -129,8 +129,6 @@ public class LoginService {
         session.setAttribute(Constant.USER_BEAN, selectByEmailUser);
         logger.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
                 Constant.USER_BEAN, session.getId(), JacksonUtil.toJson(selectByEmailUser));
-        // 将用户密码置空
-        selectByEmailUser.setPassword(null);
         // 登录成功后返回用户信息
         return selectByEmailUser;
     }
@@ -148,8 +146,6 @@ public class LoginService {
         if (selectByUserIdEntity == null) {
             throw new LoginException(LoginErrors.USER_NOT_EXIST);
         }
-        // 获取个人信息禁止返回密码
-        selectByUserIdEntity.setPassword(null);
         logger.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));
         return selectByUserIdEntity;
     }

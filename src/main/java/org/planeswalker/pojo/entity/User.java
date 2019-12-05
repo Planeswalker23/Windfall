@@ -1,5 +1,6 @@
 package org.planeswalker.pojo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ public class User implements Serializable {
     /**
      * 密码，使用md5加密，代码中加密
      */
+    @JsonIgnore
     private String password;
 
     /**

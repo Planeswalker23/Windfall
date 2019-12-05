@@ -1,4 +1,4 @@
-package org.planeswalker.module.dto;
+package org.planeswalker.pojo.dto;
 
 import lombok.Data;
 

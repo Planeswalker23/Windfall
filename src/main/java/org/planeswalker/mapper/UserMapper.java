@@ -1,7 +1,7 @@
 package org.planeswalker.mapper;
 
 import tk.mybatis.mapper.common.Mapper;
-import org.planeswalker.module.entity.User;
+import org.planeswalker.pojo.entity.User;
 
 /**
  * user表 持久层

@@ -1,4 +1,4 @@
-package org.planeswalker.module.entity;
+package org.planeswalker.pojo.entity;
 
 import lombok.Data;
 

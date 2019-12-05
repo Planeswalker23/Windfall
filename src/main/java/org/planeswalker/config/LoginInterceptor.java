@@ -8,7 +8,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.planeswalker.exception.LoginException;
 import org.planeswalker.utils.SessionUtil;
 import org.planeswalker.base.Constant;
-import org.planeswalker.module.entity.User;
+import org.planeswalker.pojo.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -27,9 +27,9 @@ spring:
 # 设置日志输出级别
 logging:
   level:
-    root: ERROR
+    root: info
     org:
       springframework:
-        web: ERROR
+        web: trace
       mybatis: ERROR
       planeswalker: DEBUG

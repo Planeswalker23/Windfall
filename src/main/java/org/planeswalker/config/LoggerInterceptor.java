@@ -20,7 +20,7 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 获取请求路由名
-        logger.info("==================Start: [{}]==================", request.getServletPath());
+        logger.info("==================Start, 请求路由: [{}]==================", request.getServletPath());
         // 获取请求方式GET/POST
         String method = request.getMethod();
         logger.info("请求方式: {}", method);
@@ -33,6 +33,6 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        logger.info("==================End: [{}]==================\n", request.getServletPath());
+        logger.info("==================End, 请求路由: [{}]==================\n", request.getServletPath());
     }
 }

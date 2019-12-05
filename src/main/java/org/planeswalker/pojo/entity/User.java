@@ -2,6 +2,7 @@ package org.planeswalker.pojo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import tk.mybatis.mapper.annotation.Version;
 
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -46,4 +47,12 @@ public class User implements Serializable {
      * 操作时间，写入数据库时自动更新
      */
     private Date updateTime;
+
+    /**
+     * 乐观锁的版本号
+     * 查询出来之后不返回
+     */
+    @Version
+    @JsonIgnore
+    private Integer version;
 }

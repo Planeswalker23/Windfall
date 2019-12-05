@@ -91,6 +91,8 @@ public class LoginService {
             if (resultByUserId == null) {
                 throw new LoginException(LoginErrors.USER_NOT_EXIST);
             }
+            // 更新前添加旧版本号
+            newUser.setVersion(resultByUserId.getVersion());
             // 修改信息
             if (userMapper.updateByPrimaryKeySelective(newUser) == 0) {
                 logger.warn("修改个人信息失败");

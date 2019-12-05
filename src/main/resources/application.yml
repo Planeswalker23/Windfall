@@ -32,7 +32,7 @@ logging:
       springframework:
         web: ERROR
       mybatis: ERROR
-      planeswalker: INFO
+      planeswalker: DEBUG
 
 # 开启Mybatis下划线命名转驼峰命名
 mybatis:

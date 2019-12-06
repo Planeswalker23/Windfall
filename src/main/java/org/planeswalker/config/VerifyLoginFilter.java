@@ -70,7 +70,9 @@ public class VerifyLoginFilter implements Filter {
         // 若不存在userId参数，只进行是否登录校验（已在SessionUtil.getUserBean()方法中验证）
         if (!StringUtils.isEmpty(userId) && !userBean.getUserId().equals(userId)) {
             logger.warn("传入用户信息参数[{}]与登录用户信息[{}]不一致", userId, userBean.getUserId());
-            throw new LoginException(LoginErrors.WRONG_USER);
+            // fix: 过滤器中报错未被统一处理，需要使用输出流返回
+            this.returnJson(httpServletResponse, new LoginException(LoginErrors.WRONG_USER));
+            return;
         }
         chain.doFilter(request, response);
         logger.info("登录用户email=[{}]，userName=[{}]", userBean.getEmail(), userBean.getUserName());

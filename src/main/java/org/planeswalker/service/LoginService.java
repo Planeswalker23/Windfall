@@ -49,7 +49,7 @@ public class LoginService {
         // 验证邮箱格式，邮箱用于找回密码
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据「邮箱」查询所有匹配的用户
-        List<User> resultByEmail = this.getUserByEmail(newUser.getEmail());
+        List<User> resultByEmail = this.getUserByEmail(newUser.getEmail(), true);
         // 若存在邮箱不相等，且userId不相等的情况，说明想要修改或注册的邮箱已经被使用
         // 注册时根据已存在邮箱查询到的结果userId不等于传参userId:null
         resultByEmail.forEach(resultEntity ->{
@@ -99,7 +99,7 @@ public class LoginService {
      */
     public User login(LoginDto loginDto) {
         // 根据「邮箱」查询
-        List<User> sameEmailUsers = this.getUserByEmail(loginDto.getEmail());
+        List<User> sameEmailUsers = this.getUserByEmail(loginDto.getEmail(), true);
         // 验证是否根据邮箱只查询出一条记录
         CollectionUtil.isOneDate(sameEmailUsers);
         User sameEmailUser = sameEmailUsers.get(Constant.ZERO);
@@ -132,15 +132,25 @@ public class LoginService {
     /**
      * 根据邮箱查询所有匹配的user
      * @param email not null or empty
+     * @param isCheckRepetitiveEmail 是否验证email重复
+     *                               true-非注册业务——会抛错："该邮箱尚未注册"
+     *                               false-注册业务——会抛错："邮箱已被注册"
      * @return List<User> {@link User}
      * @throws {@link LoginException}
      */
-    private List<User> getUserByEmail(String email) throws LoginException {
+    private List<User> getUserByEmail(String email, boolean isCheckRepetitiveEmail) throws LoginException {
         List<User> sameEmailUsers = userMapper.selectList(Wrappers.<User>lambdaQuery()
                 .eq(User::getEmail, email));
-        // 该邮箱尚未注册
         if (CollectionUtils.isEmpty(sameEmailUsers)) {
-            throw new LoginException(LoginErrors.MAIL_NOT_REGISTER);
+            // 根据邮箱查询不到已存在的User，且入参为isCheckRepetitiveEmail=true，需要抛出"邮箱不存在"
+            if (isCheckRepetitiveEmail) {
+                throw new LoginException(LoginErrors.MAIL_NOT_REGISTER);
+            }
+        } else {
+            // 根据邮箱查询到存在Users，且入参为isCheckRepetitiveEmail=false，需要抛出"邮箱已被注册"
+            if (isCheckRepetitiveEmail) {
+                throw new LoginException(LoginErrors.MAIL_EXIST);
+            }
         }
         return sameEmailUsers;
     }

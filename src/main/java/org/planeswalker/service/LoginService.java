@@ -49,13 +49,7 @@ public class LoginService {
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据「邮箱」查询所有匹配的用户，邮箱验重
-        List<User> sameEmailUsers = this.getUserByEmail(newUser.getEmail(), false);
-        // 验证邮箱是否已被占用：查询结果中邮箱相等，且userId不相等
-        sameEmailUsers.forEach(user ->{
-            if (newUser.getEmail().equals(user.getEmail())) {
-                throw new LoginException(LoginErrors.MAIL_EXIST);
-            }
-        });
+        this.getUserByEmail(newUser.getEmail(), false);
         // todo 密码加密
         // 添加其他字段
         newUser.setUserId(NumberUtil.createUuId());
@@ -176,7 +170,7 @@ public class LoginService {
             }
         } else {
             // 根据邮箱查询到存在Users，且入参为isCheckRepetitiveEmail=false，需要抛出"邮箱已被注册"
-            if (isCheckRepetitiveEmail) {
+            if (!isCheckRepetitiveEmail) {
                 throw new LoginException(LoginErrors.MAIL_EXIST);
             }
         }

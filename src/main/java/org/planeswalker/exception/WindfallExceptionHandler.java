@@ -28,7 +28,7 @@ public class WindfallExceptionHandler {
      * 拦截捕捉登录自定义异常 {@link LoginException}
      * 包括未登录异常 {@link NotLoginException}
      * @param e 登录自定义异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
     public String loginExceptionHandler(LoginException e) {
@@ -40,7 +40,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉业务性自定义异常 {@link WindfallException}
      * @param e 业务性自定义异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @ExceptionHandler(value = WindfallException.class)
     public String windfallExceptionHandler(WindfallException e) {
@@ -52,7 +52,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉参数校验异常 {@link MethodArgumentNotValidException}
      * @param e 参数校验异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public String methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
@@ -63,7 +63,7 @@ public class WindfallExceptionHandler {
      * 拦截捕捉参数校验异常 {@link BindException}
      * 若与MethodArgumentNotValidException异常一起处理，会产生直接抛出BindException的错误返回
      * @param e 参数校验异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @ExceptionHandler({BindException.class})
     public String bindExceptionHandler(BindException e) {
@@ -73,7 +73,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉参数校验异常 {@link IllegalArgumentException}
      * @param e 参数校验异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @ExceptionHandler({IllegalArgumentException.class})
     public String illegalArgumentExceptionHandler(IllegalArgumentException e) {
@@ -110,7 +110,7 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉所有异常 {@link Exception}
      * @param e 其他所有未定义的异常
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @ExceptionHandler(value = Exception.class)
     public String allExceptionHandler(Exception e) {

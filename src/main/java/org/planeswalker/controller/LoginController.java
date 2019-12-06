@@ -1,8 +1,8 @@
 package org.planeswalker.controller;
 
 import org.planeswalker.base.Constant;
-import org.planeswalker.base.Response;
 import org.planeswalker.base.Errors;
+import org.planeswalker.base.Response;
 import org.planeswalker.pojo.dto.LoginDto;
 import org.planeswalker.pojo.dto.RegisterDto;
 import org.planeswalker.pojo.entity.User;
@@ -10,7 +10,6 @@ import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -51,7 +50,7 @@ public class LoginController {
      * 注册
      * @param register {@link RegisterDto}
      *                 {"userName":"dd","password":"1","email":"123@qq.com"}
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
@@ -71,7 +70,7 @@ public class LoginController {
      *     "password": "1101001",
      *     "email": "1101001@qq.com"
      * }
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @PutMapping("/info")
     @Transactional(rollbackFor = Exception.class)
@@ -91,7 +90,7 @@ public class LoginController {
      * 登录
      * @param loginDto {@link LoginDto}
      *                 {"email": "1101001@qq.com","password": "123"}
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @PostMapping("/login")
     public String login(@Valid LoginDto loginDto) {
@@ -100,7 +99,7 @@ public class LoginController {
 
     /**
      * 获取用户个人信息
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @GetMapping("/info")
     public String getUserInfo() {

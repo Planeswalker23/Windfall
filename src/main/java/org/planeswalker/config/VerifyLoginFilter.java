@@ -44,8 +44,9 @@ public class VerifyLoginFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         // 获得请求地址，判断是否需要跳过过滤
         if (this.passChain(httpServletRequest.getRequestURI())) {
-            // 过滤器放行
+            // 过滤器放行，不进行下面过滤器的业务
             chain.doFilter(request, response);
+            return;
         }
         logger.info("==================验证登录过滤器================");
         Map<String, String[]> parameters = request.getParameterMap();

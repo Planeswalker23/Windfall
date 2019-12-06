@@ -94,11 +94,12 @@ public class LoginService {
     }
 
     /**
-     * 登录服务
-     * @param loginDto
+     * 登录业务
+     * @param loginDto {@link LoginDto}
      * @return {@link User}
      */
     public User login(LoginDto loginDto) {
+        logger.info("开始登录业务");
         // 根据「邮箱」查询
         List<User> sameEmailUsers = this.getUserByEmail(loginDto.getEmail());
         if (CollectionUtils.isEmpty(sameEmailUsers)) {
@@ -111,7 +112,6 @@ public class LoginService {
         if (!sameEmailUser.getPassword().equals(loginDto.getPassword())) {
             throw new LoginException(LoginErrors.WRONG_PASSWORD);
         }
-        logger.info("登录成功，用户信息: {}", JacksonUtil.toJson(sameEmailUser));
         // 将已登录用户信息放入session
         HttpSession session = SessionUtil.getSession();
         session.setAttribute(Constant.USER_BEAN, sameEmailUser);
@@ -122,11 +122,12 @@ public class LoginService {
     }
 
     /**
-     * 根据userId获取用户个人信息
+     * 获取用户个人信息业务
      * @param userId
      * @return {@link User}
      */
     public User getUserInfo(String userId) {
+        logger.info("开始获取用户个人信息业务");
         // 根据「userId」获取用户信息
         User selectByUserIdEntity = this.getUserByUserId(userId);
         logger.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.planeswalker.pojo.dto.RegisterDto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.Date;
  * @date Created in 2019-11-01
  */
 @Data
+@NoArgsConstructor
 public class User implements Serializable {
 
     /**
@@ -55,4 +58,10 @@ public class User implements Serializable {
     @Version
     @JsonIgnore
     private Integer version;
+
+    public User(RegisterDto registerDto) {
+        this.userName = registerDto.getUserName();
+        this.password = registerDto.getPassword();
+        this.email = registerDto.getEmail();
+    }
 }

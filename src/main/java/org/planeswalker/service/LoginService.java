@@ -40,6 +40,34 @@ public class LoginService {
     }
 
     /**
+     * 注册业务
+     * @param newUser
+     * @return userId {@link User#getEmail()}
+     */
+    public String register(User newUser) {
+        logger.info("开始注册业务");
+        // 验证邮箱格式，已验证email属性是否为空
+        CheckUtil.checkEmail(newUser.getEmail());
+        // 根据「邮箱」查询所有匹配的用户，邮箱验重
+        List<User> sameEmailUsers = this.getUserByEmail(newUser.getEmail(), false);
+        // 验证邮箱是否已被占用：查询结果中邮箱相等，且userId不相等
+        sameEmailUsers.forEach(user ->{
+            if (newUser.getEmail().equals(user.getEmail())) {
+                throw new LoginException(LoginErrors.MAIL_EXIST);
+            }
+        });
+        // todo 密码加密
+        // 添加其他字段
+        newUser.setUserId(NumberUtil.createUuId());
+        newUser.setCreateTime(new Date());
+        if(userMapper.insert(newUser) == 0) {
+            logger.warn("注册失败");
+            throw new LoginException(Constant.FAILED);
+        }
+        logger.info("注册成功");
+        return newUser.getUserId();
+    }
+    /**
      * 注册或修改用户信息
      * @param newUser
      * @return 注册成功返回userId

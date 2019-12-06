@@ -55,10 +55,7 @@ public class LoginController {
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
     public String addUser(@Valid RegisterDto register) {
-        logger.info("开始注册业务");
-        User newUser = new User();
-        BeanUtils.copyProperties(register, newUser);
-        return Response.success(loginService.applyUser(newUser));
+        return Response.success(loginService.register(new User(register)));
     }
 
     /**

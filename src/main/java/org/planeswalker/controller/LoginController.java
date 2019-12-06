@@ -78,8 +78,7 @@ public class LoginController {
             logger.warn("userId参数为空，修改个人信息失败");
             return Response.failed(Errors.VALID_ERROR + Constant.MAO_HAO + "userId");
         }
-        logger.info("开始修改个人信息业务");
-        loginService.applyUser(newUser);
+        loginService.updateUserInfo(newUser);
         return Response.success();
     }
 

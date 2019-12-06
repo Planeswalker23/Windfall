@@ -64,56 +64,33 @@ public class LoginService {
         return newUser.getUserId();
     }
     /**
-     * 注册或修改用户信息
+     * 修改用户信息业务
      * @param newUser
      * @return 注册成功返回userId
      *         修改成功返回null
      */
-    public String applyUser(User newUser) {
+    public void updateUserInfo(User newUser) {
+        logger.info("开始修改个人信息业务");
         // 验证邮箱格式，邮箱用于找回密码
         CheckUtil.checkEmail(newUser.getEmail());
-        // 根据「邮箱」查询所有匹配的用户
-        List<User> resultByEmail = this.getUserByEmail(newUser.getEmail(), true);
-        // 若存在邮箱不相等，且userId不相等的情况，说明想要修改或注册的邮箱已经被使用
-        // 注册时根据已存在邮箱查询到的结果userId不等于传参userId:null
-        resultByEmail.forEach(resultEntity ->{
-            if (newUser.getEmail().equals(resultEntity.getEmail()) && !resultEntity.getUserId().equals(newUser.getUserId())) {
-                // 若传入userId为空是注册报错，否则是修改个人信息的报错
-                if (StringUtils.isEmpty(newUser.getUserId())) {
-                    throw new LoginException(LoginErrors.MAIL_EXIST);
-                } else {
-                    throw new LoginException(LoginErrors.USER_NOT_EXIST);
-                }
-            }
-        });
-        if (StringUtils.isEmpty(newUser.getUserId())) {
-            newUser.setPassword(newUser.getPassword());
-            // 添加其他字段
-            newUser.setUserId(NumberUtil.createUuId());
-            newUser.setCreateTime(new Date());
-            if(userMapper.insert(newUser) == 0) {
-                logger.warn("注册失败");
-                throw new LoginException(Constant.FAILED);
-            }
-            logger.info("注册成功");
-            return newUser.getUserId();
-        } else {
-            // 根据「userId」查询所有匹配的用户
-            User resultByUserId = userMapper.selectById(newUser.getUserId());
-            // 若根据userId无法查询到数据，数据错误
-            if (resultByUserId == null) {
-                throw new LoginException(LoginErrors.USER_NOT_EXIST);
-            }
-            // 更新前添加旧版本号
-            newUser.setVersion(resultByUserId.getVersion());
-            // 修改信息
-            if (userMapper.updateById(newUser) == 0) {
-                logger.warn("修改个人信息失败");
-                throw new LoginException(Errors.EDIT_FAILED);
-            }
-            logger.info("修改个人信息成功");
-            return null;
+        // 根据相同「邮箱」，不同「userId」的所有匹配的用户
+        List<User> sameEmailUsers = userMapper.selectList(Wrappers.<User>lambdaQuery()
+                .eq(User::getEmail, newUser.getEmail())
+                .ne(User::getUserId, newUser.getUserId()));
+        // 若除本人外有其他相同的email存在（及邮箱重复），不允许修改
+        if (!CollectionUtils.isEmpty(sameEmailUsers)) {
+            throw new LoginException(LoginErrors.MAIL_EXIST);
         }
+        // 根据「userId」查询匹配的用户
+        User resultByUserId = this.getUserByUserId(newUser.getUserId());
+        // 更新前添加旧版本号
+        newUser.setVersion(resultByUserId.getVersion());
+        // 修改信息
+        if (userMapper.updateById(newUser) == 0) {
+            logger.warn("修改个人信息失败");
+            throw new LoginException(Errors.EDIT_FAILED);
+        }
+        logger.info("修改个人信息成功");
     }
 
     /**

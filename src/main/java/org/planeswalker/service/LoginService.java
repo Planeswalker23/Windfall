@@ -1,8 +1,9 @@
 package org.planeswalker.service;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.planeswalker.base.Constant;
-import org.planeswalker.base.LoginErrors;
 import org.planeswalker.base.Errors;
+import org.planeswalker.base.LoginErrors;
 import org.planeswalker.exception.LoginException;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.mapper.UserMapper;
@@ -54,9 +55,8 @@ public class LoginService {
             throw new WindfallException(LoginErrors.WRONG_MAIL);
         }
         // 根据「邮箱」查询所有匹配的用户
-        User selectByEmail = new User();
-        selectByEmail.setEmail(newUser.getEmail());
-        List<User> resultByEmail = userMapper.select(selectByEmail);
+        List<User> resultByEmail = userMapper.selectList(Wrappers.<User>lambdaQuery()
+                .eq(User::getEmail, newUser.getEmail()));
         if (!CollectionUtils.isEmpty(resultByEmail) && resultByEmail.size() > 0) {
             // 若存在邮箱不相等，且userId不相等的情况，说明想要修改或注册的邮箱已经被使用
             // 注册时根据已存在邮箱查询到的结果userId不等于传参userId:null
@@ -76,17 +76,15 @@ public class LoginService {
             // 添加其他字段
             newUser.setUserId(NumberUtil.createUuId());
             newUser.setCreateTime(new Date());
-            if(userMapper.insertSelective(newUser) == 0) {
+            if(userMapper.insert(newUser) == 0) {
                 logger.warn("注册失败");
                 throw new LoginException(Constant.FAILED);
             }
             logger.info("注册成功");
             return newUser.getUserId();
         } else {
-            // 根据「邮箱」查询所有匹配的用户
-            User selectByUserId = new User();
-            selectByUserId.setUserId(newUser.getUserId());
-            User resultByUserId = userMapper.selectOne(selectByUserId);
+            // 根据「userId」查询所有匹配的用户
+            User resultByUserId = userMapper.selectById(newUser.getUserId());
             // 若根据userId无法查询到数据，数据错误
             if (resultByUserId == null) {
                 throw new LoginException(LoginErrors.USER_NOT_EXIST);
@@ -94,7 +92,7 @@ public class LoginService {
             // 更新前添加旧版本号
             newUser.setVersion(resultByUserId.getVersion());
             // 修改信息
-            if (userMapper.updateByPrimaryKeySelective(newUser) == 0) {
+            if (userMapper.updateById(newUser) == 0) {
                 logger.warn("修改个人信息失败");
                 throw new LoginException(Errors.EDIT_FAILED);
             }
@@ -110,10 +108,8 @@ public class LoginService {
      */
     public User login(LoginDto loginDto) {
         // 根据「邮箱」查询
-        User selectByEmail = new User();
-        selectByEmail.setEmail(loginDto.getEmail());
-        // selectOne方法若查询结果为空会报错
-        List<User> usersBySameEmail = userMapper.select(selectByEmail);
+        List<User> usersBySameEmail = userMapper.selectList(Wrappers.<User>lambdaQuery()
+                .eq(User::getEmail, loginDto.getEmail()));
         // 该邮箱尚未注册
         if (CollectionUtils.isEmpty(usersBySameEmail)) {
             throw new LoginException(LoginErrors.MAIL_NOT_REGISTER);
@@ -142,9 +138,7 @@ public class LoginService {
      */
     public User getUserInfo(String userId) {
         // 根据「userId」获取用户信息
-        User selectByUserIdCondition = new User();
-        selectByUserIdCondition.setUserId(userId);
-        User selectByUserIdEntity = userMapper.selectOne(selectByUserIdCondition);
+        User selectByUserIdEntity = userMapper.selectById(userId);
         if (selectByUserIdEntity == null) {
             throw new LoginException(LoginErrors.USER_NOT_EXIST);
         }

@@ -1,10 +1,10 @@
 package org.planeswalker.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import tk.mybatis.mapper.annotation.Version;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,7 +19,7 @@ public class User implements Serializable {
     /**
      * user表 主键
      */
-    @Id
+    @TableId
     private String userId;
 
     /**

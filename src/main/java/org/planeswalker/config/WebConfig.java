@@ -19,12 +19,5 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoggerInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/error");
-        // 添加登录验证拦截器，在日志拦截器之后，需要添加已注册的mapping
-//        registry.addInterceptor(new LoginInterceptor())
-//                .addPathPatterns("/**")
-//                // 不经过登录拦截器的路由
-//                .excludePathPatterns("/error")
-//                .excludePathPatterns("/user/login")
-//                .excludePathPatterns("/user/register");
     }
 }

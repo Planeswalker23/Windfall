@@ -6,7 +6,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.planeswalker.base.Constant;
 import org.planeswalker.exception.NotLoginException;
-import org.planeswalker.module.entity.User;
+import org.planeswalker.pojo.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

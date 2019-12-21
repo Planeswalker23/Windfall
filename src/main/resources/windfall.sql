@@ -28,6 +28,7 @@ CREATE TABLE `user` (
   `email` varchar(55) DEFAULT NULL COMMENT '邮箱',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `version` int(255) DEFAULT '0' COMMENT '乐观锁更新的版本号',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE KEY `unique_key_email` (`email`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';

@@ -1,10 +1,12 @@
-package org.planeswalker.module.entity;
+package org.planeswalker.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.Version;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.planeswalker.annotation.Encrypt;
+import lombok.NoArgsConstructor;
+import org.planeswalker.pojo.dto.RegisterDto;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,25 +16,24 @@ import java.util.Date;
  * @date Created in 2019-11-01
  */
 @Data
+@NoArgsConstructor
 public class User implements Serializable {
 
     /**
      * user表 主键
      */
-    @Id
-    @Column(name = "user_id")
+    @TableId
     private String userId;
 
     /**
      * 用户名
      */
-    @Column(name = "user_name")
     private String userName;
 
     /**
      * 密码，使用md5加密，代码中加密
      */
-    @Encrypt
+    @JsonIgnore
     private String password;
 
     /**
@@ -43,12 +44,24 @@ public class User implements Serializable {
     /**
      * 创建记录的时间
      */
-    @Column(name = "create_time")
     private Date createTime;
 
     /**
      * 操作时间，写入数据库时自动更新
      */
-    @Column(name = "update_time")
     private Date updateTime;
+
+    /**
+     * 乐观锁的版本号
+     * 查询出来之后不返回
+     */
+    @Version
+    @JsonIgnore
+    private Integer version;
+
+    public User(RegisterDto registerDto) {
+        this.userName = registerDto.getUserName();
+        this.password = registerDto.getPassword();
+        this.email = registerDto.getEmail();
+    }
 }

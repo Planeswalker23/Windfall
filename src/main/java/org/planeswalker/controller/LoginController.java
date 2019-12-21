@@ -1,16 +1,15 @@
 package org.planeswalker.controller;
 
 import org.planeswalker.base.Constant;
-import org.planeswalker.base.Response;
 import org.planeswalker.base.Errors;
-import org.planeswalker.module.dto.LoginDto;
-import org.planeswalker.module.dto.RegisterDto;
-import org.planeswalker.module.entity.User;
+import org.planeswalker.base.Response;
+import org.planeswalker.pojo.dto.LoginDto;
+import org.planeswalker.pojo.dto.RegisterDto;
+import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -51,15 +50,12 @@ public class LoginController {
      * 注册
      * @param register {@link RegisterDto}
      *                 {"userName":"dd","password":"1","email":"123@qq.com"}
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
     public String addUser(@Valid RegisterDto register) {
-        logger.info("开始注册业务");
-        User newUser = new User();
-        BeanUtils.copyProperties(register, newUser);
-        return Response.success(loginService.applyUser(newUser));
+        return Response.success(loginService.register(new User(register)));
     }
 
     /**
@@ -71,7 +67,7 @@ public class LoginController {
      *     "password": "1101001",
      *     "email": "1101001@qq.com"
      * }
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @PutMapping("/info")
     @Transactional(rollbackFor = Exception.class)
@@ -82,8 +78,7 @@ public class LoginController {
             logger.warn("userId参数为空，修改个人信息失败");
             return Response.failed(Errors.VALID_ERROR + Constant.MAO_HAO + "userId");
         }
-        logger.info("开始修改个人信息业务");
-        loginService.applyUser(newUser);
+        loginService.updateUserInfo(newUser);
         return Response.success();
     }
 
@@ -91,7 +86,7 @@ public class LoginController {
      * 登录
      * @param loginDto {@link LoginDto}
      *                 {"email": "1101001@qq.com","password": "123"}
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @PostMapping("/login")
     public String login(@Valid LoginDto loginDto) {
@@ -100,7 +95,7 @@ public class LoginController {
 
     /**
      * 获取用户个人信息
-     * @return {@link Response} JacksonUtil.toJson(Response)
+     * @return {@link Response#toString()}
      */
     @GetMapping("/info")
     public String getUserInfo() {

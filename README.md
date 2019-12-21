@@ -30,33 +30,29 @@
 >    }
 > ```
 
-1. 注册`/register`
-2. 修改个人信息`/modify`
-3. 登录`/login`
-3. 获取个人信息`/userInfo`
+1. 注册`POST /user/register`
+2. 修改个人信息`PUT /user/info`
+3. 登录`POST /user/login`
+3. 获取个人信息`GET /user/Info`
 
 - 目录结构
 ```
-├── README.md
-├── pom.xml
-├── src
-│   └── main
-│       ├── java
-│       │   └── org
-│       │       └── planeswalker
-│       │           ├── annotation
-│       │           ├── base
-│       │           ├── config
-│       │           │   └── crypt
-│       │           ├── controller
-│       │           ├── exception
-│       │           ├── mapper
-│       │           ├── module
-│       │           │   ├── dto
-│       │           │   └── entity
-│       │           ├── service
-│       │           └── utils
-│       └── resources
+├── java
+│   └── org
+│       └── planeswalker
+│           ├── annotation
+│           ├── base
+│           ├── config
+│           │   └── crypt
+│           ├── controller
+│           ├── exception
+│           ├── mapper
+│           ├── pojo
+│           │   ├── dto
+│           │   └── entity
+│           ├── service
+│           └── utils
+└── resources
 ```
 
 > annotation: 注解类<br>

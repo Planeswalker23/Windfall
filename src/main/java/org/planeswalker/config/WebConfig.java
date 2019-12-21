@@ -4,9 +4,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * web配置
  * 添加拦截器
@@ -18,18 +15,9 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 添加日志拦截器，同事添加拦截路由 -> 所有路由
+        // 添加日志拦截器，同时添加拦截路由 -> 所有路由
         registry.addInterceptor(new LoggerInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/error");
-        // 添加登录验证拦截器，在日志拦截器之后
-        // 不经过登录拦截器的路由
-        List<String> loginInterceptorExcludePath = new ArrayList<>();
-        loginInterceptorExcludePath.add("/error");
-        loginInterceptorExcludePath.add("/user/register");
-        loginInterceptorExcludePath.add("/user/login");
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns(loginInterceptorExcludePath);
     }
 }

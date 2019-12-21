@@ -58,7 +58,7 @@ public class ClassUtil {
             return field.get(object);
         } catch (IllegalAccessException e) {
             logger.error("获取属性对象值失败，Caused by: {}", e.getMessage(), e);
-            throw new WindfallException(Errors.REFLECT_ERROR);
+            return null;
         }
     }
 
@@ -86,15 +86,20 @@ public class ClassUtil {
      * @return Field
      */
     private static Field getFieldFromClassByName(Object object, String fieldName) {
-        try {
-            // 根据fieldName获取该属性
-            Field field = object.getClass().getDeclaredField(fieldName);
-            // 开启访问权限，对private的属性
-            field.setAccessible(true);
-            return field;
-        } catch (NoSuchFieldException e) {
-            logger.error("获取属性对象失败，Caused by: {}", e.getMessage(), e);
-            throw new WindfallException(Errors.REFLECT_ERROR);
+        Class clazz = object.getClass();
+        Field field;
+        while (clazz != null) {
+            try {
+                field = clazz.getDeclaredField(fieldName);
+                // 开启访问权限，对private的属性
+                field.setAccessible(true);
+                return field;
+            } catch (NoSuchFieldException e) {
+                // 循环父类
+                clazz = clazz.getSuperclass();
+            }
         }
+        logger.error("获取属性对象[{}]失败，可能类[{}]且其父类都不存在此字段:", fieldName, object.getClass());
+        return null;
     }
 }

@@ -1,7 +1,6 @@
 package org.planeswalker.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,26 +12,25 @@ import java.util.Map;
  * @author Planeswalker23
  * @date Created in 2019-11-06
  */
+@Slf4j
 public class LoggerInterceptor extends HandlerInterceptorAdapter {
-
-    private static Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 获取请求路由名
-        logger.info("==================Start, 请求路由: [{}]==================", request.getServletPath());
+        log.info("==================Start, 请求路由: [{}]==================", request.getServletPath());
         // 获取请求方式GET/POST
         String method = request.getMethod();
-        logger.info("请求方式: {}", method);
+        log.info("请求方式: {}", method);
         // 执行获取请求参数的策略方法
         Map<String, String[]> parameters = request.getParameterMap();
-        logger.info("Args参数: ");
-        parameters.forEach((k, v)-> logger.info("\t==> input [{}]:\t{}", k, v));
+        log.info("Args参数: ");
+        parameters.forEach((k, v)-> log.info("\t==> input [{}]:\t{}", k, v));
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        logger.info("==================End, 请求路由: [{}]==================\n", request.getServletPath());
+        log.info("==================End, 请求路由: [{}]==================\n", request.getServletPath());
     }
 }

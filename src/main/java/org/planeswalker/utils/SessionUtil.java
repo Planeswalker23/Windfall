@@ -1,12 +1,11 @@
 package org.planeswalker.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.pojo.entity.User;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,9 +15,8 @@ import javax.servlet.http.HttpSession;
  * @author Planeswalker23
  * @date Created in 2019-11-02
  */
+@Slf4j
 public class SessionUtil {
-
-    private static Logger logger = LoggerFactory.getLogger(SessionUtil.class);
 
     /**
      * 获取session
@@ -41,7 +39,7 @@ public class SessionUtil {
             throw new NotLoginException();
         } else {
             // 已登录，返回登录信息
-            logger.info("获取登录信息成功，用户信息: {}", JacksonUtil.toJson(user));
+            log.info("获取登录信息成功，用户信息: {}", JacksonUtil.toJson(user));
             return user;
         }
     }

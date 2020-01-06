@@ -1,5 +1,6 @@
 package org.planeswalker.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
@@ -8,8 +9,6 @@ import org.planeswalker.pojo.dto.RegisterDto;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -23,11 +22,10 @@ import javax.validation.Valid;
  * @author Planeswalker23
  * @date Created in 2019-11-01
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class LoginController {
-
-    private static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     /**
      * final没有意义，因为spring本身就是单例的，但这里加上final更容易让人理解
@@ -75,7 +73,7 @@ public class LoginController {
         // 参数验证
         Assert.notNull(newUser, Errors.EMPTY_PARAMS);
         if (StringUtils.isEmpty(newUser.getUserId())) {
-            logger.warn("userId参数为空，修改个人信息失败");
+            log.warn("userId参数为空，修改个人信息失败");
             return Response.failed(Errors.VALID_ERROR + Constant.MAO_HAO + "userId");
         }
         loginService.updateUserInfo(newUser);

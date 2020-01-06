@@ -4,8 +4,6 @@ import com.google.common.collect.Lists;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 
@@ -25,8 +23,6 @@ import java.util.Properties;
 
 @Deprecated
 public class DecryptInterceptor implements Interceptor {
-
-    private static Logger logger = LoggerFactory.getLogger(DecryptInterceptor.class);
 
     @Autowired
     private CryptExecutor cryptExecutor;

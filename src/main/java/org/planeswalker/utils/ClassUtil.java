@@ -1,9 +1,8 @@
 package org.planeswalker.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Errors;
 import org.planeswalker.exception.WindfallException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -15,9 +14,8 @@ import java.util.List;
  * @author Planeswalker23
  * @date Created in 2019-11-08
  */
+@Slf4j
 public class ClassUtil {
-
-    private static Logger logger = LoggerFactory.getLogger(ClassUtil.class);
 
     /**
      * 根据指定的annotation查找clazz类中被此注解修饰的属性
@@ -29,7 +27,7 @@ public class ClassUtil {
     public static List<Field> getAnnotationFieldsByAnnotation(Class clazz, Class annotationClass) {
         // 验证annotationClass是否属于注解类型
         if (!annotationClass.isAnnotation()) {
-            logger.error("[{}] {}", annotationClass.toString(), Errors.NOT_BELONG_TO_ANNOTATION);
+            log.error("[{}] {}", annotationClass.toString(), Errors.NOT_BELONG_TO_ANNOTATION);
             throw new WindfallException(annotationClass.toString() + Errors.NOT_BELONG_TO_ANNOTATION);
         }
         // 含有annotationClass注解的属性集合
@@ -57,7 +55,7 @@ public class ClassUtil {
             Field field = ClassUtil.getFieldFromClassByName(object, fieldName);
             return field.get(object);
         } catch (IllegalAccessException e) {
-            logger.error("获取属性对象值失败，Caused by: {}", e.getMessage(), e);
+            log.error("获取属性对象值失败，Caused by: {}", e.getMessage(), e);
             return null;
         }
     }
@@ -74,7 +72,7 @@ public class ClassUtil {
             Field field = ClassUtil.getFieldFromClassByName(object, fieldName);
             field.set(object, newValue);
         } catch (IllegalAccessException e) {
-            logger.error("为属性对象赋值，Caused by: {}", e.getMessage(), e);
+            log.error("为属性对象赋值，Caused by: {}", e.getMessage(), e);
             throw new WindfallException(Errors.REFLECT_ERROR);
         }
     }
@@ -99,7 +97,7 @@ public class ClassUtil {
                 clazz = clazz.getSuperclass();
             }
         }
-        logger.error("获取属性对象[{}]失败，可能类[{}]且其父类都不存在此字段:", fieldName, object.getClass());
+        log.error("获取属性对象[{}]失败，可能类[{}]且其父类都不存在此字段:", fieldName, object.getClass());
         return null;
     }
 }

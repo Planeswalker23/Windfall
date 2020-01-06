@@ -4,8 +4,6 @@ import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Field;
@@ -26,7 +24,6 @@ import java.util.Properties;
 @Deprecated
 public class EncryptInterceptor implements Interceptor {
 
-    private static Logger logger = LoggerFactory.getLogger(EncryptInterceptor.class);
     /**
      * ParameterHandler对象中的属性
      */

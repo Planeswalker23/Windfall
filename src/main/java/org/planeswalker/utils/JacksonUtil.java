@@ -4,10 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Errors;
 import org.planeswalker.exception.WindfallException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,12 +19,11 @@ import java.util.List;
  * @author Planeswalker23
  * @date Created in 2019-11-08
  */
+@Slf4j
 @Component
 public class JacksonUtil {
 
     private static ObjectMapper objectMapper;
-
-    private static Logger logger = LoggerFactory.getLogger(JacksonUtil.class);
 
     /**
      * setter注入static对象objectMapper
@@ -49,7 +47,7 @@ public class JacksonUtil {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw new WindfallException(Errors.TO_JSON_FAILED);
         }
     }
@@ -65,7 +63,7 @@ public class JacksonUtil {
         try {
             return objectMapper.readValue(json, clazz);
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw new WindfallException(Errors.TO_JSON_FAILED);
         }
     }
@@ -82,7 +80,7 @@ public class JacksonUtil {
             JavaType javaType = objectMapper.getTypeFactory().constructParametricType(ArrayList.class, clazz);
             return objectMapper.readValue(json, javaType);
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw new WindfallException(Errors.TO_JSON_FAILED);
         }
     }

@@ -1,6 +1,7 @@
 package org.planeswalker.service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.LoginErrors;
@@ -9,8 +10,6 @@ import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.LoginDto;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.utils.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +24,10 @@ import java.util.List;
  * @author Planeswalker23
  * @date Created in 2019-11-01
  */
+@Slf4j
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class LoginService {
-
-    private static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     private final UserMapper userMapper;
 
@@ -44,7 +42,7 @@ public class LoginService {
      * @return userId {@link User#getEmail()}
      */
     public String register(User newUser) {
-        logger.info("开始注册业务");
+        log.info("开始注册业务");
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据「邮箱」查询所有匹配的用户，邮箱不允许重复
@@ -57,10 +55,10 @@ public class LoginService {
         newUser.setUserId(NumberUtil.createUuId());
         newUser.setCreateTime(new Date());
         if(userMapper.insert(newUser) == 0) {
-            logger.warn("注册失败");
+            log.warn("注册失败");
             throw new LoginException(Constant.FAILED);
         }
-        logger.info("注册成功");
+        log.info("注册成功");
         return newUser.getUserId();
     }
     /**
@@ -70,7 +68,7 @@ public class LoginService {
      *         修改成功返回null
      */
     public void updateUserInfo(User newUser) {
-        logger.info("开始修改个人信息业务");
+        log.info("开始修改个人信息业务");
         // 验证邮箱格式，邮箱用于找回密码
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据相同「邮箱」，不同「userId」的所有匹配的用户
@@ -87,10 +85,10 @@ public class LoginService {
         newUser.setVersion(resultByUserId.getVersion());
         // 修改信息
         if (userMapper.updateById(newUser) == 0) {
-            logger.warn("修改个人信息失败");
+            log.warn("修改个人信息失败");
             throw new LoginException(Errors.EDIT_FAILED);
         }
-        logger.info("修改个人信息成功");
+        log.info("修改个人信息成功");
     }
 
     /**
@@ -99,7 +97,7 @@ public class LoginService {
      * @return {@link User}
      */
     public User login(LoginDto loginDto) {
-        logger.info("开始登录业务");
+        log.info("开始登录业务");
         // 根据「邮箱」查询
         List<User> sameEmailUsers = this.getUserByEmail(loginDto.getEmail());
         if (CollectionUtils.isEmpty(sameEmailUsers)) {
@@ -115,7 +113,7 @@ public class LoginService {
         // 将已登录用户信息放入session
         HttpSession session = SessionUtil.getSession();
         session.setAttribute(Constant.USER_BEAN, sameEmailUser);
-        logger.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
+        log.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
                 Constant.USER_BEAN, session.getId(), JacksonUtil.toJson(sameEmailUser));
         // 登录成功后返回用户信息
         return sameEmailUser;
@@ -127,10 +125,10 @@ public class LoginService {
      * @return {@link User}
      */
     public User getUserInfo(String userId) {
-        logger.info("开始获取用户个人信息业务");
+        log.info("开始获取用户个人信息业务");
         // 根据「userId」获取用户信息
         User selectByUserIdEntity = this.getUserByUserId(userId);
-        logger.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));
+        log.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));
         return selectByUserIdEntity;
     }
 
@@ -143,7 +141,7 @@ public class LoginService {
     private List<User> getUserByEmail(String email) throws LoginException {
         List<User> sameEmailUsers = userMapper.selectList(Wrappers.<User>lambdaQuery()
                 .eq(User::getEmail, email));
-        logger.info("根据邮箱查询所有匹配用户的结果：{}条", sameEmailUsers.isEmpty()?Constant.ZERO:sameEmailUsers.size());
+        log.info("根据邮箱查询所有匹配用户的结果：{}条", sameEmailUsers.isEmpty()?Constant.ZERO:sameEmailUsers.size());
         return sameEmailUsers;
     }
 

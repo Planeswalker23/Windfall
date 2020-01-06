@@ -1,11 +1,9 @@
 package org.planeswalker.config.crypt;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.planeswalker.annotation.Encrypt;
+import org.planeswalker.utils.ClassUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.planeswalker.utils.ClassUtil;
-import org.planeswalker.annotation.Encrypt;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -17,8 +15,6 @@ import java.util.List;
  */
 @Component
 public class CryptExecutor {
-
-    private static Logger logger = LoggerFactory.getLogger(CryptExecutor.class);
 
     /**
      * 执行器持有的动作类，具体的执行策略

@@ -1,7 +1,6 @@
 package org.planeswalker.config.crypt;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.utils.ClassUtil;
 import org.planeswalker.utils.CryptUtil;
 
@@ -10,9 +9,8 @@ import org.planeswalker.utils.CryptUtil;
  * @author Planeswalker23
  * @date Created in 2019-11-09
  */
+@Slf4j
 public class EncryptStrategy implements CryptStrategy {
-
-    private static Logger logger = LoggerFactory.getLogger(EncryptStrategy.class);
 
     /**
      * 执行具体的策略方法
@@ -26,6 +24,6 @@ public class EncryptStrategy implements CryptStrategy {
         Object newValue = CryptUtil.encrypt(oldValue);
         // 重新赋值
         ClassUtil.setValueByFieldName(target, fieldName, newValue);
-        logger.info("\t加密成功，加密前的[{}]属性值为: [{}]，加密后的属性值为: [{}]", fieldName, oldValue, newValue);
+        log.info("\t加密成功，加密前的[{}]属性值为: [{}]，加密后的属性值为: [{}]", fieldName, oldValue, newValue);
     }
 }

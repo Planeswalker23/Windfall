@@ -29,12 +29,8 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public class LoginService {
 
-    private final UserMapper userMapper;
-
-    @Autowired(required = false)
-    public LoginService(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 注册业务

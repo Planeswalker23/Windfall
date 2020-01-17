@@ -98,7 +98,7 @@ public class VerifyLoginFilter implements Filter {
     private void returnJson(HttpServletResponse response, Exception exception){
         OutputStream writer = null;
         response.setCharacterEncoding(OutputFormat.Defaults.Encoding);
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         try {
             writer = response.getOutputStream();
             writer.write(Response.failed(exception.getMessage()).getBytes());

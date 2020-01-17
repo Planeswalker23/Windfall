@@ -20,7 +20,7 @@ public class LoginDto implements Serializable {
     private String email;
 
     /**
-     * 密码，使用md5加密，代码中加密
+     * 密码
      */
     @NotEmpty(message = "密码不能为空")
     private String password;

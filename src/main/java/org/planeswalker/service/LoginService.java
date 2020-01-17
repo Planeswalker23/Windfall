@@ -50,7 +50,6 @@ public class LoginService {
         if (!CollectionUtils.isEmpty(sameEmailUsers)) {
             throw new LoginException(LoginErrors.MAIL_EXIST);
         }
-        // todo 密码加密
         // 添加其他字段
         newUser.setUserId(NumberUtil.createUuId());
         newUser.setCreateTime(new Date());

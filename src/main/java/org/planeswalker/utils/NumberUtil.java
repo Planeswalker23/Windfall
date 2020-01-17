@@ -3,7 +3,7 @@ package org.planeswalker.utils;
 import java.util.UUID;
 
 /**
- * 密码加密工具类
+ * 操作数字工具类
  * @author Planeswalker23
  * @date Created in 2019-11-01
  */

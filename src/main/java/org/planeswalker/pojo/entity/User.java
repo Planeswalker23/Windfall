@@ -31,7 +31,7 @@ public class User implements Serializable {
     private String userName;
 
     /**
-     * 密码，使用md5加密，代码中加密
+     * 密码
      */
     @JsonIgnore
     private String password;

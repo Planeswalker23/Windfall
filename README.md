@@ -1,8 +1,5 @@
-<p align="center">
-    <a href="https://github.com/Planeswalker23/Windfall" target="_blank">
-        <img src="https://img-blog.csdnimg.cn/20191031212931584.png" width=""/>
-    </a>
-</p>
+# WindFall
+> 致力于进行代码实践，同时收获你想要的东西☺️
 
 ---
 - 创建新项目流程：
@@ -43,7 +40,6 @@
 │           ├── annotation
 │           ├── base
 │           ├── config
-│           │   └── crypt
 │           ├── controller
 │           ├── exception
 │           ├── mapper
@@ -57,7 +53,7 @@
 
 > annotation: 注解类<br>
 > base: 公用基础类<br>
-> config: 配置包，crypt: 加密解密相关配置<br>
+> config: 配置包<br>
 > controller: 控制层<br>
 > exception: 异常类及全局异常控制器<br>
 > mapper: tkMybatis要求mapper.java的包名是mapper<br>

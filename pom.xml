@@ -8,12 +8,17 @@
     <artifactId>Windfall</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+    <description>Windfall project</description>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <springboot.version>2.2.2.RELEASE</springboot.version>
+        <mysql.version>5.1.47</mysql.version>
+        <lombok.version>1.18.8</lombok.version>
+        <mybatis-plus-starter.version>3.2.0</mybatis-plus-starter.version>
+        <guava.version>28.1-jre</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -30,39 +35,35 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- springboot-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
         </dependency>
         <!--mysql数据库驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.47</version>
+            <version>${mysql.version}</version>
         </dependency>
-        <!--druid数据库连接池-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.9</version>
-        </dependency>
-        <!--lombok-->
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+            <version>${lombok.version}</version>
         </dependency>
-        <!--mybatis-plus-->
+        <!-- mybatis-plus（包含mybatis依赖） -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.2.0</version>
+            <version>${mybatis-plus-starter.version}</version>
         </dependency>
-        <!--guava工具包-->
+        <!-- guava工具包 -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>28.1-jre</version>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 
@@ -78,9 +79,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>

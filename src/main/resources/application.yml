@@ -13,8 +13,6 @@ spring:
     # 用户名要修改为自己的用户名
     username: root
     password: admin
-    # 数据源类型
-    type: com.alibaba.druid.pool.DruidDataSource
     # 显示sql语句
     jpa:
       dashow-sql: true

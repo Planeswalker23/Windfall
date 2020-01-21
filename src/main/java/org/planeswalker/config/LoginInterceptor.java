@@ -11,41 +11,24 @@ import org.planeswalker.pojo.entity.User;
 import org.planeswalker.utils.SessionUtil;
 import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 /**
- * 验证登录的过滤器
+ * 登录拦截器，拦截除指定路由外其余未登录的请求
  * @author Planeswalker23
- * @date Created in 2019/12/6
+ * @date Created in 2020/1/21
  */
 @Slf4j
-@WebFilter(urlPatterns = "/*", filterName = "VerifyLoginFilter")
-public class VerifyLoginFilter implements Filter {
-
-    /**
-     * 不需要过滤的路径
-     */
-    private final String[] notFilterUrls = new String[]{"/user/login","/user/register","/error"};
+public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-        // 获得请求地址，判断是否需要跳过过滤
-        if (this.passChain(httpServletRequest.getRequestURI())) {
-            // 过滤器放行，不进行下面过滤器的业务
-            chain.doFilter(request, response);
-            return;
-        }
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("==================验证登录过滤器================");
         Map<String, String[]> parameters = request.getParameterMap();
         // 登录验证，此方法中已包含未登录的验证
@@ -55,8 +38,8 @@ public class VerifyLoginFilter implements Filter {
             userBean = SessionUtil.getUserBean();
         } catch (NotLoginException e) {
             log.warn(e.getMessage(), e);
-            this.returnJson(httpServletResponse, e);
-            return;
+            this.returnJson(response, e);
+            return false;
         }
         String[] userIdArray = parameters.get(Constant.USER_ID);
         // 获取参数中的userId参数数组
@@ -69,24 +52,11 @@ public class VerifyLoginFilter implements Filter {
         if (!StringUtils.isEmpty(userId) && !userBean.getUserId().equals(userId)) {
             log.warn("传入用户信息参数[{}]与登录用户信息[{}]不一致", userId, userBean.getUserId());
             // fix: 过滤器中报错未被统一处理，需要使用输出流返回
-            this.returnJson(httpServletResponse, new LoginException(LoginErrors.WRONG_USER));
-            return;
+            this.returnJson(response, new LoginException(LoginErrors.WRONG_USER));
+            return false;
         }
-        chain.doFilter(request, response);
         log.info("登录用户email=[{}]，userName=[{}]", userBean.getEmail(), userBean.getUserName());
-    }
-
-    /**
-     * 验证是否需要跳过过滤器
-     * @param uri
-     * @return boolean
-     */
-    private boolean passChain(String uri) {
-        List<String> notFilterUrlsList = Arrays.asList(notFilterUrls);
-        if (notFilterUrlsList.contains(uri)) {
-            return true;
-        }
-        return false;
+        return super.preHandle(request, response, handler);
     }
 
     /**

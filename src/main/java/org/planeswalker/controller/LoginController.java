@@ -34,11 +34,11 @@ public class LoginController {
      * 注册
      * @param register {@link RegisterDto}
      *                 {"userName":"dd","password":"1","email":"123@qq.com"}
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public String addUser(@Valid RegisterDto register) {
+    public Response addUser(@Valid RegisterDto register) {
         return Response.success(loginService.register(new User(register)));
     }
 
@@ -51,11 +51,11 @@ public class LoginController {
      *     "password": "1101001",
      *     "email": "1101001@qq.com"
      * }
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @PutMapping("/info")
     @Transactional(rollbackFor = Exception.class)
-    public String updateUserInfo(User newUser) {
+    public Response updateUserInfo(User newUser) {
         // 参数验证
         Assert.notNull(newUser, Errors.EMPTY_PARAMS);
         if (StringUtils.isEmpty(newUser.getUserId())) {
@@ -70,19 +70,19 @@ public class LoginController {
      * 登录
      * @param loginDto {@link LoginDto}
      *                 {"email": "1101001@qq.com","password": "123"}
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @PostMapping("/login")
-    public String login(@Valid LoginDto loginDto) {
+    public Response login(@Valid LoginDto loginDto) {
         return Response.success(loginService.login(loginDto));
     }
 
     /**
      * 获取用户个人信息
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @GetMapping("/info")
-    public String getUserInfo() {
+    public Response getUserInfo() {
         // 直接获取登录信息的userId，用以获取个人信息
         User user = SessionUtil.getUserBean();
         return Response.success(loginService.getUserInfo(user.getUserId()));

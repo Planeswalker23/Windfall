@@ -71,7 +71,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         try {
             writer = response.getOutputStream();
-            writer.write(Response.failed(exception.getMessage()).getBytes());
+            writer.write(Response.failed(exception.getMessage()).toString().getBytes());
             // 清空缓存并输出流
             writer.flush();
         } catch (IOException e){

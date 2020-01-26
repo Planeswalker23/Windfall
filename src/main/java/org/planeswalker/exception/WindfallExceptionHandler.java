@@ -26,10 +26,10 @@ public class WindfallExceptionHandler {
      * 拦截捕捉登录自定义异常 {@link LoginException}
      * 包括未登录异常 {@link NotLoginException}
      * @param e 登录自定义异常
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
-    public String loginExceptionHandler(LoginException e) {
+    public Response loginExceptionHandler(LoginException e) {
         // 登录自定义异常
         log.warn("[{}]: {}", ServicesEnum.LoginService.getServiceName(), e.getMessage(), e);
         return Response.failed(e.getMessage());
@@ -38,10 +38,10 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉业务性自定义异常 {@link WindfallException}
      * @param e 业务性自定义异常
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @ExceptionHandler(value = WindfallException.class)
-    public String windfallExceptionHandler(WindfallException e) {
+    public Response windfallExceptionHandler(WindfallException e) {
         // 业务性自定义异常
         log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
@@ -50,10 +50,10 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉参数校验异常 {@link MethodArgumentNotValidException}
      * @param e 参数校验异常
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public String methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+    public Response methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         return Response.failed(this.getValidErrorMessage(e));
     }
 
@@ -61,20 +61,20 @@ public class WindfallExceptionHandler {
      * 拦截捕捉参数校验异常 {@link BindException}
      * 若与MethodArgumentNotValidException异常一起处理，会产生直接抛出BindException的错误返回
      * @param e 参数校验异常
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @ExceptionHandler({BindException.class})
-    public String bindExceptionHandler(BindException e) {
+    public Response bindExceptionHandler(BindException e) {
         return Response.failed(this.getValidErrorMessage(e));
     }
 
     /**
      * 拦截捕捉参数校验异常 {@link IllegalArgumentException}
      * @param e 参数校验异常
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @ExceptionHandler({IllegalArgumentException.class})
-    public String illegalArgumentExceptionHandler(IllegalArgumentException e) {
+    public Response illegalArgumentExceptionHandler(IllegalArgumentException e) {
         log.warn(e.getMessage(), e);
         return Response.failed(Errors.EMPTY_PARAMS);
     }
@@ -108,10 +108,10 @@ public class WindfallExceptionHandler {
     /**
      * 拦截捕捉所有异常 {@link Exception}
      * @param e 其他所有未定义的异常
-     * @return {@link Response#toString()}
+     * @return {@link Response}
      */
     @ExceptionHandler(value = Exception.class)
-    public String allExceptionHandler(Exception e) {
+    public Response allExceptionHandler(Exception e) {
         // 其他未知异常
         log.error(e.getMessage(), e);
         return Response.failed(Errors.SYSTEM_ERROR);
@@ -123,7 +123,7 @@ public class WindfallExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
-    public String httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
+    public Response httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
         // 请求方式异常
         log.warn("{}: {}", Errors.WRONG_REQUEST_METHOD, e.getMessage(), e);
         return Response.failed(Errors.WRONG_REQUEST_METHOD + Constant.MAO_HAO + e.getMethod());

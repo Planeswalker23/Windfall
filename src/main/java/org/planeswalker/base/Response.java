@@ -33,36 +33,36 @@ public class Response<T> {
         return JacksonUtil.toJson(this);
     }
 
-    public static String success() {
+    public static Response success() {
         Response res = new Response();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
         log.info("接口返回内容: {}", res.toString());
-        return res.toString();
+        return res;
     }
 
-    public static String success(Integer num) {
+    public static Response success(Integer num) {
         Response res = new Response();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
         log.info("接口返回内容: {}", res.toString());
-        return res.toString();
+        return res;
     }
 
-    public static <T> String success(T data) {
+    public static <T> Response<T> success(T data) {
         Response<T> res = new Response<T>();
         res.setSuccess(true);
         res.setMessage(Constant.SUCCESS);
         res.setData(data);
         log.info("接口返回内容: {}", res.toString());
-        return res.toString();
+        return res;
     }
 
-    public static String failed(String reason) {
+    public static Response failed(String reason) {
         Response res = new Response();
         res.setSuccess(false);
         res.setMessage(reason);
         log.info("接口返回内容: {}", res.toString());
-        return res.toString();
+        return res;
     }
 }

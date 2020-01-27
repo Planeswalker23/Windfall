@@ -1,7 +1,3 @@
-# 端口号
-server:
-  port: 8080
-
 # spring配置
 spring:
   application:
@@ -15,9 +11,8 @@ spring:
     # 显示sql语句
     jpa:
       dashow-sql: true
-  # h2 数据库相关配置
+  # h2 数据库 web 控制台配置
   h2:
-    # web 控制台配置
     console:
       enabled: true
       path: /h2

@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <springboot.version>2.2.2.RELEASE</springboot.version>
-        <mysql.version>5.1.47</mysql.version>
+        <h2.version>1.4.200</h2.version>
         <lombok.version>1.18.8</lombok.version>
         <mybatis-plus-starter.version>3.2.0</mybatis-plus-starter.version>
         <guava.version>28.1-jre</guava.version>
@@ -41,11 +41,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${springboot.version}</version>
         </dependency>
-        <!--mysql数据库驱动-->
+        <!-- h2 数据库依赖-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+            <version>${h2.version}</version>
         </dependency>
         <!-- lombok -->
         <dependency>
@@ -58,12 +59,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-starter.version}</version>
-        </dependency>
-        <!-- guava工具包 -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 

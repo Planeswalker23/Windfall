@@ -4,9 +4,16 @@
 ![Spring-Boot 2.2.2.RELEASE](https://img.shields.io/badge/Spring%20Boot-2.2.2.RELEASE-brightgreen.svg)
 ![MyBatis 3.5.2](https://img.shields.io/badge/MyBatis-3.5.2-brightgreen.svg)
 ![MyBatis-Plus 3.2.0](https://img.shields.io/badge/MyBatis%20Plus-3.2.0-brightgreen.svg)
-> 致力于进行代码实践，同时收获你想要的东西☺️
+> 致力于轻量级开发、代码实践，同时收获你想要的东西☺️
 
-本项目是基于 SpringBoot 2.0, MyBatis 实现的 RESTFul 管理系统，其他使用到的框架或技术：MyBatis-Plus, lombok, guava.
+## 技术栈
+- SpringBoot 2.0
+- 数据库: H2
+- 数据库连接池: HikariCP (SpringBoot 2.0 默认支持)
+- 持久层框架: MyBatis
+- 快速开发框架:
+    - lombok 
+    - MyBatis-Plus
 
 ## 分支仓库列表
 - [WindFall 基础架构](https://github.com/Planeswalker23/Windfall)

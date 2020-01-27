@@ -8,14 +8,19 @@ spring:
     name: Windfall
   # 配置数据库
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/windfall?characterEncoding=utf8&useSSL=false
-    # 用户名要修改为自己的用户名
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:windfall
     username: root
-    password: admin
+    password: root
     # 显示sql语句
     jpa:
       dashow-sql: true
+  # h2 数据库相关配置
+  h2:
+    # web 控制台配置
+    console:
+      enabled: true
+      path: /h2
   # jackson序列化反序列化相关配置
   jackson:
     default-property-inclusion: NON_EMPTY

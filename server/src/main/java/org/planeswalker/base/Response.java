@@ -41,14 +41,6 @@ public class Response<T> {
         return res;
     }
 
-    public static Response success(Integer num) {
-        Response res = new Response();
-        res.setSuccess(true);
-        res.setMessage(Constant.SUCCESS);
-        log.info("接口返回内容: {}", res.toString());
-        return res;
-    }
-
     public static <T> Response<T> success(T data) {
         Response<T> res = new Response<T>();
         res.setSuccess(true);

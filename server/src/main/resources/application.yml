@@ -1,0 +1,43 @@
+# 端口号
+server:
+  port: 8080
+
+# spring配置
+spring:
+  application:
+    name: Windfall
+  # 配置数据库
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:windfall
+    username: root
+    password: root
+    # 显示sql语句
+    jpa:
+      dashow-sql: true
+  # h2 数据库相关配置
+  h2:
+    # web 控制台配置
+    console:
+      enabled: true
+      path: /h2
+  # jackson序列化反序列化相关配置
+  jackson:
+    default-property-inclusion: NON_EMPTY
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+# 设置日志输出级别
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework:
+        web: ERROR
+      mybatis: ERROR
+      planeswalker: DEBUG
+
+# 开启Mybatis下划线命名转驼峰命名
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

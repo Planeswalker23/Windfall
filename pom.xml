@@ -7,7 +7,6 @@
 	<artifactId>Windfall</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	<name>server</name>
 	<description>Windfall Project</description>
 	<modules>
 		<module>server</module>

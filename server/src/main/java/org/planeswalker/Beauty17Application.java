@@ -16,14 +16,14 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @SpringBootApplication
 @MapperScan("org.planeswalker.mapper")
-public class WindfallApplication {
+public class Beauty17Application {
 
     /**
      * 启动springboot程序的主入口
      * @param args
      */
     public static void main(String[] args) {
-        SpringApplication.run(WindfallApplication.class, args);
+        SpringApplication.run(Beauty17Application.class, args);
         log.info("==================启动成功================");
     }
 

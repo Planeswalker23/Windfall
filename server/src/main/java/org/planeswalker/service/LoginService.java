@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.LoginErrors;
-import org.planeswalker.base.Response;
 import org.planeswalker.exception.LoginException;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.LoginDto;
@@ -39,7 +38,7 @@ public class LoginService {
      * @param newUser
      * @return userId {@link User#getEmail()}
      */
-    public Response register(User newUser) {
+    public String register(User newUser) {
         log.info("开始注册业务");
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
@@ -56,7 +55,7 @@ public class LoginService {
             throw new LoginException(Constant.FAILED);
         }
         log.info("注册成功");
-        return Response.success(newUser.getUserId());
+        return newUser.getUserId();
     }
     /**
      * 修改用户信息业务

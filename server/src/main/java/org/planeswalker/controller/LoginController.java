@@ -38,7 +38,7 @@ public class LoginController {
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public Response addUser(@Valid RegisterDto register) {
+    public Response<String> addUser(@Valid RegisterDto register) {
         return Response.success(loginService.register(new User(register)));
     }
 
@@ -73,7 +73,7 @@ public class LoginController {
      * @return {@link Response}
      */
     @PostMapping("/login")
-    public Response login(@Valid LoginDto loginDto) {
+    public Response<User> login(@Valid LoginDto loginDto) {
         return Response.success(loginService.login(loginDto));
     }
 
@@ -82,7 +82,7 @@ public class LoginController {
      * @return {@link Response}
      */
     @GetMapping("/info")
-    public Response getUserInfo() {
+    public Response<User> getUserInfo() {
         // 直接获取登录信息的userId，用以获取个人信息
         User user = SessionUtil.getUserBean();
         return Response.success(loginService.getUserInfo(user.getUserId()));

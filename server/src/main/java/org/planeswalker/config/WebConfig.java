@@ -1,6 +1,7 @@
 package org.planeswalker.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,8 +14,26 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    /**
+     * Configure cross origin requests processing.
+     * 设置跨域访问
+     * @param registry
+     * @since 4.2
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE")
+                // 设置是否允许客户端发送cookie信息
+                .allowCredentials(true);
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // 注册自定义拦截器，添加拦截路径
+        registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
+
         // 添加登录校验拦截器
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")

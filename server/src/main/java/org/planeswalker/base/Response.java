@@ -16,12 +16,12 @@ public class Response<T> {
     /**
      * 返回结果是否成功
      */
-    private boolean success;
+    private Integer code;
 
     /**
      * 错误信息
      */
-    private String message;
+    private String reason;
 
     /**
      * 返回数据
@@ -35,16 +35,16 @@ public class Response<T> {
 
     public static Response success() {
         Response res = new Response();
-        res.setSuccess(true);
-        res.setMessage(Constant.SUCCESS);
+        res.setCode(Constant.SUCCESS_CODE);
+        res.setReason(Constant.SUCCESS);
         log.info("接口返回内容: {}", res.toString());
         return res;
     }
 
     public static <T> Response<T> success(T data) {
         Response<T> res = new Response<T>();
-        res.setSuccess(true);
-        res.setMessage(Constant.SUCCESS);
+        res.setCode(Constant.SUCCESS_CODE);
+        res.setReason(Constant.SUCCESS);
         res.setData(data);
         log.info("接口返回内容: {}", res.toString());
         return res;
@@ -52,8 +52,8 @@ public class Response<T> {
 
     public static Response failed(String reason) {
         Response res = new Response();
-        res.setSuccess(false);
-        res.setMessage(reason);
+        res.setCode(Constant.FAILED_CODE);
+        res.setReason(reason);
         log.info("接口返回内容: {}", res.toString());
         return res;
     }

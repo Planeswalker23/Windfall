@@ -31,17 +31,17 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // 注册自定义拦截器，添加拦截路径
+        // 添加日志拦截器，同时添加拦截路由 -> 所有路由
+        registry.addInterceptor(new LoggerInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/error");
+
+        // 请求方式拦截器
         registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
 
         // 添加登录校验拦截器
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/user/register", "/error", "/h2", "/codeImg");
-
-        // 添加日志拦截器，同时添加拦截路由 -> 所有路由
-        registry.addInterceptor(new LoggerInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/error");
+                .excludePathPatterns("/user/login", "/user/register", "/error", "/h2", "/codeImg", "/favicon.ico");
     }
 }

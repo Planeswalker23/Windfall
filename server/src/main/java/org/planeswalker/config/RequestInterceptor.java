@@ -1,6 +1,7 @@
 package org.planeswalker.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.planeswalker.base.Constant;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +27,8 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
         response.setHeader("X-Powered-By","Jetty");
         String method= request.getMethod();
-        log.info("处理跨域访问拦截器");
         if (OPTIONS.equals(method)){
-            response.setStatus(200);
+            response.setStatus(Constant.SUCCESS_CODE);
             return false;
         }
         return true;

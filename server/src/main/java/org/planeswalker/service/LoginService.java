@@ -57,6 +57,8 @@ public class LoginService {
         if (!imgCode.equalsIgnoreCase(stringSessionImgCode)) {
             throw new LoginException(LoginErrors.WRONG_IMG_CODE);
         }
+        // 清除验证码
+        SessionUtil.getSession().setAttribute(Constant.CODE_IMG, null);
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据「邮箱」查询所有匹配的用户，邮箱不允许重复

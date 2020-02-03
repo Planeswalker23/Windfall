@@ -40,4 +40,6 @@ public interface Constant {
      */
     String SUCCESS = "成功";
     String FAILED = "失败";
+    Integer SUCCESS_CODE = 200;
+    Integer FAILED_CODE = 500;
 }

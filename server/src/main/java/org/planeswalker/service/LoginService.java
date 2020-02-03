@@ -6,10 +6,14 @@ import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.LoginErrors;
 import org.planeswalker.exception.LoginException;
+import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.LoginDto;
+import org.planeswalker.pojo.dto.UserPlusInfo;
 import org.planeswalker.pojo.entity.User;
+import org.planeswalker.pojo.entity.UserInfo;
 import org.planeswalker.utils.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,13 +36,16 @@ public class LoginService {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
 
     /**
      * 注册业务
      * @param newUser
+     * @param userInfo
      * @return userId {@link User#getEmail()}
      */
-    public String register(User newUser) {
+    public String register(User newUser, UserInfo userInfo) {
         log.info("开始注册业务");
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
@@ -50,7 +57,11 @@ public class LoginService {
         // 添加其他字段
         newUser.setUserId(NumberUtil.createUuId());
         newUser.setCreateTime(new Date());
-        if(userMapper.insert(newUser) == 0) {
+        userInfo.setCreateTime(new Date());
+        userInfo.setUserId(newUser.getUserId());
+        if(userMapper.insert(newUser)==0
+                // 新增插入 user_info 表
+                ||userInfoMapper.insert(userInfo)==0) {
             log.warn("注册失败");
             throw new LoginException(Constant.FAILED);
         }
@@ -60,10 +71,11 @@ public class LoginService {
     /**
      * 修改用户信息业务
      * @param newUser
+     * @param userInfo
      * @return 注册成功返回userId
      *         修改成功返回null
      */
-    public void updateUserInfo(User newUser) {
+    public void updateUserInfo(User newUser, UserInfo userInfo) {
         log.info("开始修改个人信息业务");
         // 验证邮箱格式，邮箱用于找回密码
         CheckUtil.checkEmail(newUser.getEmail());
@@ -79,8 +91,12 @@ public class LoginService {
         User resultByUserId = this.getUserByUserId(newUser.getUserId());
         // 更新前添加旧版本号
         newUser.setVersion(resultByUserId.getVersion());
+        // 防止 user_info 信息不修改的情况下 update 字段为空的错误
+        userInfo.setUpdateTime(new Date());
         // 修改信息
-        if (userMapper.updateById(newUser) == 0) {
+        if (userMapper.updateById(newUser) == 0
+                // 新增更新 user_info 表
+                || userInfoMapper.updateById(userInfo)==0) {
             log.warn("修改个人信息失败");
             throw new LoginException(Errors.EDIT_FAILED);
         }
@@ -120,12 +136,19 @@ public class LoginService {
      * @param userId
      * @return {@link User}
      */
-    public User getUserInfo(String userId) {
+    public UserPlusInfo getUserInfo(String userId) {
         log.info("开始获取用户个人信息业务");
         // 根据「userId」获取用户信息
         User selectByUserIdEntity = this.getUserByUserId(userId);
         log.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));
-        return selectByUserIdEntity;
+        // 根据「userId」获取用户基本信息
+        UserInfo userInfoByUserId = userInfoMapper.selectById(userId);
+        log.info("用户个人信息: {} ", JacksonUtil.toJson(userInfoByUserId));
+        UserPlusInfo userPlusInfo = new UserPlusInfo();
+        BeanUtils.copyProperties(selectByUserIdEntity, userPlusInfo);
+        BeanUtils.copyProperties(userInfoByUserId, userPlusInfo);
+        // todo 根据 userid 计算该用户的所有评测的合计点赞数
+        return userPlusInfo;
     }
 
     /**

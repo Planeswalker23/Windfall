@@ -6,7 +6,9 @@ import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
 import org.planeswalker.pojo.dto.LoginDto;
 import org.planeswalker.pojo.dto.RegisterDto;
+import org.planeswalker.pojo.dto.UserPlusInfo;
 import org.planeswalker.pojo.entity.User;
+import org.planeswalker.pojo.entity.UserInfo;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,38 +33,37 @@ public class LoginController {
     private LoginService loginService;
 
     /**
-     * 注册
+     * 注册 {"userName":"dd","password":"1","email":"123@qq.com","favourite":"1,2","signature":"个性签名"}
      * @param register {@link RegisterDto}
-     *                 {"userName":"dd","password":"1","email":"123@qq.com"}
+     * @param userInfo {@link UserInfo}
      * @return {@link Response}
      */
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public Response<String> addUser(@Valid RegisterDto register) {
-        return Response.success(loginService.register(new User(register)));
+    public Response<String> addUser(@Valid RegisterDto register, UserInfo userInfo) {
+        return Response.success(loginService.register(new User(register), userInfo));
     }
 
     /**
-     * 修改个人信息
+     * 修改个人信息，此接口不允许修改密码
+     * {"userId": "c68c512b-55c5-456a-9832-783070166c40","userName": "Planeswalker1101002","password": "1101001","email": "1101001@qq.com"}
      * @param newUser {@link User}
-     * {
-     *     "userId": "c68c512b-55c5-456a-9832-783070166c40",
-     *     "userName": "Planeswalker1101002",
-     *     "password": "1101001",
-     *     "email": "1101001@qq.com"
-     * }
+     * @param userInfo {@link UserInfo}
      * @return {@link Response}
      */
     @PutMapping("/info")
     @Transactional(rollbackFor = Exception.class)
-    public Response updateUserInfo(User newUser) {
+    public Response updateUserInfo(User newUser, UserInfo userInfo) {
         // 参数验证
         Assert.notNull(newUser, Errors.EMPTY_PARAMS);
         if (StringUtils.isEmpty(newUser.getUserId())) {
             log.warn("userId参数为空，修改个人信息失败");
             return Response.failed(Errors.VALID_ERROR + Constant.MAO_HAO + "userId");
         }
-        loginService.updateUserInfo(newUser);
+        // 此接口不允许修改密码
+        newUser.setPassword(null);
+        userInfo.setUserId(newUser.getUserId());
+        loginService.updateUserInfo(newUser, userInfo);
         return Response.success();
     }
 
@@ -82,7 +83,7 @@ public class LoginController {
      * @return {@link Response}
      */
     @GetMapping("/info")
-    public Response<User> getUserInfo() {
+    public Response<UserPlusInfo> getUserInfo() {
         // 直接获取登录信息的userId，用以获取个人信息
         User user = SessionUtil.getUserBean();
         return Response.success(loginService.getUserInfo(user.getUserId()));

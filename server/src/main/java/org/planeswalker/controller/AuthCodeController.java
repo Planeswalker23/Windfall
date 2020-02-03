@@ -2,6 +2,8 @@ package org.planeswalker.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
+import org.planeswalker.config.CodeImg;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -33,6 +35,9 @@ public class AuthCodeController implements Serializable {
      * 图片的高度
      */
     private static int HEIGHT = 22;
+
+    @Autowired
+    private CodeImg codeImg;
 
     /**
      * 获取四位数据的验证码
@@ -66,7 +71,7 @@ public class AuthCodeController implements Serializable {
         bos.close();
         sos.close();
         log.info("验证码 = " + new String(rands));
-        session.setAttribute(Constant.CODE_IMG, new String(rands));
+        codeImg.setCode(new String(rands));
     }
 
     private void drawBackground(Graphics g) {

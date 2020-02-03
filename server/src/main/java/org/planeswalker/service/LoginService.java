@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.LoginErrors;
+import org.planeswalker.config.CodeImg;
 import org.planeswalker.exception.LoginException;
 import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
@@ -12,7 +13,10 @@ import org.planeswalker.pojo.dto.LoginDto;
 import org.planeswalker.pojo.dto.UserPlusInfo;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
-import org.planeswalker.utils.*;
+import org.planeswalker.utils.CheckUtil;
+import org.planeswalker.utils.CollectionUtil;
+import org.planeswalker.utils.JacksonUtil;
+import org.planeswalker.utils.NumberUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class LoginService {
     private UserMapper userMapper;
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private CodeImg codeImg;
 
     /**
      * 注册业务
@@ -49,16 +54,14 @@ public class LoginService {
     public String register(User newUser, UserInfo userInfo, String imgCode) {
         log.info("开始注册业务");
         // 验证码校验
-        Object sessionImgCode = SessionUtil.getSession().getAttribute(Constant.CODE_IMG);
-        if (sessionImgCode == null) {
+        if (codeImg == null || StringUtils.isEmpty(codeImg.getCode())) {
             throw new LoginException(LoginErrors.CODE_IMG_NOT_EXIST);
         }
-        String stringSessionImgCode = (String) sessionImgCode;
-        if (!imgCode.equalsIgnoreCase(stringSessionImgCode)) {
+        if (!imgCode.equalsIgnoreCase(codeImg.getCode())) {
             throw new LoginException(LoginErrors.WRONG_IMG_CODE);
         }
         // 清除验证码
-        SessionUtil.getSession().setAttribute(Constant.CODE_IMG, null);
+        codeImg.setCode(null);
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据「邮箱」查询所有匹配的用户，邮箱不允许重复
@@ -134,11 +137,7 @@ public class LoginService {
         if (!sameEmailUser.getPassword().equals(loginDto.getPassword())) {
             throw new LoginException(LoginErrors.WRONG_PASSWORD);
         }
-        // 将已登录用户信息放入session
-        HttpSession session = SessionUtil.getSession();
-        session.setAttribute(Constant.USER_BEAN, sameEmailUser);
-        log.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
-                Constant.USER_BEAN, session.getId(), JacksonUtil.toJson(sameEmailUser));
+        log.info("登录成功 ==> {}", JacksonUtil.toJson(sameEmailUser));
         // 登录成功后返回用户信息
         return sameEmailUser;
     }
@@ -191,14 +190,14 @@ public class LoginService {
     }
 
     /**
-     * 注销账户: 根据 session 中的 userId 将该记录删除
-     * @param user session 中的 user 对象
+     * 注销账户: 根据 userId 将该记录删除
+     * @param userId
      */
-    public Integer deleteMyself(User user) {
-        if (user == null || StringUtils.isEmpty(user.getUserId())) {
-            throw new LoginException(LoginErrors.USER_NOT_EXIST);
+    public Integer deleteMyself(String userId) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new LoginException(Errors.EMPTY_PARAMS);
         }
         // 根据 userId 将该条记录删除
-        return userMapper.deleteById(user.getUserId());
+        return userMapper.deleteById(userId);
     }
 }

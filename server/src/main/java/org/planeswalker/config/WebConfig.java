@@ -40,8 +40,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new RequestInterceptor()).addPathPatterns("/**");
 
         // 添加登录校验拦截器
-        registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/user/register", "/error", "/h2", "/codeImg", "/favicon.ico");
+//        registry.addInterceptor(new LoginInterceptor())
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/user/login", "/user/register", "/error", "/h2", "/codeImg", "/favicon.ico");
     }
 }

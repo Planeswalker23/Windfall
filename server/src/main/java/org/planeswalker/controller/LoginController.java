@@ -10,7 +10,6 @@ import org.planeswalker.pojo.dto.UserPlusInfo;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
 import org.planeswalker.service.LoginService;
-import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -79,24 +78,26 @@ public class LoginController {
 
     /**
      * 获取用户个人信息
+     * @param userId
      * @return {@link Response}
      */
     @GetMapping("/info")
-    public Response<UserPlusInfo> getUserInfo() {
-        // 直接获取登录信息的userId，用以获取个人信息
-        User user = SessionUtil.getUserBean();
-        return Response.success(loginService.getUserInfo(user.getUserId()));
+    public Response<UserPlusInfo> getUserInfo(String userId) {
+        // 参数验证
+        Assert.notNull(userId, Errors.EMPTY_PARAMS);
+        return Response.success(loginService.getUserInfo(userId));
 
     }
 
     /**
-     * 注销账户: 根据 session 中的 userId 将该记录删除
+     * 注销账户: 根据 userId 将该记录删除
+     * @param userId
      * @return {@link Response}
      */
     @DeleteMapping("/myself")
-    public Response deleteMyself() {
-        // 直接获取登录信息的userId，用以获取个人信息
-        User user = SessionUtil.getUserBean();
-        return Response.success(loginService.deleteMyself(user));
+    public Response deleteMyself(String userId) {
+        // 参数验证
+        Assert.notNull(userId, Errors.EMPTY_PARAMS);
+        return Response.success(loginService.deleteMyself(userId));
     }
 }

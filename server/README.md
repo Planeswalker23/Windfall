@@ -87,7 +87,10 @@
 ## 获取个人信息
 - `GET /user/Info`
 - [UserPlusInfo 字段注释](src/main/java/org/planeswalker/pojo/dto/UserPlusInfo.java)
-- 参数：无
+- 参数：userId 必填
+```html
+http://localhost:8081/user/info?userId=e1a3b2a6-d27b-4a07-af00-b691fa359443
+```
 - 接口返回
 ```json
 {
@@ -106,7 +109,12 @@
 
 ## 注销账户
 - `DELETE /user/myself`
-- 参数：无
+- 参数：userId 必填
+```json
+{
+    "userId": "d3bc792c-687f-43f9-b446-15efd754d376"
+}
+```
 - 接口返回
 ```json
 {

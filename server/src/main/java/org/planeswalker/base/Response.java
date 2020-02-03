@@ -26,7 +26,7 @@ public class Response<T> {
     /**
      * 返回数据
      */
-    private T data;
+    private T res;
 
     @Override
     public String toString() {
@@ -45,7 +45,7 @@ public class Response<T> {
         Response<T> res = new Response<T>();
         res.setCode(Constant.SUCCESS_CODE);
         res.setReason(Constant.SUCCESS);
-        res.setData(data);
+        res.setRes(data);
         log.info("接口返回内容: {}", res.toString());
         return res;
     }

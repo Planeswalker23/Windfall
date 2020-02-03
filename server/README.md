@@ -10,13 +10,14 @@
 - `POST /user/register`
 - [RegisterDto 字段注释](src/main/java/org/planeswalker/pojo/dto/RegisterDto.java)
 - [UserInfo 字段注释](src/main/java/org/planeswalker/pojo/entity/UserInfo.java)
-- 必填字段: userName, password, email
+- 必填字段: userName, password, email, imgCode
 - 参数
 ```json
 {
     "userName": "test",
     "password": "test",
     "email": "test@qq.com",
+    "imgCode": "1234",
     "favourite": "1,2",
     "signature": "test个性签名"
 }

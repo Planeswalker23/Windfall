@@ -1,10 +1,15 @@
 ## 接口明细
+- [获取图片验证码 `GET /codeImg`](#获取图片验证码)
 - [注册 `POST /user/register`](#注册)
 - [登录 `POST /user/login`](#登录)
 - [修改个人信息 `PUT /user/info`](#修改个人信息)
 - [获取个人信息 `GET /user/Info`](#获取个人信息)
 - [注销账户 `DELETE /user/myself`](#注销账户)
  
+## 获取图片验证码
+- `GET /codeImg`
+- 参数：无
+- 接口返回：60 * 22 的图片验证码
 
 ## 注册
 - `POST /user/register`

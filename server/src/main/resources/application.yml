@@ -1,3 +1,7 @@
+# 端口号
+server:
+  port: 8081
+
 # spring配置
 spring:
   application:

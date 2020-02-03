@@ -33,7 +33,7 @@ public class LoginController {
     private LoginService loginService;
 
     /**
-     * 注册 {"userName":"dd","password":"1","email":"123@qq.com","favourite":"1,2","signature":"个性签名"}
+     * 注册
      * @param register {@link RegisterDto}
      * @param userInfo {@link UserInfo}
      * @return {@link Response}
@@ -46,7 +46,6 @@ public class LoginController {
 
     /**
      * 修改个人信息，此接口不允许修改密码
-     * {"userId": "c68c512b-55c5-456a-9832-783070166c40","userName": "Planeswalker1101002","password": "1101001","email": "1101001@qq.com"}
      * @param newUser {@link User}
      * @param userInfo {@link UserInfo}
      * @return {@link Response}

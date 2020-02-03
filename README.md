@@ -42,11 +42,7 @@
    "success": true
 }
 ```
-### controller 层接口明细
-1. 注册`POST /user/register`
-2. 修改个人信息`PUT /user/info`
-3. 登录`POST /user/login`
-3. 获取个人信息`GET /user/Info`
+### [controller 层接口明细](server/README.md)
 
 ## 项目目录结构
 ```

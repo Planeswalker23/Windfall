@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -153,5 +154,17 @@ public class LoginService {
             throw new LoginException(LoginErrors.USER_NOT_EXIST);
         }
         return sameUserIdUser;
+    }
+
+    /**
+     * 注销账户: 根据 session 中的 userId 将该记录删除
+     * @param user session 中的 user 对象
+     */
+    public Integer deleteMyself(User user) {
+        if (user == null || StringUtils.isEmpty(user.getUserId())) {
+            throw new LoginException(LoginErrors.USER_NOT_EXIST);
+        }
+        // 根据 userId 将该条记录删除
+        return userMapper.deleteById(user.getUserId());
     }
 }

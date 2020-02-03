@@ -88,4 +88,15 @@ public class LoginController {
         return Response.success(loginService.getUserInfo(user.getUserId()));
 
     }
+
+    /**
+     * 注销账户: 根据 session 中的 userId 将该记录删除
+     * @return {@link Response}
+     */
+    @DeleteMapping("/myself")
+    public Response deleteMyself() {
+        // 直接获取登录信息的userId，用以获取个人信息
+        User user = SessionUtil.getUserBean();
+        return Response.success(loginService.deleteMyself(user));
+    }
 }

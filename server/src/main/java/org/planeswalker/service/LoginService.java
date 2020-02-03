@@ -43,10 +43,20 @@ public class LoginService {
      * 注册业务
      * @param newUser
      * @param userInfo
+     * @param imgCode 验证码
      * @return userId {@link User#getEmail()}
      */
-    public String register(User newUser, UserInfo userInfo) {
+    public String register(User newUser, UserInfo userInfo, String imgCode) {
         log.info("开始注册业务");
+        // 验证码校验
+        Object sessionImgCode = SessionUtil.getSession().getAttribute(Constant.CODE_IMG);
+        if (sessionImgCode == null) {
+            throw new LoginException(LoginErrors.CODE_IMG_NOT_EXIST);
+        }
+        String stringSessionImgCode = (String) sessionImgCode;
+        if (!imgCode.equalsIgnoreCase(stringSessionImgCode)) {
+            throw new LoginException(LoginErrors.WRONG_IMG_CODE);
+        }
         // 验证邮箱格式，已验证email属性是否为空
         CheckUtil.checkEmail(newUser.getEmail());
         // 根据「邮箱」查询所有匹配的用户，邮箱不允许重复

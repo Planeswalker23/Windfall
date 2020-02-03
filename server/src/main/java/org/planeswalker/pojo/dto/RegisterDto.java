@@ -30,4 +30,10 @@ public class RegisterDto implements Serializable {
      */
     @NotEmpty(message = "邮箱不能为空")
     private String email;
+
+    /**
+     * 验证码
+     */
+    @NotEmpty(message = "验证码不能为空")
+    private String imgCode;
 }

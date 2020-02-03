@@ -41,7 +41,7 @@ public class LoginController {
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
     public Response<String> addUser(@Valid RegisterDto register, UserInfo userInfo) {
-        return Response.success(loginService.register(new User(register), userInfo));
+        return Response.success(loginService.register(new User(register), userInfo, register.getImgCode()));
     }
 
     /**

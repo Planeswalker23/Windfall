@@ -33,6 +33,7 @@ public interface Constant {
      */
     String USER_BEAN = "userBean";
     String USER_ID = "userId";
+    String CODE_IMG = "ImgCode";
 
     /**
      * 返回message

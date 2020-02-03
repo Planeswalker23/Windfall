@@ -14,6 +14,8 @@ public interface LoginErrors {
     String MAIL_EXIST = "邮箱已被注册";
     String MAIL_NOT_REGISTER = "该邮箱尚未注册";
     String USER_NOT_EXIST = "该用户不存在";
+    String CODE_IMG_NOT_EXIST = "验证码不存在，请刷新后重新获取";
+    String WRONG_IMG_CODE = "验证码错误";
 
     /**
      * 登录相关

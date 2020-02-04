@@ -6,18 +6,18 @@
 - [修改个人信息 `PUT /user/info`](#修改个人信息)
 - [获取个人信息 `GET /user/Info`](#获取个人信息)
 - [注销账户 `DELETE /user/myself`](#注销账户)
+
 ### 评测、留言模块
-- [新增评测/留言 `POST /comment/add`](#新增评测/留言)
-- [修改评测/留言 `PUT /comment/update`](#修改评测/留言)
-- [点赞或取消点赞评测/留言 `PUT /comment/like`](#点赞或取消点赞评测/留言)
-- [查询单个评测/留言 `GET /comment/one`](#查询单个评测/留言)
-- [查询我的所有评测/留言 `GET /comment/my`](#查询我的所有评测/留言)
-- [查询所有评测/留言 `GET /comment/all`](#查询所有评测/留言)
-- [删除评测/留言 `DELETE /comment/delete`](#删除评测/留言)
+- [新增评测留言 `POST /comment/add`](#新增评测留言)
+- [修改评测留言 `PUT /comment/update`](#修改评测留言)
+- [点赞或取消点赞评测留言 `PUT /comment/like`](#点赞或取消点赞评测留言)
+- [查询单个评测留言 `GET /comment/one`](#查询单个评测留言)
+- [查询我的所有评测留言 `GET /comment/my`](#查询我的所有评测留言)
+- [查询所有评测留言 `GET /comment/all`](#查询所有评测留言)
+- [删除评测留言 `DELETE /comment/delete`](#删除评测留言)
 
 ---
 
-### 用户管理模块
 #### 获取图片验证码
 - `GET /codeImg`
 - 参数：无
@@ -139,8 +139,7 @@ http://localhost:8081/user/info?userId=root
 
 ---
 
-### 评测、留言模块
-#### 新增评测/留言
+#### 新增评测留言
 - `POST /comment/add`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, content 必填，需要注意：commentPid 不填或为0时代表评测，其他代表留言
@@ -148,7 +147,7 @@ http://localhost:8081/user/info?userId=root
 {
     "userId": "root",
     "commentPid": "0",
-    "content": "评测/留言内容"
+    "content": "评测留言内容"
 }
 ```
 - 接口返回，评测 commentId
@@ -160,7 +159,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 修改评测/留言
+#### 修改评测留言
 - `PUT /comment/update`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, commentId 必填
@@ -168,7 +167,7 @@ http://localhost:8081/user/info?userId=root
 {
     "userId": "d3bc792c-687f-43f9-b446-15efd754d376",
     "commentId": "a840ccf5-7f49-474d-a07f-4906959e5b86",
-    "content": "评测/留言内容 update"
+    "content": "评测留言内容 update"
 }
 ```
 - 接口返回，修改成功的 comment 数目
@@ -180,7 +179,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 点赞或取消点赞评测/留言
+#### 点赞或取消点赞评测留言
 - `PUT /comment/like`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, commentId 必填
@@ -199,7 +198,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 查询单个评测/留言
+#### 查询单个评测留言
 - `GET /comment/one`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：commentId 必填
@@ -225,7 +224,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 查询我的所有评测/留言
+#### 查询我的所有评测留言
 - `GET /comment/my`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId 必填
@@ -285,7 +284,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 查询所有评测/留言
+#### 查询所有评测留言
 - `GET /comment/all`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId 必填
@@ -344,7 +343,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 删除评测/留言
+#### 删除评测留言
 - `DELETE /comment/delete`
 - 参数：userId, commentId 必填
 ```json

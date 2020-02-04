@@ -31,8 +31,8 @@ public class CulturalNingBoApplication {
      * 乐观锁拦截器
      * @return {@link com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor}
      */
-    @Bean
+   /* @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
-    }
+    }*/
 }

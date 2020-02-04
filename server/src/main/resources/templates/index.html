@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Clark | Home 1</title>
 
@@ -7,7 +7,7 @@
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="">
-  
+
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Karla:400,400i,700%7CLato:300,400,400i,700' rel='stylesheet'>
 
@@ -28,375 +28,403 @@
 
 <body>
 
-  <!-- Preloader -->
-  <div class="loader-mask">
-    <div class="loader">
-      "Loading..."
+<!-- Preloader -->
+<div class="loader-mask">
+  <div class="loader">
+    "Loading..."
+  </div>
+</div>
+
+<main class="main-wrapper">
+
+  <!-- Navigation -->
+  <header class="nav nav--transparent">
+
+    <div class="nav__holder" id="sticky-nav">
+      <div class="container-fluid">
+        <div class="flex-parent">
+
+          <div class="nav__header flex-child clearfix">
+            <!-- Logo -->
+            <div class="logo-wrap">
+              <a href="index.html" class="logo__link">
+                <img class="logo logo--dark" src="img/logo_dark.png" alt="logo">
+                <img class="logo logo--light" src="img/logo_light.png" alt="logo">
+              </a>
+            </div>
+
+            <button type="button" class="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="nav__icon-toggle-bar"></span>
+              <span class="nav__icon-toggle-bar"></span>
+              <span class="nav__icon-toggle-bar"></span>
+            </button>
+          </div> <!-- end nav-header -->
+
+          <nav id="navbar-collapse" class="nav__wrap flex-child collapse navbar-collapse">
+            <ul class="nav__menu">
+
+              <li class="nav__dropdown flex-child active">
+                <a href="#">历史文化</a>
+                <i class="ui-arrow-down nav__dropdown-trigger"></i>
+                <ul class="nav__dropdown-menu">
+                  <li><a href="index.html">Home Startup</a></li>
+                  <li><a href="index-2.html">Home Landing</a></li>
+                  <li><a href="index-3.html">Home Architecture</a></li>
+                  <li><a href="index-4.html">Home Artist</a></li>
+                  <li><a href="index-5.html">Home Saas Landing</a></li>
+                  <li><a href="index-6.html">Home Agency</a></li>
+                </ul>
+              </li>
+
+              <li class="nav__dropdown flex-child">
+                <a href="#">活动资讯</a>
+                <i class="ui-arrow-down nav__dropdown-trigger"></i>
+                <ul class="nav__dropdown-menu">
+                  <li>
+                    <a href="portfolio-classic.html">Classic</a>
+                  </li>
+                  <li>
+                    <a href="portfolio-masonry.html">Masonry</a>
+                  </li>
+                  <li>
+                    <a href="portfolio-single.html">Single Project</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav__dropdown flex-child">
+                <a href="#">美食特色</a>
+                <i class="ui-arrow-down nav__dropdown-trigger"></i>
+                <ul class="nav__dropdown-menu">
+                  <li><a href="blog-standard.html">Standard</a></li>
+                  <li><a href="blog-single.html">Single Post</a></li>
+                </ul>
+              </li>
+
+              <li class="nav__dropdown flex-child">
+                <a href="#">风物文化</a>
+                <i class="ui-arrow-down nav__dropdown-trigger"></i>
+                <ul class="nav__dropdown-menu">
+                  <li><a href="services.html">Services</a></li>
+                  <li><a href="about-us.html">About Us</a></li>
+                  <li><a href="about-me.html">About Me</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </li>
+
+              <li class="nav__dropdown flex-child">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="border-style: none;background-color: Transparent;">
+                  <span style="color: white;">登录</span>
+                </button>
+
+                <!-- Modal -->
+
+              </li>
+            </ul> <!-- end menu -->
+          </nav> <!-- end nav-wrap -->
+
+        </div> <!-- end flex-parent -->
+      </div> <!-- end container -->
+
+    </div>
+  </header> <!-- end navigation -->
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" style="z-index: 2041;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">登录</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">邮箱</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="请输入邮箱">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">密码</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码">
+            </div>
+
+            <button type="submit" class="btn btn-default" style="float: right;width: 60px;background-color: greenyellow;">登录</button>
+            <button type="submit" class="btn btn-default" style="width: 60px; background-color: skyblue;">注册</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
     </div>
   </div>
+  <div class="content-wrapper oh">
 
-  <main class="main-wrapper">
+    <!-- Hero -->
+    <section class="hero bg-img" style="background-image: url(img/hero/backimg.jpg);">
+      <div class="container hero__container container-full-height">
+        <div class="hero__outer">
+          <div class="hero__inner text-center">
+            <h1 class="hero__title hero__title--lg">Visualize Your Creativity</h1>
+            <p class="hero__subtitle hero--boxed hero--center">We help founders at the formative stages of their venture, to take an idea from concept through to launch</p>
+            <a href="#" class="btn btn--lg btn--transparent"><span>Start Here</span></a>
+          </div>
+        </div>
+      </div>
+    </section> <!-- end hero -->
 
-    <!-- Navigation -->
-    <header class="nav nav--transparent">
 
-      <div class="nav__holder" id="sticky-nav">
-        <div class="container-fluid">
-          <div class="flex-parent">
+    <!-- Intro -->
+    <section class="section-wrap section-wrap--md animate">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h2 class="intro__title mb-md-20">
+              Perfect tool for your real business and startup
+            </h2>
+          </div>
 
-            <div class="nav__header flex-child clearfix">
-              <!-- Logo -->
-              <div class="logo-wrap">
-                <a href="index.html" class="logo__link">
-                  <img class="logo logo--dark" src="img/logo_dark.png" alt="logo">
-                  <img class="logo logo--light" src="img/logo_light.png" alt="logo">
+          <div class="col-md-6 col-md-offset-2">
+            <p class="lead">
+              We help founders at the formative stages of their venture, to take an idea from concept through to launch.  We’re an engineering and design studio with an entrepreneurial spirit.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section> <!-- end intro -->
+    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
+
+    <!-- Portfolio Masonry -->
+    <section class="section-wrap section-wrap--md pt-0">
+      <div class="container">
+
+        <div id="masonry-grid" class="works-grid small-gutter">
+
+          <div class="work-item isotope-large hover-trigger hover-scale hover-1">
+            <div class="work-item__container">
+              <div class="work-item__img-holder">
+                <a href="http://vimeo.com/19270640" class="lightbox-video">
+                  <img src="img/portfolio/masonry_1/1.jpg" alt="" class="work-item__img">
+                  <div class="hover-overlay" data-overlay="5">
+                    <div class="work-item__description">
+                      <h3 class="work-item__title">Office Tablet (Vimeo)</h3>
+                      <span class="work-item__category">UI/UX Design</span>
+                    </div>
+                  </div>
                 </a>
               </div>
+            </div>
+          </div> <!-- end work-item -->
 
-              <button type="button" class="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-              </button>
-            </div> <!-- end nav-header -->
+          <div class="work-item isotope-small hover-trigger hover-scale hover-1">
+            <div class="work-item__container">
+              <div class="work-item__img-holder">
+                <a href="https://www.youtube.com/watch?v=Scxs7L0vhZ4?autoplay=1" class="lightbox-video">
+                  <img src="img/portfolio/masonry_1/2.jpg" alt="" class="work-item__img">
+                  <div class="hover-overlay" data-overlay="5">
+                    <div class="work-item__description">
+                      <h3 class="work-item__title">Frozen Forest (Video)</h3>
+                      <span class="work-item__category">Branding</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div> <!-- end work-item -->
 
-            <nav id="navbar-collapse" class="nav__wrap flex-child collapse navbar-collapse">              
-              <ul class="nav__menu">
+          <div class="work-item isotope-small hover-trigger hover-scale hover-1">
+            <div class="work-item__container">
+              <div class="work-item__img-holder">
+                <a href="img/portfolio/masonry_1/3.jpg" class="lightbox-img">
+                  <img src="img/portfolio/masonry_1/3.jpg" alt="" class="work-item__img">
+                  <div class="hover-overlay" data-overlay="5">
+                    <div class="work-item__description">
+                      <h3 class="work-item__title">Women T-shirt</h3>
+                      <span class="work-item__category">Branding</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div> <!-- end work-item -->
 
-                <li class="nav__dropdown flex-child active">
-                  <a href="#">Home</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="index.html">Home Startup</a></li>
-                    <li><a href="index-2.html">Home Landing</a></li>
-                    <li><a href="index-3.html">Home Architecture</a></li>
-                    <li><a href="index-4.html">Home Artist</a></li>
-                    <li><a href="index-5.html">Home Saas Landing</a></li>
-                    <li><a href="index-6.html">Home Agency</a></li>
-                  </ul>
-                </li>                
+          <div class="work-item isotope-large hover-trigger hover-scale hover-1">
+            <div class="work-item__container">
+              <div class="work-item__img-holder">
+                <a href="img/portfolio/masonry_1/4.jpg" class="lightbox-img">
+                  <img src="img/portfolio/masonry_1/4.jpg" alt="" class="work-item__img">
+                  <div class="hover-overlay" data-overlay="5">
+                    <div class="work-item__description">
+                      <h3 class="work-item__title">Stunning Bridge</h3>
+                      <span class="work-item__category">Architecture</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div> <!-- end work-item -->
 
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Portfolio</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li>
-                      <a href="portfolio-classic.html">Classic</a>
-                    </li>                 
-                    <li>
-                      <a href="portfolio-masonry.html">Masonry</a>
-                    </li>
-                    <li>
-                      <a href="portfolio-single.html">Single Project</a>
-                    </li>
-                  </ul>
-                </li>             
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Blog</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="blog-standard.html">Standard</a></li>
-                    <li><a href="blog-single.html">Single Post</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Pages</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="about-me.html">About Me</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Features</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="typography.html">Typography</a></li>
-                    <li><a href="shortcodes.html">Elements</a></li>
-                  </ul>
-                </li> <!-- end elements -->
-
-              </ul> <!-- end menu -->
-            </nav> <!-- end nav-wrap -->         
-        
-          </div> <!-- end flex-parent -->
-        </div> <!-- end container -->
-
+        </div>
       </div>
-    </header> <!-- end navigation -->
+    </section> <!-- end portfolio masonry -->
 
-
-    <div class="content-wrapper oh">
-
-      <!-- Hero -->
-      <section class="hero bg-img" style="background-image: url(img/hero/hero_1.jpg);">
-        <div class="container hero__container container-full-height">
-          <div class="hero__outer">
-            <div class="hero__inner text-center">
-              <h1 class="hero__title hero__title--lg">Visualize Your Creativity</h1>
-              <p class="hero__subtitle hero--boxed hero--center">We help founders at the formative stages of their venture, to take an idea from concept through to launch</p>
-              <a href="#" class="btn btn--lg btn--transparent"><span>Start Here</span></a>
-            </div>            
-          </div>          
-        </div>        
-      </section> <!-- end hero -->
-
-
-      <!-- Intro -->
-      <section class="section-wrap section-wrap--md animate">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <h2 class="intro__title mb-md-20">
-                Perfect tool for your real business and startup
-              </h2>
-            </div>
-
-            <div class="col-md-6 col-md-offset-2">
-              <p class="lead">
-                We help founders at the formative stages of their venture, to take an idea from concept through to launch.  We’re an engineering and design studio with an entrepreneurial spirit.
-              </p>
-            </div>
-          </div>
-        </div>        
-      </section> <!-- end intro -->
-      <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
-
-      <!-- Portfolio Masonry -->
-      <section class="section-wrap section-wrap--md pt-0">
-        <div class="container">
-
-          <div id="masonry-grid" class="works-grid small-gutter">
-
-            <div class="work-item isotope-large hover-trigger hover-scale hover-1">
-              <div class="work-item__container">
-                <div class="work-item__img-holder">
-                  <a href="http://vimeo.com/19270640" class="lightbox-video">
-                    <img src="img/portfolio/masonry_1/1.jpg" alt="" class="work-item__img">
-                    <div class="hover-overlay" data-overlay="5">
-                      <div class="work-item__description">
-                        <h3 class="work-item__title">Office Tablet (Vimeo)</h3>
-                        <span class="work-item__category">UI/UX Design</span>
-                      </div>
-                    </div>
-                  </a>              
-                </div>
-              </div> 
-            </div> <!-- end work-item -->
-
-            <div class="work-item isotope-small hover-trigger hover-scale hover-1">
-              <div class="work-item__container">
-                <div class="work-item__img-holder">
-                  <a href="https://www.youtube.com/watch?v=Scxs7L0vhZ4?autoplay=1" class="lightbox-video">
-                    <img src="img/portfolio/masonry_1/2.jpg" alt="" class="work-item__img">
-                    <div class="hover-overlay" data-overlay="5">
-                      <div class="work-item__description">
-                        <h3 class="work-item__title">Frozen Forest (Video)</h3>
-                        <span class="work-item__category">Branding</span>
-                      </div>
-                    </div>
-                  </a>              
-                </div>
-              </div> 
-            </div> <!-- end work-item -->
-
-            <div class="work-item isotope-small hover-trigger hover-scale hover-1">
-              <div class="work-item__container">
-                <div class="work-item__img-holder">
-                  <a href="img/portfolio/masonry_1/3.jpg" class="lightbox-img">
-                    <img src="img/portfolio/masonry_1/3.jpg" alt="" class="work-item__img">
-                    <div class="hover-overlay" data-overlay="5">
-                      <div class="work-item__description">
-                        <h3 class="work-item__title">Women T-shirt</h3>
-                        <span class="work-item__category">Branding</span>
-                      </div>
-                    </div>
-                  </a>              
-                </div>
-              </div> 
-            </div> <!-- end work-item -->
-
-            <div class="work-item isotope-large hover-trigger hover-scale hover-1">
-              <div class="work-item__container">
-                <div class="work-item__img-holder">
-                  <a href="img/portfolio/masonry_1/4.jpg" class="lightbox-img">
-                    <img src="img/portfolio/masonry_1/4.jpg" alt="" class="work-item__img">
-                    <div class="hover-overlay" data-overlay="5">
-                      <div class="work-item__description">
-                        <h3 class="work-item__title">Stunning Bridge</h3>
-                        <span class="work-item__category">Architecture</span>
-                      </div>
-                    </div>
-                  </a>              
-                </div>
-              </div> 
-            </div> <!-- end work-item -->
-
-          </div>
-        </div>
-      </section> <!-- end portfolio masonry -->
-
-      <!-- CTA -->
-      <section class="call-to-action bg-dark">
-        <div class="container text-center">
-          <h3 class="call-to-action__title">We’ll engage clients and businesess</h3>         
-          <a href="#" class="btn btn--md btn--gradient">
-            <span>Start Now</span>
-          </a>
-        </div>
-      </section> <!-- end CTA -->
-
-      
-
-      <!-- Feature -->
-      <section class="section-wrap section-wrap--md animate">
-        <div class="container">
-          <div class="row">
-
-            <div class="col-md-4 mb-md-30">
-              <div class="feature text-center">
-                <div class="feature__base feature--border">
-                  <a href="#" class="feature__icon-holder">
-                    <i class="pe-7s-cloud feature__icon feature__icon--gradient"></i>
-                  </a>
-                  <div class="feature__text">
-                    <h3 class="feature__title bottom-line">iOS Apps</h3>
-                    <p>Gaze is a simple and elegant template with tons of features. Lorem ipsum dolor sit amet, consectetur.</p>
-                  </div>
-                </div>
-              </div>            
-            </div> <!-- end feature item -->
-
-            <div class="col-md-4 mb-md-30">
-              <div class="feature text-center">
-                <div class="feature__base feature--border">
-                  <a href="#" class="feature__icon-holder">
-                    <i class="pe-7s-diamond feature__icon feature__icon--gradient"></i>
-                  </a>
-                  <div class="feature__text">
-                    <h3 class="feature__title bottom-line">Web Design</h3>
-                    <p>Gaze is a simple and elegant template with tons of features. Lorem ipsum dolor sit amet, consectetur.</p>
-                  </div>
-                </div>
-              </div>            
-            </div> <!-- end feature item -->
-
-            <div class="col-md-4 mb-md-30">
-              <div class="feature text-center">
-                <div class="feature__base feature--border">
-                  <a href="#" class="feature__icon-holder">
-                    <i class="pe-7s-shopbag feature__icon feature__icon--gradient"></i>
-                  </a>
-                  <div class="feature__text">
-                    <h3 class="feature__title bottom-line">eCommerce</h3>
-                    <p>Gaze is a simple and elegant template with tons of features. Lorem ipsum dolor sit amet, consectetur.</p>
-                  </div>
-                </div>
-              </div>            
-            </div> <!-- end feature item -->
-
-          </div>
-        </div>
-      </section> <!-- end feature -->      
-
-
-      <!-- Partners -->
-      <section class="section-wrap pb-100 partners bg-light text-center">
-        <div class="container">
-          <h2 class="mb-100">High-level Design studio with an entrepreneurial spirit.</h2>
-          <div class="row">
-
-            <div class="col-md-3 col-xs-6">
-              <a href="#">
-                <img src="img/partners/partner_logo_dark_1.png" alt="">
-              </a>
-            </div>
-            <div class="col-md-3 col-xs-6">
-              <a href="#">
-                <img src="img/partners/partner_logo_dark_2.png" alt="">
-              </a>
-            </div>
-            <div class="col-md-3 col-xs-6">
-              <a href="#">
-                <img src="img/partners/partner_logo_dark_3.png" alt="">
-              </a>
-            </div>
-            <div class="col-md-3 col-xs-6">
-              <a href="#">
-                <img src="img/partners/partner_logo_dark_4.png" alt="">
-              </a>
-            </div>
-            
-          </div>
-        </div>
-      </section> <!-- end partners -->
-
-
-      <!-- Footer -->
-      <footer class="footer bg-dark">
-        <div class="container">
-          <div class="footer__widgets">
-            <div class="row">
-
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="widget footer__get-in-touch text-sm-center">
-                  <div class="footer__logo">
-                    <img src="img/logo_light.png" alt="">
-                  </div>
-                  <p class="footer__get-in-touch__paragraph">
-                    <a href="mailto:hello@support.com">hello@support.com</a>
-                  </p>
-                  <p class="footer__get-in-touch__paragraph"><a href="tel:+64-93-310-70-50">+64 93 310 70 50</a> More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-                </div>
-              </div> <!-- end get in touch -->
-
-              <div class="col-md-6 col-md-offset-2 col-sm-6 col-xs-12">
-                <div class="widget footer__nav-links text-right text-sm-center">
-                  <ul class="list-inline">
-                    <li><a href="#">Works</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                  </ul>
-
-                  <div class="footer__socials mt-50">
-                    <div class="social-icons social-icons--nobase">
-                      <a href="#"><i class="ui-twitter"></i></a>
-                      <a href="#"><i class="ui-facebook"></i></a>
-                      <a href="#"><i class="ui-linkedin"></i></a>
-                      <a href="#"><i class="ui-instagram"></i></a>
-                    </div>
-                  </div>
-
-                </div>
-              </div> <!-- end nav links / socials -->
-
-            </div>
-          </div>    
-        </div>
-      </footer> <!-- end footer -->
-
-
-      <div id="back-to-top">
-        <a href="#top"><i class="ui-arrow-up"></i></a>
+    <!-- CTA -->
+    <section class="call-to-action bg-dark">
+      <div class="container text-center">
+        <h3 class="call-to-action__title">We’ll engage clients and businesess</h3>
+        <a href="#" class="btn btn--md btn--gradient">
+          <span>Start Now</span>
+        </a>
       </div>
+    </section> <!-- end CTA -->
 
-    </div> <!-- end content wrapper -->
-  </main> <!-- end main wrapper -->
-  
 
-  <!-- jQuery Scripts -->
-  <script type="text/javascript" src="js/jquery.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/plugins.js"></script>  
-  <script type="text/javascript" src="js/scripts.js"></script>
-    
+
+    <!-- Feature -->
+    <section class="section-wrap section-wrap--md animate">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-4 mb-md-30">
+            <div class="feature text-center">
+              <div class="feature__base feature--border">
+                <a href="#" class="feature__icon-holder">
+                  <i class="pe-7s-cloud feature__icon feature__icon--gradient"></i>
+                </a>
+                <div class="feature__text">
+                  <h3 class="feature__title bottom-line">iOS Apps</h3>
+                  <p>Gaze is a simple and elegant template with tons of features. Lorem ipsum dolor sit amet, consectetur.</p>
+                </div>
+              </div>
+            </div>
+          </div> <!-- end feature item -->
+
+          <div class="col-md-4 mb-md-30">
+            <div class="feature text-center">
+              <div class="feature__base feature--border">
+                <a href="#" class="feature__icon-holder">
+                  <i class="pe-7s-diamond feature__icon feature__icon--gradient"></i>
+                </a>
+                <div class="feature__text">
+                  <h3 class="feature__title bottom-line">Web Design</h3>
+                  <p>Gaze is a simple and elegant template with tons of features. Lorem ipsum dolor sit amet, consectetur.</p>
+                </div>
+              </div>
+            </div>
+          </div> <!-- end feature item -->
+
+          <div class="col-md-4 mb-md-30">
+            <div class="feature text-center">
+              <div class="feature__base feature--border">
+                <a href="#" class="feature__icon-holder">
+                  <i class="pe-7s-shopbag feature__icon feature__icon--gradient"></i>
+                </a>
+                <div class="feature__text">
+                  <h3 class="feature__title bottom-line">eCommerce</h3>
+                  <p>Gaze is a simple and elegant template with tons of features. Lorem ipsum dolor sit amet, consectetur.</p>
+                </div>
+              </div>
+            </div>
+          </div> <!-- end feature item -->
+
+        </div>
+      </div>
+    </section> <!-- end feature -->
+
+
+    <!-- Partners -->
+    <section class="section-wrap pb-100 partners bg-light text-center">
+      <div class="container">
+        <h2 class="mb-100">High-level Design studio with an entrepreneurial spirit.</h2>
+        <div class="row">
+
+          <div class="col-md-3 col-xs-6">
+            <a href="#">
+              <img src="img/partners/partner_logo_dark_1.png" alt="">
+            </a>
+          </div>
+          <div class="col-md-3 col-xs-6">
+            <a href="#">
+              <img src="img/partners/partner_logo_dark_2.png" alt="">
+            </a>
+          </div>
+          <div class="col-md-3 col-xs-6">
+            <a href="#">
+              <img src="img/partners/partner_logo_dark_3.png" alt="">
+            </a>
+          </div>
+          <div class="col-md-3 col-xs-6">
+            <a href="#">
+              <img src="img/partners/partner_logo_dark_4.png" alt="">
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section> <!-- end partners -->
+
+
+    <!-- Footer -->
+    <footer class="footer bg-dark">
+      <div class="container">
+        <div class="footer__widgets">
+          <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="widget footer__get-in-touch text-sm-center">
+                <div class="footer__logo">
+                  <img src="img/logo_light.png" alt="">
+                </div>
+                <p class="footer__get-in-touch__paragraph">
+                  <a href="mailto:hello@support.com">hello@support.com</a>
+                </p>
+                <p class="footer__get-in-touch__paragraph"><a href="tel:+64-93-310-70-50">+64 93 310 70 50</a> More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+              </div>
+            </div> <!-- end get in touch -->
+
+            <div class="col-md-6 col-md-offset-2 col-sm-6 col-xs-12">
+              <div class="widget footer__nav-links text-right text-sm-center">
+                <ul class="list-inline">
+                  <li><a href="#">Works</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Services</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">Contact</a></li>
+                </ul>
+
+                <div class="footer__socials mt-50">
+                  <div class="social-icons social-icons--nobase">
+                    <a href="#"><i class="ui-twitter"></i></a>
+                    <a href="#"><i class="ui-facebook"></i></a>
+                    <a href="#"><i class="ui-linkedin"></i></a>
+                    <a href="#"><i class="ui-instagram"></i></a>
+                  </div>
+                </div>
+
+              </div>
+            </div> <!-- end nav links / socials -->
+
+          </div>
+        </div>
+      </div>
+    </footer> <!-- end footer -->
+
+
+    <div id="back-to-top">
+      <a href="#top"><i class="ui-arrow-up"></i></a>
+    </div>
+
+  </div> <!-- end content wrapper -->
+</main> <!-- end main wrapper -->
+
+
+<!-- jQuery Scripts -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/plugins.js"></script>
+<script type="text/javascript" src="js/scripts.js"></script>
+
+
 </body>
 </html>

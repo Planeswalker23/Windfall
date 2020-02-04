@@ -10,6 +10,7 @@ import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -88,4 +89,6 @@ public class LoginController {
         return Response.success(loginService.getUserInfo(user.getUserId()));
 
     }
+
+
 }

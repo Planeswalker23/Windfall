@@ -11,6 +11,7 @@ import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.utils.NumberUtil;
+import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -174,5 +175,18 @@ public class CommentService {
         updateComment.setLikeNum(likeNum);
         commentMapper.updateById(updateComment);
         return num;
+    }
+
+    /**
+     * 获取我点赞的帖子
+     * @param pageMessage
+     * @return
+     */
+    public PageInfo<Comment> getMyLikeComment(PageMessage pageMessage) {
+        // 设置分页信息
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        List<Comment> comments = commentMapper.selectList(Wrappers.<Comment>lambdaQuery()
+                .like(Comment::getLikeNum, SessionUtil.getUserId()));
+        return new PageInfo<>(comments);
     }
 }

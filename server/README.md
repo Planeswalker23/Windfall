@@ -6,13 +6,14 @@
 - [获取个人信息 `GET /user/Info`](#获取个人信息)
 
 ### 帖子模块
-- [新增帖子留言 `POST /comment/add`](#新增帖子留言)
-- [修改帖子留言 `PUT /comment/update`](#修改帖子留言)
+- [新增帖子 `POST /comment/add`](#新增帖子)
+- [修改帖子 `PUT /comment/update`](#修改帖子)
 - [点赞或取消点赞帖子 `PUT /comment/like`](#点赞或取消点赞帖子)
-- [查询单个帖子留言 `GET /comment/one`](#查询单个帖子留言)
-- [查询我的所有帖子留言 `GET /comment/my`](#查询我的所有帖子留言)
-- [查询所有帖子留言 `GET /comment/all`](#查询所有帖子留言)
-- [删除帖子留言 `DELETE /comment/delete`](#删除帖子留言)
+- [查询单个帖子 `GET /comment/one`](#查询单个帖子)
+- [查询我的所有帖子 `GET /comment/my`](#查询我的所有帖子)
+- [查询所有帖子 `GET /comment/all`](#查询所有帖子)
+- [查询所有我点赞的帖子 `GET /comment/myLike`](#查询所有帖子查询所有我点赞的帖子)
+- [删除帖子 `DELETE /comment/delete`](#删除帖子)
 ---
 
 #### 注册
@@ -101,7 +102,7 @@
 
 ---
 
-#### 新增帖子留言
+#### 新增帖子
 - `POST /comment/add`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, title, content 必填
@@ -123,7 +124,7 @@
 }
 ```
 
-#### 修改帖子留言
+#### 修改帖子
 - `PUT /comment/update`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：commentId 必填
@@ -163,7 +164,7 @@
 }
 ```
 
-#### 查询单个帖子留言
+#### 查询单个帖子
 - `GET /comment/one`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：commentId 必填
@@ -189,7 +190,7 @@
 }
 ```
 
-#### 查询我的所有帖子留言
+#### 查询我的所有帖子
 - `GET /comment/my`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：
@@ -248,10 +249,10 @@
 }
 ```
 
-#### 查询所有帖子留言
+#### 查询所有帖子
 - `GET /comment/all`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
-- 参数：userId 必填
+- 参数：
 ```json
 {
     "pageNum": 1,
@@ -307,7 +308,58 @@
 }
 ```
 
-#### 删除帖子留言
+#### 查询所有我点赞的帖子
+- `GET /comment/myLike`
+- [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
+- 参数：
+```json
+{
+    "pageNum": 1,
+    "pageSize": 10
+}
+```
+- 接口返回，comment
+```json
+{
+    "success": true,
+    "message": "成功",
+    "data": {
+        "total": 1,
+        "list": [
+            {
+                "commentId": "testComment",
+                "userId": "root",
+                "title": "测试标题",
+                "content": "测试内容",
+                "price": 10.0,
+                "likeNum": "root",
+                "createTime": "2020-02-04 21:39:49",
+                "updateTime": "2020-02-04 21:40:24"
+            }
+        ],
+        "pageNum": 1,
+        "pageSize": 1,
+        "size": 1,
+        "startRow": 0,
+        "endRow": 0,
+        "pages": 1,
+        "prePage": 0,
+        "nextPage": 0,
+        "isFirstPage": true,
+        "isLastPage": true,
+        "hasPreviousPage": false,
+        "hasNextPage": false,
+        "navigatePages": 8,
+        "navigatepageNums": [
+            1
+        ],
+        "navigateFirstPage": 1,
+        "navigateLastPage": 1
+    }
+}
+```
+
+#### 删除帖子
 - `DELETE /comment/delete`
 - 参数：userId, commentId 必填
 ```json

@@ -97,4 +97,14 @@ public class CommentController {
     public Response<Integer> likeOrCancelComment(String commentId) {
         return Response.success(commentService.likeOrCancelComment(SessionUtil.getUserId(), commentId));
     }
+
+    /**
+     * 获取我点赞的帖子
+     * @param pageMessage
+     * @return {@link Response}
+     */
+    @GetMapping("/myLike")
+    public Response<PageInfo<Comment>> getMyLikeComment(PageMessage pageMessage) {
+        return Response.success(commentService.getMyLikeComment(pageMessage));
+    }
 }

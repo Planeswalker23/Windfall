@@ -15,10 +15,6 @@
     - lombok 
     - MyBatis-Plus
 
-## 分支仓库列表
-- [WindFall 基础架构](https://github.com/Planeswalker23/Windfall)
-- ...
-
 ## 创建新项目流程
 1. 确保本分支上没有未提交的代码
 2. 切换到master分支 `git checkout master`
@@ -32,8 +28,13 @@
     1. `pom.xml`文件中的`artifactId`节点修改为当前项目名，如`Book`
     2. `org.planeswalker.WindfallApplication`类的名字修改为当前项目名，如`BookApplication`
     3. `application.properties`文件中的`spring.application.name`修改为当前项目名，如`Book`
+    
+## 分支仓库列表
+- [WindFall 基础架构](https://github.com/Planeswalker23/Windfall/tree/master)
+- [Beauty17 拾柒美妆化妆品交易平台](https://github.com/Planeswalker23/Windfall/tree/order-beauty17)
 
 ## 基础架构及接口明细
+### [controller 层接口明细](server/README.md)
 ### 统一返回格式
 ```
 {
@@ -42,11 +43,6 @@
    "success": true
 }
 ```
-### controller 层接口明细
-1. 注册`POST /user/register`
-2. 修改个人信息`PUT /user/info`
-3. 登录`POST /user/login`
-3. 获取个人信息`GET /user/Info`
 
 ## 项目目录结构
 ```

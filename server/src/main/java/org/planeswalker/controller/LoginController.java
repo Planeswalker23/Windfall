@@ -16,6 +16,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -89,6 +92,7 @@ public class LoginController {
         return Response.success(loginService.getUserInfo(user.getUserId()));
 
     }
+
 
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Clark | About me</title>
 
@@ -29,107 +29,8 @@
 <body>
 
   <!-- Preloader -->
-  <div class="loader-mask">
-    <div class="loader">
-      "Loading..."
-    </div>
-  </div>
-
-  <main class="main-wrapper">
-
-    <!-- Navigation -->
-    <header class="nav nav--transparent">
-
-      <div class="nav__holder" id="sticky-nav">
-        <div class="container-fluid">
-          <div class="flex-parent">
-
-            <div class="nav__header flex-child clearfix">
-              <!-- Logo -->
-              <div class="logo-wrap">
-                <a href="index.html" class="logo__link">
-                  <img class="logo logo--dark" src="img/logo_dark.png" alt="logo">
-                  <img class="logo logo--light" src="img/logo_light.png" alt="logo">
-                </a>
-              </div>
-
-              <button type="button" class="nav__icon-toggle" id="nav__icon-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-                <span class="nav__icon-toggle-bar"></span>
-              </button>
-            </div> <!-- end nav-header -->
-
-            <nav id="navbar-collapse" class="nav__wrap flex-child collapse navbar-collapse">              
-              <ul class="nav__menu">
-
-                <li class="nav__dropdown flex-child active">
-                  <a href="#">Home</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="index.html">Home Startup</a></li>
-                    <li><a href="index-2.html">Home Landing</a></li>
-                    <li><a href="index-3.html">Home Architecture</a></li>
-                    <li><a href="index-4.html">Home Artist</a></li>
-                    <li><a href="index-5.html">Home Saas Landing</a></li>
-                    <li><a href="index-6.html">Home Agency</a></li>
-                  </ul>
-                </li>                
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Portfolio</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li>
-                      <a href="portfolio-classic.html">Classic</a>
-                    </li>                 
-                    <li>
-                      <a href="portfolio-masonry.html">Masonry</a>
-                    </li>
-                    <li>
-                      <a href="portfolio-single.html">Single Project</a>
-                    </li>
-                  </ul>
-                </li>             
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Blog</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="blog-standard.html">Standard</a></li>
-                    <li><a href="blog-single.html">Single Post</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Pages</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="about-me.html">About Me</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                  </ul>
-                </li>
-
-                <li class="nav__dropdown flex-child">
-                  <a href="#">Features</a>
-                  <i class="ui-arrow-down nav__dropdown-trigger"></i>
-                  <ul class="nav__dropdown-menu">
-                    <li><a href="typography.html">Typography</a></li>
-                    <li><a href="shortcodes.html">Elements</a></li>
-                  </ul>
-                </li> <!-- end elements -->
-
-              </ul> <!-- end menu -->
-            </nav> <!-- end nav-wrap -->         
-        
-          </div> <!-- end flex-parent -->
-        </div> <!-- end container -->
-
-      </div>
-    </header> <!-- end navigation -->
+  <div th:insert="navigation :: nav"></div>
+   <!-- end navigation -->
 
 
     <div class="content-wrapper oh">

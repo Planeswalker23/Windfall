@@ -1,0 +1,112 @@
+/*-------------------------------------------------------*/
+/* Sliders
+/*-------------------------------------------------------*/
+.owl-carousel {
+  overflow: hidden;
+}
+
+.owl-buttons {
+  position: static;
+}
+
+.owl-pagination {
+  position: relative;
+  margin-top: 30px;
+  left: 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+// Slide dots
+.owl-page {
+  display: inline-block;
+  padding: 6px;
+  position: relative;
+
+  &.active span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0;
+    opacity: 1;
+    background: $main-color;
+  }
+
+  span {
+    display: block;
+    position: relative;
+    width: 10px;
+    height: 10px;
+    opacity: 0.7;
+    background: rgba($text-color,.5);
+    z-index: 100;
+    border-radius: 50%;
+    @include transition ($all);
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+
+// White dots
+.owl-white-dots .owl-page.active span {
+  background: #fff;
+}
+
+.owl-white-dots .owl-page span {
+  background-color: rgba(#fff,.5);
+}
+
+
+// Arrows
+.owl-prev {
+  left: 0;
+}
+
+.owl-next {
+  right: 0;
+}
+
+.owl-prev,
+.owl-next {
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -23px;
+  text-align: center;
+  line-height: 46px;
+  z-index: 10;
+  width: 46px;
+  height: 46px;
+  opacity: 0;
+  @include transition ($all);
+}
+
+.owl-prev,
+.owl-next {
+  opacity: 1;
+}
+
+.owl-prev i,
+.owl-next i {
+  font-size: 46px;
+  color: $text-color;
+}
+
+
+// White arrows
+.owl-white-arrows .owl-prev i,
+.owl-white-arrows .owl-next i {
+  color: #fff;
+}
+
+
+// Dots inside
+.owl-carousel.dots-inside .owl-pagination {
+  position: absolute;
+  bottom: 20px;
+  margin-top: 0;
+}

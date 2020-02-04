@@ -43,4 +43,12 @@ public class SessionUtil {
             return user;
         }
     }
+
+    /**
+     * 获取已登录的 userId
+     * @throws NotLoginException
+     */
+    public static String getUserId() throws NotLoginException {
+        return getUserBean().getUserId();
+    }
 }

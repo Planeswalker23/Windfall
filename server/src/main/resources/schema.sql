@@ -17,7 +17,7 @@ create table comment (
   `comment_id` varchar(36) not null comment '评论id',
   `user_id` varchar(36) not null comment '评论用户的id',
   `title` varchar(36) default null comment '标题',
-  `content` varchar(2048) default null comment '评论内容',
+  `content` varchar(2048) default null comment '内容',
   `price` double default null comment '价格',
   `buy_url` varchar(512) default null comment '购买链接',
   `create_time` datetime default null comment '创建日期',

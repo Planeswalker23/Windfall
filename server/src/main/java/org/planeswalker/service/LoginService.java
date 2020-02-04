@@ -147,7 +147,7 @@ public class LoginService {
      * @return {@link User}
      * @throws {@link LoginException}
      */
-    private User getUserByUserId(String userId) throws LoginException {
+    public User getUserByUserId(String userId) throws LoginException {
         User sameUserIdUser = userMapper.selectById(userId);
         if (sameUserIdUser == null) {
             throw new LoginException(LoginErrors.USER_NOT_EXIST);

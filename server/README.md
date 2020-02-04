@@ -137,8 +137,10 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
+---
+
 ### 评测、留言模块
-#### 新增评测/留言 
+#### 新增评测/留言
 - `POST /comment/add`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, content 必填，需要注意：commentPid 不填或为0时代表评测，其他代表留言
@@ -158,7 +160,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 修改评测/留言 
+#### 修改评测/留言
 - `PUT /comment/update`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, commentId 必填
@@ -178,7 +180,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 点赞或取消点赞评测/留言 
+#### 点赞或取消点赞评测/留言
 - `PUT /comment/like`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, commentId 必填
@@ -197,7 +199,7 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 查询单个评测/留言 
+#### 查询单个评测/留言
 - `GET /comment/one`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：commentId 必填

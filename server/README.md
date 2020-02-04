@@ -5,13 +5,13 @@
 - [修改个人信息 `PUT /user/info`](#修改个人信息)
 - [获取个人信息 `GET /user/Info`](#获取个人信息)
 
-### 评测、留言模块
-- [新增评测留言 `POST /comment/add`](#新增评测留言)
-- [修改评测留言 `PUT /comment/update`](#修改评测留言)
-- [查询单个评测留言 `GET /comment/one`](#查询单个评测留言)
-- [查询我的所有评测留言 `GET /comment/my`](#查询我的所有评测留言)
-- [查询所有评测留言 `GET /comment/all`](#查询所有评测留言)
-- [删除评测留言 `DELETE /comment/delete`](#删除评测留言)
+### 帖子模块
+- [新增帖子留言 `POST /comment/add`](#新增帖子留言)
+- [修改帖子留言 `PUT /comment/update`](#修改帖子留言)
+- [查询单个帖子留言 `GET /comment/one`](#查询单个帖子留言)
+- [查询我的所有帖子留言 `GET /comment/my`](#查询我的所有帖子留言)
+- [查询所有帖子留言 `GET /comment/all`](#查询所有帖子留言)
+- [删除帖子留言 `DELETE /comment/delete`](#删除帖子留言)
 ---
 
 #### 注册
@@ -100,7 +100,7 @@
 
 ---
 
-#### 新增评测留言
+#### 新增帖子留言
 - `POST /comment/add`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, title, content 必填
@@ -113,7 +113,7 @@
     "buyUrl": "www.taobao.com"
 }
 ```
-- 接口返回，评测 commentId
+- 接口返回，帖子 commentId
 ```json
 {
     "success": true,
@@ -122,7 +122,7 @@
 }
 ```
 
-#### 修改评测留言
+#### 修改帖子留言
 - `PUT /comment/update`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：commentId 必填
@@ -144,7 +144,7 @@
 }
 ```
 
-#### 查询单个评测留言
+#### 查询单个帖子留言
 - `GET /comment/one`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：commentId 必填
@@ -162,7 +162,7 @@
         "commentId": "testComment",
         "userId": "root",
         "title": "title",
-        "content": "评测update",
+        "content": "帖子update",
         "price": 10.0,
         "createTime": "2020-02-04 19:48:44",
         "updateTime": "2020-02-04 19:49:17"
@@ -170,7 +170,7 @@
 }
 ```
 
-#### 查询我的所有评测留言
+#### 查询我的所有帖子留言
 - `GET /comment/my`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：
@@ -192,7 +192,7 @@
                 "commentId": "testComment",
                 "userId": "root",
                 "title": "title",
-                "content": "评测update",
+                "content": "帖子update",
                 "price": 10.0,
                 "createTime": "2020-02-04 19:48:44",
                 "updateTime": "2020-02-04 19:49:17"
@@ -229,7 +229,7 @@
 }
 ```
 
-#### 查询所有评测留言
+#### 查询所有帖子留言
 - `GET /comment/all`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId 必填
@@ -251,7 +251,7 @@
                 "commentId": "testComment",
                 "userId": "root",
                 "title": "title",
-                "content": "评测update",
+                "content": "帖子update",
                 "price": 10.0,
                 "createTime": "2020-02-04 19:48:44",
                 "updateTime": "2020-02-04 19:49:17"
@@ -288,7 +288,7 @@
 }
 ```
 
-#### 删除评测留言
+#### 删除帖子留言
 - `DELETE /comment/delete`
 - 参数：userId, commentId 必填
 ```json

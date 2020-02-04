@@ -77,8 +77,14 @@ public class LoginController {
      * @return {@link Response}
      */
     @PostMapping("/login")
-    public Response login(@Valid LoginDto loginDto) {
-        return Response.success(loginService.login(loginDto));
+    public Response login(@Valid LoginDto loginDto,
+                          HttpServletResponse response) {
+        User user=loginService.login(loginDto);
+        String userId = user.getUserId();
+        Cookie cookie = new Cookie("userId",userId);
+        cookie.setMaxAge(24*3600);
+        response.addCookie(cookie);
+        return Response.success(user);
     }
 
     /**

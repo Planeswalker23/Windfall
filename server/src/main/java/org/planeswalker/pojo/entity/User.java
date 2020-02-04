@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.planeswalker.base.Constant;
 import org.planeswalker.pojo.dto.RegisterDto;
 
 import java.io.Serializable;
@@ -40,6 +41,11 @@ public class User implements Serializable {
      * 邮箱，不可修改
      */
     private String email;
+
+    /**
+     * 权限 0-管理员 1-普通用户，默认为1
+     */
+    private Integer authority = Constant.ONE;
 
     /**
      * 创建记录的时间

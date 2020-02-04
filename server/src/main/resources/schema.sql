@@ -1,12 +1,38 @@
-DROP TABLE IF EXISTS USER;
-CREATE TABLE USER (
-  `user_id` varchar(36) NOT NULL COMMENT '用户主键id',
-  `user_name` varchar(55) DEFAULT NULL COMMENT '账号',
-  `password` varchar(55) DEFAULT NULL COMMENT '密码',
-  `email` varchar(55) DEFAULT NULL COMMENT '邮箱',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  `version` int(255) DEFAULT '0' COMMENT '乐观锁更新的版本号',
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `unique_key_email` (`email`) USING BTREE
+drop table if exists user;
+create table user (
+  `user_id` varchar(36) not null comment '用户主键id',
+  `user_name` varchar(55) default null comment '账号',
+  `password` varchar(55) default null comment '密码',
+  `email` varchar(55) default null comment '邮箱',
+  `authority` int(255) default '1' comment '权限 0-管理员 1-普通用户，默认为1',
+  `create_time` datetime default null comment '创建日期',
+  `update_time` datetime default null on update current_timestamp comment '更新时间',
+  `version` int(255) default '0' comment '乐观锁更新的版本号',
+  primary key (`user_id`),
+  unique key `unique_key_email` (`email`) using btree
 );
+
+drop table if exists comment;
+create table comment (
+  `comment_id` varchar(36) not null comment '评论id',
+  `user_id` varchar(36) not null comment '评论用户的id',
+  `title` varchar(36) default null comment '标题',
+  `content` varchar(2048) default null comment '评论内容',
+  `price` double default null comment '价格',
+  `buy_url` varchar(512) default null comment '购买链接',
+  `create_time` datetime default null comment '创建日期',
+  `update_time` datetime default null on update current_timestamp comment '更新时间',
+  `version` int(255) default '0' comment '乐观锁更新的版本号',
+  primary key (`comment_id`)
+);
+
+drop table if exists comment;
+create table `collect`  (
+  `id` int(11) not null auto_increment comment '表主键',
+  `user_id` varchar(36) default null comment '用户id',
+  `comment_id` varchar(36) default null comment '评论id',
+  `create_time` datetime default null comment '创建日期',
+  `update_time` datetime default null on update current_timestamp comment '更新时间',
+  `version` int(255) default '0' comment '乐观锁更新的版本号',
+  primary key (`id`),
+)

@@ -32,6 +32,7 @@
 ## 分支仓库列表
 - [WindFall 基础架构](https://github.com/Planeswalker23/Windfall/tree/master)
 - [Beauty17 拾柒美妆化妆品交易平台](https://github.com/Planeswalker23/Windfall/tree/order-beauty17)
+- [CulturalNingBo 宁波文化之旅网站](https://github.com/Planeswalker23/Windfall/tree/order-cultural-ningbo)
 
 ## 基础架构及接口明细
 ### [controller 层接口明细](server/README.md)

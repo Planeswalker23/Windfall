@@ -8,7 +8,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>server</name>
-	<description>Server for Windfall</description>
+	<description>Server for CulturalNingBo</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -18,7 +18,6 @@
 		<h2.version>1.4.200</h2.version>
 		<lombok.version>1.18.8</lombok.version>
 		<mybatis-plus-starter.version>3.2.0</mybatis-plus-starter.version>
-		<guava.version>28.1-jre</guava.version>
 	</properties>
 
 	<dependencyManagement>
@@ -69,7 +68,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${springboot.version}</version>
 				<configuration>
-					<mainClass>org.planeswalker.WindfallApplication</mainClass>
+					<mainClass>org.planeswalker.CulturalNingBoApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

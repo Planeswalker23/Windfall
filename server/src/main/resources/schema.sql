@@ -26,7 +26,7 @@ create table comment (
   primary key (`comment_id`)
 );
 
-drop table if exists comment;
+drop table if exists collect;
 create table `collect`  (
   `id` int(11) not null auto_increment comment '表主键',
   `user_id` varchar(36) default null comment '用户id',

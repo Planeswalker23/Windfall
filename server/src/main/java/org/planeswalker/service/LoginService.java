@@ -11,6 +11,7 @@ import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.LoginDto;
 import org.planeswalker.pojo.dto.UserPlusInfo;
+import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
 import org.planeswalker.utils.CheckUtil;
@@ -43,6 +44,8 @@ public class LoginService {
     private UserInfoMapper userInfoMapper;
     @Autowired
     private CodeImg codeImg;
+    @Autowired
+    private CommentService commentService;
 
     /**
      * 注册业务
@@ -109,12 +112,12 @@ public class LoginService {
         // 防止 user_info 信息不修改的情况下 update 字段为空的错误
         userInfo.setUpdateTime(new Date());
         // 修改信息
-        if (userMapper.updateById(newUser) == 0
-                // 新增更新 user_info 表
-                || userInfoMapper.updateById(userInfo)==0) {
+        if (userMapper.updateById(newUser) == 0) {
             log.warn("修改个人信息失败");
             throw new LoginException(Errors.EDIT_FAILED);
         }
+        // 新增更新 user_info 表
+        userInfoMapper.updateById(userInfo);
         log.info("修改个人信息成功");
     }
 
@@ -152,13 +155,16 @@ public class LoginService {
         // 根据「userId」获取用户信息
         User selectByUserIdEntity = this.getUserByUserId(userId);
         log.info("用户个人信息: {} ", JacksonUtil.toJson(selectByUserIdEntity));
-        // 根据「userId」获取用户基本信息
-        UserInfo userInfoByUserId = userInfoMapper.selectById(userId);
-        log.info("用户个人信息: {} ", JacksonUtil.toJson(userInfoByUserId));
         UserPlusInfo userPlusInfo = new UserPlusInfo();
         BeanUtils.copyProperties(selectByUserIdEntity, userPlusInfo);
-        BeanUtils.copyProperties(userInfoByUserId, userPlusInfo);
-        // todo 根据 userid 计算该用户的所有评测的合计点赞数
+        // 根据「userId」获取用户基本信息
+        UserInfo userInfoByUserId = userInfoMapper.selectById(userId);
+        if (userInfoByUserId != null) {
+            log.info("用户基本信息: {} ", JacksonUtil.toJson(userInfoByUserId));
+            BeanUtils.copyProperties(userInfoByUserId, userPlusInfo);
+        }
+        // 根据 userid 计算该用户的所有评测的合计点赞数
+        userPlusInfo.setTotalLikeNum(commentService.getMyTotalLikeNums(new Comment(userId)));
         return userPlusInfo;
     }
 
@@ -181,7 +187,7 @@ public class LoginService {
      * @return {@link User}
      * @throws {@link LoginException}
      */
-    private User getUserByUserId(String userId) throws LoginException {
+    public User getUserByUserId(String userId) throws LoginException {
         User sameUserIdUser = userMapper.selectById(userId);
         if (sameUserIdUser == null) {
             throw new LoginException(LoginErrors.USER_NOT_EXIST);

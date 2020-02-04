@@ -10,9 +10,14 @@ import lombok.Getter;
 @Getter
 public enum ServicesEnum {
     /**
-     * 登录服务
+     * 用户模块
      */
-    LoginService("登录服务");
+    UserService("用户模块"),
+
+    /**
+     * 评测留言模块
+     */
+    CommentService("评测留言模块");
 
 
     private String serviceName;

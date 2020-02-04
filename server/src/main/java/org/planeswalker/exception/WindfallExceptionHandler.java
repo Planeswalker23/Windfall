@@ -31,7 +31,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
     public Response loginExceptionHandler(LoginException e) {
         // 登录自定义异常
-        log.warn("[{}]: {}", ServicesEnum.LoginService.getServiceName(), e.getMessage(), e);
+        log.warn("[{}]: {}", ServicesEnum.UserService.getServiceName(), e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 
@@ -127,5 +127,17 @@ public class WindfallExceptionHandler {
         // 请求方式异常
         log.warn("{}: {}", Errors.WRONG_REQUEST_METHOD, e.getMessage(), e);
         return Response.failed(Errors.WRONG_REQUEST_METHOD + Constant.MAO_HAO + e.getMethod());
+    }
+
+    /**
+     * 拦截捕捉评测、留言异常 {@link CommentException}
+     * @param e 评测、留言自定义异常
+     * @return {@link Response}
+     */
+    @ExceptionHandler(value = CommentException.class)
+    public Response commentExceptionHandler(CommentException e) {
+        // 评测、留言自定义异常
+        log.warn("[{}]: {}", ServicesEnum.CommentService.getServiceName(), e.getMessage(), e);
+        return Response.failed(e.getMessage());
     }
 }

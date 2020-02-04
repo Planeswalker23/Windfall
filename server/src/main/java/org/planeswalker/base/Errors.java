@@ -26,4 +26,8 @@ public interface Errors {
     String EMPTY_COLLECTION = "集合为空";
 
     String WRONG_REQUEST_METHOD = "请求方式异常，不支持此方式：";
+
+    String OPERATING_AUTHORIZATION_ERROR = "没有操作权限";
+
+    String DATA_NOT_EXIST = "数据不存在";
 }

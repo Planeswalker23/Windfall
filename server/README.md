@@ -8,6 +8,7 @@
 ### 帖子模块
 - [新增帖子留言 `POST /comment/add`](#新增帖子留言)
 - [修改帖子留言 `PUT /comment/update`](#修改帖子留言)
+- [点赞或取消点赞帖子 `PUT /comment/like`](#点赞或取消点赞帖子)
 - [查询单个帖子留言 `GET /comment/one`](#查询单个帖子留言)
 - [查询我的所有帖子留言 `GET /comment/my`](#查询我的所有帖子留言)
 - [查询所有帖子留言 `GET /comment/all`](#查询所有帖子留言)
@@ -141,6 +142,24 @@
     "success": true,
     "message": "成功",
     "data": 1
+}
+```
+
+#### 点赞或取消点赞帖子
+- `PUT /comment/like`
+- [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
+- 参数：commentId 必填
+```json
+{
+    "commentId": "testComment"
+}
+```
+- 接口返回，修改成功的 comment 数目
+```json
+{
+    "code": 200,
+    "reason": "成功",
+    "res": 1
 }
 ```
 

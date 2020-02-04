@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.exception.CommentException;
 import org.planeswalker.mapper.CommentMapper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -134,43 +136,43 @@ public class CommentService {
         return new PageInfo<>(comments);
     }
 
-//    /**
-//     * 点赞 comment，若已点赞则取消
-//     * @param userId
-//     * @param commentId
-//     * @return 该 comment 的点赞数
-//     */
-//    public Integer likeOrCancelComment(String userId, String commentId) {
-//        // 根据 commentId 查询 comment
-//        Comment comment = this.checkAndGetCommentByUserIdAndCommentId(userId, commentId);
-//        String likeNum = comment.getLikeNum();
-//        Integer num;
-//        // 当前没有人点赞，记录该 userId 后返回
-//        if (StringUtils.isEmpty(likeNum)) {
-//            likeNum = userId;
-//            num = Constant.ONE;
-//        } else {
-//            // 有点赞记录，若存在 userId，删除；若不存在则添加userId
-//            List<String> userIds = new ArrayList<>(Constant.TEN);
-//            // 使用 Arrays.toList() 会报 UnsupportedOperationException
-//            String[] userIdStrings = likeNum.split(Constant.DOU_HAO);
-//            for (String string : userIdStrings) {
-//                userIds.add(string);
-//            }
-//            if (userIds.contains(userId)) {
-//                userIds.remove(userId);
-//            } else {
-//                userIds.add(userId);
-//            }
-//            // 以 Constant.DOU_HAO 为分隔符，将 list 转化为 String
-//            likeNum = StringUtils.collectionToDelimitedString(userIds, Constant.DOU_HAO);
-//            num = userIds.size();
-//        }
-//        // 更新 likeNum
-//        Comment updateComment = new Comment();
-//        updateComment.setCommentId(commentId);
-//        updateComment.setLikeNum(likeNum);
-//        commentMapper.updateById(updateComment);
-//        return num;
-//    }
+    /**
+     * 点赞 comment，若已点赞则取消
+     * @param userId
+     * @param commentId
+     * @return 该 comment 的点赞数
+     */
+    public Integer likeOrCancelComment(String userId, String commentId) {
+        // 根据 commentId 查询 comment
+        Comment comment = this.checkAndGetCommentByUserIdAndCommentId(userId, commentId);
+        String likeNum = comment.getLikeNum();
+        Integer num;
+        // 当前没有人点赞，记录该 userId 后返回
+        if (StringUtils.isEmpty(likeNum)) {
+            likeNum = userId;
+            num = Constant.ONE;
+        } else {
+            // 有点赞记录，若存在 userId，删除；若不存在则添加userId
+            List<String> userIds = new ArrayList<>(Constant.TEN);
+            // 使用 Arrays.toList() 会报 UnsupportedOperationException
+            String[] userIdStrings = likeNum.split(Constant.DOU_HAO);
+            for (String string : userIdStrings) {
+                userIds.add(string);
+            }
+            if (userIds.contains(userId)) {
+                userIds.remove(userId);
+            } else {
+                userIds.add(userId);
+            }
+            // 以 Constant.DOU_HAO 为分隔符，将 list 转化为 String
+            likeNum = StringUtils.collectionToDelimitedString(userIds, Constant.DOU_HAO);
+            num = userIds.size();
+        }
+        // 更新 likeNum
+        Comment updateComment = new Comment();
+        updateComment.setCommentId(commentId);
+        updateComment.setLikeNum(likeNum);
+        commentMapper.updateById(updateComment);
+        return num;
+    }
 }

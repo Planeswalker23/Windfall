@@ -88,14 +88,13 @@ public class CommentController {
         return Response.success(commentService.getComments(null, pageMessage));
     }
 
-//    /**
-//     * 点赞 comment，若已点赞则取消
-//     * @param userId
-//     * @param commentId
-//     * @return {@link Response} 修改的行数
-//     */
-//    @PutMapping("/like")
-//    public Response<Integer> likeOrCancelComment(String userId, String commentId) {
-//        return Response.success(commentService.likeOrCancelComment(userId, commentId));
-//    }
+    /**
+     * 点赞 comment，若已点赞则取消
+     * @param commentId
+     * @return {@link Response} 修改的行数
+     */
+    @PutMapping("/like")
+    public Response<Integer> likeOrCancelComment(String commentId) {
+        return Response.success(commentService.likeOrCancelComment(SessionUtil.getUserId(), commentId));
+    }
 }

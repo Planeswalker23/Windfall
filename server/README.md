@@ -11,16 +11,13 @@
 #### 注册
 - `POST /user/register`
 - [RegisterDto 字段注释](src/main/java/org/planeswalker/pojo/dto/RegisterDto.java)
-- [UserInfo 字段注释](src/main/java/org/planeswalker/pojo/entity/UserInfo.java)
 - 必填字段: userName, password, email
 - 参数
 ```json
 {
     "userName": "test",
     "password": "test",
-    "email": "test@qq.com",
-    "favourite": "1,2",
-    "signature": "test个性签名"
+    "email": "test@qq.com"
 }
 ```
 - 接口返回，data 为注册成功后用户的 userId
@@ -60,7 +57,6 @@
 #### 修改个人信息
 - `PUT /user/info`
 - [RegisterDto 字段注释](src/main/java/org/planeswalker/pojo/dto/RegisterDto.java)
-- [UserInfo 字段注释](src/main/java/org/planeswalker/pojo/entity/UserInfo.java)
 - 必填字段: userId(且必须为当前登录用户的 userId)
 - 参数
 ```json
@@ -68,9 +64,7 @@
     "userId": "root",
     "userName": "root",
     "password": "root",
-    "email": "root@qq.com",
-    "favourite": "1,2",
-    "signature": "root个性签名"
+    "email": "root@qq.com"
 }
 ```
 - 接口返回
@@ -93,10 +87,7 @@
     "res": {
         "userId": "root",
         "userName": "root",
-        "email": "root@qq.com",
-        "favourite": "1,2,3,4",
-        "signature": "root的个性签名",
-        "totalLikeNum": 0
+        "email": "root@qq.com"
     }
 }
 ```

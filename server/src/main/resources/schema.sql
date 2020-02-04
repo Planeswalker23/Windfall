@@ -26,7 +26,7 @@ create table comment (
   primary key (`comment_id`)
 );
 
-drop table if exists comment;
+drop table if exists collect;
 create table `collect`  (
   `id` int(11) not null auto_increment comment '表主键',
   `user_id` varchar(36) default null comment '用户id',
@@ -34,5 +34,5 @@ create table `collect`  (
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
   `version` int(255) default '0' comment '乐观锁更新的版本号',
-  primary key (`id`),
+  primary key (`id`)
 )

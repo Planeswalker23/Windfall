@@ -1,8 +1,6 @@
 package org.planeswalker.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.planeswalker.base.Constant;
-import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
 import org.planeswalker.pojo.dto.LoginDto;
 import org.planeswalker.pojo.dto.RegisterDto;
@@ -10,14 +8,10 @@ import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -57,15 +51,10 @@ public class LoginController {
      * }
      * @return {@link Response}
      */
-    @PutMapping("/info")
+    @PostMapping("/info")
     @Transactional(rollbackFor = Exception.class)
     public Response updateUserInfo(User newUser) {
-        // 参数验证
-        Assert.notNull(newUser, Errors.EMPTY_PARAMS);
-        if (StringUtils.isEmpty(newUser.getUserId())) {
-            log.warn("userId参数为空，修改个人信息失败");
-            return Response.failed(Errors.VALID_ERROR + Constant.MAO_HAO + "userId");
-        }
+        newUser.setUserId(SessionUtil.getUserId());
         loginService.updateUserInfo(newUser);
         return Response.success();
     }

@@ -2,7 +2,7 @@
 ### 用户管理模块
 - [注册 `POST /user/register`](#注册)
 - [登录 `POST /user/login`](#登录)
-- [修改个人信息 `PUT /user/info`](#修改个人信息)
+- [修改个人信息 `POST /user/info`](#修改个人信息)
 - [获取个人信息 `GET /user/Info`](#获取个人信息)
 
 ### 帖子模块
@@ -63,7 +63,7 @@
 ```
 
 #### 修改个人信息
-- `PUT /user/info`
+- `POST /user/info`
 - [RegisterDto 字段注释](src/main/java/org/planeswalker/pojo/dto/RegisterDto.java)
 - 必填字段: userId(且必须为当前登录用户的 userId)
 - 参数

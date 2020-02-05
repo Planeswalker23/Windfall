@@ -1,8 +1,14 @@
 package org.planeswalker.controller;
 
+import com.github.pagehelper.PageInfo;
+import org.planeswalker.base.Response;
+import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.entity.Comment;
+import org.planeswalker.utils.SessionUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,4 +31,19 @@ public class IndexController {
         return "redirect:/";
     }
 
+    @Autowired
+    private CommentController commentController;
+
+    /**
+     * 个人中心页面
+     * @param model
+     * @return
+     */
+    @GetMapping("/profile")
+    public String profile(Model model){
+        model.addAttribute("user", SessionUtil.getUserBean());
+        Response<PageInfo<Comment>> comments =  commentController.getMyLikeComment(new PageMessage());
+        model.addAttribute("comment", comments.getData().getList());
+        return "contact-us";
+    }
 }

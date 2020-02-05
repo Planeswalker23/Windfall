@@ -16,9 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -86,6 +83,8 @@ public class LoginService {
             log.warn("修改个人信息失败");
             throw new LoginException(Errors.EDIT_FAILED);
         }
+        // 更新 session 中的 user
+        SessionUtil.updateUserInSession(newUser);
         log.info("修改个人信息成功");
     }
 
@@ -109,10 +108,8 @@ public class LoginService {
             throw new LoginException(LoginErrors.WRONG_PASSWORD);
         }
         // 将已登录用户信息放入session
-        HttpSession session = SessionUtil.getSession();
-        session.setAttribute(Constant.USER_BEAN, sameEmailUser);
-        log.info("登录成功, {} 的sessionId ==> {} 登录信息 ==> {}",
-                Constant.USER_BEAN, session.getId(), JacksonUtil.toJson(sameEmailUser));
+        SessionUtil.updateUserInSession(sameEmailUser);
+        log.info("登录信息 ==> {}", JacksonUtil.toJson(sameEmailUser));
         // 登录成功后返回用户信息
         return sameEmailUser;
     }

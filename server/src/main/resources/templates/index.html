@@ -9,6 +9,11 @@
   <title>阿拉宁波</title>
   <link rel="shortcut icon" href="images/favicon.png" />
   <link rel="stylesheet" href="css/boot.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/icons.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css " />
+  <link rel="stylesheet" type="text/css" href="css/flexslider.css " />
+  <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
   <link href="css/icons.css" rel="stylesheet" type="text/css">
@@ -22,18 +27,118 @@
   <![endif]-->
 </head>
 
-<body>
-
-<!-- Preloader -->
-<div th:insert="head :: nav"></div>
-</main> <!-- end main wrapper -->
+<body data-spy="scroll" data-target=".navbar-fixed-top">
+  <header>
+    <div th:insert="head :: nav"></div>
+  </header>
+  <div class="clear"></div>
+  <div id="page-content">
+    <section class="flexslider">
+      <ul class="slides">
+        <li>
+          <img src="images/slider-img.jpg" />
+          <div class="slide-info">
+            <div class="slide-con">
+              <b>Healthcare</b>
+              <h3>Health Insurance</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+              <a href="#" class="ti-arrow-right"></a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="images/slider-img1.jpg" />
+          <div class="slide-info">
+            <div class="slide-con">
+              <b>Lifecare</b>
+              <h3>Life Insurance</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+              <a href="#" class="ti-arrow-right"></a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="images/slider-img2.jpg" />
+          <div class="slide-info">
+            <div class="slide-con">
+              <b>Healthcare</b>
+              <h3>Travel Insurance</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+              <a href="#" class="ti-arrow-right"></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <div class="container">
+      <div class="row">
+        <section class="col-sm-7 col-md-8 col-lg-8">
+          <div class="intro">
+            <h2>Welcome to Insurance press</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent orci nisi, porta sed diam id, venenatis dignissim urna. Duis sit amet eros a sem viverra mollis nec eu sem. Quisque rutporta sed diam id, venenatis dignissim urna. Duis sit amet eros a sem viver uisque rurum euismod fermentum.</p>
+            <ul class="row">
+              <li class="col-sm-4">
+                <i class="fa fa-life-ring"></i>
+                <h3>27x7 Support</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+              </li>
+              <li class="col-sm-4">
+                <i class="ti-marker-alt"></i>
+                <h3>Easy Claim system</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+              </li>
+              <li class="col-sm-4">
+                <i class="ti-email"></i>
+                <h3>Get Started with us</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur.</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="col-sm-5 col-md-4 col-lg-4">
+          <div class="get-quote-form">
+            <h2>Get a free quote form</h2>
+            <form id="get-quote">
+              <div>
+                <input type="text" name="name" placeholder="Your Name" />
+              </div>
+              <div>
+                <input type="text" name="email" placeholder="Email" />
+              </div>
+              <div>
+                <input type="text" name="ph-no" placeholder="Phone no" />
+              </div>
+              <div class="form-select">
+                <span></span>
+                <select>
+                  <option>Product</option>
+                </select>
+              </div>
+              <div>
+                <textarea rows="1" cols="1" placeholder="Message"></textarea>
+              </div>
+              <div class="text-center">
+                <input type="submit" class="btn-default" value="Get Free Quote" />
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
 
 
 <!-- jQuery Scripts -->
 <script src="js/jquery.min.js"></script>
-<script src="js/boot.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
-<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script src="js/easyResponsiveTabs.js"></script>
+<script src="js/owl.carousel.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/boot.js"></script>
 <script type="text/javascript">
   function login() {
     $.ajax({

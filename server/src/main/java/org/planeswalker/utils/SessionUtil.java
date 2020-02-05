@@ -51,4 +51,13 @@ public class SessionUtil {
     public static String getUserId() throws NotLoginException {
         return getUserBean().getUserId();
     }
+
+    /**
+     * 更新 session 中的 user 变量
+     * @param user
+     */
+    public static void updateUserInSession(User user) {
+        HttpSession session = SessionUtil.getSession();
+        session.setAttribute(Constant.USER_BEAN, user);
+    }
 }

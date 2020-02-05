@@ -24,11 +24,10 @@ public class WindfallExceptionHandler {
 
     /**
      * 拦截捕捉登录自定义异常 {@link LoginException}
-     * 包括未登录异常 {@link NotLoginException}
      * @param e 登录自定义异常
      * @return {@link Response}
      */
-    @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
+    @ExceptionHandler(value = {LoginException.class})
     public Response loginExceptionHandler(LoginException e) {
         // 登录自定义异常
         log.warn("[{}]: {}", ServicesEnum.LoginService.getServiceName(), e.getMessage(), e);

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>美食特色</title>
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="css/boot.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/icons.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 8]><!-->
+    <link rel="stylesheet" href="ie7/ie7.css">
+    <link rel="stylesheet" href="css/food.css">
+    <!--<![endif]-->
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll" data-target=".navbar-fixed-top">
+<div th:insert="head :: nav"></div>
+<body>
+<div id="page-content">
+    <section class="breadcrumb">
+        <div class="container">
+            <h2>美食特色</h2>
+            <ul>
+                <li><a href="index.html">阿拉宁波</a> ></li>
+                <li><a href="#">美食特色</a></li>
+            </ul>
+        </div>
+    </section>
+<section>
+    <div class="container-fluid p-sm-0">
+        <div class="row featured-post-slider">
+            <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1" th:each="comment : ${comments.getList()}">
+                <article class="card bg-dark text-center text-white border-0 rounded-0">
+                    <img class="card-img rounded-0 img-fluid w-100" th:src="${comment.imgUrl}" alt="post-thumb" style="width: 400px;height: 400px">
+                    <div class="card-img-overlay">
+                        <div class="card-content">
+                            <p class="text-uppercase">美食分享</p>
+                            <h4 class="card-title mb-4"><a class="text-white" href="blog-single.html" th:text="${comment.title}"></a></h4>
+                            <a class="btn btn-outline-light" href="blog-single.html">阅读</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- blog post -->
+<section class="section">
+    <div class="container">
+        <div class="row masonry-container">
+            <div class="col-lg-4 col-sm-6 mb-5" th:each="comment : ${comments.getList()}">
+                <article class="text-center">
+                    <img class="img-fluid mb-4" th:src="${comment.imgUrl}" alt="post-thumb" style="width: 70%;">
+                    <p class="text-uppercase mb-2">美食</p>
+                    <h4 class="title-border"><a class="text-dark" href="blog-single.html" th:text="${comment.title}"></a></h4>
+                    <p th:text="${comment.content}"></p>
+                    <a href="blog-single.html" class="btn btn-transparent">购买</a>
+                </article>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <nav>
+                    <ul class="pagination justify-content-center align-items-center">
+                        <li class="page-item">
+                            <span class="page-link">&laquo; Previous</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">01</a></li>
+                        <li class="page-item active">
+                            <span class="page-link">02</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                        <li class="page-item"><a class="page-link" href="#">04</a></li>
+                        <li class="page-item"><a class="page-link" href="#">05</a></li>
+                        <li class="page-item"><a class="page-link" href="#">06</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next &raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- masonry -->
+<script src="plugins/masonry/masonry.js"></script>
+<!-- instafeed -->
+<script src="plugins/instafeed/instafeed.min.js"></script>
+<!-- smooth scroll -->
+<script src="plugins/smooth-scroll/smooth-scroll.js"></script>
+<!-- headroom -->
+<script src="plugins/headroom/headroom.js"></script>
+<!-- reading time -->
+<script src="plugins/reading-time/readingTime.min.js"></script>
+
+<!-- Main Script -->
+<script src="js/food.js"></script>
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            type: "post",
+            url: "/user/login",
+            data: $('#loginForm').serialize(),// 获取form表单中的数据
+            dataType: "json",// 预期服务器返回的数据类型
+            success:function (data) {
+                if (data.success) {
+                    // 登录成功转到主页
+                    //window.location.href="/";
+                    window.location.reload();
+                } else {
+                    // 登录失败提示
+                    alert(data.message);
+                }
+            }
+        });
+    }
+
+    // 注册函数
+    function regist() {
+        $.ajax({
+            type: "POST",
+            url: "/user/register",
+            data: $('#registerForm').serialize(),// 获取form表单中的数据
+            dataType: "json",// 预期服务器返回的数据类型
+            success:function (data) {
+                if (data.success) {
+                    // 注册成功转到登录页面
+                    window.location.href="/"; //在原有窗口打开
+                } else {
+                    // 注册失败提示
+                    alert(data.message);
+                }
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

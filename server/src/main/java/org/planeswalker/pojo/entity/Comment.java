@@ -52,7 +52,17 @@ public class Comment implements Serializable {
      */
     private String buyUrl;
 
+
+    /**
+     *  文章类型
+     */
     private Integer type;
+
+    /**
+     * 图片链接
+     */
+    private String imgUrl;
+
 
     /**
      * 点赞的 userId，返回前端时，需要更新为 num

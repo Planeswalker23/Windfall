@@ -9,6 +9,7 @@ import org.planeswalker.base.Errors;
 import org.planeswalker.exception.CommentException;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.PaginationDTO;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.utils.NumberUtil;
 import org.planeswalker.utils.SessionUtil;
@@ -188,5 +189,17 @@ public class CommentService {
         List<Comment> comments = commentMapper.selectList(Wrappers.<Comment>lambdaQuery()
                 .like(Comment::getLikeNum, SessionUtil.getUserId()));
         return new PageInfo<>(comments);
+    }
+
+    /**
+     * 金思磊
+     * 列出有关历史文化的信息
+     * @param search
+     * @param page
+     * @param size
+     * @return
+     */
+    public PaginationDTO list(String search, Integer page, Integer size) {
+        return null;
     }
 }

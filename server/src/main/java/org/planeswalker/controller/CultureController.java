@@ -5,16 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/culture")
 public class CultureController {
 
     /**
      * 名人故事
      * @return
      */
-    @GetMapping("/celebrity")
-    public String celebrity(){
-        return "celebrity";
+    @GetMapping("/cultural")
+    public String cultural(){
+        return "cultural";
     }
 
     /**

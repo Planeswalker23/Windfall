@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <title>Insurance - Press</title>
     <link rel="shortcut icon" href="images/favicon.png" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/boot.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="css/icons.css" rel="stylesheet" type="text/css">
@@ -24,15 +24,15 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
-<div th:insert="navigation :: nav"></div>
+<div th:insert="head :: nav"></div>
     <div class="clear"></div>
     <div id="page-content">
         <section class="breadcrumb">
             <div class="container">
                 <h2>历史文化</h2>
                 <ul>
-                    <li><a href="index.html">Home</a> ></li>
-                    <li><a href="#">Blog Page</a></li>
+                    <li><a href="index.html">阿拉宁波</a> ></li>
+                    <li><a href="#">历史文化</a></li>
                 </ul>
             </div>
         </section>
@@ -43,7 +43,7 @@
                         <div class="single-post">
                             <div class="blog-img">
                                 <a href="">
-                                    <img src="images/slider-img.jpg" class="img-responsive">
+                                    <img src="/images/bg-1.jpg" class="img-responsive">
                                 </a>
                                 <div class="blog-icon"><img src="images/icon2.png"></div>
                             </div>
@@ -292,7 +292,7 @@
                     <ul class="footer-nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="#">About Us</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="cultural.html">Blog</a></li>
                         <li><a href="#">Compnies represented</a></li>
                         <li><a href="contact-us.html">Contact us</a></li>
                         <li><a href="#">Services</a></li>
@@ -325,9 +325,29 @@
         </div>
     </footer>
     <script src="js/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/boot.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
     <script src="js/custom.js"></script>
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            type: "post",
+            url: "/user/login",
+            data: $('#loginForm').serialize(),// 获取form表单中的数据
+            dataType: "json",// 预期服务器返回的数据类型
+            success:function (data) {
+                if (data.success) {
+                    // 登录成功转到主页
+                    //window.location.href="/";
+                    window.location.reload();
+                } else {
+                    // 登录失败提示
+                    alert(data.message);
+                }
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

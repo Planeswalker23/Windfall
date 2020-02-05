@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>新闻资讯</title>
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="css/boot.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="css/icons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/news.css">
+    <!--[if lt IE 8]><!-->
+    <link rel="stylesheet" href="ie7/ie7.css">
+    <!--<![endif]-->
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-spy="scroll" data-target=".navbar-fixed-top">
+<div th:insert="head :: nav"></div>
+<div id="page-content">
+    <section class="breadcrumb">
+        <div class="container">
+            <h2>新闻资讯</h2>
+            <ul>
+                <li><a href="index.html">阿拉宁波</a> ></li>
+                <li><a href="#">新闻资讯</a></li>
+            </ul>
+        </div>
+    </section>
+    <section class="blog-page">
+            <div class="container">
+    <div class="row" th:each="comment : ${comments.getList()}">
+        <article class="col-md-8 article-list">
+            <div class="inner">
+                <figure>
+                    <a th:href="@{'/news/'+${comment.commentId}}">
+                        <img src="images/slider-img.jpg" alt="Sample Article">
+                    </a>
+                </figure>
+                <div class="details">
+                    <div class="detail">
+                        <div class="category">
+                            <a href="/news">资讯</a>
+                        </div>
+                        <div class="time"><span th:text="${comment.createTime}"></span></div>
+                    </div>
+                    <h1><a th:href="@{'/news/'+${comment.commentId}}" th:text="${comment.title}"></a></h1>
+                    <p th:text="${#strings.substring(comment.content,0,40)}+'......'">
+
+                    </p>
+                    <div style="margin-top: 50px">
+                        <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
+                        <a class="btn btn-primary more" th:href="@{'/news/'+${comment.commentId}}" style="float: right">更多
+                            <div>More</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+        </section>
+</div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/boot.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript">
+    function login() {
+        $.ajax({
+            type: "post",
+            url: "/user/login",
+            data: $('#loginForm').serialize(),// 获取form表单中的数据
+            dataType: "json",// 预期服务器返回的数据类型
+            success:function (data) {
+                if (data.success) {
+                    // 登录成功转到主页
+                    //window.location.href="/";
+                    window.location.reload();
+                } else {
+                    // 登录失败提示
+                    alert(data.message);
+                }
+            }
+        });
+    }
+
+    // 注册函数
+    function regist() {
+        $.ajax({
+            type: "POST",
+            url: "/user/register",
+            data: $('#registerForm').serialize(),// 获取form表单中的数据
+            dataType: "json",// 预期服务器返回的数据类型
+            success:function (data) {
+                if (data.success) {
+                    // 注册成功转到登录页面
+                    window.location.href="/"; //在原有窗口打开
+                } else {
+                    // 注册失败提示
+                    alert(data.message);
+                }
+            }
+        });
+    }
+</script>
+</html>

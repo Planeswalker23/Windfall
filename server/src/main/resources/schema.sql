@@ -20,6 +20,7 @@ create table comment (
   `content` varchar(2048) default null comment '内容',
   `price` double default null comment '价格',
   `buy_url` varchar(512) default null comment '购买链接',
+  `type` int default 1 comment '文章类型(1：历史文化，2：新闻资讯，3：美食，4：风物)',
   `like_num` varchar(1024) default null comment '点赞的 userId',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',

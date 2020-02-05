@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
+import org.planeswalker.base.Response;
 import org.planeswalker.exception.CommentException;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.pojo.dto.PageMessage;
@@ -138,6 +139,7 @@ public class CommentService {
         return new PageInfo<>(comments);
     }
 
+
     /**
      * 点赞 comment，若已点赞则取消
      * @param userId
@@ -191,15 +193,5 @@ public class CommentService {
         return new PageInfo<>(comments);
     }
 
-    /**
-     * 金思磊
-     * 列出有关历史文化的信息
-     * @param search
-     * @param page
-     * @param size
-     * @return
-     */
-    public PaginationDTO list(String search, Integer page, Integer size) {
-        return null;
-    }
+
 }

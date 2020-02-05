@@ -78,6 +78,8 @@ public class CommentController {
         return Response.success(commentService.getComments(new Comment(SessionUtil.getUserId()), pageMessage));
     }
 
+
+
     /**
      * 查询所有帖子（分页）
      * @param pageMessage

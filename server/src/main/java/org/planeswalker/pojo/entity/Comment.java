@@ -52,6 +52,8 @@ public class Comment implements Serializable {
      */
     private String buyUrl;
 
+    private Integer type;
+
     /**
      * 点赞的 userId，返回前端时，需要更新为 num
      */

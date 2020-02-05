@@ -28,9 +28,7 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
-  <header>
-    <div th:insert="head :: nav"></div>
-  </header>
+  <div th:insert="head :: nav"></div>
   <div class="clear"></div>
   <div id="page-content">
     <section class="flexslider">
@@ -39,10 +37,10 @@
           <img src="images/slider-img.jpg" />
           <div class="slide-info">
             <div class="slide-con">
-              <b>Healthcare</b>
-              <h3>Health Insurance</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
-              <a href="#" class="ti-arrow-right"></a>
+              <b>cultural</b>
+              <h3>历史文化</h3>
+              <p>宁波是一座极具历史文化的城市，最早可以追溯到7000年前的河姆渡文化...</p>
+              <a href="/cultural" class="ti-arrow-right"></a>
             </div>
           </div>
         </li>
@@ -50,10 +48,10 @@
           <img src="images/slider-img1.jpg" />
           <div class="slide-info">
             <div class="slide-con">
-              <b>Lifecare</b>
-              <h3>Life Insurance</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
-              <a href="#" class="ti-arrow-right"></a>
+              <b>news</b>
+              <h3>活动资讯</h3>
+              <p>来看看最近宁波都有些什么重大活动，快来一起参与吧...</p>
+              <a href="/news" class="ti-arrow-right"></a>
             </div>
           </div>
         </li>
@@ -61,9 +59,20 @@
           <img src="images/slider-img2.jpg" />
           <div class="slide-info">
             <div class="slide-con">
-              <b>Healthcare</b>
-              <h3>Travel Insurance</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in.</p>
+              <b>food</b>
+              <h3>美食特色</h3>
+              <p>当你来到一座城市，必不可少的就是当地特色美食...</p>
+              <a href="/food" class="ti-arrow-right"></a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="images/slider-img1.jpg" />
+          <div class="slide-info">
+            <div class="slide-con">
+              <b>cultural</b>
+              <h3>风物文化</h3>
+              <p>宁波是一座极具历史文化的城市，最早可以追溯到7000年前的河姆渡文化...</p>
               <a href="#" class="ti-arrow-right"></a>
             </div>
           </div>
@@ -74,8 +83,8 @@
       <div class="row">
         <section class="col-sm-7 col-md-8 col-lg-8">
           <div class="intro">
-            <h2>Welcome to Insurance press</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent orci nisi, porta sed diam id, venenatis dignissim urna. Duis sit amet eros a sem viverra mollis nec eu sem. Quisque rutporta sed diam id, venenatis dignissim urna. Duis sit amet eros a sem viver uisque rurum euismod fermentum.</p>
+            <h2>你可以在「阿拉宁波」干什么？</h2>
+            <p></p>
             <ul class="row">
               <li class="col-sm-4">
                 <i class="fa fa-life-ring"></i>
@@ -97,28 +106,19 @@
         </section>
         <section class="col-sm-5 col-md-4 col-lg-4">
           <div class="get-quote-form">
-            <h2>Get a free quote form</h2>
-            <form id="get-quote">
+            <h2>快速注册</h2>
+            <form id="quickRegister"  onsubmit="return false">
               <div>
-                <input type="text" name="name" placeholder="Your Name" />
+                <input type="text" name="userName" placeholder="请输入你的昵称" />
               </div>
               <div>
-                <input type="text" name="email" placeholder="Email" />
+                <input type="text" name="email" placeholder="请输入你的邮箱" />
               </div>
               <div>
-                <input type="text" name="ph-no" placeholder="Phone no" />
-              </div>
-              <div class="form-select">
-                <span></span>
-                <select>
-                  <option>Product</option>
-                </select>
-              </div>
-              <div>
-                <textarea rows="1" cols="1" placeholder="Message"></textarea>
+                <input type="password" name="password" placeholder="请输入你的密码" />
               </div>
               <div class="text-center">
-                <input type="submit" class="btn-default" value="Get Free Quote" />
+                <button type="submit" class="btn-default" onclick="quickRegister()">注册</button>
               </div>
             </form>
           </div>
@@ -139,44 +139,7 @@
 <script src="js/owl.carousel.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/boot.js"></script>
-<script type="text/javascript">
-  function login() {
-    $.ajax({
-      type: "post",
-      url: "/user/login",
-      data: $('#loginForm').serialize(),// 获取form表单中的数据
-      dataType: "json",// 预期服务器返回的数据类型
-      success:function (data) {
-        if (data.success) {
-          // 登录成功转到主页
-          window.location.href="/";
-        } else {
-          // 登录失败提示
-          alert(data.message);
-        }
-      }
-    });
-  }
-
-  // 注册函数
-  function regist() {
-    $.ajax({
-      type: "POST",
-      url: "/user/register",
-      data: $('#registerForm').serialize(),// 获取form表单中的数据
-      dataType: "json",// 预期服务器返回的数据类型
-      success:function (data) {
-        if (data.success) {
-          // 注册成功转到登录页面
-          window.location.href="/"; //在原有窗口打开
-        } else {
-          // 注册失败提示
-          alert(data.message);
-        }
-      }
-    });
-  }
-</script>
+<script src="js/user.js"></script>
 
 
 </body>

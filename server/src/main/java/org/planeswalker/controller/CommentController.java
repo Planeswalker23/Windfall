@@ -2,6 +2,7 @@ package org.planeswalker.controller;
 
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.planeswalker.base.Constant;
 import org.planeswalker.base.Response;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
@@ -69,26 +70,38 @@ public class CommentController {
     }
 
     /**
-     * 查询我的所有评测/留言（分页）
-     * @param userId
+     * 查询我的所有评测（分页）
+     * @param comment
      * @param pageMessage
      * @return {@link Response}
      */
-    @GetMapping("/my")
-    public Response<PageInfo<Comment>> getMyComments(String userId, PageMessage pageMessage) {
+    @GetMapping("/myPc")
+    public Response<PageInfo<Comment>> getMyPcComments(Comment comment, PageMessage pageMessage) {
         // Comment 构造器中有 userId 的参数校验
-        return Response.success(commentService.getComments(new Comment(userId), pageMessage));
+        comment.setCommentPid(Constant.ZERO.toString());
+        return Response.success(commentService.getComments(comment, pageMessage));
     }
 
     /**
-     * 查询所有评测/留言（分页）
+     * 查询所有评测（分页）
+     * @param comment
      * @param pageMessage
      * @return {@link Response}
      */
-    @GetMapping("/all")
-    public Response<PageInfo<Comment>> getAllComments(String userId, PageMessage pageMessage) {
-        Comment comment = new Comment();
-        comment.setUserId(userId);
+    @GetMapping("/allPc")
+    public Response<PageInfo<Comment>> getAllPcComments(Comment comment, PageMessage pageMessage) {
+        comment.setCommentPid(Constant.ZERO.toString());
+        return Response.success(commentService.getComments(comment, pageMessage));
+    }
+
+    /**
+     * 查询该评测的所有留言（分页）
+     * @param comment
+     * @param pageMessage
+     * @return {@link Response}
+     */
+    @GetMapping("/allLy")
+    public Response<PageInfo<Comment>> getAllLyComments(Comment comment, PageMessage pageMessage) {
         return Response.success(commentService.getComments(comment, pageMessage));
     }
 

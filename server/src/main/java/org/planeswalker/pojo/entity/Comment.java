@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -34,7 +33,6 @@ public class Comment implements Serializable {
     /**
      * user表 主键
      */
-    @NotBlank(message = "用户 id 参数不可为空")
     private String userId;
 
     /**
@@ -87,7 +85,7 @@ public class Comment implements Serializable {
     @JsonIgnore
     private Integer version;
 
-    public Comment(@NotBlank(message = "用户 id 参数不可为空") String userId) {
+    public Comment(String userId) {
         this.userId = userId;
     }
 }

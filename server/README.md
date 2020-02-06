@@ -227,8 +227,8 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 查询我的所有评测留言
-- `GET /comment/my`
+#### 查询我的所有评测
+- `GET /comment/myPc`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId 必填
 ```json
@@ -287,8 +287,8 @@ http://localhost:8081/user/info?userId=root
 }
 ```
 
-#### 查询所有评测留言
-- `GET /comment/all`
+#### 查询所有评测
+- `GET /comment/allPc`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId 必填
 ```json
@@ -298,54 +298,21 @@ http://localhost:8081/user/info?userId=root
     "pageSize": 10
 }
 ```
-- 接口返回，comment
+- 接口返回，同上
+
+#### 查询此评测的所有留言
+- `GET /comment/allLy`
+- [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
+- 参数：userId 必填
 ```json
 {
-    "code": 200,
-    "reason": "成功",
-    "res": {
-        "total": 2,
-        "list": [
-            {
-                "commentId": "eeea200a-4a2d-49e7-b590-94aff6b29b5c",
-                "commentPid": "0",
-                "userId": "root",
-                "content": "评测2",
-                "likeNum": "1",
-                "createTime": "2020-02-04 12:44:32",
-                "updateTime": "2020-02-04 13:26:47"
-            },
-            {
-                "commentId": "a840ccf5-7f49-474d-a07f-4906959e5b86",
-                "commentPid": "0",
-                "userId": "root",
-                "content": "评测update",
-                "likeNum": "0",
-                "createTime": "2020-02-04 13:22:06",
-                "updateTime": "2020-02-04 13:24:34"
-            }
-        ],
-        "pageNum": 1,
-        "pageSize": 2,
-        "size": 2,
-        "startRow": 0,
-        "endRow": 1,
-        "pages": 1,
-        "prePage": 0,
-        "nextPage": 0,
-        "isFirstPage": true,
-        "isLastPage": true,
-        "hasPreviousPage": false,
-        "hasNextPage": false,
-        "navigatePages": 8,
-        "navigatepageNums": [
-            1
-        ],
-        "navigateFirstPage": 1,
-        "navigateLastPage": 1
-    }
+    "userId": "root",
+    "commentId": "rootComment0",
+    "pageNum": 1,
+    "pageSize": 10
 }
 ```
+- 接口返回，同上
 
 #### 删除评测留言
 - `DELETE /comment/delete`

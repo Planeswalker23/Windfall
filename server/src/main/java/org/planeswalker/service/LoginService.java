@@ -163,7 +163,7 @@ public class LoginService {
             log.info("用户基本信息: {} ", JacksonUtil.toJson(userInfoByUserId));
             BeanUtils.copyProperties(userInfoByUserId, userPlusInfo);
         }
-        // 根据 userid 计算该用户的所有评测的合计点赞数
+        // 根据 userId 计算该用户的所有评测的合计点赞数
         userPlusInfo.setTotalLikeNum(commentService.getMyTotalLikeNums(new Comment(userId)));
         return userPlusInfo;
     }

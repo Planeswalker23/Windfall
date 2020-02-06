@@ -43,7 +43,7 @@ public class CommentController {
      * @param commentId
      * @return {@link Response} 删除的行数
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Response<Integer> addComment(String userId, String commentId) {
         return Response.success(commentService.deleteComment(userId, commentId));
     }
@@ -53,7 +53,7 @@ public class CommentController {
      * @param comment
      * @return {@link Response} 修改的行数
      */
-    @PutMapping("/update")
+    @PostMapping("/update")
     public Response<Integer> updateComment(Comment comment) {
         return Response.success(commentService.updateComment(comment));
     }
@@ -111,7 +111,7 @@ public class CommentController {
      * @param commentId
      * @return {@link Response} 修改的行数
      */
-    @PutMapping("/like")
+    @PostMapping("/like")
     public Response<Integer> likeOrCancelComment(String userId, String commentId) {
         return Response.success(commentService.likeOrCancelComment(userId, commentId));
     }

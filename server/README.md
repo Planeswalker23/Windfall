@@ -3,19 +3,19 @@
 - [获取图片验证码 `GET /codeImg`](#获取图片验证码)
 - [注册 `POST /user/register`](#注册)
 - [登录 `POST /user/login`](#登录)
-- [修改个人信息 `PUT /user/info`](#修改个人信息)
+- [修改个人信息 `POST /user/update`](#修改个人信息)
 - [获取个人信息 `GET /user/Info`](#获取个人信息)
-- [注销账户 `DELETE /user/myself`](#注销账户)
+- [注销账户 `Post /user/delete`](#注销账户)
 
 ### 评测、留言模块
 - [新增评测留言 `POST /comment/add`](#新增评测留言)
-- [修改评测留言 `PUT /comment/update`](#修改评测留言)
-- [点赞或取消点赞评测留言 `PUT /comment/like`](#点赞或取消点赞评测留言)
+- [修改评测留言 `POST /comment/update`](#修改评测留言)
+- [点赞或取消点赞评测留言 `POST /comment/like`](#点赞或取消点赞评测留言)
 - [查询单个评测留言 `GET /comment/one`](#查询单个评测留言)
 - [查询我的所有评测留言 `GET /comment/myPc`](#查询我的所有评测)
 - [查询所有评测留言 `GET /comment/allPc`](#查询所有评测)
 - [查询此评测的所有留言 `GET /comment/allLy`](#查询此评测的所有留言)
-- [删除评测留言 `DELETE /comment/delete`](#删除评测留言)
+- [删除评测留言 `POST /comment/delete`](#删除评测留言)
 
 ---
 
@@ -75,7 +75,7 @@
 ```
 
 #### 修改个人信息
-- `PUT /user/info`
+- `POST /user/info`
 - [RegisterDto 字段注释](src/main/java/org/planeswalker/pojo/dto/RegisterDto.java)
 - [UserInfo 字段注释](src/main/java/org/planeswalker/pojo/entity/UserInfo.java)
 - 必填字段: userId(且必须为当前登录用户的 userId)
@@ -122,7 +122,7 @@ http://localhost:8081/user/info?userId=root
 ```
 
 #### 注销账户
-- `DELETE /user/myself`
+- `POST /user/myself`
 - 参数：userId 必填
 ```json
 {
@@ -162,7 +162,7 @@ http://localhost:8081/user/info?userId=root
 ```
 
 #### 修改评测留言
-- `PUT /comment/update`
+- `POST /comment/update`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, commentId 必填
 ```json
@@ -183,7 +183,7 @@ http://localhost:8081/user/info?userId=root
 ```
 
 #### 点赞或取消点赞评测留言
-- `PUT /comment/like`
+- `POST /comment/like`
 - [Comment 字段注释](src/main/java/org/planeswalker/pojo/entity/Comment.java)
 - 参数：userId, commentId 必填
 ```json
@@ -316,7 +316,7 @@ http://localhost:8081/user/info?userId=root
 - 接口返回，同上
 
 #### 删除评测留言
-- `DELETE /comment/delete`
+- `POST /comment/delete`
 - 参数：userId, commentId 必填
 ```json
 {

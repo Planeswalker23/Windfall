@@ -49,7 +49,7 @@ public class LoginController {
      * @param userInfo {@link UserInfo}
      * @return {@link Response}
      */
-    @PutMapping("/info")
+    @PostMapping("/update")
     @Transactional(rollbackFor = Exception.class)
     public Response updateUserInfo(User newUser, UserInfo userInfo) {
         // 参数验证
@@ -94,7 +94,7 @@ public class LoginController {
      * @param userId
      * @return {@link Response}
      */
-    @DeleteMapping("/myself")
+    @PostMapping("/delete")
     public Response deleteMyself(String userId) {
         // 参数验证
         Assert.notNull(userId, Errors.EMPTY_PARAMS);

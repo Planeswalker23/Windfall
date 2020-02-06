@@ -48,15 +48,11 @@
                         <a href="contact-us.html">风物文化</a>
                     </li>
                     <li th:switch="${session.user == null}">
-                        <button th:case="true" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="border-style: none;background-color: Transparent;">
-                            <span>登录</span>
-                        </button>
+                        <a href="/index.html#loginForm" th:case="true" >登录</a>
                         <a href="/profile" th:case="false" th:text="${session.user.getUserName()}" style="color: white"></a>
                     </li>
                     <li th:switch="${session.user == null}">
-                        <button th:case="true" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registerModal" style="border-style: none;background-color: Transparent;">
-                            <span>注册</span>
-                        </button>
+                        <a href="/index.html#registerForm" th:case="true" >注册</a>
                         <a href="/logout" th:case="false">退出</a>
                     </li>
                 </ul>
@@ -64,64 +60,6 @@
         </div>
     </nav>
 </header>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" style="z-index: 2041;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">登录</h4>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm" onsubmit="return false">
-                    <div class="form-group">
-                        <label for="email">邮箱</label>
-                        <input type="email"  name="email" class="form-control" id="email" placeholder="请输入邮箱">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password"  name="password" class="form-control" id="password" placeholder="请输入密码">
-                    </div>
-
-                    <button type="submit" class="btn btn-default" style="float: right;width: 60px;background-color: greenyellow;margin: auto" onclick="login()">登录</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-
-            </div>
-        </div>
-    </div>
-</div>
-<!--  注册  -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="register">
-    <div class="modal-dialog" style="z-index: 2041;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="registerModalTitle">注册</h4>
-            </div>
-            <div class="modal-body">
-                <form id="registerForm" onsubmit="return false">
-                    <div class="form-group">
-                        <label for="emailRegister">邮箱</label>
-                        <input type="email"  name="email" class="form-control" id="emailRegister" placeholder="请输入邮箱">
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordRegister">密码</label>
-                        <input type="password"  name="password" class="form-control" id="passwordRegister" placeholder="请输入密码">
-                    </div>
-                    <div class="form-group">
-                        <label for="userNameRegister">昵称</label>
-                        <input type="text"  name="userName" class="form-control" id="userNameRegister" placeholder="请输入昵称">
-                    </div>
-                    <button type="submit" class="btn btn-default" style="float: right;width: 60px;background-color: greenyellow;margin: auto" onclick="regist()">注册</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 </body>
 </html>

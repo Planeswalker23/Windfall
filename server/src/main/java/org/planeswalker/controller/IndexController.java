@@ -14,13 +14,18 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * page 访问
+ * @author Planeswalker23
+ */
 @Controller
 public class IndexController {
 
-    @GetMapping("/")
+    @GetMapping({"/", "index.html"})
     public String index(){
         return "index";
     }
+
     @GetMapping("/logout")
     public String logout(HttpServletRequest request,
                          HttpServletResponse response){

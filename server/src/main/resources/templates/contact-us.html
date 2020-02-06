@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Insurance - Press</title>
+    <title>个人中心</title>
     <link rel="shortcut icon" href="images/favicon.png" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -176,26 +176,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
     <script src="js/custom.js"></script>
-    <script>
-        // 编辑用户信息函数
-        function edit() {
-            $.ajax({
-                type: "POST",
-                url: "/user/info",
-                data: $('#editForm').serialize(),// 获取form表单中的数据
-                dataType: "json",// 预期服务器返回的数据类型
-                success:function (data) {
-                    if (data.success) {
-                        // 注册成功转到登录页面
-                        window.location.href="/profile"; //在原有窗口打开
-                    } else {
-                        // 修改信息失败提示
-                        alert(data.message);
-                    }
-                }
-            });
-        }
-    </script>
+    <script src="js/user.js"></script>
 </body>
 
 </html>

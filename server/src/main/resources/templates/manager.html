@@ -284,8 +284,8 @@
                           </td>
                           <td>
                             <div class="toolbar-btn-action">
-                              <a class="btn btn-success m-r-5" th:onclick="state(1, [[${comment.commentId}]]);">启用</a>
-                              <a class="btn btn-warning m-r-5" th:onclick="state(0, [[${comment.commentId}]]);">禁用</a>
+                              <a class="btn btn-success m-r-5" th:onclick="modifyState(1, [[${comment.commentId}]]);">启用</a>
+                              <a class="btn btn-warning m-r-5" th:onclick="modifyState(0, [[${comment.commentId}]]);">禁用</a>
                               <a class="btn btn-danger" th:onclick="deleteComment([[${comment.commentId}]]);">删除</a>
                             </div>
                           </td>
@@ -365,7 +365,7 @@ function deleteComment(inputCommentId){
 }
 
 // 修改帖子启用禁用状态
-function state(inputState, inputCommentId){
+function modifyState(inputState, inputCommentId){
   $.ajax({
     type: "POST",
     url: "/comment/state",

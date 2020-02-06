@@ -24,8 +24,8 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar-fixed-top">
-<audio autoplay="autoplay" loop="loop" preload="auto" src="media/bgm.mp3"></audio>
 <div th:insert="head :: nav"></div>
+
     <div class="clear"></div>
     <div id="page-content">
         <section class="breadcrumb">
@@ -40,7 +40,7 @@
         <section class="blog-page">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
                         <div th:each="comment : ${pageInfo.getList()}">
                         <div class="single-post">
                             <div class="blog-img">
@@ -78,6 +78,9 @@
                                 <li><a href="#">Next</a></li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <iframe frameborder="no" border="0"  marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=1410927768&auto=1&height=32"></iframe>
                     </div>
                     <!--<div class="col-sm-4">
                         <div class="blog-post">

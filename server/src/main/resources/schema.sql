@@ -27,6 +27,7 @@ create table comment (
   `comment_id` varchar(36) not null comment '评论id',
   `comment_pid` varchar(36) default '0' comment '此评论的父类id，0-评测，其它uuid-留言',
   `user_id` varchar(36) not null comment '评论用户的id',
+  `title` varchar(200) default null comment '标题',
   `img_url` varchar(200) default null comment '图片链接地址',
   `content` varchar(2048) default null comment '评论内容',
   `like_num` varchar(1024) default null comment '点赞人',

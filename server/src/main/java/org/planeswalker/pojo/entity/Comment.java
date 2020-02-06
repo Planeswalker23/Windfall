@@ -44,6 +44,11 @@ public class Comment implements Serializable {
     private String userName;
 
     /**
+     * 评论内容
+     */
+    private String title;
+
+    /**
      * 作者，发表评测的用户的昵称
      */
     private String imgUrl;
@@ -51,7 +56,6 @@ public class Comment implements Serializable {
     /**
      * 评论内容
      */
-    @NotBlank(message = "内容参数不可为空")
     private String content;
 
     /**

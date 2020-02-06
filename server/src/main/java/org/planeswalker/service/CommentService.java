@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.exception.CommentException;
+import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
@@ -69,7 +70,10 @@ public class CommentService {
      */
     public Integer deleteComment(String userId, String commentId) {
         // 参数校验 userId, commentId
-        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(commentId)) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new NotLoginException();
+        }
+        if (StringUtils.isEmpty(commentId)) {
             throw new CommentException(Errors.EMPTY_PARAMS);
         }
         // 权限及数据校验
@@ -105,7 +109,10 @@ public class CommentService {
      */
     private Comment checkAndGetCommentByUserIdAndCommentId(String userId, String commentId, boolean isMine) {
         // 参数校验 userId, commentId
-        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(commentId)) {
+        if (StringUtils.isEmpty(userId)) {
+            throw new NotLoginException();
+        }
+        if (StringUtils.isEmpty(commentId)) {
             throw new CommentException(Errors.EMPTY_PARAMS);
         }
         // 判断 userId 是否存在
@@ -157,7 +164,7 @@ public class CommentService {
         if (myId == null) {
             return false;
         }
-        if (StringUtils.isEmpty(likeUserId) && likeUserId.contains(myId)) {
+        if (!StringUtils.isEmpty(likeUserId) && likeUserId.contains(myId)) {
             return true;
         }
         return false;

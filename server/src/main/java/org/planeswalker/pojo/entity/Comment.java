@@ -38,6 +38,17 @@ public class Comment implements Serializable {
     private String userId;
 
     /**
+     * 作者，发表评测的用户的昵称
+     */
+    @TableField(exist = false)
+    private String userName;
+
+    /**
+     * 作者，发表评测的用户的昵称
+     */
+    private String imgUrl;
+
+    /**
      * 评论内容
      */
     @NotBlank(message = "内容参数不可为空")

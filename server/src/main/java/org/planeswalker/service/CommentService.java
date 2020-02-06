@@ -137,6 +137,8 @@ public class CommentService {
         if (comment == null) {
             throw new CommentException(Errors.DATA_NOT_EXIST);
         }
+        // 查询此 comment 的作者信息
+        comment.setUserName(loginService.getUserByUserId(comment.getUserId()).getUserName());
         // 判断是否是"我"点赞的
         this.isMyZan(userId, comment);
         // 计算点赞人数
@@ -175,6 +177,8 @@ public class CommentService {
             this.isMyZan(comment.getUserId(), singleComment);
             // 计算点赞人数
             singleComment.setLikeNum(this.getLikeNum(singleComment.getLikeNum()));
+            // 查询此 comment 的作者信息
+            comment.setUserName(loginService.getUserByUserId(singleComment.getUserId()).getUserName());
         });
         return new PageInfo<>(comments);
     }

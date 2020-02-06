@@ -65,7 +65,7 @@ public class Comment implements Serializable {
      * 若已登录，此字段表示"我"是否对此 comment 点赞
      */
     @TableField(exist = false)
-    private boolean isZan;
+    private boolean zan;
 
     /**
      * 创建记录的时间

@@ -208,7 +208,7 @@ http://localhost:8081/user/info?userId=root
 ```json
 {
     "userId": "root",
-    "commentId": "a840ccf5-7f49-474d-a07f-4906959e5b86"
+    "commentId": "rootComment0"
 }
 ```
 - 接口返回，comment
@@ -217,13 +217,17 @@ http://localhost:8081/user/info?userId=root
     "code": 200,
     "reason": "成功",
     "res": {
-        "commentId": "a840ccf5-7f49-474d-a07f-4906959e5b86",
+        "commentId": "rootComment0",
         "commentPid": "0",
         "userId": "root",
-        "content": "评测update",
-        "likeNum": "0",
-        "createTime": "2020-02-04 13:22:06",
-        "updateTime": "2020-02-04 13:24:34"
+        "userName": "root",
+        "title": "评测标题0",
+        "imgUrl": "http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg",
+        "content": "root评测内容0",
+        "likeNum": "1",
+        "zan": false,
+        "createTime": "2020-02-06 21:52:53",
+        "updateTime": "2020-02-06 21:52:53"
     }
 }
 ```
@@ -245,45 +249,41 @@ http://localhost:8081/user/info?userId=root
     "code": 200,
     "reason": "成功",
     "res": {
-        "total": 2,
+        "total": 11,
         "list": [
             {
-                "commentId": "eeea200a-4a2d-49e7-b590-94aff6b29b5c",
+                "commentId": "rootComment0",
                 "commentPid": "0",
                 "userId": "root",
-                "content": "评测2",
+                "userName": "root",
+                "title": "评测标题0",
+                "imgUrl": "http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg",
+                "content": "root评测内容0",
                 "likeNum": "1",
-                "createTime": "2020-02-04 12:44:32",
-                "updateTime": "2020-02-04 13:26:47"
-            },
-            {
-                "commentId": "a840ccf5-7f49-474d-a07f-4906959e5b86",
-                "commentPid": "0",
-                "userId": "root",
-                "content": "评测update",
-                "likeNum": "0",
-                "createTime": "2020-02-04 13:22:06",
-                "updateTime": "2020-02-04 13:24:34"
-            }
+                "zan": false,
+                "createTime": "2020-02-06 21:52:53",
+                "updateTime": "2020-02-06 21:52:53"
+            },{},{},{},{},{},{},{},{},{}
         ],
         "pageNum": 1,
-        "pageSize": 2,
-        "size": 2,
-        "startRow": 0,
-        "endRow": 1,
-        "pages": 1,
+        "pageSize": 10,
+        "size": 10,
+        "startRow": 1,
+        "endRow": 10,
+        "pages": 2,
         "prePage": 0,
-        "nextPage": 0,
+        "nextPage": 2,
         "isFirstPage": true,
-        "isLastPage": true,
+        "isLastPage": false,
         "hasPreviousPage": false,
-        "hasNextPage": false,
+        "hasNextPage": true,
         "navigatePages": 8,
         "navigatepageNums": [
-            1
+            1,
+            2
         ],
         "navigateFirstPage": 1,
-        "navigateLastPage": 1
+        "navigateLastPage": 2
     }
 }
 ```

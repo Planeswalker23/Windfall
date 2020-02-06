@@ -12,8 +12,9 @@
 - [修改评测留言 `PUT /comment/update`](#修改评测留言)
 - [点赞或取消点赞评测留言 `PUT /comment/like`](#点赞或取消点赞评测留言)
 - [查询单个评测留言 `GET /comment/one`](#查询单个评测留言)
-- [查询我的所有评测留言 `GET /comment/my`](#查询我的所有评测留言)
-- [查询所有评测留言 `GET /comment/all`](#查询所有评测留言)
+- [查询我的所有评测留言 `GET /comment/myPc`](#查询我的所有评测)
+- [查询所有评测留言 `GET /comment/allPc`](#查询所有评测)
+- [查询此评测的所有留言 `GET /comment/allLy`](#查询此评测的所有留言)
 - [删除评测留言 `DELETE /comment/delete`](#删除评测留言)
 
 ---

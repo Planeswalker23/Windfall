@@ -58,6 +58,6 @@ public class SessionUtil {
      */
     public static void updateUserInSession(User user) {
         HttpSession session = SessionUtil.getSession();
-        session.setAttribute(Constant.USER_BEAN, user);
+        session.setAttribute("user", user);
     }
 }

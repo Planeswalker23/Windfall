@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.exception.CommentException;
+import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.PageMessage;
@@ -137,8 +138,13 @@ public class CommentService {
     public PageInfo<Comment> getComments(Comment comment, PageMessage pageMessage) {
         // 设置分页信息
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
-        User loginUser = SessionUtil.getUserBean();
-        if (!Constant.ZERO.equals(loginUser.getAuthority())) {
+        try {
+            User loginUser = SessionUtil.getUserBean();
+            if (!Constant.ZERO.equals(loginUser.getAuthority())) {
+                comment.setState(Constant.ONE);
+            }
+        } catch (NotLoginException e) {
+            log.info("用户未登录，需要查询启用的 comment");
             comment.setState(Constant.ONE);
         }
         List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));

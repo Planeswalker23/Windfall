@@ -63,6 +63,7 @@ public class Comment implements Serializable {
 
     /**
      *  文章类型
+     *  1：历史文化，2：新闻资讯，3：美食特色，4：风物文化
      */
     private Integer type;
 

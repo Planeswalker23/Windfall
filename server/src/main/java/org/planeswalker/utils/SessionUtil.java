@@ -60,4 +60,14 @@ public class SessionUtil {
         HttpSession session = SessionUtil.getSession();
         session.setAttribute("user", user);
     }
+
+    /**
+     * 更新 session 中的变量
+     * @param target
+     * @param object
+     */
+    public static void addIntoSession(String target, Object object) {
+        HttpSession session = SessionUtil.getSession();
+        session.setAttribute(target, object);
+    }
 }

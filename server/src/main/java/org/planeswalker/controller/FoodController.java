@@ -31,7 +31,7 @@ public class FoodController {
         Comment comment = new Comment();
         comment.setType(3);
         PageInfo<Comment> comments = commentService.getComments(comment, pageMessage);
-        model.addAttribute("comments",comments);
+        model.addAttribute("pageInfo",comments);
         return "food";
     }
     @GetMapping("/food/{id}")

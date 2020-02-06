@@ -37,38 +37,45 @@
         </div>
     </section>
     <section class="blog-page">
-            <div class="container">
-    <div class="row" th:each="comment : ${comments.getList()}">
-        <article class="col-md-8 article-list">
-            <div class="inner">
-                <figure>
-                    <a th:href="@{'/news/'+${comment.commentId}}">
-                        <img src="images/slider-img.jpg" alt="Sample Article">
-                    </a>
-                </figure>
-                <div class="details">
-                    <div class="detail">
-                        <div class="category">
-                            <a href="/news">资讯</a>
-                        </div>
-                        <div class="time"><span th:text="${comment.createTime}"></span></div>
-                    </div>
-                    <h1><a th:href="@{'/news/'+${comment.commentId}}" th:text="${comment.title}"></a></h1>
-                    <p th:text="${#strings.substring(comment.content,0,40)}+'......'">
+        <div class="container">
+            <div class="row" th:each="comment : ${pageInfo.getList()}">
+                <article class="col-md-8 article-list">
+                    <div class="inner">
+                        <figure>
+                            <a th:href="@{'/news/'+${comment.commentId}}">
+                                <img src="images/slider-img.jpg" alt="Sample Article">
+                            </a>
+                        </figure>
+                        <div class="details">
+                            <div class="detail">
+                                <div class="category">
+                                    <a href="/news">资讯</a>
+                                </div>
+                                <div class="time"><span th:text="${comment.createTime}"></span></div>
+                            </div>
+                            <h1><a th:href="@{'/news/'+${comment.commentId}}" th:text="${comment.title}"></a></h1>
+                            <p th:text="${#strings.substring(comment.content,0,40)}+'......'">
 
-                    </p>
-                    <div style="margin-top: 50px">
-                        <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
-                        <a class="btn btn-primary more" th:href="@{'/news/'+${comment.commentId}}" style="float: right">更多
-                            <div>More</div>
-                        </a>
+                            </p>
+                            <div style="margin-top: 50px">
+                                <a href="#" class="love"><i class="ion-android-favorite-outline"></i> <div>273</div></a>
+                                <a class="btn btn-primary more" th:href="@{'/news/'+${comment.commentId}}" style="float: right">更多
+                                    <div>More</div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </article>
+                <br/>
+                <br/>
             </div>
-        </article>
-    </div>
-</div>
-        </section>
+            <div class="text-center">
+                <ul class="pagination ins-page" th:each="num:${pageInfo.navigatepageNums}">
+                    <li><a href="cultural" th:href="@{'/news?pageNum=' + ${num}}" th:text="${num}"></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/boot.js"></script>

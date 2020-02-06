@@ -178,7 +178,7 @@ public class CommentService {
             // 计算点赞人数
             singleComment.setLikeNum(this.getLikeNum(singleComment.getLikeNum()));
             // 查询此 comment 的作者信息
-            comment.setUserName(loginService.getUserByUserId(singleComment.getUserId()).getUserName());
+            singleComment.setUserName(loginService.getUserByUserId(singleComment.getUserId()).getUserName());
         });
         return new PageInfo<>(comments);
     }

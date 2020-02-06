@@ -6,9 +6,13 @@ function login() {
         dataType: "json",// 预期服务器返回的数据类型
         success:function (data) {
             if (data.success) {
-                // 登录成功转到主页
+                // 登录成功转到主页，如登录管理员账号，跳转到后台管理页面
                 //window.location.href="/";
-                window.location.reload();
+                if (data.data.authority==0) {
+                    window.location.href="/manager";
+                } else {
+                    window.location.reload();
+                }
             } else {
                 // 登录失败提示
                 alert(data.message);

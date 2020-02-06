@@ -6,12 +6,12 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
-import org.planeswalker.base.Response;
 import org.planeswalker.exception.CommentException;
 import org.planeswalker.mapper.CommentMapper;
+import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.PageMessage;
-import org.planeswalker.pojo.dto.PaginationDTO;
 import org.planeswalker.pojo.entity.Comment;
+import org.planeswalker.pojo.entity.User;
 import org.planeswalker.utils.NumberUtil;
 import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 帖子模块服务层
@@ -37,6 +35,8 @@ public class CommentService {
     private CommentMapper commentMapper;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 新增 comment
@@ -100,10 +100,11 @@ public class CommentService {
             throw new CommentException(Errors.EMPTY_PARAMS);
         }
         // 判断 userId 是否存在
-        loginService.getUserByUserId(userId);
+        User user = loginService.getUserByUserId(userId);
         Comment comment = commentMapper.selectById(commentId);
-        // 根据 commentId 查询数据为空
-        if (comment == null) {
+        // 根据 commentId 查询数据为空，或不是管理员且该 comment 为启用
+        if (comment == null
+                || (Constant.ONE.equals(user.getAuthority()) && Constant.ZERO.equals(comment.getState()))) {
             throw new CommentException(Errors.DATA_NOT_EXIST);
         }
         return comment;
@@ -120,9 +121,10 @@ public class CommentService {
             throw new CommentException(Errors.EMPTY_PARAMS);
         }
         Comment comment = commentMapper.selectById(commentId);
-        if (comment == null) {
+        if (comment == null || Constant.ZERO.equals(comment.getState())) {
             throw new CommentException(Errors.DATA_NOT_EXIST);
         }
+        comment.setLikeNum(this.getZanByLikeNum(comment.getLikeNum()).toString());
         return comment;
     }
 
@@ -135,7 +137,22 @@ public class CommentService {
     public PageInfo<Comment> getComments(Comment comment, PageMessage pageMessage) {
         // 设置分页信息
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        User loginUser = SessionUtil.getUserBean();
+        if (!Constant.ZERO.equals(loginUser.getAuthority())) {
+            comment.setState(Constant.ONE);
+        }
         List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));
+        // 查询 userName，使用 hashSet 是为了去重
+        Set<String> userIds = new HashSet<>(Constant.TEN);
+        comments.forEach(comment1 -> userIds.add(comment1.getUserId()));
+        List<User> users = userMapper.selectList(Wrappers.<User>lambdaQuery().in(User::getUserId, userIds));
+        Map<String, String> userId2NameMap = new HashMap<>(Constant.TEN);
+        users.forEach(user -> userId2NameMap.put(user.getUserId(), user.getUserName()));
+        // 添加 userName 和 likeNum 返回
+        comments.forEach(comment1 -> {
+            comment1.setUserName(userId2NameMap.get(comment1.getUserId()));
+            comment1.setLikeNum(this.getZanByLikeNum(comment1.getLikeNum()).toString());
+        });
         return new PageInfo<>(comments);
     }
 
@@ -189,9 +206,40 @@ public class CommentService {
         // 设置分页信息
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
         List<Comment> comments = commentMapper.selectList(Wrappers.<Comment>lambdaQuery()
+                .eq(Comment::getState, Constant.ONE)
                 .like(Comment::getLikeNum, SessionUtil.getUserId()));
+        comments.forEach(comment1 -> comment1.setLikeNum(this.getZanByLikeNum(comment1.getLikeNum()).toString()));
         return new PageInfo<>(comments);
     }
 
+    /**
+     * 计算点赞数
+     * @param likeNum
+     * @return
+     */
+    private Integer getZanByLikeNum(String likeNum) {
+        // 当前没有人点赞，记录该 userId 后返回
+        if (StringUtils.isEmpty(likeNum)) {
+            return Constant.ZERO;
+        } else {
+            return likeNum.split(Constant.DOU_HAO).length;
+        }
+    }
 
+    /**
+     * 修改 comment 的启用状态
+     * @param state
+     * @param commentId
+     */
+    public void openOrCloseComment(Integer state, String commentId) {
+        User user = SessionUtil.getUserBean();
+        if (!Constant.ZERO.equals(user.getAuthority())) {
+            throw new CommentException("没有编辑权限");
+        }
+        this.checkAndGetCommentByUserIdAndCommentId(user.getUserId(), commentId);
+        Comment comment = new Comment();
+        comment.setState(state);
+        comment.setCommentId(commentId);
+        commentMapper.updateById(comment);
+    }
 }

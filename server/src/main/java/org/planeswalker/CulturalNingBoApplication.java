@@ -1,6 +1,7 @@
 package org.planeswalker;
 
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
+import com.github.pagehelper.PageInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -31,8 +32,17 @@ public class CulturalNingBoApplication {
      * 乐观锁拦截器
      * @return {@link com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor}
      */
-   /* @Bean
+    @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
-    }*/
+    }
+
+    /**
+     * 分页插件，需要手动注入
+     * @return {@link PageInterceptor}
+     */
+    @Bean
+    public PageInterceptor pageInterceptor() {
+        return new PageInterceptor();
+    }
 }

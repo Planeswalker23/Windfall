@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>阿拉宁波 - 后台管理系统</title>
+<link rel="icon" href="favicon.ico" type="image/ico">
+<meta name="keywords" content="LightYear,光年,后台模板,后台管理系统,光年HTML模板">
+<link href="manager/css/bootstrap.min.css" rel="stylesheet">
+<link href="manager/css/materialdesignicons.min.css" rel="stylesheet">
+<link href="manager/css/style.min.css" rel="stylesheet">
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+       
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a href="index.html">
+          <span class="navbar-page-title">阿拉宁波 - 后台管理系统</span>
+        </a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll">
+        
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+            <li class="nav-item">
+              <a href="/manager">
+                <i class="mdi mdi-file-outline"></i>
+                文章管理
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+    <!--End 左侧导航-->
+    
+    <!--头部信息-->
+    <header class="lyear-layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="lyear-aside-toggler">
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+            </div>
+            <span class="navbar-page-title"> 文章管理 </span>
+          </div>
+          
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <span>
+                  ROOT<span class="caret"></span>
+                </span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a href="/logout">
+                    <i class="mdi mdi-logout-variant"></i> 退出登录
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--切换主题配色-->
+		    <li class="dropdown dropdown-skin">
+			  <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+			  <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                <li class="drop-title"><p>主题</p></li>
+                <li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
+                    <label for="site_theme_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="dark" id="site_theme_2">
+                    <label for="site_theme_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="site_theme" value="translucent" id="site_theme_3">
+                    <label for="site_theme_3"></label>
+                  </span>
+                </li>
+			    <li class="drop-title"><p>LOGO</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="logo_bg" value="default" id="logo_bg_1" checked>
+                    <label for="logo_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_2" id="logo_bg_2">
+                    <label for="logo_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_3" id="logo_bg_3">
+                    <label for="logo_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_4" id="logo_bg_4">
+                    <label for="logo_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_5" id="logo_bg_5">
+                    <label for="logo_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_6" id="logo_bg_6">
+                    <label for="logo_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_7" id="logo_bg_7">
+                    <label for="logo_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="logo_bg" value="color_8" id="logo_bg_8">
+                    <label for="logo_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>头部</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="header_bg" value="default" id="header_bg_1" checked>
+                    <label for="header_bg_1"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_2" id="header_bg_2">
+                    <label for="header_bg_2"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_3" id="header_bg_3">
+                    <label for="header_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_4" id="header_bg_4">
+                    <label for="header_bg_4"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_5" id="header_bg_5">
+                    <label for="header_bg_5"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_6" id="header_bg_6">
+                    <label for="header_bg_6"></label>                      
+                  </span>                                                    
+                  <span>                                                     
+                    <input type="radio" name="header_bg" value="color_7" id="header_bg_7">
+                    <label for="header_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="header_bg" value="color_8" id="header_bg_8">
+                    <label for="header_bg_8"></label>
+                  </span>
+				</li>
+				<li class="drop-title"><p>侧边栏</p></li>
+				<li class="drop-skin-li clearfix">
+                  <span class="inverse">
+                    <input type="radio" name="sidebar_bg" value="default" id="sidebar_bg_1" checked>
+                    <label for="sidebar_bg_1"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_2" id="sidebar_bg_2">
+                    <label for="sidebar_bg_2"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_3" id="sidebar_bg_3">
+                    <label for="sidebar_bg_3"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_4" id="sidebar_bg_4">
+                    <label for="sidebar_bg_4"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_5" id="sidebar_bg_5">
+                    <label for="sidebar_bg_5"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_6" id="sidebar_bg_6">
+                    <label for="sidebar_bg_6"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_7" id="sidebar_bg_7">
+                    <label for="sidebar_bg_7"></label>
+                  </span>
+                  <span>
+                    <input type="radio" name="sidebar_bg" value="color_8" id="sidebar_bg_8">
+                    <label for="sidebar_bg_8"></label>
+                  </span>
+				</li>
+			  </ul>
+			</li>
+            <!--切换主题配色-->
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <!-- 搜索栏 -->
+                <form class="left search-bar" method="get" action="#!" role="form">
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <input type="hidden" name="search_field" id="search-field" value="title">
+                      <button class="btn btn-info dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
+                        搜索文章类别
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li> <a href="/manager" >所有</a> </li>
+                        <li> <a href="/manager?type=1" >历史文化</a> </li>
+                        <li> <a href="/manager?type=2" >新闻资讯</a> </li>
+                        <li> <a href="/manager?type=3" >美食特色</a> </li>
+                        <li> <a href="/manager?type=4" >风物文化</a> </li>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-body">
+                
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>标题</th>
+                        <th>作者</th>
+                        <th>文章类型</th>
+                        <th>点赞数</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <div th:each="comment : ${pageInfo.list}">
+                        <tr>
+                          <td th:switch="${comment.type}">
+                            <span th:case="1">
+                              <a target="view_window" th:href="@{'/cultural/' + ${comment.commentId}}" th:text="${comment.title}"></a>
+                            </span>
+                            <span th:case="2">
+                              <a target="view_window" th:href="@{'/news/' + ${comment.commentId}}" th:text="${comment.title}"></a>
+                            </span>
+                            <span th:case="3">
+                              <a target="view_window" th:href="@{'/food/' + ${comment.commentId}}" th:text="${comment.title}"></a>
+                            </span>
+                            <span th:case="4">
+                              <a target="view_window" th:href="@{'/cultural/' + ${comment.commentId}}" th:text="${comment.title}"></a>
+                            </span>
+                          </td>
+                          <td th:text="${comment.userName}"></td>
+                          <td>
+                            <span th:switch="${comment.type}">
+                              <span th:case="1">历史文化</span>
+                              <span th:case="2">新闻资讯</span>
+                              <span th:case="3">美食特色</span>
+                              <span th:case="4">风物文化</span>
+                            </span>
+                          </td>
+                          <td th:text="${comment.likeNum}"></td>
+                          <td>
+                            <font th:if="${comment.state}==0" class="text-gray">禁用</font>
+                            <font th:if="${comment.state}==1" class="text-success">启用</font>
+                          </td>
+                          <td>
+                            <div class="toolbar-btn-action">
+                              <a class="btn btn-success m-r-5" th:onclick="state(1, [[${comment.commentId}]]);">启用</a>
+                              <a class="btn btn-warning m-r-5" th:onclick="state(0, [[${comment.commentId}]]);">禁用</a>
+                              <a class="btn btn-danger" th:onclick="deleteComment([[${comment.commentId}]]);">删除</a>
+                            </div>
+                          </td>
+                        </tr>
+                      </div>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- 底部分页栏 -->
+                <ul class="pagination" th:each="num:${pageInfo.navigatepageNums}">
+                  <li>
+                    <a th:href="@{'/manager?pageNum=' + ${num}}" th:text="${num}"></a>
+                  </li>
+                </ul>
+       
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="manager/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="manager/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="manager/js/main.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+
+// 删除帖子
+function deleteComment(inputCommentId){
+  $.ajax({
+    type: "POST",
+    url: "/comment/delete",
+    data: {
+      commentId : inputCommentId
+    },
+    dataType: "json",// 预期服务器返回的数据类型
+    success:function (data) {
+      if (data.success) {
+        window.location.reload()
+      } else {
+        // 失败提示
+        alert(data.message);
+      }
+    }
+  });
+}
+
+// 修改帖子启用禁用状态
+function state(inputState, inputCommentId){
+  $.ajax({
+    type: "POST",
+    url: "/comment/state",
+    data: {
+      state : inputState,
+      commentId : inputCommentId
+    },
+    dataType: "json",// 预期服务器返回的数据类型
+    success:function (data) {
+      if (data.success) {
+        window.location.reload()
+      } else {
+        // 失败提示
+        alert(data.message);
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

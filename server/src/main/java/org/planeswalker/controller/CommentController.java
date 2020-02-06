@@ -41,7 +41,7 @@ public class CommentController {
      * @param commentId
      * @return {@link Response} 删除的行数
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Response<Integer> addComment(String commentId) {
         return Response.success(commentService.deleteComment(SessionUtil.getUserId(), commentId));
     }
@@ -51,7 +51,7 @@ public class CommentController {
      * @param comment
      * @return {@link Response} 修改的行数
      */
-    @PutMapping("/update")
+    @PostMapping("/update")
     public Response<Integer> updateComment(@Valid Comment comment) {
         comment.setUserId(SessionUtil.getUserId());
         return Response.success(commentService.updateComment(comment));
@@ -81,13 +81,14 @@ public class CommentController {
 
 
     /**
-     * 查询所有帖子（分页）
+     * 查询所有帖子（分页），可增加查询条件
+     * @param comment
      * @param pageMessage
      * @return {@link Response}
      */
     @GetMapping("/all")
-    public Response<PageInfo<Comment>> getAllComments(PageMessage pageMessage) {
-        return Response.success(commentService.getComments(null, pageMessage));
+    public Response<PageInfo<Comment>> getAllComments(Comment comment, PageMessage pageMessage) {
+        return Response.success(commentService.getComments(comment, pageMessage));
     }
 
     /**
@@ -95,7 +96,7 @@ public class CommentController {
      * @param commentId
      * @return {@link Response} 修改的行数
      */
-    @PutMapping("/like")
+    @PostMapping("/like")
     public Response<Integer> likeOrCancelComment(String commentId) {
         return Response.success(commentService.likeOrCancelComment(SessionUtil.getUserId(), commentId));
     }
@@ -108,5 +109,17 @@ public class CommentController {
     @GetMapping("/myLike")
     public Response<PageInfo<Comment>> getMyLikeComment(PageMessage pageMessage) {
         return Response.success(commentService.getMyLikeComment(pageMessage));
+    }
+
+    /**
+     * 启用或禁用帖子
+     * @param state
+     * @param commentId
+     * @return {@link Response}
+     */
+    @PostMapping("/state")
+    public Response getMyLikeComment(Integer state, String commentId) {
+        commentService.openOrCloseComment(state, commentId);
+        return Response.success();
     }
 }

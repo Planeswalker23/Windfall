@@ -1,5 +1,6 @@
 package org.planeswalker.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,6 +30,13 @@ public class Comment implements Serializable {
      * user表 主键
      */
     private String userId;
+
+    /**
+     * 用户昵称
+     * @TableField exist = false 表示该属性不为数据库表字段
+     */
+    @TableField(exist = false)
+    private String userName;
 
     /**
      * 标题
@@ -86,6 +94,11 @@ public class Comment implements Serializable {
     @Version
     @JsonIgnore
     private Integer version;
+
+    /**
+     * 启用状态 0-禁用 1-启用
+     */
+    private Integer state;
 
     public Comment(@NotBlank(message = "用户 id 不可为空") String userId) {
         this.userId = userId;

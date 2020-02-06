@@ -81,33 +81,10 @@
     </section>
     <div class="container">
       <div class="row">
-        <section class="col-sm-7 col-md-8 col-lg-8">
-          <div class="intro">
-            <h2>你可以在「阿拉宁波」干什么？</h2>
-            <p></p>
-            <ul class="row">
-              <li class="col-sm-4">
-                <i class="fa fa-life-ring"></i>
-                <h3>27x7 Support</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur.</p>
-              </li>
-              <li class="col-sm-4">
-                <i class="ti-marker-alt"></i>
-                <h3>Easy Claim system</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur.</p>
-              </li>
-              <li class="col-sm-4">
-                <i class="ti-email"></i>
-                <h3>Get Started with us</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur.</p>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <section class="col-sm-5 col-md-4 col-lg-4">
+        <section class="col-sm-3 col-md-4 col-lg-4">
           <div class="get-quote-form">
             <h2>快速注册</h2>
-            <form id="quickRegister"  onsubmit="return false">
+            <form id="registerForm"  onsubmit="return false">
               <div>
                 <input type="text" name="userName" placeholder="请输入你的昵称" />
               </div>
@@ -118,7 +95,46 @@
                 <input type="password" name="password" placeholder="请输入你的密码" />
               </div>
               <div class="text-center">
-                <button type="submit" class="btn-default" onclick="quickRegister()">注册</button>
+                <button type="submit" class="btn-default" onclick="regist()">注册</button>
+              </div>
+            </form>
+          </div>
+        </section>
+        <section class="col-sm-3 col-md-4 col-lg-4">
+          <div class="intro">
+            <h2>「阿拉宁波」有什么？</h2>
+            <p></p>
+            <ul class="row">
+              <li class="col-sm-4">
+                <i class="ti-email"></i>
+                <h2>资讯</h2>
+                <p>「阿拉宁波」拥有最新关于的宁波的活动资讯，一起来参与吧</p>
+              </li>
+              <li class="col-sm-4">
+                <i class="fa fa-life-ring"></i>
+                <h2>文化</h2>
+                <p>「阿拉宁波」描述了既悠久有敦厚的历史文化与风物文化</p>
+              </li>
+              <li class="col-sm-4">
+                <i class="ti-face-smile"></i>
+                <h2>美食</h2>
+                <p>「阿拉宁波」向你介绍最好吃的宁波特色美食</p>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="col-sm-3 col-md-4 col-lg-4">
+          <div class="get-quote-form">
+            <h2>快速登录</h2>
+            <form id="loginForm"  onsubmit="return false">
+              <div>
+                <input type="text" name="email" placeholder="请输入你的邮箱" />
+              </div>
+              <div>
+                <input type="password" name="password" placeholder="请输入你的密码" />
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn-default" onclick="login()">注册</button>
               </div>
             </form>
           </div>

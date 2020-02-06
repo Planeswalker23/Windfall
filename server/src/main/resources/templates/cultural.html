@@ -70,12 +70,8 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <ul class="pagination ins-page">
-                                <li class="active"><span>Previous</span></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">Next</a></li>
+                            <ul class="pagination ins-page" th:each="num:${pageInfo.navigatepageNums}">
+                                <li><a href="cultural" th:href="@{'/cultural?pageNum=' + ${num}}" th:text="${num}"></a></li>
                             </ul>
                         </div>
                     </div>

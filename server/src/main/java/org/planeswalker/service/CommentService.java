@@ -140,7 +140,7 @@ public class CommentService {
         // 查询此 comment 的作者信息
         comment.setUserName(loginService.getUserByUserId(comment.getUserId()).getUserName());
         // 判断是否是"我"点赞的
-        this.isMyZan(userId, comment);
+        comment.setZan(this.isMyZan(userId, comment.getLikeNum()));
         // 计算点赞人数
         comment.setLikeNum(this.getLikeNum(comment.getLikeNum()));
         return comment;
@@ -148,18 +148,19 @@ public class CommentService {
 
     /**
      * 判断是否属于"我"点赞的 comment
-     * @param myId
-     * @param comment
+     * @param myId 登录用户的 userId, 若未登录则为 null
+     * @param likeUserId 数据库中储存的 comment 的 likeNum 字段
+     * @return boolean 对于未登录用户，直接返回 false
+     *                 对于已登录用户，根据 likeNum 字段中是否包含自己 userId 来判断是否对此 comment 点赞
      */
-    private void isMyZan(String myId, Comment comment) {
+    private boolean isMyZan(String myId, String likeUserId) {
         if (myId == null) {
-            return;
+            return false;
         }
-        // 对于已登录用户，是否对此 comment 点赞
-        String likeUserId = comment.getLikeNum();
         if (StringUtils.isEmpty(likeUserId) && likeUserId.contains(myId)) {
-            comment.setZan(true);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -174,7 +175,7 @@ public class CommentService {
         List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));
         comments.forEach(singleComment -> {
             // 判断是否是"我"点赞的
-            this.isMyZan(comment.getUserId(), singleComment);
+            singleComment.setZan(this.isMyZan(comment.getUserId(), singleComment.getLikeNum()));
             // 计算点赞人数
             singleComment.setLikeNum(this.getLikeNum(singleComment.getLikeNum()));
             // 查询此 comment 的作者信息

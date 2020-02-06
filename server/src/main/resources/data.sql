@@ -1,5 +1,5 @@
 insert into user (user_id, user_name, password, email, authority, create_time, update_time, version) values ('rootId', 'root', '1', 'root@qq.com', '0', now(), now(), 0);
-insert into user (user_id, user_name, password, email, authority, create_time, update_time, version) values ('默认昵称', 'user', '1', 'user@qq.com', '1', now(), now(), 0);
+insert into user (user_id, user_name, password, email, authority, create_time, update_time, version) values ('user1', 'user', '1', 'user@qq.com', '1', now(), now(), 0);
 
 insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test1', 'user1', '测试标题', '测试内容', 10.00, null,1, now(), now(), 0, 1);
 insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test2', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);

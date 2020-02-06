@@ -11,7 +11,7 @@ function login() {
                 if (data.data.authority==0) {
                     window.location.href="/manager";
                 } else {
-                    window.location.reload();
+                    window.location.href="/"; //在原有窗口打开
                 }
             } else {
                 // 登录失败提示

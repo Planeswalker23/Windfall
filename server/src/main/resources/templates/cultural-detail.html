@@ -51,11 +51,11 @@
                             <div class="blog-meta">
                                 <a href="" class="ml-0"><i class="blue-text fa fa-calendar"></i> <span th:text="${comment.createTime}"></span></a>
                                 <a href=""><i class="blue-text fa fa-user"></i><span th:text="${comment.userId}"></span></a>
-                                <a href=""><i class="blue-text fa fa-heart-o"></i><span th:text="${likeNum}"></span></a>
+                                <a href=""><i class="blue-text fa fa-heart-o"></i><span th:text="${session.likeNum}"></span></a>
                             </div>
                             <p th:text="${comment.content}"></p>
-                            <a href="">
-                                <img id="image" src="/images/thumb.png" th:src="${session.user!=null&&comment.likeNum!=session.user.userId}?'/images/thumb_c.png':'/images/thumb.png'">
+                            <a th:href="@{'/cultural/'+${comment.commentId}+'/thumb'}">
+                                <img id="image" src="/images/thumb.png" th:src="${session.user==null||comment.likeNum!=session.user.userId}?'/images/thumb.png':'/images/thumb_c.png'">
                             </a>
                             <p></p>
                         </div>
@@ -241,51 +241,7 @@
     <script src="/js/boot.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
     <script src="/js/custom.js"></script>
-<<<<<<< HEAD
-<script type="text/javascript">
-    function change() {
-        var test1 = document.getElementById('image');
-        if(test1.src.indexOf('thumb') >= 0){
-            test1.src="/images/thumb_c.png";
-        }else{
-            test1.src="/images/thumb.png";
-        }
-        //alert(x);
-    }
-
-    function secound(obj){
-        obj.src="/images/thumb_c.png";
-        console.log(obj.getAttribute("src"));
-    }
-
-    function first(obj){
-        obj.src="/images/thumb.png";
-        console.log(obj.getAttribute("src"));
-    }
-</script>
-<script type="text/javascript">
-    function login() {
-        $.ajax({
-            type: "post",
-            url: "/user/login",
-            data: $('#loginForm').serialize(),// 获取form表单中的数据
-            dataType: "json",// 预期服务器返回的数据类型
-            success:function (data) {
-                if (data.success) {
-                    // 登录成功转到主页
-                    //window.location.href="/";
-                    window.location.reload();
-                } else {
-                    // 登录失败提示
-                    alert(data.message);
-                }
-            }
-        });
-    }
-</script>
-=======
     <script src="js/user.js"></script>
->>>>>>> 44dbfc94b1766f60b9a1b5c9446085cbb6a93bdf
 </body>
 
 </html>

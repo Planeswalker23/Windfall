@@ -125,7 +125,7 @@ public class CommentService {
         if (comment == null || Constant.ZERO.equals(comment.getState())) {
             throw new CommentException(Errors.DATA_NOT_EXIST);
         }
-        comment.setLikeNum(this.getZanByLikeNum(comment.getLikeNum()).toString());
+        //comment.setLikeNum(this.getZanByLikeNum(comment.getLikeNum()).toString());
         return comment;
     }
 

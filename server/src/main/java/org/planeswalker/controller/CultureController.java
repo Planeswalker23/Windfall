@@ -49,23 +49,25 @@ public class CultureController {
                                   Model model,
                                   HttpServletRequest request){
         Comment comment = commentService.getOneComment(id);
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (user!=null){
-            Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
-            model.addAttribute("likeNum",likeNum);
-        }
         model.addAttribute("comment",comment);
         return "cultural-detail";
     }
 
     /**
-     * 古代遗迹
+     * 点赞
      * @return
      */
-    @GetMapping("/ruins")
-    public String ruins(){
-        return "ruins";
+    @GetMapping("/cultural/{id}/thumb")
+    public String thumb(@PathVariable(name = "id") String id,
+                        HttpServletRequest request,
+                        Model model){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user!=null){
+            Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
+            session.setAttribute("likeNum",likeNum);
+        }
+        return "redirect:/cultural/{id}";
     }
 
 }

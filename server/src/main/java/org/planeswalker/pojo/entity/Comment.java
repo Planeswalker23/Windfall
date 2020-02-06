@@ -78,6 +78,12 @@ public class Comment implements Serializable {
     private String likeNum;
 
     /**
+     * 是否是我喜欢的 comment
+     */
+    @TableField(exist = false)
+    private boolean isMyLike;
+
+    /**
      * 创建记录的时间
      */
     private Date createTime;

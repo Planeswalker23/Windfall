@@ -40,13 +40,28 @@ public class NewsController {
                                   Model model,
                                   HttpServletRequest request){
         Comment comment = commentService.getOneComment(id);
+        model.addAttribute("comment",comment);
+        return "news-detail";
+    }
+
+    /**
+     * 点赞
+     * @param id
+     * @param request
+     * @param model
+     * @return
+     */
+
+    @GetMapping("/news/{id}/thumb")
+    public String thumb(@PathVariable(name = "id") String id,
+                        HttpServletRequest request,
+                        Model model){
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user!=null){
             Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
-            model.addAttribute("likeNum",likeNum);
+            session.setAttribute("likeNum",likeNum);
         }
-        model.addAttribute("comment",comment);
-        return "news-detail";
+        return "redirect:/news/{id}";
     }
 }

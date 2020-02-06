@@ -1,6 +1,7 @@
 package org.planeswalker;
 
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
+import com.github.pagehelper.PageInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -34,5 +35,14 @@ public class Beauty17Application {
     @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
         return new OptimisticLockerInterceptor();
+    }
+
+    /**
+     * 分页拦截器
+     * @return {@link com.github.pagehelper.PageInterceptor}
+     */
+    @Bean
+    public PageInterceptor pageInterceptor() {
+        return new PageInterceptor();
     }
 }

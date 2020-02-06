@@ -124,10 +124,11 @@ public class CommentService {
 
     /**
      * 根据 commentId 查询 comment
+     * @param userId
      * @param commentId
      * @return {@link Comment}
      */
-    public Comment getOneComment(String commentId) {
+    public Comment getOneComment(String userId, String commentId) {
         // 参数校验 commentId
         if (StringUtils.isEmpty(commentId)) {
             throw new CommentException(Errors.EMPTY_PARAMS);
@@ -136,9 +137,27 @@ public class CommentService {
         if (comment == null) {
             throw new CommentException(Errors.DATA_NOT_EXIST);
         }
+        // 判断是否是"我"点赞的
+        this.isMyZan(userId, comment);
         // 计算点赞人数
         comment.setLikeNum(this.getLikeNum(comment.getLikeNum()));
         return comment;
+    }
+
+    /**
+     * 判断是否属于"我"点赞的 comment
+     * @param myId
+     * @param comment
+     */
+    private void isMyZan(String myId, Comment comment) {
+        if (myId == null) {
+            return;
+        }
+        // 对于已登录用户，是否对此 comment 点赞
+        String likeUserId = comment.getLikeNum();
+        if (StringUtils.isEmpty(likeUserId) && likeUserId.contains(myId)) {
+            comment.setZan(true);
+        }
     }
 
     /**
@@ -152,6 +171,8 @@ public class CommentService {
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
         List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));
         comments.forEach(singleComment -> {
+            // 判断是否是"我"点赞的
+            this.isMyZan(comment.getUserId(), singleComment);
             // 计算点赞人数
             singleComment.setLikeNum(this.getLikeNum(singleComment.getLikeNum()));
         });

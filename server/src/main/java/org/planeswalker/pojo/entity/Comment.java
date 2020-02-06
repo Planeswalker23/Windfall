@@ -1,5 +1,6 @@
 package org.planeswalker.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,6 +47,12 @@ public class Comment implements Serializable {
      * 点赞人数，实际存的是以逗号分隔的点赞人 userId
      */
     private String likeNum;
+
+    /**
+     * 若已登录，此字段表示"我"是否对此 comment 点赞
+     */
+    @TableField(exist = false)
+    private boolean isZan;
 
     /**
      * 创建记录的时间

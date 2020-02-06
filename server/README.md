@@ -204,6 +204,7 @@ http://localhost:8081/user/info?userId=root
 - 参数：commentId 必填
 ```json
 {
+    "userId": "root",
     "commentId": "a840ccf5-7f49-474d-a07f-4906959e5b86"
 }
 ```
@@ -290,6 +291,7 @@ http://localhost:8081/user/info?userId=root
 - 参数：userId 必填
 ```json
 {
+    "userId": "root",
     "pageNum": 1,
     "pageSize": 10
 }

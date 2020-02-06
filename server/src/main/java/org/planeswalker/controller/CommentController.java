@@ -59,12 +59,13 @@ public class CommentController {
 
     /**
      * 查询单个评测/留言
+     * @param userId
      * @param commentId
      * @return {@link Response}
      */
     @GetMapping("/one")
-    public Response<Comment> getOneComment(String commentId) {
-        return Response.success(commentService.getOneComment(commentId));
+    public Response<Comment> getOneComment(String userId, String commentId) {
+        return Response.success(commentService.getOneComment(userId, commentId));
     }
 
     /**
@@ -85,8 +86,10 @@ public class CommentController {
      * @return {@link Response}
      */
     @GetMapping("/all")
-    public Response<PageInfo<Comment>> getAllComments(PageMessage pageMessage) {
-        return Response.success(commentService.getComments(null, pageMessage));
+    public Response<PageInfo<Comment>> getAllComments(String userId, PageMessage pageMessage) {
+        Comment comment = new Comment();
+        comment.setUserId(userId);
+        return Response.success(commentService.getComments(comment, pageMessage));
     }
 
     /**

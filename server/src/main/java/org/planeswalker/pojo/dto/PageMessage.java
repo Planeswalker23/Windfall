@@ -19,5 +19,5 @@ public class PageMessage {
     /**
      * 每页数目
      */
-    private Integer pageSize = Constant.FIVE;
+    private Integer pageSize = Constant.THREE;
 }

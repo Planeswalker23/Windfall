@@ -60,4 +60,27 @@ public class SessionUtil {
         HttpSession session = SessionUtil.getSession();
         session.setAttribute("user", user);
     }
+
+    /**
+     * 更新 session 中的变量
+     * @param target
+     * @param object
+     */
+    public static void addIntoSession(String target, Object object) {
+        HttpSession session = SessionUtil.getSession();
+        session.setAttribute(target, object);
+    }
+
+    /**
+     * 校验后台管理系统的权限
+     */
+    public static void checkRootAuthority() {
+        // 后台管理页面的权限
+        User user = SessionUtil.getUserBean();
+        // user 未登录的情况已在工具类中校验
+        if (!Constant.ZERO.equals(user.getAuthority())) {
+            log.error("没有访问权限");
+            throw new NotLoginException();
+        }
+    }
 }

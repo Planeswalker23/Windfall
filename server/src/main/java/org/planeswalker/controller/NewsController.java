@@ -1,12 +1,10 @@
 package org.planeswalker.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.planeswalker.base.Response;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.CommentService;
-import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +24,7 @@ public class NewsController {
         Comment comment = new Comment();
         comment.setType(2);
         PageInfo<Comment> comments = commentService.getComments(comment, pageMessage);
-        model.addAttribute("comments",comments);
+        model.addAttribute("pageInfo",comments);
         return "news";
     }
     /**

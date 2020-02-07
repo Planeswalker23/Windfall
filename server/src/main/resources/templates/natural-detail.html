@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>风物文化</title>
+    <link rel="stylesheet" href="/css/boot.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/css/icons.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 8]><!-->
+    <link rel="stylesheet" href="/ie7/ie7.css">
+    <!--<![endif]-->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target=".navbar-fixed-top">
+<div th:insert="head :: nav"></div>
+    <div class="clear"></div>
+    <div id="page-content">
+        <section class="breadcrumb">
+            <div class="container">
+                <h2 th:text="${comment.title}">详情</h2>
+                <ul>
+                    <li><a href="index.html">风物文化</a> ></li>
+                    <li><a href="#" th:text="${comment.title}"></a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="blog-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="single-post">
+                            <div class="blog-meta">
+                                <a href="" class="ml-0"><i class="blue-text fa fa-calendar"></i> <span th:text="${comment.createTime}"></span></a>
+                                <a href=""><i class="blue-text fa fa-user"></i><span th:text="${comment.userId}"></span></a>
+                                <a href=""><i class="blue-text fa fa-heart-o"></i><span th:text="${session.likeNum}"></span></a>
+                                <a th:href="@{'/natural/'+${comment.commentId}+'/thumb'}">
+                                    <img id="image" src="/images/thumb.png" th:src="${session.user==null||comment.likeNum!=session.user.userId}?'/images/thumb.png':'/images/thumb_c.png'">
+                                </a>
+                            </div>
+                            <p/>
+                            <p/>
+                            <p/>
+                            <div class="blog-img">
+                                <img th:src="${comment.imgUrl}" class="img-responsive">
+                            </div>
+                            <p></p>
+                            <p th:text="${comment.content}"></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="clear"></div>
+   <footer>
+        <div class="container">
+            <div class="row contact-sec">
+                <div class="col-md-5 col-lg-5">
+                    <h2>Insurance<span>Press</span></h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
+                                <br/>Zip - 382481</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-phone"></i> +91 123 456 7890</a></li>
+                                <li><a href="#"><i class="ti-email"></i> info@website.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-default">Contact Us</a>
+                </div>
+                <div class="col-md-5 col-lg-5 col-md-offset-2 col-lg-offset-2">
+                    <h2>Agent<span>Detail</span></h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>E104 Dharti -2 , Nr Silverstar Mall Chandlodia - Ahmedabad
+                                <br/>Zip - 382481</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-phone"></i> +91 123 456 7890</a></li>
+                                <li><a href="#"><i class="ti-email"></i> info@website.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-default">Contact Agent</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+                    <ul class="footer-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Compnies represented</a></li>
+                        <li><a href="contact-us.html">Contact us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Products</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-lg-2 col-md-offset-2 col-lg-offset-2">
+                    <ul class="footer-social">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        Copyright &copy; 2018 More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 text-right">
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/boot.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="js/user.js"></script>
+</body>
+
+</html>

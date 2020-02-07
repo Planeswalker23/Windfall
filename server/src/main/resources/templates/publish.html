@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>发表内容</title>
+    <link rel="stylesheet" href="/css/boot.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/editormd.min.css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
+    <script src="/js/editormd.min.js" type="application/javascript"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar-fixed-top">
+<div th:insert="head :: nav"></div>
+<div class="clear"></div>
+<div id="page-content">
+    <section class="breadcrumb">
+        <div class="container">
+            <h2>个人中心</h2>
+            <ul>
+                <li><a href="index.html">个人中心</a> ></li>
+                <li><a href="#">发表文字</a></li>
+            </ul>
+        </div>
+    </section>
+    <section class="blog-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>编辑</h2>
+                    <hr>
+
+                    <form action="/publish" method="post">
+                        <input type="hidden" name="id">
+                        <div class="form-group">
+                            <label for="title">标题（简单扼要）：</label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                   autocomplete="off"
+                                   placeholder="问题标题">
+                        </div>
+                        <div class="form-group" id="question-editor">
+                            <label for="content">文章内容（必填，请参照右边提示）：</label>
+                            <textarea name="content" id="content"
+                                      style="display: none"
+                                      class="form-control" cols="30" rows="10"></textarea>
+                        </div>
+                        <script type="text/javascript">
+                            $(function() {
+                                var editor = editormd("question-editor", {
+                                    width  : "100%",
+                                    height : 350,
+                                    path   : "/js/lib/",
+                                    delay: 0,
+                                    watch: false,
+                                    placeholder: "请输入问题描述",
+                                    imageUpload: true,
+                                    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                                    imageUploadURL: "/file/upload"
+                                });
+                            });
+                        </script>
+                        <div class="container-fluid main">
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" th:text="${error}"
+                                     th:if="${error != null}"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"><button type="submit" class="btn btn-success btn-publish" style="float: right">发布</button></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                    <h3>内容发起指南</h3>
+                    ● 标题：请用精简的语言描述您发布的内容，不超过25个字。 <br>
+                    ● 内容：详细描述您的内容，并确保问题描述清晰直观，并提供一些相关资料。<br>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

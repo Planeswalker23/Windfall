@@ -28,7 +28,7 @@ public class TypeNum {
         if (Constant.ONE.equals(this.type)) {
             return "历史文化";
         } else if (Constant.TWO.equals(this.type)) {
-            return "新闻资讯";
+            return "活动资讯";
         } else if (Constant.THREE.equals(this.type)) {
             return "美食特色";
         } else if (Constant.FOUR.equals(this.type)) {

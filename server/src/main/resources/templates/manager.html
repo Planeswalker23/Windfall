@@ -224,7 +224,7 @@
                       <button th:switch="${#httpServletRequest.getParameter('type')}" class="btn btn-info dropdown-toggle" id="search-btn" data-toggle="dropdown" type="button" aria-haspopup="true" aria-expanded="false">
                         <!--  分页需要判断当前属于哪个 type  -->
                         <span th:case="1" th:text="历史文化"></span>
-                        <span th:case="2" th:text="新闻资讯"></span>
+                        <span th:case="2" th:text="活动资讯"></span>
                         <span th:case="3" th:text="美食特色"></span>
                         <span th:case="4" th:text="风物文化"></span>
                         <span th:case="null" th:text="搜索文章类别"></span>
@@ -232,7 +232,7 @@
                       <ul class="dropdown-menu">
                         <li> <a href="/manager" >所有</a> </li>
                         <li> <a href="/manager?type=1" >历史文化</a> </li>
-                        <li> <a href="/manager?type=2" >新闻资讯</a> </li>
+                        <li> <a href="/manager?type=2" >活动资讯</a> </li>
                         <li> <a href="/manager?type=3" >美食特色</a> </li>
                         <li> <a href="/manager?type=4" >风物文化</a> </li>
                       </ul>
@@ -275,7 +275,7 @@
                           <td>
                             <span th:switch="${comment.type}">
                               <span th:case="1">历史文化</span>
-                              <span th:case="2">新闻资讯</span>
+                              <span th:case="2">活动资讯</span>
                               <span th:case="3">美食特色</span>
                               <span th:case="4">风物文化</span>
                             </span>

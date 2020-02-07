@@ -28,3 +28,10 @@ insert into comment (comment_id, user_id, title, content, price, buy_url, type, 
 insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test17', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
 insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test18', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
 insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test19', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
+
+
+
+-- 历史文化
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('history_of_liang_zhu', 'root', '梁祝的传说', null, null, 1, now(), now(), 0, 1, '梁祝传说和以梁祝传说为内容的其他艺术形式所展现的艺术魅力，使其成为中国民间文学艺术之林中的一朵奇葩。 梁祝传说自1600 年前的晋代形成以来，主要流传于宁波、上虞、杭州、宜兴、济宁、汝南等地，并向中国的各个地区、各个民族流传辐射。
+  在流传的过程中，各地人民又不断丰富发展传说的内容，甚至还兴建了众多以梁祝传说为主题的墓碑和庙宇等建筑。此外，梁祝传说还流传到朝鲜、越南、缅甸、日本、新加坡和印度尼西亚等国家，其影响之大在中国民间传说中实属罕见。 人们用丰富多彩的文艺样式来表现这个美丽动听的故事，仅戏曲剧种就有30余种、曲艺20余种，更有上百首歌谣、几十种工艺品，以及电影和电视作品。 同其他口头文学和非物质文化遗产一样，近20年来，由于受现代化和城市化的影响，以口头传承为主的梁祝传说受到了前所未有的冲击。原有的口头传承人相继去世，年轻一代不愿接续，传承面临着断代的危险，梁祝传说在不久的将来，很可能再也找不到梁祝传说的传承者、说唱者，而梁祝文化的"根"在于梁祝传说，故而急需抢救和采取相应的保护措施，使这一优秀的文化传统得以绵延。', 'https://img-blog.csdnimg.cn/20200207123935910.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');

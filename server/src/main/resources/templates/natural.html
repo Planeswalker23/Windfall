@@ -49,16 +49,46 @@
                                 </div>
                                 <h2 class="blog-title" th:text="${comment.title}"></h2>
                                 <div class="blog-meta">
-                                    <span th:text="${comment.createTime}"></span><a href="">(3) Comments</a></div>
+                                    <span th:text="${comment.createTime}"></span><a href="">(3) Comments</a>
+                                </div>
                                 <p th:text="${comment.content}">.</p>
                                 <hr />
                             </div>
+                        </div>
+                        <div class="text-center">
+                            <ul class="pagination ins-page" th:each="num:${pageInfo.navigatepageNums}">
+                                <li><a href="natural" th:href="@{'/natural?pageNum=' + ${num}}" th:text="${num}"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="blog-post">
+                            <!-- Search -->
+                            <h2>搜索 todo</h2>
+                            <div class="input-group search-text">
+                                <input type="text" class="form-control search" placeholder="搜索风物文化的标题">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default btn-search" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                              </span>
                             </div>
-                            <div class="text-center">
-                                <ul class="pagination ins-page" th:each="num:${pageInfo.navigatepageNums}">
-                                    <li><a href="natural" th:href="@{'/natural?pageNum=' + ${num}}" th:text="${num}"></a></li>
-                                </ul>
-                            </div>
+                            <!-- Categories -->
+                            <h2>分类 todo</h2>
+                            <ul class="category-post">
+                                <li>
+                                    <a href="#">
+                                        <div class="inline-text">
+                                            <i class="glyphicon glyphicon-play blue-text"></i>
+                                            <h4>House Insurance</h4>
+                                            <div class="margin-left-auto blue-text">
+                                                <span>(11)</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

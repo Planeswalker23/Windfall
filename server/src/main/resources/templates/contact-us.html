@@ -29,16 +29,22 @@
     <div id="page-content">
         <section class="breadcrumb">
             <div class="container">
-                <h2>个人中心
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#editModal">
+                <div class="col-sm-6">
+                    <h2>个人中心</h2>
+                    <ul>
+                        <li><a href="index.html">阿拉宁波</a> ></li>
+                        <li><a href="#">个人中心</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn-default" data-toggle="modal" data-target="#editModal">
                         <span>修改个人资料</span>
                     </button>
-                    <a href="/publish" class="btn-default" style="float: right;">发表</a>
-                </h2>
-                <ul>
-                    <li><a href="index.html">阿拉宁波</a> ></li>
-                    <li><a href="#">个人中心</a></li>
-                </ul>
+                </div>
+                <div class="col-sm-2">
+                    <a href="/publish" class="btn-default">发表</a>
+                </div>
             </div>
             <!--  注册  -->
             <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="edit">

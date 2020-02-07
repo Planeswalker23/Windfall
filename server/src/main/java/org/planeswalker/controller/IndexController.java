@@ -3,6 +3,7 @@ package org.planeswalker.controller;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Response;
+import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.utils.SessionUtil;
@@ -36,7 +37,12 @@ public class IndexController {
      */
     @GetMapping("/manager")
     public String manager(Comment comment, PageMessage pageMessage, Model model){
-        SessionUtil.checkRootAuthority();
+        try {
+            SessionUtil.checkRootAuthority();
+        } catch (NotLoginException e) {
+            log.error(e.getMessage(), e);
+            return "redirect:/index#loginForm";
+        }
         Response<PageInfo<Comment>> res = commentController.getAllComments(comment, pageMessage);
         model.addAttribute("pageInfo", res.getData());
         return "manager";
@@ -48,7 +54,12 @@ public class IndexController {
      */
     @GetMapping("/addDoc")
     public String addDoc(){
-        SessionUtil.checkRootAuthority();
+        try {
+            SessionUtil.checkRootAuthority();
+        } catch (NotLoginException e) {
+            log.error(e.getMessage(), e);
+            return "redirect:/index#loginForm";
+        }
         return "add-doc";
     }
 
@@ -72,9 +83,14 @@ public class IndexController {
      */
     @GetMapping("/profile")
     public String profile(Model model){
-        model.addAttribute("user", SessionUtil.getUserBean());
-        Response<PageInfo<Comment>> comments =  commentController.getMyLikeComment(new PageMessage());
-        model.addAttribute("comment", comments.getData().getList());
+        try {
+            model.addAttribute("user", SessionUtil.getUserBean());
+            Response<PageInfo<Comment>> comments =  commentController.getMyLikeComment(new PageMessage());
+            model.addAttribute("comment", comments.getData().getList());
+        } catch (NotLoginException e) {
+            log.error(e.getMessage(), e);
+            return "redirect:/index#loginForm";
+        }
         return "contact-us";
     }
 }

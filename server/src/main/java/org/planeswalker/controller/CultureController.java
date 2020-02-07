@@ -1,7 +1,9 @@
 package org.planeswalker.controller;
 
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
+import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.dto.TypeNum;
 import org.planeswalker.pojo.entity.Comment;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 @Controller
 public class CultureController {
 
@@ -116,6 +119,8 @@ public class CultureController {
         if (user!=null){
             Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
             session.setAttribute("likeNum",likeNum);
+        } else {
+            return "redirect:/index#loginForm";
         }
         return "redirect:/cultural/{id}";
     }
@@ -126,9 +131,14 @@ public class CultureController {
      */
     @GetMapping("/natural/{id}/thumb")
     public String naturalThumb(@PathVariable(name = "id") String id){
-        User user = SessionUtil.getUserBean();
-        Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
-        SessionUtil.addIntoSession("likeNum",likeNum);
+        try {
+            User user = SessionUtil.getUserBean();
+            Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
+            SessionUtil.addIntoSession("likeNum",likeNum);
+        } catch (NotLoginException e) {
+            log.error(e.getMessage(), e);
+            return "redirect:/index#loginForm";
+        }
         return "redirect:/natural/{id}";
     }
 

@@ -73,6 +73,24 @@
                 </div>
             </div>
         </section>
+
+        <section class="contact-us">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="form-box">
+                            <h2>联系作者</h2>
+                            <div class="form-content">
+                                <textarea rows="1" cols="1" id="content" name="content" placeholder="有什么想问的，在这里写下来吧"></textarea>
+                                <div class="text-center">
+                                    <input type="submit" class="btn-default" value="发送邮件"th:onclick="sendEmail([[${comment.commentId}]]);" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <div class="clear"></div>
 <div th:insert="~{footer :: foot}"></div>
@@ -80,6 +98,28 @@
     <script src="/js/boot.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
     <script src="/js/custom.js"></script>
+<script type="text/javascript">
+    function sendEmail(inputCommentId) {
+        const input = document.getElementById('content').value;
+        $.ajax({
+            type: "POST",
+            url: "/send",
+            data: {
+                commentId: inputCommentId,
+                content: input
+            },
+            dataType: "json",
+            success:function (data) {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    // 登录失败提示
+                    alert(data.message);
+                }
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

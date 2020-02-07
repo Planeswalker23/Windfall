@@ -59,6 +59,8 @@ public class NewsController {
         if (user!=null){
             Integer likeNum = commentService.likeOrCancelComment(user.getUserId(), id);
             session.setAttribute("likeNum",likeNum);
+        } else {
+            return "redirect:/index#loginForm";
         }
         return "redirect:/news/{id}";
     }

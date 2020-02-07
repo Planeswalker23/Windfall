@@ -24,6 +24,26 @@ spring:
     default-property-inclusion: NON_EMPTY
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+  #邮件部分
+  mail:
+    host: smtp.qq.com
+    username: yqzhu1528@foxmail.com
+    #发送方的授权码
+    password: xbrogbbyqnotbfje
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: ture
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+    # 修改发送邮件TCP端口
+    port: 465
 
 # 设置日志输出级别
 logging:

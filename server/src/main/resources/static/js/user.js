@@ -7,12 +7,7 @@ function login() {
         success:function (data) {
             if (data.success) {
                 // 登录成功转到主页，如登录管理员账号，跳转到后台管理页面
-                //window.location.href="/";
-                if (data.data.authority==0) {
-                    window.location.href="/manager";
-                } else {
-                    window.location.href="/"; //在原有窗口打开
-                }
+                window.location.href="/"; //在原有窗口打开
             } else {
                 // 登录失败提示
                 alert(data.message);

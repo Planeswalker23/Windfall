@@ -11,6 +11,7 @@ import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.TypeNum;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.utils.NumberUtil;
@@ -18,6 +19,7 @@ import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -247,5 +249,55 @@ public class CommentService {
         comment.setState(state);
         comment.setCommentId(commentId);
         commentMapper.updateById(comment);
+    }
+
+    /**
+     * 模糊搜索标题
+     * @param comment
+     * @param pageMessage
+     * @return
+     */
+    public PageInfo<Comment> searchLikelyTitle(Comment comment, PageMessage pageMessage) {
+        // 设置分页信息
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        try {
+            User loginUser = SessionUtil.getUserBean();
+            if (!Constant.ZERO.equals(loginUser.getAuthority())) {
+                comment.setState(Constant.ONE);
+            }
+        } catch (NotLoginException e) {
+            log.info("用户未登录，需要查询启用的 comment");
+            comment.setState(Constant.ONE);
+        }
+        List<Comment> comments = commentMapper.selectList(Wrappers.<Comment>lambdaQuery()
+                .eq(Comment::getType, comment.getType())
+                .like(Comment::getTitle, comment.getTitle()));
+        // 查询 userName，使用 hashSet 是为了去重
+        Set<String> userIds = new HashSet<>(Constant.TEN);
+        comments.forEach(comment1 -> userIds.add(comment1.getUserId()));
+        List<User> users = userMapper.selectList(Wrappers.<User>lambdaQuery().in(User::getUserId, userIds));
+        Map<String, String> userId2NameMap = new HashMap<>(Constant.TEN);
+        users.forEach(user -> userId2NameMap.put(user.getUserId(), user.getUserName()));
+        // 添加 userName 和 likeNum 返回
+        comments.forEach(comment1 -> {
+            comment1.setUserName(userId2NameMap.get(comment1.getUserId()));
+            comment1.setLikeNum(this.getZanByLikeNum(comment1.getLikeNum()).toString());
+        });
+        return new PageInfo<>(comments);
+    }
+
+    /**
+     * 获取各种类文章数目
+     * @return
+     */
+    public List<TypeNum> getTypeNum() {
+        List<TypeNum> count = commentMapper.getTypeNum();
+        if (CollectionUtils.isEmpty(count)) {
+            count.add(new TypeNum(Constant.ONE));
+            count.add(new TypeNum(Constant.TWO));
+            count.add(new TypeNum(Constant.THREE));
+            count.add(new TypeNum(Constant.FOUR));
+        }
+        return count;
     }
 }

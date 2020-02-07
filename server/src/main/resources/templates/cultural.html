@@ -79,25 +79,25 @@
                         <div class="blog-post">
                             <iframe frameborder="no" border="0"  marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=1410927768&auto=1&height=32"></iframe>
                             <!-- Search -->
-                            <h2>搜索 todo</h2>
+                            <h2>搜索</h2>
                             <div class="input-group search-text">
-                                <input type="text" class="form-control search" placeholder="搜索历史文化的标题">
+                                <input id="culturalSearch" type="text" class="form-control search" placeholder="搜索风物文化的标题">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default btn-search" type="button">
+                                    <button class="btn btn-default btn-search" type="button" onclick="searchCultural()">
                                         <i class="fa fa-search"></i>
                                     </button>
                               </span>
                             </div>
                             <!-- Categories -->
-                            <h2>分类 todo</h2>
+                            <h2>分类</h2>
                             <ul class="category-post">
-                                <li>
-                                    <a href="#">
+                                <li th:each="typeNum : ${typeNums}">
+                                    <a th:href="@{'/' + ${typeNum.typeCode}}">
                                         <div class="inline-text">
                                             <i class="glyphicon glyphicon-play blue-text"></i>
-                                            <h4>House Insurance</h4>
+                                            <h4 th:text="${typeNum.typeName}"></h4>
                                             <div class="margin-left-auto blue-text">
-                                                <span>(11)</span>
+                                                <span th:text="${typeNum.num}"></span>
                                             </div>
                                         </div>
                                     </a>
@@ -116,6 +116,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.2.1/bootstrap-hover-dropdown.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/user.js"></script>
+<script type="text/javascript">
+    function searchCultural() {
+        const searchInput = document.getElementById('culturalSearch').value;
+        window.location.href = "/search?type=1&title="+searchInput
+    }
+</script>
 </body>
 
 </html>

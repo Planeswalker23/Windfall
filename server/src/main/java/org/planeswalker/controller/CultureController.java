@@ -3,6 +3,7 @@ package org.planeswalker.controller;
 import com.github.pagehelper.PageInfo;
 import org.planeswalker.base.Constant;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.TypeNum;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.CommentService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CultureController {
@@ -32,6 +34,8 @@ public class CultureController {
         Comment comment = new Comment();
         comment.setType(1);
         PageInfo<Comment> pageInfo = commentService.getComments(comment, pageMessage);
+        List<TypeNum> typeNums = commentService.getTypeNum();
+        model.addAttribute("typeNums",typeNums);
         model.addAttribute("pageInfo",pageInfo);
         return "cultural";
     }
@@ -45,8 +49,30 @@ public class CultureController {
         Comment comment = new Comment();
         comment.setType(Constant.FOUR);
         PageInfo<Comment> pageInfo = commentService.getComments(comment, pageMessage);
+        List<TypeNum> typeNums = commentService.getTypeNum();
+        model.addAttribute("typeNums",typeNums);
         model.addAttribute("pageInfo",pageInfo);
         return "natural";
+    }
+
+    /**
+     * 搜索匹配标题的 comment
+     * @param comment type必填，title必填
+     * @return
+     */
+    @GetMapping("/search")
+    public String natural(Comment comment, Model model, PageMessage pageMessage){
+        PageInfo<Comment> pageInfo = commentService.searchLikelyTitle(comment, pageMessage);
+        List<TypeNum> typeNums = commentService.getTypeNum();
+        model.addAttribute("typeNums",typeNums);
+        model.addAttribute("pageInfo",pageInfo);
+        if (Constant.ONE.equals(comment.getType())) {
+            return "cultural";
+        } else if (Constant.FOUR.equals(comment.getType())) {
+            return "natural";
+        } else {
+            return "redirect:/";
+        }
     }
 
     /**

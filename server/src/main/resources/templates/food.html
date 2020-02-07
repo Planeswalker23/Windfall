@@ -64,7 +64,7 @@
                         <p class="text-uppercase mb-2">美食</p>
                         <h4 class="title-border"><a class="text-dark" href="blog-single.html" th:text="${comment.title}"></a></h4>
                         <p th:text="${comment.content}"></p>
-                        <a href="blog-single.html" class="btn btn-transparent">购买</a>
+                        <a th:href="${comment.buyUrl}" class="btn btn-transparent">购买</a>
                     </article>
                 </div>
 

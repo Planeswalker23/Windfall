@@ -1,6 +1,6 @@
 function login() {
     $.ajax({
-        type: "post",
+        type: "POST",
         url: "/user/login",
         data: $('#loginForm').serialize(),// 获取form表单中的数据
         dataType: "json",// 预期服务器返回的数据类型

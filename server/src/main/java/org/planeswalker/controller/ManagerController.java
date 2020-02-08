@@ -3,6 +3,7 @@ package org.planeswalker.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
+import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 后台管理系统接口 控制层，返回 template 页面
@@ -27,22 +30,23 @@ public class ManagerController {
 
     @GetMapping({"/", "/login"})
     public String managerLogin() {
+        // 清空用户 session 缓存
+        SessionUtil.updateAttribute(Constant.USER_BEAN, null);
         return "login";
     }
 
     /**
      * 后台管理系统：首页
      * @param model 模板实体类，可在页面中存放变量
+     * @param response
      * @return
      */
     @GetMapping("/index")
-    public String managerIndex(Model model) {
-//        String res = this.getUserBeanTryCatch(model);
-//        if (res != null) {
-//            return res;
-//        }
-        User user = loginService.getUserByUserId("root");
-        model.addAttribute(Constant.USER_BEAN, user);
+    public String managerIndex(Model model, HttpServletResponse response) {
+        String res = this.getUserBeanTryCatch(model, response);
+        if (res != null) {
+            return res;
+        }
         return "index";
     }
 
@@ -51,15 +55,18 @@ public class ManagerController {
      * @param model
      * @return (null || login)
      */
-    private String getUserBeanTryCatch(Model model) {
+    private String getUserBeanTryCatch(Model model, HttpServletResponse response) {
         try {
             User user = SessionUtil.getUserBean();
+            if (!Constant.ZERO.equals(user.getAuthority())) {
+                throw new WindfallException(Errors.OPERATING_AUTHORIZATION_ERROR);
+            }
             model.addAttribute(Constant.USER_BEAN, user);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             // 错误信息
             String message;
-            if (e instanceof WindfallException) {
+            if (e instanceof WindfallException || e instanceof NotLoginException) {
                 message = e.getMessage();
             } else {
                 message = Errors.SYSTEM_ERROR;

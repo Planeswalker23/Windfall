@@ -48,9 +48,24 @@
     left: 15px;
 }
 </style>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--消息提示-->
+<script src="js/bootstrap-notify.min.js"></script>
+<script type="text/javascript" src="js/lightyear.js"></script>
+<script type="text/javascript" src="js/main.min.js"></script>
 </head>
   
 <body>
+<input type="hidden" th:value="${reason}" id="reason"/>
+<script type="text/javascript">
+  // 如果 reason 字段中有值，代表是错误信息，需要提示框显示
+  // Js 获取hidden的隐藏域
+  const reason = $("#reason").val();
+  if (reason !== '' && reason) {
+    lightyear.notify(reason, 'danger', 2000, 'mdi mdi-lock', 'top', 'center');
+  }
+</script>
 <div class="row lyear-wrapper">
   <div class="lyear-login">
     <div class="login-center">
@@ -79,12 +94,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<!--消息提示-->
-<script src="js/bootstrap-notify.min.js"></script>
-<script type="text/javascript" src="js/lightyear.js"></script>
-<script type="text/javascript" src="js/main.min.js"></script>
 <script type="text/javascript">
   function loginPageFunction() {
     $.ajax({
@@ -94,8 +103,13 @@
       dataType: "json",// 预期服务器返回的数据类型
       success:function (data) {
         if (data.code === 200) {
-          // 在原有窗口打开，登录成功转到主页
-          window.location.href="/index";
+          // 校验用户权限
+          if (data.res.authority === 0) {
+            // 在原有窗口打开，登录成功转到主页
+            window.location.href = "/index";
+          } else {
+            lightyear.notify("账户错误，无管理员权限", 'danger', 2000, 'mdi mdi-lock', 'top', 'center');
+          }
         } else {
           // 消息提醒
           lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-lock', 'top', 'center');

@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,5 +85,15 @@ public class JacksonUtil {
             log.error(e.getMessage(), e);
             throw new WindfallException(Errors.TO_JSON_FAILED);
         }
+    }
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    /**
+     * 时间格式化
+     * @param time
+     * @return
+     */
+    public static String date2String(Date time) {
+        return sdf.format(time);
     }
 }

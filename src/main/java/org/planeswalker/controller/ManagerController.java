@@ -1,10 +1,14 @@
 package org.planeswalker.controller;
 
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
+import org.planeswalker.base.Response;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.exception.WindfallException;
+import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.RootUserInfo;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
@@ -25,8 +29,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ManagerController {
 
     @Autowired
-    private LoginService loginService;
+    private RootController rootController;
 
+    @Autowired
+    private LoginService loginService;
 
     @GetMapping({"/", "/login"})
     public String managerLogin() {
@@ -49,6 +55,27 @@ public class ManagerController {
         }
         return "index";
     }
+
+    /**
+     * 后台管理系统：用户管理
+     * @param user 查询条件，按需
+     * @param model 模板实体类，可在页面中存放变量
+     * @param response
+     * @return
+     */
+    @GetMapping("/users")
+    public String managerUsers(User user, PageMessage pageMessage, Model model, HttpServletResponse response) {
+//        // 权限校验
+//        String res = this.getUserBeanTryCatch(model, response);
+//        if (res != null) {
+//            return res;
+//        }
+        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.getAllUsers(user, pageMessage);
+        model.addAttribute("pageInfo", pageInfoResponse.getRes());
+        return "doc";
+    }
+
 
     /**
      * 后台管理：校验用户是否登录，若未登录返回登录页

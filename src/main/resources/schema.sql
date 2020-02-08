@@ -15,7 +15,7 @@ create table user (
 drop table if exists user_info;
 create table user_info (
   `user_id` varchar(36) not null comment '用户主键id',
-  `favourite` varchar(36) default null comment '关注的内容，逗号分隔 1-美妆 2-彩妆 3-香水 4-护肤品',
+  `favourite` varchar(36) default null comment '关注的内容，中文逗号分隔 彩妆，香水，护肤品',
   `signature` varchar(512) default null comment '个性签名',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',

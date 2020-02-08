@@ -28,7 +28,7 @@ public class UserPlusInfo {
     private String email;
 
     /**
-     * 关注的内容，逗号分隔 1-美妆 2-彩妆 3-香水 4-护肤品
+     * 关注的内容，中文逗号分隔 彩妆，香水，护肤品
      */
     private String favourite;
 

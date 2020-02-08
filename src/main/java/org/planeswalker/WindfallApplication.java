@@ -1,6 +1,5 @@
 package org.planeswalker;
 
-import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.github.pagehelper.PageInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -17,24 +16,15 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @SpringBootApplication
 @MapperScan("org.planeswalker.mapper")
-public class Beauty17Application {
+public class WindfallApplication {
 
     /**
      * 启动springboot程序的主入口
      * @param args
      */
     public static void main(String[] args) {
-        SpringApplication.run(Beauty17Application.class, args);
+        SpringApplication.run(WindfallApplication.class, args);
         log.info("==================启动成功================");
-    }
-
-    /**
-     * 乐观锁拦截器
-     * @return {@link com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor}
-     */
-    @Bean
-    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
-        return new OptimisticLockerInterceptor();
     }
 
     /**

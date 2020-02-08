@@ -1,7 +1,6 @@
 package org.planeswalker.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -50,14 +49,6 @@ public class User implements Serializable {
      * 操作时间，写入数据库时自动更新
      */
     private Date updateTime;
-
-    /**
-     * 乐观锁的版本号
-     * 查询出来之后不返回
-     */
-    @Version
-    @JsonIgnore
-    private Integer version;
 
     /**
      * 启用状态 0-禁用 1-启用，默认为0-禁用

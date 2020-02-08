@@ -102,9 +102,7 @@ public class LoginService {
             throw new WindfallException(Errors.MAIL_EXIST);
         }
         // 根据「userId」查询匹配的用户
-        User resultByUserId = this.getUserByUserId(newUser.getUserId());
-        // 更新前添加旧版本号
-        newUser.setVersion(resultByUserId.getVersion());
+        this.getUserByUserId(newUser.getUserId());
         // 防止 user_info 信息不修改的情况下 update 字段为空的错误
         userInfo.setUpdateTime(new Date());
         // 修改信息

@@ -6,7 +6,6 @@ create table user (
   `email` varchar(55) default null comment '邮箱',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
-  `version` int(255) default '0' comment '乐观锁更新的版本号',
   `state` int(11) default '0' comment '启用状态 0-禁用 1-启用，默认为0-禁用',
   `authority` int(11) default '1' comment '权限 0-管理员 1-普通用户，默认为1-普通用户',
   primary key (`user_id`),
@@ -20,7 +19,6 @@ create table user_info (
   `signature` varchar(512) default null comment '个性签名',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
-  `version` int(255) default '0' comment '乐观锁更新的版本号',
   primary key (`user_id`)
 );
 
@@ -35,7 +33,6 @@ create table comment (
   `like_num` varchar(1024) default null comment '点赞人',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
-  `version` int(255) default '0' comment '乐观锁更新的版本号',
   primary key (`comment_id`)
 );
 
@@ -55,6 +52,5 @@ create table goods (
   `price` double not null comment '价格',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
-  `version` int(255) default '0' comment '乐观锁更新的版本号',
   primary key (`goods_id`)
 );

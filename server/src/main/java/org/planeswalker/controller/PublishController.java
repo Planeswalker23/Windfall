@@ -1,8 +1,11 @@
 package org.planeswalker.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.CommentService;
+import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +15,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+@Slf4j
 @Controller
 public class PublishController {
     @Autowired
     private CommentService commentService;
 
     @GetMapping("/publish")
-    public String publish(){
+    public String publish(Model model){
+        try {
+            model.addAttribute("user", SessionUtil.getUserBean());
+        } catch (NotLoginException e) {
+            log.error(e.getMessage(), e);
+            return "redirect:/index#loginForm";
+    }
         return "publish";
     }
 

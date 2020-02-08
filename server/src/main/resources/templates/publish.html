@@ -18,11 +18,24 @@
 <div id="page-content">
     <section class="breadcrumb">
         <div class="container">
-            <h2>个人中心</h2>
-            <ul>
-                <li><a href="index.html">个人中心</a> ></li>
-                <li><a href="#">发表文字</a></li>
-            </ul>
+            <div class="col-sm-6">
+                <h2>个人中心</h2>
+                <ul>
+                    <li><a href="index.html">个人中心</a> ></li>
+                    <li><a href="#">发表文字</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <a th:if="${user.authority==0}" href="/manager" class="btn-default">后台管理系统</a>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn-default" data-toggle="modal" data-target="#editModal">
+                    <span>修改个人资料</span>
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <a href="/publish" class="btn-default">发表</a>
+            </div>
         </div>
     </section>
     <section class="blog-page">

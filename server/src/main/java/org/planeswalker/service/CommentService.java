@@ -6,7 +6,7 @@ import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
-import org.planeswalker.exception.CommentException;
+import org.planeswalker.exception.WindfallException;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.pojo.dto.PageMessage;
@@ -45,7 +45,7 @@ public class CommentService {
     public String addComment(Comment comment) {
         // 参数校验 userId, content
         if (StringUtils.isEmpty(comment.getUserId()) || StringUtils.isEmpty(comment.getContent())) {
-            throw new CommentException(Errors.EMPTY_PARAMS);
+            throw new WindfallException(Errors.EMPTY_PARAMS);
         }
         // 判断 userId 是否存在
         loginService.getUserByUserId(comment.getUserId());
@@ -53,7 +53,7 @@ public class CommentService {
         if (!StringUtils.isEmpty(comment.getCommentPid()) && !Constant.ZERO.toString().equals(comment.getCommentPid())) {
             if (commentMapper.selectCount(Wrappers.<Comment>lambdaQuery()
                     .eq(Comment::getCommentId, comment.getCommentPid())).equals(Constant.ZERO)) {
-                throw new CommentException(Errors.DATA_NOT_EXIST);
+                throw new WindfallException(Errors.DATA_NOT_EXIST);
             }
         }
         comment.setCommentId(NumberUtil.createUuId());
@@ -74,7 +74,7 @@ public class CommentService {
             throw new NotLoginException();
         }
         if (StringUtils.isEmpty(commentId)) {
-            throw new CommentException(Errors.EMPTY_PARAMS);
+            throw new WindfallException(Errors.EMPTY_PARAMS);
         }
         // 权限及数据校验
         this.checkAndGetCommentByUserIdAndCommentId(userId, commentId, true);
@@ -101,10 +101,10 @@ public class CommentService {
      * @param userId
      * @param commentId
      * @param isMine 是否需要判断 userId 与 comment 的 userId 是否一致
-     * @throws CommentException 参数校验失败，传入参数为空
+     * @throws WindfallException 参数校验失败，传入参数为空
      *                          根据 commentId 查询数据为空;
      *                          查询得到的 comment 的作者不是传入的参数 userId，没有操作权限
-     * @throws org.planeswalker.exception.LoginException 该用户不存在
+     * @throws org.planeswalker.exception.WindfallException 该用户不存在
      * @return
      */
     private Comment checkAndGetCommentByUserIdAndCommentId(String userId, String commentId, boolean isMine) {
@@ -113,18 +113,18 @@ public class CommentService {
             throw new NotLoginException();
         }
         if (StringUtils.isEmpty(commentId)) {
-            throw new CommentException(Errors.EMPTY_PARAMS);
+            throw new WindfallException(Errors.EMPTY_PARAMS);
         }
         // 判断 userId 是否存在
         loginService.getUserByUserId(userId);
         Comment comment = commentMapper.selectById(commentId);
         // 根据 commentId 查询数据为空
         if (comment == null) {
-            throw new CommentException(Errors.DATA_NOT_EXIST);
+            throw new WindfallException(Errors.DATA_NOT_EXIST);
         }
         // 查询得到的 comment 的作者不是传入的参数 userId，没有操作权限
         if (isMine && !userId.equals(comment.getUserId())) {
-            throw new CommentException(Errors.OPERATING_AUTHORIZATION_ERROR);
+            throw new WindfallException(Errors.OPERATING_AUTHORIZATION_ERROR);
         }
         return comment;
     }
@@ -138,11 +138,11 @@ public class CommentService {
     public Comment getOneComment(String userId, String commentId) {
         // 参数校验 commentId
         if (StringUtils.isEmpty(commentId)) {
-            throw new CommentException(Errors.EMPTY_PARAMS);
+            throw new WindfallException(Errors.EMPTY_PARAMS);
         }
         Comment comment = commentMapper.selectById(commentId);
         if (comment == null) {
-            throw new CommentException(Errors.DATA_NOT_EXIST);
+            throw new WindfallException(Errors.DATA_NOT_EXIST);
         }
         // 查询此 comment 的作者信息
         comment.setUserName(loginService.getUserByUserId(comment.getUserId()).getUserName());

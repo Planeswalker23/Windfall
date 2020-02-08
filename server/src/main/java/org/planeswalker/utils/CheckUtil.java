@@ -1,7 +1,6 @@
 package org.planeswalker.utils;
 
 import org.planeswalker.base.Errors;
-import org.planeswalker.base.LoginErrors;
 import org.planeswalker.exception.WindfallException;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +17,7 @@ public class CheckUtil {
     /**
      * 标准email格式的正则表达式验证
      */
-    private static final String EmailFormatRule = "^[A-Za-zd0-9]+([-_.][A-Za-zd0-9]+)*@([A-Za-zd0-9]+[-.])+[A-Za-zd]{2,5}$";
+    private static final String EMAIL_FORMAT_RULE = "^[A-Za-zd0-9]+([-_.][A-Za-zd0-9]+)*@([A-Za-zd0-9]+[-.])+[A-Za-zd]{2,5}$";
 
     /**
      * 验证邮箱格式，若不符合邮箱格式直接报错
@@ -30,10 +29,10 @@ public class CheckUtil {
         if (StringUtils.isEmpty(email)) {
             throw new WindfallException(Errors.EMPTY_PARAMS);
         }
-        Pattern p = Pattern.compile(EmailFormatRule);
+        Pattern p = Pattern.compile(EMAIL_FORMAT_RULE);
         Matcher m = p.matcher(email);
         if (!m.matches()) {
-            throw new WindfallException(LoginErrors.WRONG_MAIL);
+            throw new WindfallException(Errors.WRONG_MAIL);
         }
     }
 }

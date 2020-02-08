@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
-import org.planeswalker.base.LoginErrors;
 import org.planeswalker.config.CodeImg;
-import org.planeswalker.exception.LoginException;
+import org.planeswalker.exception.WindfallException;
 import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.LoginDto;
@@ -58,10 +57,10 @@ public class LoginService {
         log.info("开始注册业务");
         // 验证码校验
         if (codeImg == null || StringUtils.isEmpty(codeImg.getCode())) {
-            throw new LoginException(LoginErrors.CODE_IMG_NOT_EXIST);
+            throw new WindfallException(Errors.CODE_IMG_NOT_EXIST);
         }
         if (!imgCode.equalsIgnoreCase(codeImg.getCode())) {
-            throw new LoginException(LoginErrors.WRONG_IMG_CODE);
+            throw new WindfallException(Errors.WRONG_IMG_CODE);
         }
         // 清除验证码
         codeImg.setCode(null);
@@ -70,7 +69,7 @@ public class LoginService {
         // 根据「邮箱」查询所有匹配的用户，邮箱不允许重复
         List<User> sameEmailUsers = this.getUserByEmail(newUser.getEmail());
         if (!CollectionUtils.isEmpty(sameEmailUsers)) {
-            throw new LoginException(LoginErrors.MAIL_EXIST);
+            throw new WindfallException(Errors.MAIL_EXIST);
         }
         // 添加其他字段
         newUser.setUserId(NumberUtil.createUuId());
@@ -81,7 +80,7 @@ public class LoginService {
                 // 新增插入 user_info 表
                 ||userInfoMapper.insert(userInfo)==0) {
             log.warn("注册失败");
-            throw new LoginException(Constant.FAILED);
+            throw new WindfallException(Constant.FAILED);
         }
         log.info("注册成功");
         return newUser.getUserId();
@@ -103,7 +102,7 @@ public class LoginService {
                 .ne(User::getUserId, newUser.getUserId()));
         // 若除本人外有其他相同的email存在（及邮箱重复），不允许修改
         if (!CollectionUtils.isEmpty(sameEmailUsers)) {
-            throw new LoginException(LoginErrors.MAIL_EXIST);
+            throw new WindfallException(Errors.MAIL_EXIST);
         }
         // 根据「userId」查询匹配的用户
         User resultByUserId = this.getUserByUserId(newUser.getUserId());
@@ -114,7 +113,7 @@ public class LoginService {
         // 修改信息
         if (userMapper.updateById(newUser) == 0) {
             log.warn("修改个人信息失败");
-            throw new LoginException(Errors.EDIT_FAILED);
+            throw new WindfallException(Errors.EDIT_FAILED);
         }
         // 新增更新 user_info 表
         userInfoMapper.updateById(userInfo);
@@ -131,14 +130,14 @@ public class LoginService {
         // 根据「邮箱」查询
         List<User> sameEmailUsers = this.getUserByEmail(loginDto.getEmail());
         if (CollectionUtils.isEmpty(sameEmailUsers)) {
-            throw new LoginException(LoginErrors.MAIL_NOT_REGISTER);
+            throw new WindfallException(Errors.MAIL_NOT_REGISTER);
         }
         // 验证是否根据邮箱只查询出一条记录
         CollectionUtil.isOneDate(sameEmailUsers);
         User sameEmailUser = sameEmailUsers.get(Constant.ZERO);
         // 验证密码
         if (!sameEmailUser.getPassword().equals(loginDto.getPassword())) {
-            throw new LoginException(LoginErrors.WRONG_PASSWORD);
+            throw new WindfallException(Errors.WRONG_PASSWORD);
         }
         log.info("登录成功 ==> {}", JacksonUtil.toJson(sameEmailUser));
         // 登录成功后返回用户信息
@@ -172,9 +171,9 @@ public class LoginService {
      * 根据邮箱查询所有匹配的user
      * @param email not null or empty
      * @return List<User> {@link User}
-     * @throws {@link LoginException}
+     * @throws {@link WindfallException}
      */
-    private List<User> getUserByEmail(String email) throws LoginException {
+    private List<User> getUserByEmail(String email) throws WindfallException {
         List<User> sameEmailUsers = userMapper.selectList(Wrappers.<User>lambdaQuery()
                 .eq(User::getEmail, email));
         log.info("根据邮箱查询所有匹配用户的结果：{}条", sameEmailUsers.isEmpty()?Constant.ZERO:sameEmailUsers.size());
@@ -185,12 +184,12 @@ public class LoginService {
      * 根据userId查询唯一匹配的user
      * @param userId
      * @return {@link User}
-     * @throws {@link LoginException}
+     * @throws {@link WindfallException}
      */
-    public User getUserByUserId(String userId) throws LoginException {
+    public User getUserByUserId(String userId) throws WindfallException {
         User sameUserIdUser = userMapper.selectById(userId);
         if (sameUserIdUser == null) {
-            throw new LoginException(LoginErrors.USER_NOT_EXIST);
+            throw new WindfallException(Errors.USER_NOT_EXIST);
         }
         return sameUserIdUser;
     }
@@ -201,7 +200,7 @@ public class LoginService {
      */
     public Integer deleteMyself(String userId) {
         if (StringUtils.isEmpty(userId)) {
-            throw new LoginException(Errors.EMPTY_PARAMS);
+            throw new WindfallException(Errors.EMPTY_PARAMS);
         }
         // 根据 userId 将该条记录删除
         return userMapper.deleteById(userId);

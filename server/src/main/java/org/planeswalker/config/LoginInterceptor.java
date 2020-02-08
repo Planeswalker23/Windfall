@@ -3,9 +3,9 @@ package org.planeswalker.config;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
-import org.planeswalker.base.LoginErrors;
+import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
-import org.planeswalker.exception.LoginException;
+import org.planeswalker.exception.WindfallException;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.utils.SessionUtil;
@@ -52,7 +52,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (!StringUtils.isEmpty(userId) && !userBean.getUserId().equals(userId)) {
             log.warn("传入用户信息参数[{}]与登录用户信息[{}]不一致", userId, userBean.getUserId());
             // fix: 过滤器中报错未被统一处理，需要使用输出流返回
-            this.returnJson(response, new LoginException(LoginErrors.WRONG_USER));
+            this.returnJson(response, new WindfallException(Errors.WRONG_USER));
             return false;
         }
         log.info("登录用户email=[{}]，userName=[{}]", userBean.getEmail(), userBean.getUserName());

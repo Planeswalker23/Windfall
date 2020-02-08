@@ -4,11 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
-import org.planeswalker.base.ServicesEnum;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,15 +21,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class WindfallExceptionHandler {
 
     /**
-     * 拦截捕捉登录自定义异常 {@link LoginException}
-     * 包括未登录异常 {@link NotLoginException}
+     * 未登录异常 {@link NotLoginException}
      * @param e 登录自定义异常
      * @return {@link Response}
      */
-    @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
-    public Response loginExceptionHandler(LoginException e) {
-        // 登录自定义异常
-        log.warn("[{}]: {}", ServicesEnum.UserService.getServiceName(), e.getMessage(), e);
+    @ExceptionHandler(value = NotLoginException.class)
+    public Response WindfallExceptionHandler(NotLoginException e) {
+        // 未登录自定义异常
+        log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 
@@ -115,29 +112,5 @@ public class WindfallExceptionHandler {
         // 其他未知异常
         log.error(e.getMessage(), e);
         return Response.failed(Errors.SYSTEM_ERROR);
-    }
-
-    /**
-     * 请求方式异常
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
-    public Response httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
-        // 请求方式异常
-        log.warn("{}: {}", Errors.WRONG_REQUEST_METHOD, e.getMessage(), e);
-        return Response.failed(Errors.WRONG_REQUEST_METHOD + Constant.MAO_HAO + e.getMethod());
-    }
-
-    /**
-     * 拦截捕捉评测、留言异常 {@link CommentException}
-     * @param e 评测、留言自定义异常
-     * @return {@link Response}
-     */
-    @ExceptionHandler(value = CommentException.class)
-    public Response commentExceptionHandler(CommentException e) {
-        // 评测、留言自定义异常
-        log.warn("[{}]: {}", ServicesEnum.CommentService.getServiceName(), e.getMessage(), e);
-        return Response.failed(e.getMessage());
     }
 }

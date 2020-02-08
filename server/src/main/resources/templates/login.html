@@ -59,7 +59,7 @@
           <img alt="17-admin" src="images/logo-sidebar.png">
         </a>
       </div>
-      <form id="loginInLoginPage">
+      <form id="loginInLoginPage" onsubmit="return false">
         <div class="form-group has-feedback feedback-left">
           <input type="text" placeholder="请输入您的邮箱" class="form-control" name="email" id="email" />
           <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
@@ -68,28 +68,23 @@
           <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" />
           <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
         </div>
-        <div class="form-group has-feedback feedback-left row">
-          <div class="col-xs-7">
-            <input type="text" name="captcha" class="form-control" placeholder="验证码">
-            <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
-          </div>
-          <div class="col-xs-5">
-            <img src="images/captcha.png" class="pull-right" id="captcha" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
-          </div>
-        </div>
         <div class="form-group">
-          <button class="btn btn-block btn-primary" type="button" onclick="loginPageFunction()">立即登录</button>
+          <input class="btn btn-block btn-primary" type="submit" onclick="loginPageFunction()" value="立即登录" />
         </div>
       </form>
       <hr>
       <footer class="col-sm-12 text-center">
-        <p class="m-b-0">Copyright © 2020 <a href="/login">拾柒美妆</a>. All right reserved</p>
+        <p class="m-b-0">Copyright © 2020 <a href="/login">拾柒</a>. All right reserved</p>
       </footer>
     </div>
   </div>
 </div>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--消息提示-->
+<script src="js/bootstrap-notify.min.js"></script>
+<script type="text/javascript" src="js/lightyear.js"></script>
+<script type="text/javascript" src="js/main.min.js"></script>
 <script type="text/javascript">
   function loginPageFunction() {
     $.ajax({
@@ -102,8 +97,8 @@
           // 在原有窗口打开，登录成功转到主页
           window.location.href="/index";
         } else {
-          // 登录失败提示
-          alert(data.reason);
+          // 消息提醒
+          lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-lock', 'top', 'center');
         }
       }
     });

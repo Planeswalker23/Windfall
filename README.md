@@ -364,56 +364,10 @@ http://localhost:8081/user/info?userId=root
 ---
 ### 商品模块
 #### 获取所有商品
-- `GET /goods/all`
-- [Goods 字段注释](src/main/java/org/planeswalker/pojo/entity/Goods.java)
-- 参数：
-```json
-{
-    "pageNum": 1,
-    "pageSize": 10
-}
-```
-- 接口返回
-```json
-{
-    "code": 200,
-    "reason": "成功",
-    "res": {
-        "total": 1,
-        "list": [
-            {
-                "goodsId": "testGoods",
-                "goodsName": "小仙贝唇膏",
-                "brand": "欧莱雅",
-                "type": "彩妆",
-                "set": "XXB-001",
-                "requirement": "唇",
-                "introduce": "高级贝壳外壳 细腻闪耀唇色 一抹仙气贝出",
-                "description": "兼具唇釉的浓郁亮泽与唇膏的舒适易用，显色、滋润不黏腻。",
-                "usage": "适量转出1-2mm膏体，均匀涂抹于唇部。",
-                "img": "https://www.lorealparis.com.cn/Product/Detail/1231.loreal",
-                "taoBaoUrl": "https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-21588119984.1.6a5f3654AuddrV&id=563367801510&skuId=4024837316337&scene=taobao_shop",
-                "price": 145.0
-            }
-        ],
-        "pageNum": 1,
-        "pageSize": 10,
-        "size": 1,
-        "startRow": 1,
-        "endRow": 1,
-        "pages": 1,
-        "prePage": 0,
-        "nextPage": 0,
-        "isFirstPage": true,
-        "isLastPage": true,
-        "hasPreviousPage": false,
-        "hasNextPage": false,
-        "navigatePages": 8,
-        "navigatepageNums": [
-            1
-        ],
-        "navigateFirstPage": 1,
-        "navigateLastPage": 1
-    }
-}
-```
+- 请求方式：`GET /goods/all`
+- 字段注释：[Goods 字段注释](src/main/java/org/planeswalker/pojo/entity/Goods.java)
+- 子接口，举例：
+    - 获取类型为香水的商品 `GET /goods/all?type=香水`
+    - 获取类型为彩妆的商品 `GET /goods/all?type=彩妆`
+    - 获取品牌为香奈儿的商品 `GET /goods/all?brand=香奈儿`
+    - 获取品牌为欧莱雅的商品 `GET /goods/all?brand=欧莱雅`

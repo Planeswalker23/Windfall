@@ -43,4 +43,14 @@ public class SessionUtil {
             return user;
         }
     }
+
+    /**
+     * 更新 session 信息
+     * @param target
+     * @param obj
+     */
+    public static void updateAttribute(String target, Object obj) {
+        HttpSession httpSession = getSession();
+        httpSession.setAttribute(target, obj);
+    }
 }

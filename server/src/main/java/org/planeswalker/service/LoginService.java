@@ -13,10 +13,7 @@ import org.planeswalker.pojo.dto.UserPlusInfo;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
-import org.planeswalker.utils.CheckUtil;
-import org.planeswalker.utils.CollectionUtil;
-import org.planeswalker.utils.JacksonUtil;
-import org.planeswalker.utils.NumberUtil;
+import org.planeswalker.utils.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -128,17 +125,16 @@ public class LoginService {
     public User login(LoginDto loginDto) {
         log.info("开始登录业务");
         // 根据「邮箱」查询
-        List<User> sameEmailUsers = this.getUserByEmail(loginDto.getEmail());
-        if (CollectionUtils.isEmpty(sameEmailUsers)) {
+        User sameEmailUser = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getEmail, loginDto.getEmail()));
+        if (sameEmailUser == null) {
             throw new WindfallException(Errors.MAIL_NOT_REGISTER);
         }
-        // 验证是否根据邮箱只查询出一条记录
-        CollectionUtil.isOneDate(sameEmailUsers);
-        User sameEmailUser = sameEmailUsers.get(Constant.ZERO);
         // 验证密码
         if (!sameEmailUser.getPassword().equals(loginDto.getPassword())) {
             throw new WindfallException(Errors.WRONG_PASSWORD);
         }
+        // 更新session 信息，用以后台管理系统的登录校验
+        SessionUtil.updateAttribute(Constant.USER_BEAN, sameEmailUser);
         log.info("登录成功 ==> {}", JacksonUtil.toJson(sameEmailUser));
         // 登录成功后返回用户信息
         return sameEmailUser;

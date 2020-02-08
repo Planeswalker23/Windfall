@@ -59,6 +59,16 @@ public class User implements Serializable {
     @JsonIgnore
     private Integer version;
 
+    /**
+     * 启用状态 0-禁用 1-启用，默认为0-禁用
+     */
+    private Integer state;
+
+    /**
+     * 权限 0-管理员 1-普通用户，默认为1-普通用户
+     */
+    private Integer authority;
+
     public User(RegisterDto registerDto) {
         this.userName = registerDto.getUserName();
         this.password = registerDto.getPassword();

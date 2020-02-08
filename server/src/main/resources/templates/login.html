@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>登录 - 拾柒美妆后台管理系统</title>
+<link rel="icon" href="images/favicon.ico" type="image/ico">
+<meta name="keywords" content="拾柒美妆后台管理系统">
+<meta name="description" content="拾柒美妆后台管理系统是一个基于Bootstrap v3.3.7的后台管理系统。">
+<meta name="author" content="yinqi">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/materialdesignicons.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+<style>
+.lyear-wrapper {
+    position: relative;
+}
+.lyear-login {
+    display: flex !important;
+    min-height: 100vh;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.login-center {
+    background: #fff;
+    min-width: 38.25rem;
+    padding: 2.14286em 3.57143em;
+    border-radius: 5px;
+    margin: 2.85714em 0;
+}
+.login-header {
+    margin-bottom: 1.5rem !important;
+}
+.login-center .has-feedback.feedback-left .form-control {
+    padding-left: 38px;
+    padding-right: 12px;
+}
+.login-center .has-feedback.feedback-left .form-control-feedback {
+    left: 0;
+    right: auto;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    z-index: 4;
+    color: #dcdcdc;
+}
+.login-center .has-feedback.feedback-left.row .form-control-feedback {
+    left: 15px;
+}
+</style>
+</head>
+  
+<body>
+<div class="row lyear-wrapper">
+  <div class="lyear-login">
+    <div class="login-center">
+      <div class="login-header text-center">
+        <a href="/index">
+          <img alt="17-admin" src="images/logo-sidebar.png">
+        </a>
+      </div>
+      <form id="loginInLoginPage">
+        <div class="form-group has-feedback feedback-left">
+          <input type="text" placeholder="请输入您的邮箱" class="form-control" name="email" id="email" />
+          <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="form-group has-feedback feedback-left">
+          <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" />
+          <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="form-group has-feedback feedback-left row">
+          <div class="col-xs-7">
+            <input type="text" name="captcha" class="form-control" placeholder="验证码">
+            <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
+          </div>
+          <div class="col-xs-5">
+            <img src="images/captcha.png" class="pull-right" id="captcha" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-block btn-primary" type="button" onclick="loginPageFunction()">立即登录</button>
+        </div>
+      </form>
+      <hr>
+      <footer class="col-sm-12 text-center">
+        <p class="m-b-0">Copyright © 2020 <a href="/login">拾柒美妆</a>. All right reserved</p>
+      </footer>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+  function loginPageFunction() {
+    $.ajax({
+      type: "POST",
+      url: "/user/login",
+      data: $('#loginInLoginPage').serialize(),// 获取form表单中的数据
+      dataType: "json",// 预期服务器返回的数据类型
+      success:function (data) {
+        if (data.code === 200) {
+          // 在原有窗口打开，登录成功转到主页
+          window.location.href="/index";
+        } else {
+          // 登录失败提示
+          alert(data.reason);
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>

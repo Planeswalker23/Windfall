@@ -37,10 +37,12 @@ public class ManagerController {
      */
     @GetMapping("/index")
     public String managerIndex(Model model) {
-        String res = this.getUserBeanTryCatch(model);
-        if (res != null) {
-            return res;
-        }
+//        String res = this.getUserBeanTryCatch(model);
+//        if (res != null) {
+//            return res;
+//        }
+        User user = loginService.getUserByUserId("root");
+        model.addAttribute(Constant.USER_BEAN, user);
         return "index";
     }
 

@@ -40,7 +40,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8">
-                        <div th:each="comment : ${pageInfo.getList()}">
+                        <div th:each="comment : ${pageInfo.list}">
                             <div class="single-post">
                                 <div class="blog-img">
                                     <a th:href="@{'/natural/'+${comment.commentId}}">

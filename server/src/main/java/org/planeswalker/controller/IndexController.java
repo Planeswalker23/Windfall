@@ -82,11 +82,11 @@ public class IndexController {
      * @return
      */
     @GetMapping("/profile")
-    public String profile(Model model){
+    public String profile(PageMessage pageMessage, Model model){
         try {
             model.addAttribute("user", SessionUtil.getUserBean());
-            Response<PageInfo<Comment>> comments =  commentController.getMyLikeComment(new PageMessage());
-            model.addAttribute("comment", comments.getData().getList());
+            Response<PageInfo<Comment>> comments =  commentController.getMyLikeComment(pageMessage);
+            model.addAttribute("pageInfo", comments.getData());
         } catch (NotLoginException e) {
             log.error(e.getMessage(), e);
             return "redirect:/index#loginForm";

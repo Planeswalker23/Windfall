@@ -85,7 +85,7 @@
                 <div class="row">
                     <p>我点赞的帖子</p>
                     <div class="col-sm-12">
-                        <div th:each="comment : ${comment}">
+                        <div th:each="comment : ${pageInfo.list}">
                             <div class="single-post">
                                 <a th:href="@{'/cultural/'+${comment.commentId}}">
                                     <h3 class="blog-title" th:text="${comment.title}"></h3>
@@ -94,12 +94,8 @@
                             <hr/>
                         </div>
                         <div class="text-center">
-                            <ul class="pagination ins-page">
-                                <li class="active"><span>Previous</span></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">Next</a></li>
+                            <ul class="pagination ins-page" th:each="num:${pageInfo.navigatepageNums}">
+                                <li><a href="natural" th:href="@{'/profile?pageNum=' + ${num}}" th:text="${num}"></a></li>
                             </ul>
                         </div>
                     </div>

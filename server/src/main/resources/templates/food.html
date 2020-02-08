@@ -39,7 +39,7 @@
     <section>
         <div class="container-fluid p-sm-0">
             <div class="row featured-post-slider">
-                <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1" th:each="comment : ${pageInfo.getList()}">
+                <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1" th:each="comment : ${pageInfo.list}">
                     <article class="card bg-dark text-center text-white border-0 rounded-0">
                         <img class="card-img rounded-0 img-fluid w-100" th:src="${comment.imgUrl}" alt="post-thumb" style="width: 400px;height: 400px">
                         <div class="card-img-overlay">
@@ -58,7 +58,7 @@
     <section class="section">
         <div class="container">
             <div class="row masonry-container">
-                <div class="col-lg-4 col-sm-6 mb-5" th:each="comment : ${pageInfo.getList()}">
+                <div class="col-lg-4 col-sm-6 mb-5" th:each="comment : ${pageInfo.list}">
                     <article class="text-center">
                         <img class="img-fluid mb-4" th:src="${comment.imgUrl}" alt="post-thumb" style="width: 70%;">
                         <p class="text-uppercase mb-2">美食</p>

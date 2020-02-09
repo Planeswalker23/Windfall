@@ -66,12 +66,11 @@ public class ManagerController {
      */
     @GetMapping("/users")
     public String managerUsers(User user, PageMessage pageMessage, Model model, HttpServletResponse response) {
-//        // 权限校验
-//        String res = this.getUserBeanTryCatch(model, response);
-//        if (res != null) {
-//            return res;
-//        }
-        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        // 权限校验
+        String res = this.getUserBeanTryCatch(model, response);
+        if (res != null) {
+            return res;
+        }
         Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.getAllUsers(user, pageMessage);
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
         return "users";
@@ -87,12 +86,11 @@ public class ManagerController {
      */
     @GetMapping("/search")
     public String searchUsers(String keyword, PageMessage pageMessage, Model model, HttpServletResponse response) {
-//        // 权限校验
-//        String res = this.getUserBeanTryCatch(model, response);
-//        if (res != null) {
-//            return res;
-//        }
-        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        // 权限校验
+        String res = this.getUserBeanTryCatch(model, response);
+        if (res != null) {
+            return res;
+        }
         Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.searchUsers(keyword, pageMessage);
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
         return "search";

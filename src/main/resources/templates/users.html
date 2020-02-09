@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>用户管理 - 拾柒美妆后台管理系统</title>
+<link rel="icon" href="/images/favicon.ico" type="image/ico">
+<meta name="keywords" content="拾柒美妆后台管理系统">
+<meta name="description" content="拾柒美妆后台管理系统是一个基于Bootstrap v3.3.7的后台管理系统">
+<meta name="author" content="yinqi">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/materialdesignicons.min.css" rel="stylesheet">
+<link href="css/style.min.css" rel="stylesheet">
+</head>
+  
+<body>
+<div class="lyear-layout-web">
+  <div class="lyear-layout-container">
+    <!--左侧导航-->
+    <aside class="lyear-layout-sidebar">
+       
+      <!-- logo -->
+      <div id="logo" class="sidebar-header">
+        <a href="index.html"><img src="images/logo-sidebar.png" title="LightYear" alt="LightYear" /></a>
+      </div>
+      <div class="lyear-layout-sidebar-scroll">
+
+        <nav class="sidebar-main">
+          <ul class="nav nav-drawer">
+            <li class="nav-item">
+              <a href="/index"><i class="mdi mdi-home"></i> 首页</a>
+            </li>
+            <li class="nav-item active">
+              <a href="/users"><i class="mdi mdi-account"></i> 用户管理</a>
+            </li>
+            <li class="nav-item">
+              <a href="#todo商品管理模块"><i class="mdi mdi-database"></i> 商品管理</a>
+            </li>
+            <li class="nav-item">
+              <a href="#todo评测管理模块"><i class="mdi mdi-comment-text"></i> 评测管理</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+        </div>
+      </div>
+      
+    </aside>
+    <!--End 左侧导航-->
+    
+    <!--头部信息-->
+    <header class="lyear-layout-header">
+      
+      <nav class="navbar navbar-default">
+        <div class="topbar">
+          
+          <div class="topbar-left">
+            <div class="lyear-aside-toggler">
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+              <span class="lyear-toggler-bar"></span>
+            </div>
+            <span class="navbar-page-title"> 用户管理 </span>
+          </div>
+
+          <ul class="topbar-right">
+            <li class="dropdown dropdown-profile">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg"/>
+                <span th:text="${userBean.userName}"></span>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li> <a href="/login"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+              </ul>
+            </li>
+          </ul>
+          
+        </div>
+      </nav>
+      
+    </header>
+    <!--End 头部信息-->
+    
+    <!--页面主要内容-->
+    <main class="lyear-layout-content">
+      
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-toolbar clearfix">
+                <form class="pull-right search-bar" method="get" action="/search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" value="" id="keyword" name="keyword" placeholder="可查询邮箱或昵称">
+                  </div>
+                </form>
+                <div class="toolbar-btn-action">
+                  <a class="btn btn-primary m-r-5" data-toggle="modal" data-target="#editUserInUsers" onclick="changeLabel('add')"><i class="mdi mdi-plus"></i> 新增用户</a>
+                </div>
+              </div>
+              <div class="card-body">
+                
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>序号</th>
+                        <th>邮箱</th>
+                        <th>昵称</th>
+                        <th>密码</th>
+                        <th>关注内容</th>
+                        <th>个性签名</th>
+                        <th>创建时间</th>
+                        <th>权限</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="rootUserInfo:${pageInfo.list}">
+                        <td th:text="${rootUserInfo.no}"></td>
+                        <td th:text="${rootUserInfo.email}"></td>
+                        <td th:text="${rootUserInfo.userName}"></td>
+                        <td th:text="${rootUserInfo.password}"></td>
+                        <td th:text="${rootUserInfo.favourite}"></td>
+                        <td th:text="${rootUserInfo.signature}"></td>
+                        <td th:text="${rootUserInfo.createTimeString}"></td>
+                        <td th:if="${rootUserInfo.authority==1}">普通用户</td>
+                        <td th:if="${rootUserInfo.authority==0}">管理员</td>
+                        <td>
+                          <font th:if="${rootUserInfo.state==1}" class="text-success">启用</font>
+                          <font th:if="${rootUserInfo.state==0}" class="text-danger">禁用</font>
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <a class="btn btn-xs btn-default" th:onclick="changeLabel('update', [[${rootUserInfo.userId}]]);" data-toggle="modal" data-target="#editUserInUsers" title="编辑"><i class="mdi mdi-pencil"></i></a>
+                            <a class="btn btn-xs btn-default" th:onclick="deleteUser([[${rootUserInfo.userId}]]);" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- 底部分页栏 -->
+                <div class="text-center">
+                  <ul class="pagination">
+                    <li th:each="num:${pageInfo.navigatepageNums}">
+                      <a th:href="@{'/users?pageNum=' + ${num}}" th:text="${num}"></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="modal fade" id="editUserInUsers" tabindex="-1" role="dialog" aria-labelledby="editUserInUsersLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="editUserInUsersLabel"></h4>
+            </div>
+            <div class="modal-body">
+              <form id="editUserFormInUsers" onsubmit="return false">
+                <input type="hidden" id="userId"/>
+                <div class="form-group">
+                  <label for="email" class="control-label">邮箱</label>
+                  <input type="email" class="form-control" id="email" />
+                </div>
+                <div class="form-group">
+                  <label for="userName" class="control-label">昵称</label>
+                  <input type="text" class="form-control" id="userName" />
+                </div>
+                <div class="form-group">
+                  <label for="password" class="control-label">密码</label>
+                  <input type="password" class="form-control" id="password" />
+                </div>
+                <div class="form-group">
+                  <label for="signature" class="control-label">个性签名</label>
+                  <input class="form-control" id="signature" />
+                </div>
+                <div class="form-group">
+                  <label class="control-label">关注内容</label>
+                  <div class="clearfix">
+                    <label class="checkbox-inline" for="favourite1">
+                      <input type="checkbox" id="favourite1" name="favourite1" value="彩妆">彩妆
+                    </label>
+                    <label class="checkbox-inline" for="favourite2">
+                      <input type="checkbox" id="favourite2" name="favourite2" value="香水">香水
+                    </label>
+                    <label class="checkbox-inline" for="favourite3">
+                      <input type="checkbox" id="favourite3" name="favourite3" value="护肤品">护肤品
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">权限</label>
+                  <div class="clearfix">
+                    <label class="lyear-radio radio-inline radio-primary">
+                      <input type="radio" id="authority1" name="authority" value="0"><span>管理员</span>
+                    </label>
+                    <label class="lyear-radio radio-inline radio-primary">
+                      <input type="radio" id="authority2" name="authority" value="1" checked><span>普通用户</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">状态</label>
+                  <div class="clearfix">
+                    <label class="lyear-radio radio-inline radio-primary">
+                      <input type="radio" id="state1" name="state" value="0"><span>禁用</span>
+                    </label>
+                    <label class="lyear-radio radio-inline radio-primary">
+                      <input type="radio" id="state2" name="state" value="1" checked><span>启用</span>
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <input type="submit" class="btn btn-primary" onclick="editUserInUsers()" />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </main>
+    <!--End 页面主要内容-->
+  </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="js/main.min.js"></script>
+<script src="js/bootstrap-notify.min.js"></script>
+<script type="text/javascript" src="js/lightyear.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.search-bar .dropdown-menu a').click(function() {
+        var field = $(this).data('field') || '';
+        $('#search-field').val(field);
+        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
+    });
+});
+
+function deleteUser(inputUserId) {
+  $.ajax({
+    type: "POST",
+    url: "/root/deleteUser",
+    data: {
+      userId: inputUserId
+    },
+    dataType: "json",
+    success:function (data) {
+      if (data.code === 200) {
+        lightyear.notify(data.reason, 'success', 1000, 'mdi mdi-emoticon-happy', 'top', 'center');
+        // 2s 后刷新页面
+        setTimeout(function() {
+          window.location.reload();
+          }, 1000);
+      } else {
+        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+      }
+    }
+  });
+}
+
+function deleteUser(inputUserId) {
+  $.ajax({
+    type: "POST",
+    url: "/root/delete",
+    data: {
+      userId: inputUserId
+    },
+    dataType: "json",
+    success:function (data) {
+      if (data.code === 200) {
+        lightyear.notify(data.reason, 'success', 1000, 'mdi mdi-emoticon-happy', 'top', 'center');
+        // 2s 后刷新页面
+        setTimeout(function() {
+          window.location.reload();
+        }, 1000);
+      } else {
+        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+      }
+    }
+  });
+}
+
+function changeLabel(label, userId) {
+  let labelElement = document.getElementById("editUserInUsersLabel");
+  if (label === 'add') {
+    labelElement.value = "新增用户";
+    labelElement.innerHTML = "新增用户";
+    // 因为模态框是一个控件，所以需要清除历史痕迹
+    document.getElementById("userId").value = null;
+    document.getElementById("email").value = null;
+    document.getElementById("userName").value = null;
+    document.getElementById("password").value = null;
+    document.getElementById("signature").value = null;
+    document.getElementById("authority1").checked = false;
+    document.getElementById("authority2").checked = true;
+    document.getElementById("state1").checked = false;
+    document.getElementById("state2").checked = true;
+    document.getElementById("favourite1").checked = false;
+    document.getElementById("favourite2").checked = false;
+    document.getElementById("favourite3").checked = false;
+  } else {
+    labelElement.value = "编辑用户信息";
+    labelElement.innerHTML = "编辑用户信息";
+    insertInfo(userId);
+  }
+}
+
+function insertInfo(userId) {
+// 根据传入的 userId 给模态框赋值
+  $.ajax({
+    type: "GET",
+    url: "/root/users",
+    data: {
+      userId: userId
+    },
+    dataType: "json",// 预期服务器返回的数据类型
+    success:function (data) {
+      if (data.code === 200) {
+        let user = data.res.list[0];
+        document.getElementById("userId").value = user.userId;
+        document.getElementById("email").value = user.email;
+        document.getElementById("userName").value = user.userName;
+        document.getElementById("password").value = user.password;
+        if (user.signature!=null) {
+          document.getElementById("signature").value = user.signature;
+        } else {
+          document.getElementById("signature").value = null;
+        }
+        if (user.authority === 0) {
+          document.getElementById("authority1").checked = true;
+          document.getElementById("authority2").checked = false;
+        } else {
+          document.getElementById("authority2").checked = true;
+          document.getElementById("authority1").checked = false;
+        }
+        if (user.state === 0) {
+          document.getElementById("state1").checked = true;
+          document.getElementById("state2").checked = false;
+        } else {
+          document.getElementById("state2").checked = true;
+          document.getElementById("state1").checked = false;
+        }
+        // 关注内容字段
+        let fa = user.favourite;
+        if (fa!=null && fa.indexOf("彩妆")>-1) {
+          document.getElementById("favourite1").checked = true;
+        } else {
+          document.getElementById("favourite1").checked = false;
+        }
+        if (fa!=null && fa.indexOf("香水")>-1) {
+          document.getElementById("favourite2").checked = true;
+        } else {
+          document.getElementById("favourite2").checked = false;
+        }
+        if (fa!=null && fa.indexOf("护肤品")>-1) {
+          document.getElementById("favourite3").checked = true;
+        } else {
+          document.getElementById("favourite3").checked = false;
+        }
+      } else {
+        // 消息提醒
+        lightyear.notify("获取用户信息失败", 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+      }
+    }
+  });
+}
+
+function editUserInUsers() {
+  // 判断调用接口
+  let label = document.getElementById("editUserInUsersLabel").value;
+  let url;
+  if (label === '新增用户') {
+    url = "/root/add";
+  } else {
+    url = "/root/update";
+  }
+  let userIdInput = document.getElementById("userId").value;
+  let emailInput = document.getElementById("email").value;
+  let userNameInput = document.getElementById("userName").value;
+  let passwordInput = document.getElementById("password").value;
+  let signatureInput = document.getElementById("signature").value;
+  let favourite1Input = document.getElementById("favourite1");
+  let favourite2Input = document.getElementById("favourite2");
+  let favourite3Input = document.getElementById("favourite3");
+  // 关注内容字段
+  let favouriteInput = "";
+  if (favourite1Input.checked === true) {
+    favouriteInput += favourite1Input.value + "，";
+  }
+  if (favourite2Input.checked === true) {
+    favouriteInput += favourite2Input.value + "，";
+  }
+  if (favourite3Input.checked === true) {
+    favouriteInput += favourite3Input.value + "，";
+  }
+  // 权限字段
+  let authority1Input = document.getElementById("authority1");
+  let authority2Input = document.getElementById("authority2");
+  let authorityInput;
+  if (authority1Input.checked === true) {
+    authorityInput = authority1Input.value;
+  } else {
+    authorityInput = authority2Input.value;
+  }
+  // 状态字段
+  let state1Input = document.getElementById("state1");
+  let state2Input = document.getElementById("state2");
+  let stateInput;
+  if (state1Input.checked === true) {
+    stateInput = state1Input.value;
+  } else {
+    stateInput = state2Input.value;
+  }
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: {
+      userId: userIdInput,
+      email: emailInput,
+      userName: userNameInput,
+      password: passwordInput,
+      signature: signatureInput,
+      favourite: favouriteInput,
+      authority: authorityInput,
+      state: stateInput
+    },// 获取form表单中的数据
+    dataType: "json",// 预期服务器返回的数据类型
+    success:function (data) {
+      if (data.code === 200) {
+        lightyear.notify(data.reason, 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+        // 2s 后刷新页面
+        setTimeout(function() {
+          window.location.reload();
+        }, 1000);
+      } else {
+        // 消息提醒
+        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

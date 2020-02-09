@@ -59,6 +59,7 @@ public class ManagerController {
     /**
      * 后台管理系统：用户管理
      * @param user 查询条件，按需
+     * @param pageMessage
      * @param model 模板实体类，可在页面中存放变量
      * @param response
      * @return
@@ -73,7 +74,28 @@ public class ManagerController {
         model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
         Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.getAllUsers(user, pageMessage);
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
-        return "doc";
+        return "users";
+    }
+
+    /**
+     * 后台管理系统：用户管理 搜索
+     * @param keyword 查询条件
+     * @param pageMessage
+     * @param model 模板实体类，可在页面中存放变量
+     * @param response
+     * @return
+     */
+    @GetMapping("/search")
+    public String searchUsers(String keyword, PageMessage pageMessage, Model model, HttpServletResponse response) {
+//        // 权限校验
+//        String res = this.getUserBeanTryCatch(model, response);
+//        if (res != null) {
+//            return res;
+//        }
+        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.searchUsers(keyword, pageMessage);
+        model.addAttribute("pageInfo", pageInfoResponse.getRes());
+        return "search";
     }
 
 

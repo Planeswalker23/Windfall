@@ -13,12 +13,14 @@ import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.dto.RootUserInfo;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
+import org.planeswalker.utils.NumberUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,10 +53,20 @@ public class RootController {
         List<User> userList = userMapper.selectList(Wrappers.lambdaQuery(user));
         // 查询 user_info 表信息
         List<UserInfo> userInfoList = userInfoMapper.selectBatchIds(Lists.transform(userList, User::getUserId));
+        return Response.success(new PageInfo<>(this.bindData(userList, userInfoList)));
+    }
+
+    /**
+     * 绑定数据
+     * @param userList
+     * @param userInfoList
+     * @return
+     */
+    private List<RootUserInfo> bindData(List<User> userList, List<UserInfo> userInfoList) {
         Map<String, UserInfo> userInfoMap = Maps.uniqueIndex(userInfoList, UserInfo::getUserId);
         List<RootUserInfo> users = Lists.newArrayList();
         // 根据 userId 进行数据绑定
-        for (int i=0; i<userInfoList.size(); i++) {
+        for (int i=0; i<userList.size(); i++) {
             User userDTO = userList.get(i);
             RootUserInfo rootUserInfo = new RootUserInfo();
             rootUserInfo.setNo(i+1);
@@ -68,7 +80,25 @@ public class RootController {
             }
             users.add(rootUserInfo);
         }
-        return Response.success(new PageInfo<>(users));
+        return users;
+    }
+
+    /**
+     * 搜索 邮箱或昵称
+     * @param keyword
+     * @param pageMessage
+     * @return
+     */
+    @GetMapping("/root/search")
+    public Response<PageInfo<RootUserInfo>> searchUsers(String keyword, PageMessage pageMessage) {
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        // 模糊匹配 user 的邮箱或昵称
+        List<User> userList = userMapper.selectList(Wrappers.<User>lambdaQuery()
+                .like(User::getEmail, keyword)
+                .or().like(User::getUserName, keyword));
+        // 查询 user_info 表信息
+        List<UserInfo> userInfoList = userInfoMapper.selectBatchIds(Lists.transform(userList, User::getUserId));
+        return Response.success(new PageInfo<>(this.bindData(userList, userInfoList)));
     }
 
     @PostMapping("/root/delete")
@@ -87,6 +117,21 @@ public class RootController {
         UserInfo userInfo = new UserInfo();
         BeanUtils.copyProperties(rootUserInfo, userInfo);
         userInfoMapper.updateById(userInfo);
+        return Response.success();
+    }
+
+    @PostMapping("/root/add")
+    public Response add(RootUserInfo rootUserInfo) {
+        rootUserInfo.setUserId(NumberUtil.createUuId());
+        rootUserInfo.setCreateTime(new Date());
+
+        User user = new User();
+        BeanUtils.copyProperties(rootUserInfo, user);
+        userMapper.insert(user);
+
+        UserInfo userInfo = new UserInfo();
+        BeanUtils.copyProperties(rootUserInfo, userInfo);
+        userInfoMapper.insert(userInfo);
         return Response.success();
     }
 

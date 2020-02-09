@@ -68,11 +68,7 @@ public class RootUserInfo {
      */
     private String signature;
 
-    public String getCreateTime() {
+    public String getCreateTimeString() {
         return JacksonUtil.date2String(this.createTime);
-    }
-
-    public String getUpdateTime() {
-        return JacksonUtil.date2String(this.updateTime);
     }
 }

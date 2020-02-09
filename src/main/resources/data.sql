@@ -1,5 +1,6 @@
 insert into user (user_id, user_name, password, email, create_time, update_time, state, authority) values ('root', '管理员', '1', 'root@qq.com', now(), now(), 1, 0);
 insert into user (user_id, user_name, password, email, create_time, update_time, state, authority) values ('user', '普通用户', '1', 'user@qq.com', now(), now(), 1, 1);
+insert into user (user_id, user_name, password, email, create_time, update_time, state, authority) values ('user1', '测试用户', '1', 'user1@qq.com', now(), now(), 1, 1);
 
 insert into user_info (user_id, favourite, signature, create_time, update_time) values ('root', '彩妆，香水，护肤品', 'root的个性签名', now(), now());
 insert into user_info (user_id, favourite, signature, create_time, update_time) values ('user', '彩妆', 'user的个性签名', now(), now());

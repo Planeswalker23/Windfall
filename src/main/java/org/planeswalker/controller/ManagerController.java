@@ -15,6 +15,7 @@ import org.planeswalker.utils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletResponse;
@@ -58,42 +59,28 @@ public class ManagerController {
 
     /**
      * 后台管理系统：用户管理
+     * @param keyword 查询条件
      * @param user 查询条件，按需
      * @param pageMessage
      * @param model 模板实体类，可在页面中存放变量
      * @param response
      * @return
      */
-    @GetMapping("/users")
-    public String managerUsers(User user, PageMessage pageMessage, Model model, HttpServletResponse response) {
+    @GetMapping({"/users", "/searchUsers"})
+    public String managerUsers(String keyword, User user, PageMessage pageMessage, Model model, HttpServletResponse response) {
         // 权限校验
         String res = this.getUserBeanTryCatch(model, response);
         if (res != null) {
             return res;
         }
-        Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.getAllUsers(user, pageMessage);
+        Response<PageInfo<RootUserInfo>> pageInfoResponse;
+        if (StringUtils.isEmpty(keyword)) {
+            pageInfoResponse =  rootController.getAllUsers(user, pageMessage);
+        } else {
+            pageInfoResponse = rootController.searchUsers(keyword, pageMessage);
+        }
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
         return "users";
-    }
-
-    /**
-     * 后台管理系统：用户管理 搜索
-     * @param keyword 查询条件
-     * @param pageMessage
-     * @param model 模板实体类，可在页面中存放变量
-     * @param response
-     * @return
-     */
-    @GetMapping("/search")
-    public String searchUsers(String keyword, PageMessage pageMessage, Model model, HttpServletResponse response) {
-        // 权限校验
-        String res = this.getUserBeanTryCatch(model, response);
-        if (res != null) {
-            return res;
-        }
-        Response<PageInfo<RootUserInfo>> pageInfoResponse = rootController.searchUsers(keyword, pageMessage);
-        model.addAttribute("pageInfo", pageInfoResponse.getRes());
-        return "search";
     }
 
 

@@ -92,9 +92,12 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-toolbar clearfix">
-                <form class="pull-right search-bar" method="get" action="/search">
+                <form class="pull-right search-bar" method="get" action="/searchUsers">
                   <div class="input-group">
-                    <input type="text" class="form-control" value="" id="keyword" name="keyword" placeholder="可查询邮箱或昵称">
+                    <div class="input-group-btn">
+                      <div class="btn btn-default dropdown-toggle" id="search-btn">搜索</div>
+                    </div>
+                    <input type="text" class="form-control" value="" id="keyword" name="keyword" placeholder="请输入关键字">
                   </div>
                 </form>
                 <div class="toolbar-btn-action">
@@ -148,8 +151,9 @@
                 <!-- 底部分页栏 -->
                 <div class="text-center">
                   <ul class="pagination">
-                    <li th:each="num:${pageInfo.navigatepageNums}">
-                      <a th:href="@{'/users?pageNum=' + ${num}}" th:text="${num}"></a>
+                    <li th:each="num:${pageInfo.navigatepageNums}" th:with="url=${#httpServletRequest.getRequestURI()}, key=${#httpServletRequest.getParameter('keyword')}">
+                      <a th:if="${url}=='/users'" th:href="@{/users(pageNum=${num})}" th:text="${num}"></a>
+                      <a th:if="${url}=='/searchUsers'" th:href="@{/searchUsers(keyword=${key}, pageNum=${num})}" th:text="${num}"></a>
                     </li>
                   </ul>
                 </div>

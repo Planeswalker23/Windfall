@@ -9,6 +9,7 @@ import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.dto.RootUserInfo;
+import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
 import org.planeswalker.utils.SessionUtil;
@@ -81,6 +82,33 @@ public class ManagerController {
         }
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
         return "users";
+    }
+
+    /**
+     * 商品管理页面
+     * @param keyword
+     * @param goods
+     * @param pageMessage
+     * @param model
+     * @param response
+     * @return
+     */
+    @GetMapping({"/goods", "/searchGoods"})
+    public String goodsManager(String keyword, Goods goods, PageMessage pageMessage, Model model, HttpServletResponse response) {
+        // 权限校验
+//        String res = this.getUserBeanTryCatch(model, response);
+//        if (res != null) {
+//            return res;
+//        }
+        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        Response<PageInfo<RootUserInfo>> pageInfoResponse;
+        if (StringUtils.isEmpty(keyword)) {
+            pageInfoResponse =  rootController.getAllGoods(goods, pageMessage);
+        } else {
+            pageInfoResponse = rootController.searchGoods(keyword, pageMessage);
+        }
+        model.addAttribute("pageInfo", pageInfoResponse.getRes());
+        return "goods";
     }
 
 

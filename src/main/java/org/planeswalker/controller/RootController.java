@@ -11,6 +11,7 @@ import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.dto.RootUserInfo;
+import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
 import org.planeswalker.utils.NumberUtil;
@@ -135,5 +136,13 @@ public class RootController {
         return Response.success();
     }
 
+    @GetMapping("/root/goods")
+    public Response<PageInfo<RootUserInfo>> getAllGoods(Goods goods, PageMessage pageMessage) {
+        return null;
+    }
 
+    @GetMapping("/root/searchGoods")
+    public Response<PageInfo<RootUserInfo>> searchGoods(String keyword, PageMessage pageMessage) {
+        return null;
+    }
 }

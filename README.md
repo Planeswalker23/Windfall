@@ -371,3 +371,10 @@ http://localhost:8081/user/info?userId=root
     - 获取类型为彩妆的商品 `GET /goods/all?type=彩妆`
     - 获取品牌为香奈儿的商品 `GET /goods/all?brand=香奈儿`
     - 获取品牌为欧莱雅的商品 `GET /goods/all?brand=欧莱雅`
+    
+#### 获取单个商品详情    
+- 请求方式：`GET /goods/detail`
+- 字段注释：[Goods 字段注释](src/main/java/org/planeswalker/pojo/entity/Goods.java)
+- 字段注释：[GoodsDetail 字段注释](src/main/java/org/planeswalker/pojo/dto/GoodsDetail.java)
+- 举例：[http://localhost:8081/goods/detail?goodsId=testGoods](http://localhost:8081/goods/detail?goodsId=testGoods)
+   

@@ -25,6 +25,7 @@ create table user_info (
 drop table if exists comment;
 create table comment (
   `comment_id` varchar(36) not null comment '评论id',
+  `goods_id` varchar(36) default null comment '商品id，表示评测的是哪个商品',
   `comment_pid` varchar(36) default '0' comment '此评论的父类id，0-评测，其它uuid-留言',
   `user_id` varchar(36) not null comment '评论用户的id',
   `title` varchar(200) default null comment '标题',

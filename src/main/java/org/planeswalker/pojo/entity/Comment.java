@@ -34,18 +34,23 @@ public class Comment implements Serializable {
     private String userId;
 
     /**
+     * 商品 id
+     */
+    private String goodsId;
+
+    /**
      * 作者，发表评测的用户的昵称
      */
     @TableField(exist = false)
     private String userName;
 
     /**
-     * 评论内容
+     * 评论标题
      */
     private String title;
 
     /**
-     * 作者，发表评测的用户的昵称
+     * 图片url
      */
     private String imgUrl;
 

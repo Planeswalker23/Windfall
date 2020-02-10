@@ -7,9 +7,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Response;
+import org.planeswalker.mapper.GoodsMapper;
 import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.RootGoodsInfo;
 import org.planeswalker.pojo.dto.RootUserInfo;
 import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
@@ -36,9 +38,10 @@ public class RootController {
 
     @Autowired
     private UserMapper userMapper;
-
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private GoodsMapper goodsMapper;
 
 
     /**
@@ -90,7 +93,7 @@ public class RootController {
      * @param pageMessage
      * @return
      */
-    @GetMapping("/root/search")
+    @GetMapping("/root/user/search")
     public Response<PageInfo<RootUserInfo>> searchUsers(String keyword, PageMessage pageMessage) {
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
         // 模糊匹配 user 的邮箱或昵称
@@ -102,14 +105,14 @@ public class RootController {
         return Response.success(new PageInfo<>(this.bindData(userList, userInfoList)));
     }
 
-    @PostMapping("/root/delete")
+    @PostMapping("/root/user/delete")
     public Response deleteUser(User user) {
         userMapper.deleteById(user.getUserId());
         userInfoMapper.deleteById(user.getUserId());
         return Response.success();
     }
 
-    @PostMapping("/root/update")
+    @PostMapping("/root/user/update")
     public Response update(RootUserInfo rootUserInfo) {
         User user = new User();
         BeanUtils.copyProperties(rootUserInfo, user);
@@ -121,7 +124,7 @@ public class RootController {
         return Response.success();
     }
 
-    @PostMapping("/root/add")
+    @PostMapping("/root/user/add")
     public Response add(RootUserInfo rootUserInfo) {
         rootUserInfo.setUserId(NumberUtil.createUuId());
         rootUserInfo.setCreateTime(new Date());
@@ -136,13 +139,66 @@ public class RootController {
         return Response.success();
     }
 
+
+    /**
+     * 查询所有商品（分页）
+     * @param goods
+     * @param pageMessage
+     * @return
+     */
     @GetMapping("/root/goods")
-    public Response<PageInfo<RootUserInfo>> getAllGoods(Goods goods, PageMessage pageMessage) {
-        return null;
+    public Response<PageInfo<RootGoodsInfo>> getAllGoods(Goods goods, PageMessage pageMessage) {
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        // 查询 user 表信息
+        List<Goods> goodsList = goodsMapper.selectList(Wrappers.lambdaQuery(goods));
+        return Response.success(new PageInfo<>(this.bindGoods(goodsList)));
     }
 
-    @GetMapping("/root/searchGoods")
-    public Response<PageInfo<RootUserInfo>> searchGoods(String keyword, PageMessage pageMessage) {
-        return null;
+    @GetMapping("/root/goods/search")
+    public Response<PageInfo<RootGoodsInfo>> searchGoods(String searchType, String keyword, PageMessage pageMessage) {
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        // 模糊匹配 goods 的类型、名称、品牌、型号、需求
+        List<Goods> goodsList = goodsMapper.selectList(Wrappers.<Goods>lambdaQuery()
+                .eq(Goods::getType, searchType)
+                .like(Goods::getGoodsName, keyword)
+                .or().like(Goods::getBrand, keyword)
+                .or().like(Goods::getType, keyword)
+                .or().like(Goods::getSet, keyword)
+                .or().like(Goods::getRequirement, keyword));
+        return Response.success(new PageInfo<>(this.bindGoods(goodsList)));
+    }
+
+    private List<RootGoodsInfo> bindGoods(List<Goods> goodsList) {
+        List<RootGoodsInfo> rootGoodsInfoList = Lists.newArrayList();
+        for (int i = 0; i < goodsList.size(); i++) {
+            Goods goodsDto = goodsList.get(i);
+            RootGoodsInfo rootGoodsInfo = new RootGoodsInfo();
+            BeanUtils.copyProperties(goodsDto, rootGoodsInfo);
+            // 给序号赋值
+            rootGoodsInfo.setNo(i+1);
+            rootGoodsInfoList.add(rootGoodsInfo);
+        }
+        return rootGoodsInfoList;
+    }
+
+
+    @PostMapping("/root/goods/delete")
+    public Response deleteGoods(Goods goods) {
+        goodsMapper.deleteById(goods.getGoodsId());
+        return Response.success();
+    }
+
+    @PostMapping("/root/goods/update")
+    public Response updateGoods(Goods goods) {
+        goodsMapper.updateById(goods);
+        return Response.success();
+    }
+
+    @PostMapping("/root/goods/add")
+    public Response addGoods(Goods goods) {
+        goods.setGoodsId(NumberUtil.createUuId());
+        goods.setCreateTime(new Date());
+        goodsMapper.insert(goods);
+        return Response.success();
     }
 }

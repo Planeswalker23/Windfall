@@ -87,4 +87,9 @@ public class Goods implements Serializable {
      * 操作时间，写入数据库时自动更新
      */
     private Date updateTime;
+
+    /**
+     * 启用状态 0-禁用 1-启用，默认为0-禁用
+     */
+    private Integer state;
 }

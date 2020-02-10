@@ -29,5 +29,5 @@ insert into comment (comment_id, comment_pid, user_id, img_url, content, like_nu
 insert into comment (comment_id, comment_pid, user_id, img_url, content, like_num, create_time, update_time, title) values ('rootComment21', 'rootComment0', 'root', null, 'root评测内容的留言', '0', now(), now(), '留言标题11');
 insert into comment (comment_id, comment_pid, user_id, img_url, content, like_num, create_time, update_time, title) values ('rootComment22', 'rootComment0', 'root', null, 'root评测内容的留言', '0', now(), now(), '留言标题12');
 
-insert into goods(goods_id, goods_name, brand, type, set, requirement, introduce, description, usage, img, tao_bao_url, price)
- values ('testGoods', '小仙贝唇膏', '欧莱雅', '彩妆' ,'XXB-001', '唇', '高级贝壳外壳 细腻闪耀唇色 一抹仙气贝出', '兼具唇釉的浓郁亮泽与唇膏的舒适易用，显色、滋润不黏腻。', '适量转出1-2mm膏体，均匀涂抹于唇部。', 'https://www.lorealparis.com.cn/Product/Detail/1231.loreal', 'https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-21588119984.1.6a5f3654AuddrV&id=563367801510&skuId=4024837316337&scene=taobao_shop', 145.00);
+insert into goods(goods_id, goods_name, brand, type, set, requirement, introduce, description, usage, img, tao_bao_url, price, state, create_time)
+ values ('testGoods', '小仙贝唇膏', '欧莱雅', '彩妆' ,'XXB-001', '唇', '高级贝壳外壳 细腻闪耀唇色 一抹仙气贝出', '兼具唇釉的浓郁亮泽与唇膏的舒适易用，显色、滋润不黏腻。', '适量转出1-2mm膏体，均匀涂抹于唇部。', 'https://www.lorealparis.com.cn/Product/Detail/1231.loreal', 'https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-21588119984.1.6a5f3654AuddrV&id=563367801510&skuId=4024837316337&scene=taobao_shop', 145.00, 1, now());

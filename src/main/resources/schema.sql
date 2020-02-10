@@ -53,5 +53,6 @@ create table goods (
   `price` double not null comment '价格',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
+  `state` int(11) default '0' comment '启用状态 0-禁用 1-启用，默认为0-禁用',
   primary key (`goods_id`)
 );

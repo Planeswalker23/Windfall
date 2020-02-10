@@ -34,7 +34,7 @@
               <a href="/users"><i class="mdi mdi-account"></i> 用户管理</a>
             </li>
             <li class="nav-item">
-              <a href="#todo商品管理模块"><i class="mdi mdi-database"></i> 商品管理</a>
+              <a href="/goods"><i class="mdi mdi-database"></i> 商品管理</a>
             </li>
             <li class="nav-item">
               <a href="#todo评测管理模块"><i class="mdi mdi-comment-text"></i> 评测管理</a>
@@ -101,7 +101,7 @@
                   </div>
                 </form>
                 <div class="toolbar-btn-action">
-                  <a class="btn btn-primary m-r-5" data-toggle="modal" data-target="#editUserInUsers" onclick="changeLabel('add')"><i class="mdi mdi-plus"></i> 新增用户</a>
+                  <a class="btn btn-danger m-r-5" data-toggle="modal" data-target="#editUserInUsers" onclick="changeLabel('add')"><i class="mdi mdi-plus"></i> 新增用户</a>
                 </div>
               </div>
               <div class="card-body">
@@ -189,7 +189,7 @@
                 </div>
                 <div class="form-group">
                   <label for="signature" class="control-label">个性签名</label>
-                  <input class="form-control" id="signature" />
+                  <input type="text" class="form-control" id="signature" />
                 </div>
                 <div class="form-group">
                   <label>关注内容</label>
@@ -253,40 +253,10 @@
 <script src="js/bootstrap-notify.min.js"></script>
 <script type="text/javascript" src="js/lightyear.js"></script>
 <script type="text/javascript">
-$(function(){
-    $('.search-bar .dropdown-menu a').click(function() {
-        var field = $(this).data('field') || '';
-        $('#search-field').val(field);
-        $('#search-btn').html($(this).text() + ' <span class="caret"></span>');
-    });
-});
-
 function deleteUser(inputUserId) {
   $.ajax({
     type: "POST",
-    url: "/root/deleteUser",
-    data: {
-      userId: inputUserId
-    },
-    dataType: "json",
-    success:function (data) {
-      if (data.code === 200) {
-        lightyear.notify(data.reason, 'success', 1000, 'mdi mdi-emoticon-happy', 'top', 'center');
-        // 2s 后刷新页面
-        setTimeout(function() {
-          window.location.reload();
-          }, 1000);
-      } else {
-        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
-      }
-    }
-  });
-}
-
-function deleteUser(inputUserId) {
-  $.ajax({
-    type: "POST",
-    url: "/root/delete",
+    url: "/root/user/delete",
     data: {
       userId: inputUserId
     },
@@ -395,9 +365,9 @@ function editUserInUsers() {
   let label = document.getElementById("editUserInUsersLabel").value;
   let url;
   if (label === '新增用户') {
-    url = "/root/add";
+    url = "/root/user/add";
   } else {
-    url = "/root/update";
+    url = "/root/user/update";
   }
   let userIdInput = document.getElementById("userId").value;
   let emailInput = document.getElementById("email").value;

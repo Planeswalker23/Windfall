@@ -8,6 +8,7 @@ import org.planeswalker.base.Response;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.RootGoodsInfo;
 import org.planeswalker.pojo.dto.RootUserInfo;
 import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
@@ -86,26 +87,26 @@ public class ManagerController {
 
     /**
      * 商品管理页面
-     * @param keyword
-     * @param goods
+     * @param searchType 搜索的商品类型
+     * @param keyword 搜索关键词，支持类型、名称、品牌、型号、需求
+     * @param goods 按需搜索所有商品
      * @param pageMessage
      * @param model
      * @param response
      * @return
      */
     @GetMapping({"/goods", "/searchGoods"})
-    public String goodsManager(String keyword, Goods goods, PageMessage pageMessage, Model model, HttpServletResponse response) {
+    public String goodsManager(String searchType, String keyword, Goods goods, PageMessage pageMessage, Model model, HttpServletResponse response) {
         // 权限校验
-//        String res = this.getUserBeanTryCatch(model, response);
-//        if (res != null) {
-//            return res;
-//        }
-        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
-        Response<PageInfo<RootUserInfo>> pageInfoResponse;
-        if (StringUtils.isEmpty(keyword)) {
+        String res = this.getUserBeanTryCatch(model, response);
+        if (res != null) {
+            return res;
+        }
+        Response<PageInfo<RootGoodsInfo>> pageInfoResponse;
+        if (StringUtils.isEmpty(keyword) && StringUtils.isEmpty(searchType)) {
             pageInfoResponse =  rootController.getAllGoods(goods, pageMessage);
         } else {
-            pageInfoResponse = rootController.searchGoods(keyword, pageMessage);
+            pageInfoResponse = rootController.searchGoods(searchType, keyword, pageMessage);
         }
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
         return "goods";

@@ -45,7 +45,7 @@
                         <div class="card-img-overlay">
                             <div class="card-content">
                                 <p class="text-uppercase">美食分享</p>
-                                <h4 class="card-title mb-4"><a class="text-white" href="blog-single.html" th:text="${comment.title}"></a></h4>
+                                <h4 class="card-title mb-4"><a class="text-white" th:href="@{'/food/'+${comment.commentId}}" th:text="${comment.title}"></a></h4>
                                 <a class="btn btn-outline-light" th:href="@{'/food/'+${comment.commentId}}">阅读</a>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                     <article class="text-center">
                         <img class="img-fluid mb-4" th:src="${comment.imgUrl}" alt="post-thumb" style="width: 70%;">
                         <p class="text-uppercase mb-2">美食</p>
-                        <h4 class="title-border"><a class="text-dark" href="blog-single.html" th:text="${comment.title}"></a></h4>
+                        <h4 class="title-border"><a class="text-dark" th:href="@{'/food/'+${comment.commentId}}" th:text="${comment.title}"></a></h4>
                         <p th:text="${comment.content}"></p>
                         <a th:href="${comment.buyUrl}" class="btn btn-transparent">购买</a>
                     </article>

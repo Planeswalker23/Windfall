@@ -126,11 +126,10 @@ public class ManagerController {
     @GetMapping({"/comments", "/searchComments"})
     public String commentsManager(String keyword, Comment comment, PageMessage pageMessage, Model model, HttpServletResponse response) {
         // 权限校验
-//        String res = this.getUserBeanTryCatch(model, response);
-//        if (res != null) {
-//            return res;
-//        }
-        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        String res = this.getUserBeanTryCatch(model, response);
+        if (res != null) {
+            return res;
+        }
         PageInfo<RootCommentInfo> pageInfoResponse;
         // 评测
         comment.setCommentPid(Constant.ZERO.toString());

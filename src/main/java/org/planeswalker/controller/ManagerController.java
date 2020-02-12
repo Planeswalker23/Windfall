@@ -8,8 +8,10 @@ import org.planeswalker.base.Response;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.RootCommentInfo;
 import org.planeswalker.pojo.dto.RootGoodsInfo;
 import org.planeswalker.pojo.dto.RootUserInfo;
+import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.service.LoginService;
@@ -110,6 +112,35 @@ public class ManagerController {
         }
         model.addAttribute("pageInfo", pageInfoResponse.getRes());
         return "goods";
+    }
+
+    /**
+     * 商品管理页面
+     * @param keyword 搜索关键词，支持标题、内容
+     * @param comment 按需搜索所有商品
+     * @param pageMessage
+     * @param model
+     * @param response
+     * @return
+     */
+    @GetMapping({"/comments", "/searchComments"})
+    public String commentsManager(String keyword, Comment comment, PageMessage pageMessage, Model model, HttpServletResponse response) {
+        // 权限校验
+//        String res = this.getUserBeanTryCatch(model, response);
+//        if (res != null) {
+//            return res;
+//        }
+        model.addAttribute(Constant.USER_BEAN, loginService.getUserByUserId("root"));
+        PageInfo<RootCommentInfo> pageInfoResponse;
+        // 评测
+        comment.setCommentPid(Constant.ZERO.toString());
+        if (StringUtils.isEmpty(keyword)) {
+            pageInfoResponse =  rootController.getAllComments(comment, pageMessage);
+        } else {
+            pageInfoResponse = rootController.searchComments(keyword, comment, pageMessage);
+        }
+        model.addAttribute("pageInfo", pageInfoResponse);
+        return "comments";
     }
 
 

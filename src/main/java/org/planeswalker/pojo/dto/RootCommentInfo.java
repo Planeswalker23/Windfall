@@ -1,17 +1,20 @@
 package org.planeswalker.pojo.dto;
 
 import lombok.Data;
-import org.planeswalker.pojo.entity.Goods;
+import lombok.NoArgsConstructor;
+import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.utils.JacksonUtil;
 
 import java.io.Serializable;
 
 /**
+ * 评测表
  * @author Planeswalker23
- * @date Created in 2020/2/10
+ * @date Created in 2020/2/3
  */
 @Data
-public class RootGoodsInfo extends Goods implements Serializable {
+@NoArgsConstructor
+public class RootCommentInfo extends Comment implements Serializable {
 
     /**
      * 返回到前端的序号

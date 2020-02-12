@@ -3,13 +3,15 @@ package org.planeswalker.pojo.dto;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 用户信息 + 基本信息
  * @author Planeswalker23
  * @date Created in 2020/2/3
  */
 @Data
-public class UserPlusInfo {
+public class UserPlusInfo implements Serializable {
 
     /**
      * user表 主键

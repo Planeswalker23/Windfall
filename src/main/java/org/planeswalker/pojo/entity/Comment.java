@@ -39,6 +39,12 @@ public class Comment implements Serializable {
     private String goodsId;
 
     /**
+     * 商品名称
+     */
+    @TableField(exist = false)
+    private String goodsName;
+
+    /**
      * 作者，发表评测的用户的昵称
      */
     @TableField(exist = false)

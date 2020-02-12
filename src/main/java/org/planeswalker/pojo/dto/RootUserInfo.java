@@ -3,6 +3,7 @@ package org.planeswalker.pojo.dto;
 import lombok.Data;
 import org.planeswalker.utils.JacksonUtil;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  * @date Created in 2020/2/8
  */
 @Data
-public class RootUserInfo {
+public class RootUserInfo implements Serializable {
 
     /**
      * 序号

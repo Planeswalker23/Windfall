@@ -9,8 +9,10 @@ import org.planeswalker.base.Errors;
 import org.planeswalker.exception.WindfallException;
 import org.planeswalker.exception.NotLoginException;
 import org.planeswalker.mapper.CommentMapper;
+import org.planeswalker.mapper.GoodsMapper;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
+import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.utils.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,8 @@ public class CommentService {
     private CommentMapper commentMapper;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     /**
      * 新增 comment
@@ -180,15 +184,41 @@ public class CommentService {
         // 设置分页信息
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
         List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));
+        this.getCommentsOtherData(comments, comment.getUserId());
+        return new PageInfo<>(comments);
+    }
+
+    /**
+     * 模糊搜索
+     * @param keyword
+     * @param comment
+     * @param pageMessage
+     * @return
+     */
+    public PageInfo<Comment> searchComments(String keyword, Comment comment, PageMessage pageMessage) {
+        // 设置分页信息
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment)
+                .like(Comment::getTitle, keyword)
+                .or().like(Comment::getContent, keyword));
+        this.getCommentsOtherData(comments, comment.getUserId());
+        return new PageInfo<>(comments);
+    }
+
+    public void getCommentsOtherData(List<Comment> comments, String userId) {
         comments.forEach(singleComment -> {
             // 判断是否是"我"点赞的
-            singleComment.setZan(this.isMyZan(comment.getUserId(), singleComment.getLikeNum()));
+            singleComment.setZan(this.isMyZan(userId, singleComment.getLikeNum()));
             // 计算点赞人数
             singleComment.setLikeNum(this.getLikeNum(singleComment.getLikeNum()));
             // 查询此 comment 的作者信息
             singleComment.setUserName(loginService.getUserByUserId(singleComment.getUserId()).getUserName());
+            // 查询此 comment 的评测商品名称
+            Goods goods = goodsMapper.selectById(singleComment.getGoodsId());
+            if (goods != null) {
+                singleComment.setGoodsName(goods.getGoodsName());
+            }
         });
-        return new PageInfo<>(comments);
     }
 
     /**

@@ -4,6 +4,7 @@ import lombok.Data;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.Goods;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @date Created in 2020/2/10
  */
 @Data
-public class GoodsDetail extends Goods {
+public class GoodsDetail extends Goods implements Serializable {
 
     /**
      * 评论列表

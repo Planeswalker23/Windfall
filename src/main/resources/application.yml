@@ -12,6 +12,8 @@ spring:
     url: jdbc:h2:mem:beauty17
     username: root
     password: root
+    # sql 脚本编码
+    sql-script-encoding: utf-8
   # 显示sql语句
   jpa:
     dashow-sql: true

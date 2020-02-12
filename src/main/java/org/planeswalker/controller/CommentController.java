@@ -95,6 +95,18 @@ public class CommentController {
     }
 
     /**
+     * 查询所有评测（分页）模糊搜索
+     * @param keyword
+     * @param comment
+     * @param pageMessage
+     * @return {@link Response}
+     */
+    public Response<PageInfo<Comment>> searchAllPcComments(String keyword, Comment comment, PageMessage pageMessage) {
+        comment.setCommentPid(Constant.ZERO.toString());
+        return Response.success(commentService.searchComments(keyword, comment, pageMessage));
+    }
+
+    /**
      * 查询该评测的所有留言（分页）
      * @param comment
      * @param pageMessage

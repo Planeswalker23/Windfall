@@ -3,12 +3,14 @@ package org.planeswalker.pojo.dto;
 import lombok.Data;
 import org.planeswalker.base.Constant;
 
+import java.io.Serializable;
+
 /**
  * @author Planeswalker23
  * @date Created in 2020/2/4
  */
 @Data
-public class PageMessage {
+public class PageMessage implements Serializable {
 
     /**
      * 页码

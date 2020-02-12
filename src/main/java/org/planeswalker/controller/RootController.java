@@ -1,5 +1,6 @@
 package org.planeswalker.controller;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -7,12 +8,15 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Response;
+import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.mapper.GoodsMapper;
 import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
 import org.planeswalker.pojo.dto.PageMessage;
+import org.planeswalker.pojo.dto.RootCommentInfo;
 import org.planeswalker.pojo.dto.RootGoodsInfo;
 import org.planeswalker.pojo.dto.RootUserInfo;
+import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
 import org.planeswalker.pojo.entity.UserInfo;
@@ -42,6 +46,10 @@ public class RootController {
     private UserInfoMapper userInfoMapper;
     @Autowired
     private GoodsMapper goodsMapper;
+    @Autowired
+    private CommentController commentController;
+    @Autowired
+    private CommentMapper commentMapper;
 
 
     /**
@@ -199,6 +207,61 @@ public class RootController {
         goods.setGoodsId(NumberUtil.createUuId());
         goods.setCreateTime(new Date());
         goodsMapper.insert(goods);
+        return Response.success();
+    }
+
+    /**
+     * 获取所有评测
+     * @param comment
+     * @param pageMessage
+     * @return
+     */
+    public PageInfo<RootCommentInfo> getAllComments(Comment comment, PageMessage pageMessage) {
+        Response<PageInfo<Comment>> res = commentController.getAllPcComments(comment, pageMessage);
+        return this.resPageInfo(res);
+    }
+
+    private PageInfo<RootCommentInfo> resPageInfo(Response<PageInfo<Comment>> res) {
+        List<Comment> list = res.getRes().getList();
+        List<RootCommentInfo> resList = Lists.newArrayList();
+        for (int i = 0; i < list.size(); i++) {
+            RootCommentInfo rootCommentInfo = new RootCommentInfo();
+            BeanUtils.copyProperties(list.get(i), rootCommentInfo);
+            rootCommentInfo.setNo(i+1);
+            // 标题截取
+            rootCommentInfo.setTitle(this.subString20(rootCommentInfo.getTitle()));
+            // 内容截取
+            rootCommentInfo.setContent(this.subString20(rootCommentInfo.getContent()));
+            // 图片url
+            rootCommentInfo.setImgUrl(this.subString20(rootCommentInfo.getImgUrl()));
+            resList.add(rootCommentInfo);
+        }
+        PageInfo<RootCommentInfo> resPageInfo = new PageInfo<>();
+        // 拷贝分页信息
+        BeanUtils.copyProperties(res.getRes(), resPageInfo);
+        resPageInfo.setList(resList);
+        return resPageInfo;
+    }
+
+    private String subString20(String target) {
+        if (StringUtils.isEmpty(target)) {
+            return target;
+        }
+        if (target.length()>20) {
+            target = target.substring(0, 20) + "...";
+        }
+        return target;
+    }
+
+    public PageInfo<RootCommentInfo> searchComments(String keyword, Comment comment, PageMessage pageMessage) {
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        Response<PageInfo<Comment>> res = commentController.searchAllPcComments(keyword, comment, pageMessage);
+        return this.resPageInfo(res);
+    }
+
+    @PostMapping("/root/comment/delete")
+    public Response deleteComment(Comment comment) {
+        commentMapper.deleteById(comment.getCommentId());
         return Response.success();
     }
 }

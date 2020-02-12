@@ -128,7 +128,25 @@
                         <td th:text="${comment.createTimeString}"></td>
                         <td>
                           <div class="btn-group">
-                            <a class="btn btn-xs btn-default" th:onclick="deleteComments([[${comment.commentId}]]);" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
+                            <a class="btn btn-success m-r-5" th:onclick="getChildComments([[${comment.commentId}]]);" data-toggle="modal" data-target="#messageList">查看留言</a>
+                            <!-- 模态框   -->
+                            <div id="messageList" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                              <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title" id="myLargeModalLabel">留言列表</h4>
+                                  </div>
+                                  <div class="modal-body col-lg-12" id="messageBody">
+
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <a class="btn btn-danger m-r-5" th:onclick="deleteComments([[${comment.commentId}]]);">删除</a>
                           </div>
                         </td>
                       </tr>
@@ -186,6 +204,35 @@ function deleteComments(inputCommentId) {
         setTimeout(function () {
           window.location.reload();
         }, 1000);
+      } else {
+        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+      }
+    }
+  });
+}
+
+function getChildComments(inputCommentPId) {
+  $.ajax({
+    type: "POST",
+    url: "/root/comment/getAllChildCommentsByPid",
+    data: {
+      commentPid: inputCommentPId
+    },
+    dataType: "json",
+    success: function (data) {
+      if (data.code === 200) {
+        // 填充模态框
+        let divContent = "<div class='form-group col-lg-1'>序号</div>"
+                + "<div class='form-group col-lg-2'>留言人</div>"
+                + "<div class='form-group col-lg-9'>留言内容</div>"
+        for (let i = 0; i < data.res.length; i++) {
+          let dto = data.res[i]
+          divContent += "<div class='form-group col-lg-1'>"+i+"</div>"
+                  + "<div class='form-group col-lg-2'>"+dto.userName+"</div>"
+                  + "<div class='form-group col-lg-9'>"+dto.content+"</div>"
+        }
+        // 将div添加
+        $("#messageBody").html(divContent);
       } else {
         lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
       }

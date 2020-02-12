@@ -264,4 +264,14 @@ public class RootController {
         commentMapper.deleteById(comment.getCommentId());
         return Response.success();
     }
+
+    @PostMapping("/root/comment/getAllChildCommentsByPid")
+    public Response<List<Comment>> getAllChildCommentsByPid(Comment comment) {
+        List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));
+        comments.forEach(comment1 -> {
+            User user = userMapper.selectById(comment1.getUserId());
+            comment1.setUserName(user.getUserName());
+        });
+        return Response.success(comments);
+    }
 }

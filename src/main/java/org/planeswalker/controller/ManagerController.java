@@ -58,6 +58,8 @@ public class ManagerController {
         if (res != null) {
             return res;
         }
+        // 获取首页数据
+        model.addAttribute("total", rootController.getManagerTotalBean());
         return "index";
     }
 
@@ -150,11 +152,14 @@ public class ManagerController {
      */
     private String getUserBeanTryCatch(Model model, HttpServletResponse response) {
         try {
+            // 获取 userId
             User user = SessionUtil.getUserBean();
-            if (!Constant.ZERO.equals(user.getAuthority())) {
+            // 查询数据库中最新的权限
+            User rightNowUser = loginService.getUserByUserId(user.getUserId());
+            if (!Constant.ZERO.equals(rightNowUser.getAuthority())) {
                 throw new WindfallException(Errors.OPERATING_AUTHORIZATION_ERROR);
             }
-            model.addAttribute(Constant.USER_BEAN, user);
+            model.addAttribute(Constant.USER_BEAN, rightNowUser);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             // 错误信息

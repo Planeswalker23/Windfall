@@ -7,15 +7,13 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.planeswalker.base.Constant;
 import org.planeswalker.base.Response;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.mapper.GoodsMapper;
 import org.planeswalker.mapper.UserInfoMapper;
 import org.planeswalker.mapper.UserMapper;
-import org.planeswalker.pojo.dto.PageMessage;
-import org.planeswalker.pojo.dto.RootCommentInfo;
-import org.planeswalker.pojo.dto.RootGoodsInfo;
-import org.planeswalker.pojo.dto.RootUserInfo;
+import org.planeswalker.pojo.dto.*;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.pojo.entity.Goods;
 import org.planeswalker.pojo.entity.User;
@@ -229,11 +227,11 @@ public class RootController {
             BeanUtils.copyProperties(list.get(i), rootCommentInfo);
             rootCommentInfo.setNo(i+1);
             // 标题截取
-            rootCommentInfo.setTitle(this.subString20(rootCommentInfo.getTitle()));
+            rootCommentInfo.setTitle(this.subString15(rootCommentInfo.getTitle()));
             // 内容截取
-            rootCommentInfo.setContent(this.subString20(rootCommentInfo.getContent()));
+            rootCommentInfo.setContent(this.subString15(rootCommentInfo.getContent()));
             // 图片url
-            rootCommentInfo.setImgUrl(this.subString20(rootCommentInfo.getImgUrl()));
+            rootCommentInfo.setImgUrl(this.subString15(rootCommentInfo.getImgUrl()));
             resList.add(rootCommentInfo);
         }
         PageInfo<RootCommentInfo> resPageInfo = new PageInfo<>();
@@ -243,12 +241,12 @@ public class RootController {
         return resPageInfo;
     }
 
-    private String subString20(String target) {
+    private String subString15(String target) {
         if (StringUtils.isEmpty(target)) {
             return target;
         }
-        if (target.length()>20) {
-            target = target.substring(0, 20) + "...";
+        if (target.length()>15) {
+            target = target.substring(0, 15) + "...";
         }
         return target;
     }
@@ -273,5 +271,29 @@ public class RootController {
             comment1.setUserName(user.getUserName());
         });
         return Response.success(comments);
+    }
+
+    /**
+     * 获取首页统计
+     * @return
+     */
+    public ManagerTotalBean getManagerTotalBean() {
+        ManagerTotalBean managerTotalBean = new ManagerTotalBean();
+        managerTotalBean.setUsers(userMapper.selectCount(Wrappers.lambdaQuery()));
+        managerTotalBean.setGoods(goodsMapper.selectCount(Wrappers.lambdaQuery()));
+        managerTotalBean.setComments0(commentMapper.selectCount(Wrappers.<Comment>lambdaQuery()
+                .eq(Comment::getCommentPid, Constant.ZERO.toString())));
+        managerTotalBean.setCommentsOthers(commentMapper.selectCount(Wrappers.<Comment>lambdaQuery()
+                .ne(Comment::getCommentPid, Constant.ZERO.toString())));
+        List<IndexGoods> list = commentMapper.getIndexGoods();
+        for (int i = 0; i < list.size(); i++) {
+            IndexGoods indexGoods = list.get(i);
+            indexGoods.setNo(i+1);
+            // 查询商品信息
+            Goods goods = goodsMapper.selectById(indexGoods.getGoodsId());
+            BeanUtils.copyProperties(goods, indexGoods);
+        }
+        managerTotalBean.setList(list);
+        return managerTotalBean;
     }
 }

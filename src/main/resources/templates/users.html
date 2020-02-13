@@ -269,7 +269,7 @@ function deleteUser(inputUserId) {
           window.location.reload();
         }, 1000);
       } else {
-        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+        lightyear.notify(data.reason, 'danger', 1500, 'mdi mdi-emoticon-sad', 'top', 'center');
       }
     }
   });
@@ -354,7 +354,7 @@ function insertInfo(userId) {
         }
       } else {
         // 消息提醒
-        lightyear.notify("获取用户信息失败", 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+        lightyear.notify("获取用户信息失败", 'danger', 1500, 'mdi mdi-emoticon-sad', 'top', 'center');
       }
     }
   });
@@ -422,14 +422,14 @@ function editUserInUsers() {
     dataType: "json",// 预期服务器返回的数据类型
     success:function (data) {
       if (data.code === 200) {
-        lightyear.notify(data.reason, 'success', 2000, 'mdi mdi-emoticon-happy', 'top', 'center');
+        lightyear.notify(data.reason, 'success', 1500, 'mdi mdi-emoticon-happy', 'top', 'center');
         // 2s 后刷新页面
         setTimeout(function() {
           window.location.reload();
         }, 1000);
       } else {
         // 消息提醒
-        lightyear.notify(data.reason, 'danger', 2000, 'mdi mdi-emoticon-sad', 'top', 'center');
+        lightyear.notify(data.reason, 'danger', 1500, 'mdi mdi-emoticon-sad', 'top', 'center');
       }
     }
   });

@@ -17,14 +17,14 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @SpringBootApplication
 @MapperScan("org.planeswalker.mapper")
-public class CulturalNingBoApplication {
+public class WindfallApplication {
 
     /**
      * 启动springboot程序的主入口
      * @param args
      */
     public static void main(String[] args) {
-        SpringApplication.run(CulturalNingBoApplication.class, args);
+        SpringApplication.run(WindfallApplication.class, args);
         log.info("==================启动成功================");
     }
 

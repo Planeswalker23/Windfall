@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.planeswalker.base.Constant;
 import org.planeswalker.base.Response;
 import org.planeswalker.mapper.CommentMapper;
 import org.planeswalker.mapper.GoodsMapper;
@@ -66,5 +67,26 @@ public class GoodsController {
         BeanUtils.copyProperties(goods, goodsDetail);
         goodsDetail.setComments(comments);
         return Response.success(goodsDetail);
+    }
+
+    /**
+     * 商品搜索接口
+     * @param keyword
+     * @param pageMessage
+     * @return
+     */
+    @GetMapping("/search")
+    public Response<PageInfo<Goods>> searchGoods(String keyword, PageMessage pageMessage) {
+        PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
+        // 模糊匹配 goods 的类型、名称、品牌、型号、需求
+        List<Goods> goodsList = goodsMapper.selectList(Wrappers.<Goods>lambdaQuery()
+                // 搜索已启用的商品
+                .eq(Goods::getState, Constant.ONE)
+                .like(Goods::getGoodsName, keyword)
+                .or().like(Goods::getBrand, keyword)
+                .or().like(Goods::getType, keyword)
+                .or().like(Goods::getSet, keyword)
+                .or().like(Goods::getRequirement, keyword));
+        return Response.success(new PageInfo<>(goodsList));
     }
 }

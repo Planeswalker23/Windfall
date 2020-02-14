@@ -45,6 +45,7 @@
 ### 商品模块
 - [获取所有商品 `GET /goods/all`](#获取所有商品)
 - [获取单个商品详情 `GET /goods/detail`](#获取单个商品详情)
+- [根据关键字搜索商品 `GET /goods/search`](#根据关键字搜索商品)
 
 ---
 
@@ -378,4 +379,9 @@ http://localhost:8081/user/info?userId=root
 - 字段注释：[Goods 字段注释](src/main/java/org/planeswalker/pojo/entity/Goods.java)
 - 字段注释：[GoodsDetail 字段注释](src/main/java/org/planeswalker/pojo/dto/GoodsDetail.java)
 - 举例：[http://localhost:8081/goods/detail?goodsId=testGoods](http://localhost:8081/goods/detail?goodsId=testGoods)
+
+#### 根据关键字搜索商品   
+- 请求方式：`GET /goods/search`
+- 请求参数：keyword
+- 举例：[http://localhost:8081/goods/search?keyword=欧莱雅](http://localhost:8081/goods/search?keyword=欧莱雅)
    

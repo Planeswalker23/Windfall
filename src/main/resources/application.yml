@@ -4,23 +4,24 @@ spring:
     name: Windfall
   # 配置数据库
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:windfall
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/windfall?characterEncoding=utf8&useSSL=false
+    # 用户名要修改为自己的用户名
     username: root
-    password: root
-    # 设置数据库脚本编码
-    sql-script-encoding: utf-8
+    password: admin
+#    # 设置数据库脚本编码
+#    sql-script-encoding: utf-8
   # 显示sql语句
   jpa:
     dashow-sql: true
-    hibernate:
-      # 每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新
-      ddl-auto: update
-  # h2 数据库 web 控制台配置
-  h2:
-    console:
-      enabled: true
-      path: /h2
+#    hibernate:
+#      # 每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新
+#      ddl-auto: update
+#  # h2 数据库 web 控制台配置
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2
   # jackson序列化反序列化相关配置
   jackson:
     default-property-inclusion: NON_EMPTY

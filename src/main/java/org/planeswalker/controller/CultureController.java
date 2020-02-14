@@ -39,6 +39,13 @@ public class CultureController {
         PageInfo<Comment> pageInfo = commentService.getComments(comment, pageMessage);
         List<TypeNum> typeNums = commentService.getTypeNum();
         model.addAttribute("typeNums",typeNums);
+        // content字段显示部分
+        pageInfo.getList().forEach(comment1 -> {
+            String content = comment1.getContent();
+            if (content.length()>100) {
+                comment1.setContent(content.substring(0, 100) + "...");
+            }
+        });
         model.addAttribute("pageInfo",pageInfo);
         return "cultural";
     }

@@ -1,37 +1,151 @@
 insert into user (user_id, user_name, password, email, authority, create_time, update_time, version) values ('rootId', 'root', '1', 'root@qq.com', '0', now(), now(), 0);
-
-
 insert into user (user_id, user_name, password, email, authority, create_time, update_time, version) values ('user1', 'user', '1', '805334683@qq.com', '1', now(), now(), 0);
-
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test1', 'user1', '测试标题', '测试内容', 10.00, null,1, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test2', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test21', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test22', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test23', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test24', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test25', 'user1', '依山傍水，最美古城', '宁波，取自“海定则波宁”，简称“甬”，早在七千年前，宁波就创造了灿烂的河姆渡文化。宁波人文积淀丰厚，历史文化悠久，属于典型的江南水乡兼海港城市。四明学派、姚江学派和浙东学派是宁波文化重要部分。宁波菜以海鲜名闻内外，向以蒸、烤、炖制海鲜见长，别具特色。宁波还有很多精彩的内容，一起来看看吧。', 10.00, null,2, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state) values ('test3', 'user1', '测试标题', '测试内容', 10.00, null,1, now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test4', 'user1', '宁波汤圆', '汤圆是浙江宁波著名的特色小吃之一，也是中国的代表小吃之一，春节，元宵节节日食俗。历史十分悠久。据传，汤圆起源于宋朝。当时明州（现浙江宁波市）兴起吃一种新奇食品，即用黑芝麻、猪脂肪油、少许白砂糖做馅，外面用糯米粉搓成球，煮熟..', 10.00, 'https://detail.tmall.com/item.htm?spm=a230r.1.14.6.5388ad9buO9c7G&id=555406119586&cm_id=140105335569ed55e27b&abbucket=13',3,'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1580903856303&di=74ce12738409092345cc2ed999b0c582&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171206%2Fa31d4ca3ebfd41c88ef63368d273bd5a.jpeg', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test41', 'user1', '慈城年糕', '吃年糕，要吃宁波慈城的水磨年糕。慈城水磨年糕是纯手工艺制作，精选优质粳米，经种、选、浸、磨、蒸、舂、印等十道工序制成，吃起来细腻柔滑有嚼劲。宁波人最常的做法是放汤和油炒。雪菜肉丝年糕汤可是相当地道的宁波菜了，汤汁浓郁，咸鲜中还有一丝微酸，极为爽口。.', 10.00, 'https://detail.tmall.com/item.htm?spm=a230r.1.14.6.143b5e825e3dkO&id=536572463945&cm_id=140105335569ed55e27b&abbucket=13',3,'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2020095863,214139871&fm=173&app=49&f=JPEG?w=640&h=640&s=497007D1E0644B075B21CCE303006051', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test42', 'user1', '红膏呛蟹', '宁波的菜肴自然少不了海鲜。红膏呛蟹，是其中的杰出代表。既然叫红膏炝蟹，选料自然讲究，一是有红膏，一是要活蟹。因为是生吃，所以新鲜很重要，以四比一的盐水腌制，时间不要太长，以免咸味盖过鲜味。开动时，最好蘸姜醋，醋能杀菌去腥，姜可以中和蟹的寒性，保护肠胃。到底是生食，肠胃不好的人最好不要轻易尝试。', 10.00, 'https://detail.tmall.com/item.htm?id=560287299943&ali_refid=a3_430583_1006:1122595749:N:L3041CYGfgU1ispVhpcK/A==:2d65e1720a14629e609d1bd83adb04a9&ali_trackid=1_2d65e1720a14629e609d1bd83adb04a9&spm=a230r.1.14.1',3,'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2157938872,309232679&fm=173&app=49&f=JPEG?w=400&h=260&s=8A624F946E1857C6060AF96F0300706A', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test43', 'user1', '宁波三臭', '臭中取鲜，大概最能体现宁波吃货的本色。臭冬瓜、臭苋菜梗、臭菜心是著名的宁波三臭，那臭气，用宁波话说:“辽远隔水”也能闻到味儿。说是三臭，吃起来尤其香。特别在夏天，腻了大鱼大肉，上一碗臭冬瓜，滴几滴麻油，那咸中带酸，酸里透鲜的味道像一道清泉，从嘴巴到心里都透着股清爽。', 10.00, null,3,'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=64401983,2034017579&fm=173&app=49&f=JPEG?w=584&h=346&s=93A1DC055E925FC67C35F73E0300506B', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test5', 'user1', '熏鱼', '熏——俗作熏。会意。金文，上面象火烟冒出,中间是烟突(本古“窗”字),两点表示烟苔,下面是火焰。合起来是烟突冒烟。本义:火烟向上冒。《尔雅》“炎炎，熏也”，《诗·豳风·七月》“穹窒熏鼠，塞向墐户”。', 10.00, 'https://detail.tmall.com/item.htm?spm=a230r.1.14.6.351766258y0Am8&id=610417637914&cm_id=140105335569ed55e27b&abbucket=13',3,'https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=e45b780087d6277ffd1f3a6a49517455/4e4a20a4462309f7f30841a9720e0cf3d7cad622.jpg',now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test6', 'user1', '千层饼', '奉化的千层饼、水蜜桃和芋艿头并称为“奉化三宝”。千层饼始创于清乾隆年间，距今已有两百多年的历史，是浙江名点，也是溪口的象征，名扬海内外。千层饼以面粉制作，加白糖、芝麻、花生米及适量苔菜粉，经过12道工序，精心烘焙而成。其厚约两公分，每一块都有27层以上的薄片重叠，入口松脆不粘牙，甜中有咸，咸中有甜，吃完口有余香。', 10.00, 'https://detail.tmall.com/item.htm?spm=a230r.1.14.6.4c333802DX73O7&id=605894754592&cm_id=140105335569ed55e27b&abbucket=13',3,'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=271928619,3778342075&fm=173&app=49&f=JPEG?w=550&h=400&s=D910BEF7022396FC4EA576260300704E', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test7', 'user1', '朗霞豆浆', '豆浆在中国的地位犹如牛奶在西方。要在这样一种广泛普及的食物中脱颖而出，宁波余姚的朗霞豆浆自然不同凡响。与别地的不同，朗霞豆浆形如刚出锅的鸡蛋羹，浆汁醇厚，入口鲜香，是四季皆宜的小吃。要做成朗霞这样的豆浆，黄豆和水都要严格选材，浸豆、煮浆等的制作过程更是不容有失。牛肉豆浆和羊肉豆浆是它的特色口味，吸引不少食客从全国各地慕名而来。', 10.00, null,3,'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3937493500,783718642&fm=173&app=49&f=JPEG?w=597&h=533&s=80ABDF156C725E9E8FA9E0E80300F013', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, img_url, create_time, update_time, version, state) values ('test8', 'user1', '奉化芋艿头', '芋艿头可说是奉化的招牌，在江浙一带十分有名。奉化的芋艿头呈球状，表皮棕黄而顶端粉红，个头大，单个重1公斤以上，大的有2.5公斤左右，无怪乎奉化市被国务院发展研究中心、中国农学会和《中国特产报》联合命名为“中国芋艿头之乡”。奉化芋头皮薄肉粉，香糯可口，无论是烘、烤、炒，还是蒸、煮、浇汤，都很美味。”。', 10.00, 'https://detail.tmall.com/item.htm?spm=a230r.1.14.1.8b6543cb4ogSPD&id=610633695088&cm_id=140105335569ed55e27b&abbucket=13',3,'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3780020901,1847281014&fm=173&app=49&f=JPEG?w=640&h=427&s=92204FA042421AE60C9C897F03008068', now(), now(), 0, 1);
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test11', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test12', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test13', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test14', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test15', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test16', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test17', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test18', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-insert into comment (comment_id, user_id, title, content, price, buy_url, type, create_time, update_time, version, state, img_url) values ('test19', 'user1', '测试风物文化', '测试内容', null, null, 4, now(), now(), 0, 1, 'http://5b0988e595225.cdn.sohucs.com/images/20171025/153cea00c53d45f2a2d749c28cbf9a93.jpeg');
-
 
 
 -- 历史文化
 insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
- values ('history_of_liang_zhu', 'root', '梁祝的传说', null, null, 1, now(), now(), 0, 1, '梁祝传说和以梁祝传说为内容的其他艺术形式所展现的艺术魅力，使其成为中国民间文学艺术之林中的一朵奇葩。 梁祝传说自1600 年前的晋代形成以来，主要流传于宁波、上虞、杭州、宜兴、济宁、汝南等地，并向中国的各个地区、各个民族流传辐射。
-  在流传的过程中，各地人民又不断丰富发展传说的内容，甚至还兴建了众多以梁祝传说为主题的墓碑和庙宇等建筑。此外，梁祝传说还流传到朝鲜、越南、缅甸、日本、新加坡和印度尼西亚等国家，其影响之大在中国民间传说中实属罕见。 人们用丰富多彩的文艺样式来表现这个美丽动听的故事，仅戏曲剧种就有30余种、曲艺20余种，更有上百首歌谣、几十种工艺品，以及电影和电视作品。 同其他口头文学和非物质文化遗产一样，近20年来，由于受现代化和城市化的影响，以口头传承为主的梁祝传说受到了前所未有的冲击。原有的口头传承人相继去世，年轻一代不愿接续，传承面临着断代的危险，梁祝传说在不久的将来，很可能再也找不到梁祝传说的传承者、说唱者，而梁祝文化的"根"在于梁祝传说，故而急需抢救和采取相应的保护措施，使这一优秀的文化传统得以绵延。', 'https://img-blog.csdnimg.cn/20200207123935910.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+ values ('history_of_liang_zhu', 'root', '梁祝的传说', null, null, 1, now(), now(), 0, 1, '故事讲述的是上虞祝家庄才女祝英台，女扮男装赴杭求学，途中邂逅同时到杭州求学的会稽书生梁山伯，于是双双结伴到杭州游学，期间同窗三载，形影不离，结下深厚情义。祝英台学成先归，二年后梁山伯到虞寻访祝英台时，真相大白，方知祝英台是女儿身，遂回家告知父母，意欲娶其为妻，不料此时祝英台已由父母之命许配马家，梁山伯知后追悔莫及。三年后梁山伯出任鄞县县令，终因多年相思成疾，一病不起，死后葬鄞城西清道山下。梁死后第二年祝英台出嫁途中，路经梁墓，风浪大作，闻此处就是梁山伯葬地之后，不禁悲从中来，上山祭奠，祝英台痛哭亡灵，情义感动天地，只见梁山伯墓突然地裂开一道口子，祝英台纵身跃入其中，同穴而死，过后二人魂魄化作彩蝶翩翩起舞。
+
+梁祝传说是中华文化的瑰宝。周恩来总理生前曾经指出，它不仅写出了悲剧，而且展示了理想。千百年来，梁祝传说以提倡求知、崇尚爱情、歌颂生命生生不息的鲜明主题深深打动着人们的心灵，以曲折动人的情节、鲜明的人物性格、奇巧的故事结构而受到民众的广泛喜爱。梁祝传说和以梁祝传说为内容的其他艺术形式所展现的艺术魅力，使其成为中国民间文学艺术之林中的一朵奇葩。 梁祝传说自1600 年前的晋代形成以来，主要流传于宁波、上虞、杭州、宜兴、济宁、汝南等地，并向中国的各个地区、各个民族流传辐射。
+
+在流传的过程中，各地人民又不断丰富发展传说的内容，甚至还兴建了众多以梁祝传说为主题的墓碑和庙宇等建筑。此外，梁祝传说还流传到朝鲜、越南、缅甸、日本、新加坡和印度尼西亚等国家，其影响之大在中国民间传说中实属罕见。 人们用丰富多彩的文艺样式来表现这个美丽动听的故事，仅戏曲剧种就有30余种、曲艺20余种，更有上百首歌谣、几十种工艺品，以及电影和电视作品。 同其他口头文学和非物质文化遗产一样，近20年来，由于受现代化和城市化的影响，以口头传承为主的梁祝传说受到了前所未有的冲击。原有的口头传承人相继去世，年轻一代不愿接续，传承面临着断代的危险，梁祝传说在不久的将来，很可能再也找不到梁祝传说的传承者、说唱者，而梁祝文化的"根"在于梁祝传说，故而急需抢救和采取相应的保护措施，使这一优秀的文化传统得以绵延。'
+, 'https://img-blog.csdnimg.cn/20200207123935910.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('tianfengta', 'root', '天封塔', null, null, 1, now(), now(), 0, 1, '这是宁波建城有关的故事。在《天封塔、永丰库、庆安会馆及其它》一文中叙述到唐时镇海招宝山的一条鲨鱼精经常兴风作浪，淹没宁波城的故事，民间老石匠在四明山上采得的一颗宝石帮助下，杀死了此妖。而天封塔是为保存这颗宝珠并镇甬江蛟龙所用，因为建于唐武则天“天册万岁”至“万岁登峰”年间，故称此塔为天封塔。天封塔曾经发掘过，虽不见传说中的宝珠，但文物丰富，可以到宁波博物馆细瞻。
+
+而历史上这些年正好是一个叫黄晟(859—909)的人任剌史，这位宁波最初的设计师，不仅建筑了子城外总长达18里的罗城，还治理了甬江泛滥。但是老百姓把他治理甬江的泛滥用神话的手法来表现，黄晟跳入甬江中与蛟龙作战，三天三夜，一直追到甬西的桃花渡，最后斩死蛟龙，而英雄也因此力竭而死。至今宁波人每年端午节还用菖蒲草染雄黄制成宝剑挂在门口的方式，纪念这位“宁波城市之父”。
+
+宁波建城时的洪水已然消逝，但见证这段历史的遗迹与风俗仍在，到底是老石匠这样的民间英雄最终战胜了洪水，还是黄晟这样有作为的官员为民除害，这并不重要，重要的宁波人相信人定胜天，这种积极的浪漫主义情绪是宁波走向三江时代最绚丽的开篇之章。'
+, 'https://img-blog.csdnimg.cn/20200214115904771.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('003', 'root', '黄晟斩蛟龙', null, null, 1, now(), now(), 0, 1, '3.黄晟斩蛟龙
+黄晟，字明远，鄮县（今鄞县）人，自小习武，为人仗义，好结交朋友。年轻时曾与伙伴们结队，赴望海县(今镇海)应募参军，有一天走正好到了明州城北桃花渡（大概位置在今天宁波影都附近，江对岸桃渡路的名称就来源于此）。黄晟正准备与众人一起雇船赶路，却见到一个老妇人正在姚江边上嚎咷痛哭，十分哀伤，便上前询问：“老人家缘何如此？”那老妇人哽咽道：“官人见笑！您有所不知，我们这里原先风调雨顺，大家以捕鱼为生，日子倒也小康。但前些年，不知道从何处来了两条恶蛟，盘踞在此，兴风起浪，为虐一方，搞得民不聊生。没有办法，乡邻们只好每三年都献上一对童男童女供它们享用，自此才稍保平安。如今三年期限又至，前日里抽签竟然抽中我家孙女！妾身一想到小孙女就要落入恶蛟之口，怎么能不痛哭流泪呢！”
+
+黄晟听闻顿时青筋涨起，怒道：“自黄巢之乱以来，我大唐朝纲不振、藩镇割据，本已民生凋敝，如今竟又有恶蛟为祸乡里，害我百姓，难道就没人管了么！也罢，黄某人今天也要学学春秋时斩杀蛟龙的佽飞，为乡亲们除了这个祸害！”老夫人见眼前这位陌生公子竟自告奋勇杀蛟除恶，噗地跪在了地下，连声叩谢救命之恩。
+
+到了祭祀蛟龙之日，百姓们哭着在姚江边摆上大供桌，上面放上三牲福礼，还有一对可怜的童男童女坐在金盘之上，瑟瑟发抖，等待着噩运降临。只见黄晟一身青衣、皂纱扎发，挺身站在供桌一旁，手握宝剑，静候恶蛟来临。突然间江面上阴风怒号，浊浪排空，往日平静的江水，此时却露出了狰狞气象。猛地一个大浪向岸边拍来，一条银色的大蛟从巨浪之中跃起，来到半空，张开血盆大口扑向扑向童男童女。说时迟那时快，黄晟一个箭步挡在孩子们前面，举起宝剑全力刺向恶蛟。恶蛟躲闪不及，头上中了一剑，疼痛难忍，长啸一声暴退数丈。黄晟迅速追上前去，不多时便来到了桃花渡前的江边上。黄晟心说不好：恶蛟被袭之后，怕是要沿着大江回东海养伤，若等它养足精神再来报仇，不见得能敌过他，今日必须断了这孽障的性命，以绝后患！正当恶蛟准备遁入江中之时，黄晟迅速拦住了它的去路，于是又是一番搏斗，半日下来竟然难解难分，一人一蛟均已伤痕累累、气喘吁吁。此时恶蛟回江的去路已经被封死，它觉得在岸上无法敌过这个年轻人，便四处寻找其他可以用来躲藏的水域，正巧发现姚江西侧有一个大水潭，于是瞅准一个空档迅速钻入水中不见了。
+
+黄晟哪肯就此罢休，他从腰间拽下一个酒葫芦，抿了几口黄酒，顿觉周身暖和，气力稍复。之后便一个猛子扎进了深不见底的水潭之中。刚开始，水边的人们还能看到潭中水波激荡，几个时辰之后，水面渐渐平静下来，却不见黄晟和恶蛟现身。人们以为黄晟或已葬身潭底，纷纷退去，唯有黄晟的伙伴和那老妇人坚持守在水边，等待最后的结果。一夜之后，当清晨第一缕阳光自三江口照向水潭之时，黄晟竟奇迹般的从潭水中冒了出来，手中还提着一只血淋淋的蛟头！他终于完成了自己的诺言，为大家杀蛟除恶！这真是：
+
+佽飞斩长蛟，激水方龙战。
+惊波动连山，拔剑曳雷电。
+鳞摧白刃下，血染沧江变。
+感此壮古人，四明有神剑。
+
+自此之后，桃花渡周边再次恢复了往日的宁静，两条恶蛟一条被斩，另一条摄于黄晟之威，再未出现。人们为了纪念这次斩蛟事件，便把水潭称为蛟池。
+
+后来黄晟未能顺利应征入伍，回到老家，自己组织起一支队伍，并被官方收编，历任鄞塘镇遏使、佽飞都副兵马使、左散骑常侍、浙东道副都指挥使等职。公元892年唐昭宗任命黄晟为明州刺史。黄晟主政宁波十八年，尽管天下大乱，战祸不断，但他礼贤下士、励精图治，对外镇压周边武装，对内疏河道、筑城墙、造浮桥，保境安民，深得百姓拥护。
+
+907年，朱温灭唐，开启了五代乱世。不久，黄晟的儿女亲家钱镠在杭州建立吴越国，明州成为吴越十三州之一。909年黄晟病逝，弥留之际上疏朝廷，不要让他的儿子们袭官，并封存府中公共财务，上报朝廷。
+
+黄晟一生，年轻时挺身而出舍命杀蛟，是为有仁。割据年代里只忠于一帝(先唐后吴越)，是为有义。动荡局势中能保明州一方安宁，是为有智。天下一片称孤道寡声中公私分明，是为有礼。这样的英雄，宁波人不能忘记他！
+'
+, 'https://img-blog.csdnimg.cn/20200214122006861.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('4', 'root', '董孝子汲水奉母', null, null, 1, now(), now(), 0, 1, '话说东汉年间，慈城北山下住着一对相依为命的母子：母亲黄氏腿脚不便，患病多年；儿子董黯砍柴为生，照顾母亲无微不至。那时候，慈城北山下还没有后来在唐朝时开挖的慈湖，却有一条小溪从董黯家门前淙淙流过，他们平时就喝这条小溪里的水。
+
+董母年纪大了，有时难免犯糊涂。有一天，她忽然对儿子说：“听说南山大隐溪的水好，能治百病，我想喝大隐溪的水。”董黯一听，感觉很为难：南山离家三十里，来回挑一趟水，一天工夫就没了，哪还有时间去砍柴啊？再说了，喝水怎么能治百病？但是董黯又想：孝以顺为先，老娘的心愿应该得到满足，何况她还是个病人，只要她老人家高兴，自己辛苦一点又算得了什么呢？于是二话没说，挑起水桶就出门了。
+
+  从慈城出发到南山大隐溪去，途中得坐渡船过姚江。摆渡的艄公见董黯挑着两个空水桶，问他干什么去。董黯就说去给老娘挑水，艄公听了哈哈大笑，说：“你傻呀，哪里的水不好喝，还非得到大隐溪去挑水？你看姚江水清澈甘甜，大隐溪是姚江的支流，你挑两桶姚江水回家不就行了吗？”船上其他乘客也随声附和，都说这是个好办法。董黯听了也不得不承认艄公说的有道理，可他又想起“心诚则灵”这句话——挑两桶姚江水回去，老娘未必能分辨得出来，可这毕竟也是欺骗啊！不行，一定要给老娘喝正宗的大隐溪水，以免良心上过不去；也许老天爷可怜我们母子，老娘喝了大隐溪水身体真能好起来！——想到这儿，他下了渡船，坚定地朝着大隐溪方向走去。
+
+当他挑着两桶水快到家时，天都要黑了，却一眼望见老娘拄着拐杖坐在门口——这是“倚庐之望”啊，董黯眼眶发热，眼泪都快流下来了。老娘问他累不累，他说不累，还故作轻松跟老娘讲起一路上遇到的趣事儿。老娘喝了儿子挑来的水，当夜睡得很香。
+
+董黯挑来的两桶水不到三天就喝光了，又得来回六十里去挑水。他倒是不怕苦，可左邻右舍出闲话了——都说这母子俩脑子有病，放着家门口的溪水不喝，还非要去大老远挑水喝；说这儿子也太傻了，说这老娘也太不心疼儿子了。
+
+ 闲言碎语传到董母耳朵里，这老太太也受不住了，她对儿子说：“我不喝大隐溪的水了，我老婆子要死就死了吧，只要儿子过得好，早点娶上媳妇儿，我也就放心了。”但是她越这么说，董黯就越觉得应该继续挑水，可问题在于听别人说闲话，老娘心里也不安啊。董黯想起庄子的话：“事其亲者，不择地而安之，孝之至也。”——必须也要让老娘安心才好。想到这里，他忽然灵机一动想出一个好办法，他对老娘说：“我们搬家到大隐溪去住吧。反正也没什么家当，搬家很容易的。”董母想了想觉得也是，儿子是樵夫，大隐溪那边不也可以砍柴养家吗？就这样，他们把家搬到了大隐溪，从此每天都能喝到新鲜的好水，董母也不用担心儿子来回奔波劳苦了
+
+他们母子在大隐溪边住了三年，董母的腿病居然奇迹般好了。
+'
+, 'https://img-blog.csdnimg.cn/20200214122138626.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('5', 'root', '田螺姑娘传说', null, null, 1, now(), now(), 0, 1, '很久以前，在海曙区集士港镇西乡的一个村子里有一个孤儿，是好心的邻居们收养了他，才使他长大成人。小伙子长到二十来岁时，就在广德湖边上搭了两间茅屋，开始独立生活了。无论谁家遇到了困难，他都会热心地帮助，大家都夸小伙子是个勤劳、善良的孩子。
+
+他每天早出晚归地辛苦耕种，但是忙了地里的活儿，顾不上屋里的活儿，经 吃凉饭、剩菜。有一天，小伙子干完活儿回家，看见广德湖边上有一只很大的田螺，出于好奇，他就将这只田螺带回家，把它养在水缸里。
+
+第二天，小伙子照旧到地里去干活儿，可是当他回到家，准备做饭时却发现，热腾腾的饭菜己经在桌上摆好了。小伙子以为这是好心的邻居们帮他做的？
+
+没想到，接连几天，小伙子干完活儿回到家，都能吃到香喷喷的饭菜。于是，小伙子向邻居们道谢，可是邻居们都说不是他们做的。小伙子很纳闷儿，决心要弄个水落石出。
+
+这天早晨，小伙子又扛起锄头下地干活儿了，他没有等到傍晚，就早早地回来躲在篱笆外面看屋里的动静。只见一位美丽的姑娘从水缸里出来，忙着生火、做饭，不一会儿，屋里就飘出了饭菜的香味。
+
+小伙子飞快地推门进屋，直奔水缸，看见那只大田螺只剩下一个空壳静静地躺在水缸里。小伙子走向正在做饭的姑娘，问道：“姑娘，你是从哪里来的？为什么要帮助我呢？”姑娘见小伙子突然闯进来，不知如何是好，她想回到水缸里，又被小伙子挡住了去路，只得说出实情。
+
+原来，姑娘是天上银河里的白水素女，因为玉皇大帝知道小伙子从小没有父母，很同情他，还因为小伙子乐于帮助别人，就派她扮作田螺来帮助小伙子。
+
+田螺姑娘说：“我本来想多帮助你几年，等你生活富裕了、娶了妻子以后再走，可是你今天突然闯进来，知道了我的身份，我不能在人间呆下去了。”小伙子非常后悔，责怪自己的举动太鲁莽，再三请求田螺姑娘留下来。田螺姑娘指着水缸里的田螺壳说：“我把田螺壳留给你，你用它盛粮食，就会有很多粮食出来，你用这些粮食帮助乡亲们吧。”
+
+忽然，天空中刮起了一阵大风，接着下起了大雨。风雨过后，田螺姑娘己经不见了踪影。小伙子望着田螺壳，呆呆地看了很久，心里有一种说不出的滋味。
+
+后来，小伙子就用这个田螺壳来盛粮食，壳里的粮食总是满满的，家里的粮食越来越多。但小伙子仍然辛勤地劳动，还拿出很多粮食送给乡亲们。受到帮助的乡亲们都十分感激田螺姑娘，大家建庙立祠，来纪念这位乐于助人的田螺姑娘。
+'
+, 'https://img-blog.csdnimg.cn/20200214122304962.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('6', 'root', '布袋和尚', null, null, 1, now(), now(), 0, 1, '布袋和尚的事迹，正史记载很简单，但在奉化流传的许多故事，描述了他的聪明智慧、幽默风趣、与人为善、乐观包容等精神和品德。
+
+布袋和尚是一位来自民间、深得民心的大师，其真性最本然。传说，布袋和尚身世如谜。据说唐朝时，宁波奉化的龙溪上漂着一捆柴，柴上有一幼儿，有恻隐之心人将其救起，只见孩子圆头大耳、眉清目秀，对人咪咪发笑，人们爱不释手，把孩子抱回家来。后来，这孩子长大剃度到香火鼎盛的岳林寺。出家后，他总随身带着一个大布袋，人称“布袋和尚”。
+
+布袋和尚喜好田间劳作，最好与人打赌取乐。有次与人比赛插秧，谁输了谁请吃夜饭。四位农夫手起手落，不一会儿田中就绿了一大片，而布袋和尚眼看就要输了，他却呵呵笑着，高声吟诗： “手捏青苗种福田，低头便见水中天；六根清净方成稻，退后原来是向前。”
+
+大伙一听这首《插秧偈》很有意思。 “福田”既指良田，也指佛田，“水中天”既是大自然的天空，又是佛教的理想世界。“六根”不光是说插秧每行有六株，也暗示佛经指的眼耳、鼻、舌、身、脑，“稻”与佛“道”又谐音，最后一句，“退后原来是向前”，不仅描绘了插秧情景，更包含了佛教的智慧和辩证的哲理。人们在琢磨的时候，布袋和尚施展神通，乐呵呵地插完秧苗。
+
+布袋和尚交友带着三分侠气，为人存有一片素心，他在圆寂前，说了四句《辞世偈》：“弥勒真弥勒，化身千百亿；时时示时人，时人自不识。”说毕，即在青石上端坐而逝。后人恍然大悟，原来布袋和尚是弥勒佛的化身 。
+
+这位弥勒化身的布袋和尚，时常劝化人们要忘却烦恼，宽却肚皮。他也时常手持藜杖、撒履闲行，应了佛法中的“万法本空”之意。
+
+后代文人崇敬这位可敬的大师，提写了一幅对联：“大肚能容，容世上难容之事；笑口常开，笑天下可笑之人；”这首妇孺皆知的句子赞颂了布袋和尚容人容事之雅量，但似乎并未悟得佛祖旷达襟怀。
+
+试问尘世间，谁未做可笑之事，谁又能说自己不是可笑之人。宽厚的佛祖，曾几何时讥笑过可笑之事可笑之人，何时不是以悲悯之心，善待芸芸众生，这等境界后人自是望尘莫及。
+
+正史记载，布袋和尚氏族不详，不知从何而来。奉化传说，布袋和尚自奉化县江漂流而来，为长汀村民张重天和妻子窦氏收养，取名“起此”，后演绎为“契此”。
+
+奉化有三大河流：剡江、县江和东江。其中县江穿城而过，因以得名。县江发源于奉化大堰镇董李第一尖山，干流长77公里，由甬江出海。流经县城的一段称龙津，相传为东海龙王的九子敖牙居住。每年敖牙要兴风作浪发大水，说是要趁洪水出东海拜会父亲。这年秋天也不例外，台风过境水就涨了上来，在大水中漂来了一块木板（也有人说是一捆柴草），板上躺着一个孩子。这个孩子就是以后鼎鼎大名的布袋和尚。
+
+奉化城北三华里、县江西岸有个村子，叫长汀。村里有户人家，男的叫张重天，妻子窦氏，务农为生。夫妻恩爱，但膝下无子。这天张重天吃过早饭，正在田间劳作，忽听溪上一声轰鸣，那溪水犹如巨龙，呼啸奔涌而下。在那白花花的浪头之中，晃动着一块木板，板上躺着一个赤身露体的小孩，随时有灭顶之险。张重天见此情景，动了恻隐之心，就近找来一根竹竿，把木板拨到身边，抱起孩子一看，圆头大耳，生相端庄，朝着自己咪咪发笑，顿觉爱不释手。
+
+岳林寺，始建于南梁大同二年（536年），原名崇福院。唐宣宗大中二年（848年），寺址从龙津之西迁到龙津之东，改名岳林寺，以其背后有三山丛林得名，后演绎为岳林寺，寺名沿用至今。
+
+张重天夫妇信佛。契此从小开始，常随父母到与长汀村隔溪相对的岳林寺拜佛。稍长，又常与村里的小伙伴到寺里嬉戏。岳林寺高大的建筑，恢宏的佛殿，巍峨的佛像，肃穆的佛事活动，对契此产生了强烈的吸引力。天长日久，潜移默化，对佛教产生了虔诚的信仰，终于向父母提出了出俗为僧的念头。
+
+唐朝末年，政治腐败，群雄争霸，战火频频，社会动乱。在这种情势下，许多人都想找个清静之地，安身立命，躲避战祸。所以，当时佛教比较兴旺，出家也成为时尚。张重天夫妇本来就信佛，对儿子皈依佛门也不反对。于是，17岁的契此，离开家庭，跨入佛门。
+
+方丈见契此圆头大耳，一脸善相，小小年纪，如此虔诚，就欣然接纳，说：“善哉！善哉！本寺添此沙弥，定能香火兴旺！”接着，方丈亲自动手，为契此剃去青丝，披上袈裟，并在他的名字前面加上“释”字，赐法号“释契此”。
+
+方丈慧眼识珠，一语中的。布袋和尚在岳林寺出家，又在岳林寺圆寂，为岳林寺做过许多事情，身后又被定为弥勒化身，以其形象代替印度弥勒。岳林寺因此被定为弥勒道场而名声大振，闻名寰宇。
+
+契此出家后，整天背着一个布袋，云游四方。有人问他：“师父有法号否？”契此回答：“我有一布袋，虚空无挂碍；展开遍十方，入时观自在。”于是，世人都称他为“布袋和尚”。
+
+布袋和尚这只布袋十分神奇。
+
+一是深广无边。它看起来不大，但无论多少东西装进去，永远都没有满的时候。甚至连他在福建募捐来的一批扩建寺院的大木头，都能装入袋中。
+
+二是有起死回生、变馊为鲜的特殊功效。有人把死了的鱼儿投入他的布袋，他毫不生气，仍然笑嘻嘻地收下。背到河边，倒入水中，鱼儿竟然摇头摆尾，游入溪中。有人把馊了的饭菜倒入他的布袋，过了一会，取出来却新鲜无比，美味可口。他自己吃不完，招来小儿们，让他们尽情啖食。小儿们吃得津津有味，布袋和尚则坐在一方，开怀大笑。所以，许多孩子都喜欢跟他一起戏耍。杭州灵隐寺前山岩上雕刻的“十八小儿戏布袋”，就是根据这一传说塑造的。
+
+三是这只布袋永远用不坏，毁不了。有个地方上的无赖，惯于寻衅闹事，弄人取乐，以为布袋和尚老实可欺，夺下他的布袋点火烧掉。奇怪的是，第二天，布袋和尚依然背着那只布袋，来去如旧。无赖以为这只布袋一定是重新做起来的，又夺过来把它烧了。如此一而再、再而三，布袋和尚都大度地容忍了，可是当无赖第四次去夺布袋时，使尽吃奶力气也提不动空布袋了。
+
+至此，无赖才知道布袋和尚不是凡人，就拜到脚下，恳求饶恕。布袋和尚点化他说：“善有善报，恶有恶报，不是不报，时机未到，时间一到，一切都报。”从此，这个无赖改恶从善，再也不敢为非作歹了。'
+, 'https://img-blog.csdnimg.cn/20200214122449980.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+-- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+--  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
+-- , '');
+--
+-- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+--  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
+-- , '');
+-- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+--  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
+-- , '');
+-- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+--  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
+-- , '');
+-- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+--  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
+-- , '');
+

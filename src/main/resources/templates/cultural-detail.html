@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Insurance - Press</title>
+    <title th:text="${comment.title}"></title>
     <link rel="shortcut icon" href="/images/favicon.png" />
     <link rel="stylesheet" href="/css/boot.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -42,59 +42,32 @@
                     <div class="col-sm-12">
                         <div class="single-post">
                             <div class="blog-img">
-                                <a href="">
-                                    <img th:src="${comment.imgUrl}" class="img-responsive">
-                                </a>
-                                <div class="blog-icon"><img src="/images/icon2.png"></div>
+                                <img th:src="${comment.imgUrl}" class="img-responsive">
                             </div>
                             <h2 class="blog-title" th:text="${comment.title}"></h2>
                             <div class="blog-meta">
                                 <a href="" class="ml-0"><i class="blue-text fa fa-calendar"></i> <span th:text="${comment.createTime}"></span></a>
                                 <a href=""><i class="blue-text fa fa-user"></i><span th:text="${comment.userId}"></span></a>
                                 <a href=""><i class="blue-text fa fa-heart-o"></i><span th:text="${session.likeNum}"></span></a>
+                                <a th:href="@{'/cultural/'+${comment.commentId}+'/thumb'}">
+                                    <img id="image" src="/images/thumb.png" th:src="${session.user==null||comment.likeNum!=session.user.userId}?'/images/thumb.png':'/images/thumb_c.png'">
+                                </a>
                             </div>
-                            <p th:text="${comment.content}"></p>
-                            <a th:href="@{'/cultural/'+${comment.commentId}+'/thumb'}">
-                                <img id="image" src="/images/thumb.png" th:src="${session.user==null||comment.likeNum!=session.user.userId}?'/images/thumb.png':'/images/thumb_c.png'">
-                            </a>
+                            <br />
+                            <div style="white-space: pre-line; text-indent: 25px;line-height: 35px; letter-spacing: 3px;font-weight: normal;font-size: 20px" th:text="${comment.content}"></div>
+                            <br />
                             <p></p>
                         </div>
-                        <div class="blog-author">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <a href="">
-                                        <img src="/images/rec-1.jpg" class="img-responsive">
-                                        <div class="author-text">by <span th:text="${comment.userId}"></span>/div>
-                                    </a>
-                                </div>
-                                <div class="col-sm-7">
-                                    <h4 class="cap-title">Duis Non Quam Sagit Ulitracies Sem Vitae Luctus Tincidunt Quam Lacinia Quis Sed Elit.</h4>
-                                    <ul class="caption-list">
-                                        <li>
-                                            <i class="glyphicon glyphicon-ok-sign blue-text"></i>
-                                            <a href="#">Posure distcum nam integer</a>
-                                        </li>
-                                        <li>
-                                            <i class="glyphicon glyphicon-ok-sign blue-text"></i>
-                                            <a href="#">Nec congue leo pharetra in sit amet</a>
-                                        </li>
-                                        <li>
-                                            <i class="glyphicon glyphicon-ok-sign blue-text"></i>
-                                            <a href="#">Mauris hendrerit fringilla ligula</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-post">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leosdsdsd pharetra in.lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in. Integer eget orci id leo consectetur iaculis ut vitae neque. Interdum et malesuada fames.</p>
-                        </div>
-                        <div class="quote-post1">
-                            <div class="quote-text">
-                                <h5>"Vivamus faucibus magna vitae purus blandit, rutrum aliquam turpis bibendum. Ut sit amet sapien dolor. Integer eget orci id leo consectetur iaculis ut vitae neque. Interdum etmalesuad fames ac ante ipsum primis in faucibus."</h5>
-                            </div>
-                        </div>
                         <!-- Comments -->
+                        <div class="quote-post">
+                            <div class="quote-img">
+                                <img src="images/icon3.png">
+                            </div>
+                            <div class="quote-text">
+                                <h5>文化是，或者说应该是，对完美的研究和追求；而文化所追求的完美以美与智为主要品质。</h5>
+                                <h6> - 阿诺德</h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

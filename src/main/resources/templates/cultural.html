@@ -44,14 +44,15 @@
                         <div th:each="comment : ${pageInfo.list}">
                         <div class="single-post">
                             <div class="blog-img">
-                                <a href="">
+                                <a th:href="@{'/cultural/'+${comment.commentId}}">
                                     <img th:src="${comment.imgUrl}" class="img-responsive" alt="点击查看详情">
                                 </a>
-                                <div class="blog-icon"><img src="images/icon2.png"></div>
                             </div>
                             <h2 class="blog-title" th:text="${comment.title}"></h2>
                             <div class="blog-meta">
-                                <span th:text="${comment.createTime}"></span><a href="">(3) Comments</a></div>
+                                <span th:text="${comment.createTime}"></span>
+                                <a th:text="'('+${comment.likeNum} + ') likes'"></a>
+                            </div>
                             <p th:text="${comment.content}">.</p>
                             <div class="blog-btn">
                                 <a th:href="@{'/cultural/'+${comment.commentId}}" class="btn-default">了解更多</a>
@@ -65,8 +66,8 @@
                                 <img src="images/icon3.png">
                             </div>
                             <div class="quote-text">
-                                <h5>Vivamus faucibus magna vitae purus blandit, rutrum aliquam turpis bibendum. Ut sit amet sapien dolor. Integer eget orci id leo consectetur iaculis ut vitae neque. Interdum et malesuada fames ac ante ipsum primis in faucibus.</h5>
-                                <h6> - Kelly Claw</h6>
+                                <h5>文化是，或者说应该是，对完美的研究和追求；而文化所追求的完美以美与智为主要品质。</h5>
+                                <h6> - 阿诺德</h6>
                             </div>
                         </div>
                         <div class="text-center">

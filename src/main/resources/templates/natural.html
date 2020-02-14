@@ -49,7 +49,8 @@
                                 </div>
                                 <h2 class="blog-title" th:text="${comment.title}"></h2>
                                 <div class="blog-meta">
-                                    <span th:text="${comment.createTime}"></span><a href="">(3) Comments</a>
+                                    <span th:text="${comment.createTime}"></span>
+                                    <a th:text="'('+${comment.likeNum} + ') likes'"></a>
                                 </div>
                                 <p th:if="${#strings.length(comment.content)>20}" th:text="${#strings.substring(comment.content,0,19)}+'......'">.</p>
                                 <p th:if="${#strings.length(comment.content)<=20}" th:text="${comment.content}">.</p>

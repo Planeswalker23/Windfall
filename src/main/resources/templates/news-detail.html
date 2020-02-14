@@ -45,53 +45,25 @@
                                 <a href="">
                                     <img th:src="${comment.imgUrl}" class="img-responsive">
                                 </a>
-                                <div class="blog-icon"><img src="/images/icon2.png"></div>
                             </div>
                             <h2 class="blog-title" th:text="${comment.title}"></h2>
                             <div class="blog-meta">
                                 <a href="" class="ml-0"><i class="blue-text fa fa-calendar"></i> <span th:text="${comment.createTime}"></span></a>
                                 <a href=""><i class="blue-text fa fa-user"></i><span th:text="${comment.userId}"></span></a>
                                 <a href=""><i class="blue-text fa fa-heart-o"></i><span th:text="${session.likeNum}"></span></a>
+                                <a th:href="@{'/news/'+${comment.commentId}+'/thumb'}">
+                                    <img id="image" src="/images/thumb.png" th:src="${session.user==null||comment.likeNum!=session.user.userId}?'/images/thumb.png':'/images/thumb_c.png'">
+                                </a>
                             </div>
-                            <p th:text="${comment.content}"></p>
-                            <a th:href="@{'/news/'+${comment.commentId}+'/thumb'}">
-                                <img id="image" src="/images/thumb.png" th:src="${session.user==null||comment.likeNum!=session.user.userId}?'/images/thumb.png':'/images/thumb_c.png'">
-                            </a>
                             <p></p>
-                        </div>
-                        <!--<div class="blog-author">
-                            <div class="row">
-                                <div class="col-sm-5">
-                                    <a href="">
-                                        <img src="/images/rec-1.jpg" class="img-responsive">
-                                        <div class="author-text">by <span th:text="${comment.userId}"></span>/div>
-                                    </a>
-                                </div>
-                                <div class="col-sm-7">
-                                    <h4 class="cap-title">Duis Non Quam Sagit Ulitracies Sem Vitae Luctus Tincidunt Quam Lacinia Quis Sed Elit.</h4>
-                                    <ul class="caption-list">
-                                        <li>
-                                            <i class="glyphicon glyphicon-ok-sign blue-text"></i>
-                                            <a href="#">Posure distcum nam integer</a>
-                                        </li>
-                                        <li>
-                                            <i class="glyphicon glyphicon-ok-sign blue-text"></i>
-                                            <a href="#">Nec congue leo pharetra in sit amet</a>
-                                        </li>
-                                        <li>
-                                            <i class="glyphicon glyphicon-ok-sign blue-text"></i>
-                                            <a href="#">Mauris hendrerit fringilla ligula</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>-->
-                        <div class="single-post">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leosdsdsd pharetra in.lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris hendrerit fringilla ligula, nec congue leo pharetra in. Integer eget orci id leo consectetur iaculis ut vitae neque. Interdum et malesuada fames.</p>
+                            <p></p>
+                            <div style="white-space: pre-line; text-indent: 25px;line-height: 35px; letter-spacing: 3px;font-weight: normal;" th:text="${comment.content}"></div>
+                            <p></p>
+                            <p></p>
                         </div>
                         <div class="quote-post1">
                             <div class="quote-text">
-                                <h5>"Vivamus faucibus magna vitae purus blandit, rutrum aliquam turpis bibendum. Ut sit amet sapien dolor. Integer eget orci id leo consectetur iaculis ut vitae neque. Interdum etmalesuad fames ac ante ipsum primis in faucibus."</h5>
+                                <h5>"天将降大任于斯人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，曾益其所不能。"</h5>
                             </div>
                         </div>
                         <!-- Comments -->

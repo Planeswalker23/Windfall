@@ -34,7 +34,6 @@ public class CultureController {
      */
     @GetMapping("/cultural")
     public String cultural(Model model, PageMessage pageMessage){
-        pageMessage.setPageSize(Constant.FIVE);
         Comment comment = new Comment();
         comment.setType(1);
         PageInfo<Comment> pageInfo = commentService.getComments(comment, pageMessage);
@@ -57,7 +56,6 @@ public class CultureController {
      */
     @GetMapping("/natural")
     public String natural(Model model, PageMessage pageMessage){
-        pageMessage.setPageSize(Constant.FIVE);
         Comment comment = new Comment();
         comment.setType(Constant.FOUR);
         PageInfo<Comment> pageInfo = commentService.getComments(comment, pageMessage);

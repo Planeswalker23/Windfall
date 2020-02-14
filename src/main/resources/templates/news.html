@@ -43,7 +43,8 @@
                     <div class="inner">
                         <figure>
                             <a th:href="@{'/news/'+${comment.commentId}}">
-                                <img th:src="${comment.imgUrl}" alt="Sample Article">
+                                <img th:if="${comment.imgUrl}!=null" th:src="${comment.imgUrl}" alt="Sample Article">
+                                <img th:if="${comment.imgUrl}==null" src="images/notice.jpeg" alt="Sample Article">
                             </a>
                         </figure>
                         <div class="details">

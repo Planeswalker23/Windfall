@@ -1,4 +1,3 @@
-drop table if exists user;
 create table user (
   `user_id` varchar(36) not null comment '用户主键id',
   `user_name` varchar(55) default null comment '账号',
@@ -12,7 +11,6 @@ create table user (
   unique key `unique_key_email` (`email`) using btree
 );
 
-drop table if exists comment;
 create table comment (
   `comment_id` varchar(36) not null comment '评论id',
   `user_id` varchar(36) not null comment '评论用户的id',

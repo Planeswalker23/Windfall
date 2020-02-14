@@ -682,20 +682,52 @@ insert into comment (comment_id, user_id, title, price, buy_url, type, create_ti
 , 'https://img-blog.csdnimg.cn/20200214135117625.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
 
 
--- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
---  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
--- , '');
---
--- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
---  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
--- , '');
--- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
---  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
--- , '');
--- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
---  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
--- , '');
--- insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
---  values ('', 'root', '', null, null, 1, now(), now(), 0, 1, ''
--- , '');
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('news1', 'root', '宁波博物馆开展春节前安全生产大检查', null, null, 2, now(), now(), 0, 1, '为做好春节期间的安全生产工作，坚决遏制节日期间重特大事故的发生，确保宁波博物馆平稳运行。1月19日上午，副馆长杨丹及安全物管部、物业等相关责任人，分别对中控室、地下室设备机房、仓库、公共区域等部位进行了全面检查。
+此次检查重点内容为对照消防九类突出风险隐患，检查消防通道是否畅通，消防设施设备是否正常运行，仓库是否存放易燃易爆危险品，办公室内是否存在违规使用大功率电器等，确保全馆春节长假期间的安全。
+在检查中杨馆强调到，中控室值班人员在春节长假期间一定要保持高度警惕，强化安全意识和纪律意识，坚持双人双岗值守，加强视频监控的巡查力度，及时和准确发现可能存在的安全隐患，将技防和人防真正结合起来。在对办公区和设备机房检查中，杨馆还对相关部位灭火器和消防栓的可用性以及台账记录情况进行了抽查，并要求物业在长假期间对各个重点部位做到定岗定人定责，严肃值守纪律和用电安全，加大白天和夜间的安全巡查力度，认真落实好参观高峰期时段内的秩序维护和卫生工作，让来馆参观的游客渡过一个欢乐、祥和的春节假期。'
+, null );
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('news2', 'root', '王程局长一行在宁波博物馆检查工作', null, null, 2, now(), now(), 0, 1, '1月25日上午，局党组书记、局长王程一行，来宁波博物馆，检查落实春节期间对做好新型冠状病毒感染肺炎疫情防控工作，并亲切慰问值班的职工。
+王程局长一行现场检查，查看并详细询问值班工作人员，听取了宁波博物馆馆长的有关汇报。王程局长表示：要高度重视疫情防控的态势，不能掉以轻心，要做好开放关停的文物安全工作，面向社会的信息和各项服务工作，要加强疫情的各项防控措施，确保安全万无一失。
+局巡视员韩小寅，局办公室主任吴一柱主任一同参加。'
+, 'https://img-blog.csdnimg.cn/20200214142241554.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('news3', 'root', '春季常见病预防讲座', null, null, 2, now(), now(), 0, 1, '类型：展览
+时间：2019-01-18
+活动结束时间以实际活动为准
+地点：鄞州区太古城社区五楼多功能厅
+费用：免费
+活动介绍
+流行于春季的常见传染病有以下几种：流行性感冒、麻疹、流行性腮腺炎、猩红热、水痘、流脑等。
+流感是常见的呼吸道传染病，潜伏期1—3日，主要症状为发热、头痛、流涕、咽痛、干咳，全身肌肉、关节酸痛不适等，发热一般持续3—4天，也有表现为较重的肺炎或胃肠型流感。
+麻疹是由麻疹病毒引起的急性传染病，潜伏期8—12日，主要症状为发热、怕光、流泪、流涕，眼结膜充血，出现口腔粘膜斑及全身斑丘疹。
+流行性腮腺炎是由流腮病毒引起的急性传染病，儿童多见，近年成人也有发病，俗称“乍腮”，潜伏期14—19日，主要表现为全身不适，发热，耳下或下颌角疼痛，以耳垂为中心1—2天内迅速肿大，张口和咀嚼时疼痛。
+猩红热是由乙型溶血性链球菌引起的急性呼吸道传染病，临床特点为发热，咽峡炎，全身弥漫性皮疹，疹退后伴皮肤脱屑等，潜伏期1—7天。
+水痘是由病毒引起的急性传染病，主要传播途径有：直接接触水痘疱疹液；空气飞沫传播；被疱疹液污染的用具。水痘的潜伏期为 12 ～ 21 天，平均 14 天。患了水痘以后的主要临床表现有：全身皮肤分批出现皮疹，以躯干为多，头面部次之；皮疹由最初的斑丘疹逐渐发展为疱疹，好转后结痂；水痘为自限性疾病，约 10 天左右自愈，但发疹期间要注意各种并发症，尤其是继发感染；重症水痘还可发生水痘肺炎、脑炎、肝炎、间质性心肌炎及肾炎等。
+流行性脑脊髓膜炎（简称流脑）是由脑膜炎奈瑟菌（又称脑膜炎双球菌）引起的，经呼吸道传播所发生的一种化脓性脑膜炎。它发生在冬春季节，主要表现是突发高热、剧烈头痛、频繁呕吐、皮肤黏膜瘀点和脑膜刺激征，严重的还会有败血症、休克及脑实质损害。婴幼儿流脑的临床表现不典型，可有咳嗽等呼吸道症状及拒食、呕吐、腹泻等消化道症状；有烦躁不安、尖声哭叫、惊厥及囟门隆起，脑膜刺激征（颈项强直）多不明显。
+活动名称：春季常见病预防（三）
+活动时间：5月23日
+地点和地址：太古城社区五楼多功能厅
+票价：免费'
+, 'https://img-blog.csdnimg.cn/20200214142348405.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('news4', 'root', '“温故-竹” 非遗手工艺展', null, null, 2, now(), now(), 0, 1, '类型：演出
+时间：2019-04-02
+活动结束时间以实际活动为准
+地点：海曙区 117艺术中心
+费用：免费
+活动介绍
+中国瓷器文化灿烂纷繁，要尽数其风流谈何容易。因此“温故”非遗手工艺展第二回，将从“文人雅事”的角度切入，把瓷器与文人生活相结合，藉着装置化、情境化的演绎，呈现古代文人的生活美学风姿。本期展览引入了国家级非遗项目“越窑青瓷烧制技艺”、“龙泉青瓷烧制技艺”、“景德镇手工制瓷技艺”，其中龙泉青瓷烧制技艺也被联合国科教文组织列入《人类非物质文化遗产代表作名录》。展场一楼根据宋代《文会图》复原的上百件瓷器用具组合场景，交映着古代文人雅会的经典一幕。二楼借由“万物”“静物”等生活美学品牌提供的家具、道具，还原了古代“文房”的风雅景致。展览现场还融入了烹茶、插花、焚香、挂画等古代文人生活艺术点滴，从中亦可领略到瓷器所承载的生活之道。基于“文人雅事”主题，8月4日开幕式参照“茶会雅集”形式，现场设置茶席，以茶会友，一同品茶、品瓷、品雅道，谈谈人生几何。'
+, 'https://img-blog.csdnimg.cn/20200214142507536.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
+
+insert into comment (comment_id, user_id, title, price, buy_url, type, create_time, update_time, version, state, content, img_url)
+ values ('news5', 'root', '第十七届越剧大展演宁波分会场演出《碧玉簪》《鹿鼎记》', null, null, 2, '2019-6-20', now(), 0, 1, '“同唱一台戏”2019（中国?绍兴）第十七届越剧大展演目前正在如火如荼上演。作为本届越剧大展演的分会场之一，宁波逸夫剧院于6月19日、20日上演杭州越剧院的《碧玉簪》、《鹿鼎记》两部经典越剧，以飨市民。
+《碧玉簪》是越剧的骨子老戏，越剧表演艺术家金采风在此剧中充分发挥金派的唱腔特色，塑造出了深人人心的李秀英形象，也使该剧成为金派的代表作之一。此次杭州越剧院的青春版《碧玉簪》由优秀青年演员孙菊秀、金玉皎领衔演出，在传承经典的基础上，推陈出新，实现了古曲新唱，老戏新传。
+《鹿鼎记》改编自金庸的同名武侠小说，由著名剧作家颜全毅编剧、展敏执导，戏剧“梅花奖”得主、范派小生徐铭领衔主演，历经五年磨砺，自2015年首演后，便为越剧舞台带来了一股清新之风。剧本创作的别具一格，导演技法的张弛有度，舞台呈现的删繁就简，这些方面经常成为这该剧被人津津乐道的地方。此外，该剧音乐唱腔的创作与设计也非常接地气，一批市井小调和方言俚语的运用，为演员的表演增色不少。一小段扬州时调“哭灵”，不仅表现出地域特色，也是更集中、形象地表现出韦小宝的审美理想和追求。
+本届越剧大展演是国家艺术基金资助项目-越剧优秀剧目展演。由浙江省文化和旅游厅、中共绍兴市委宣传部、绍兴市文化广电旅游局、绍兴市文旅集团有限公司共同主办，绍兴越剧艺术发展有限公司、绍兴大剧院管理经营有限公司共同承办。这是越剧大展演史上首次将展演场地范围扩散到“江浙沪闽”一带，实现了“文化牵手旅游”，联合11个剧院，上演50多场大戏，提升了活动格局，扩大了展演规模。'
+, 'https://img-blog.csdnimg.cn/20200214142609941.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzI5NDAxNDkx,size_16,color_FFFFFF,t_70');
 

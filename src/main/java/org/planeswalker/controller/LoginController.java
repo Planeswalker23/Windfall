@@ -45,6 +45,7 @@ public class LoginController {
 
     /**
      * 修改个人信息，此接口不允许修改密码
+     * 相同参数 userId 会映射到两个类中的相同字段
      * @param newUser {@link User}
      * @param userInfo {@link UserInfo}
      * @return {@link Response}
@@ -58,9 +59,6 @@ public class LoginController {
             log.warn("userId参数为空，修改个人信息失败");
             return Response.failed(Errors.VALID_ERROR + Constant.MAO_HAO + "userId");
         }
-        // 此接口不允许修改密码
-        newUser.setPassword(null);
-        userInfo.setUserId(newUser.getUserId());
         loginService.updateUserInfo(newUser, userInfo);
         return Response.success();
     }

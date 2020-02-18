@@ -14,20 +14,6 @@
 - 快速开发框架:
     - lombok 
     - MyBatis-Plus
-
-## 创建新项目流程
-1. 确保本分支上没有未提交的代码
-2. 切换到master分支 `git checkout master`
-3. 拉取最新代码`git pull`
-4. 基于`master`分支创建新分支（如dev）`git checkout -b order-book`
-    - 命名规则：小写，`order-` + 项目名，如图书管理系统，分支名应该是`order-book`
-5. 将本地`order-book`分支提交到远程仓库`git push origin order-book:order-book`
-    1. 冒号前的`order-book`：本地分支名
-    2. 冒号后的`order-book`：将要创建的远程分支名
-6. 创建完新项目后需要修改的内容：
-    1. `pom.xml`文件中的`artifactId`节点修改为当前项目名，如`Book`
-    2. `org.planeswalker.WindfallApplication`类的名字修改为当前项目名，如`BookApplication`
-    3. `application.properties`文件中的`spring.application.name`修改为当前项目名，如`Book`
     
 ## 分支仓库列表
 - [WindFall 基础架构](https://github.com/Planeswalker23/Windfall/tree/master)

@@ -5,7 +5,7 @@
 
 	<groupId>org.planeswalker</groupId>
 	<artifactId>cultural-bingbo</artifactId>
-	<version>1.0</version>
+	<version>1.0-cultural-bingbo</version>
 	<packaging>jar</packaging>
 	<description>Server for CulturalNingBo</description>
 

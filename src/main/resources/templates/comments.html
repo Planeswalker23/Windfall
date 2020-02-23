@@ -123,7 +123,7 @@
                         <td th:text="${comment.no}"></td>
                         <td><a th:text="${comment.title}" th:href="@{'http://localhost:8080/#/testDetails?commentId=' + ${comment.commentId}}" target="view_window"></a></td>
                         <td th:text="${comment.content}"></td>
-                        <td th:text="${comment.imgUrl}"></td>
+                        <td><a th:text="点击查看" th:href="@{${comment.imgUrl}}" target="view_window"></a> </td>
                         <td th:text="${comment.likeNum}"></td>
                         <td th:text="${comment.createTimeString}"></td>
                         <td>

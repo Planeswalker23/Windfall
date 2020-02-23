@@ -231,7 +231,7 @@ public class RootController {
             // 内容截取
             rootCommentInfo.setContent(this.subString15(rootCommentInfo.getContent()));
             // 图片url
-            rootCommentInfo.setImgUrl(this.subString15(rootCommentInfo.getImgUrl()));
+            rootCommentInfo.setImgUrl(rootCommentInfo.getImgUrl());
             resList.add(rootCommentInfo);
         }
         PageInfo<RootCommentInfo> resPageInfo = new PageInfo<>();

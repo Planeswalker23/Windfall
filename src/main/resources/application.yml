@@ -2,6 +2,11 @@
 server:
   port: 8081
 
+# 文件上传路径
+file:
+  # upload-path: E:\\拾柒美妆\\
+  upload-path: /Users/nanbei/Downloads/
+
 # spring配置
 spring:
   application:

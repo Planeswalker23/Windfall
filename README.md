@@ -47,6 +47,8 @@
 - [获取单个商品详情 `GET /goods/detail`](#获取单个商品详情)
 - [根据关键字搜索商品 `GET /goods/search`](#根据关键字搜索商品)
 
+- [上传文件 `POST /upload`](#上传文件)
+
 ---
 
 #### 获取图片验证码
@@ -384,4 +386,20 @@ http://localhost:8081/user/info?userId=root
 - 请求方式：`GET /goods/search`
 - 请求参数：keyword
 - 举例：[http://localhost:8081/goods/search?keyword=欧莱雅](http://localhost:8081/goods/search?keyword=欧莱雅)
-   
+
+#### 上传文件
+- 请求方式：`POST /upload`
+- 请求参数：file
+```json
+{
+    "file": "文件.jpg"
+}
+```
+- 接口返回，返回文件在服务器中的路径，作为imgUrl参数
+```json
+{
+    "code": 200,
+    "reason": "成功",
+    "res": "/Users/nanbei/Downloads/my.jpg"
+}
+```

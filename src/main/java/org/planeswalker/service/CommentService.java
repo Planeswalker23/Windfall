@@ -183,7 +183,7 @@ public class CommentService {
     public PageInfo<Comment> getComments(Comment comment, PageMessage pageMessage) {
         // 设置分页信息
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
-        List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment));
+        List<Comment> comments = commentMapper.selectList(Wrappers.lambdaQuery(comment).orderByDesc(Comment::getCreateTime));
         this.getCommentsOtherData(comments, comment.getUserId());
         return new PageInfo<>(comments);
     }

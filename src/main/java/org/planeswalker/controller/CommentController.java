@@ -3,11 +3,13 @@ package org.planeswalker.controller;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
+import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
 import org.planeswalker.pojo.dto.PageMessage;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -91,6 +93,8 @@ public class CommentController {
     @GetMapping("/allPc")
     public Response<PageInfo<Comment>> getAllPcComments(Comment comment, PageMessage pageMessage) {
         comment.setCommentPid(Constant.ZERO.toString());
+        // 防止查询我的评测
+        comment.setUserId(null);
         return Response.success(commentService.getComments(comment, pageMessage));
     }
 
@@ -114,6 +118,14 @@ public class CommentController {
      */
     @GetMapping("/allLy")
     public Response<PageInfo<Comment>> getAllLyComments(Comment comment, PageMessage pageMessage) {
+        if (StringUtils.isEmpty(comment.getCommentId())) {
+            return Response.failed(Errors.EMPTY_PARAMS);
+        }
+        // 防止查询我的评测
+        comment.setUserId(null);
+        // 将参数commentId设置到commentPid中，查询的是该commentId的留言
+        comment.setCommentPid(comment.getCommentId());
+        comment.setCommentId(null);
         return Response.success(commentService.getComments(comment, pageMessage));
     }
 

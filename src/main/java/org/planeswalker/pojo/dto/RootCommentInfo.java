@@ -1,6 +1,7 @@
 package org.planeswalker.pojo.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.planeswalker.pojo.entity.Comment;
 import org.planeswalker.utils.JacksonUtil;
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @author Planeswalker23
  * @date Created in 2020/2/3
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 public class RootCommentInfo extends Comment implements Serializable {

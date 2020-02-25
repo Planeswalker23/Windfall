@@ -15,7 +15,7 @@ create table user (
 drop table if exists user_info;
 create table user_info (
   `user_id` varchar(36) not null comment '用户主键id',
-  `favourite` varchar(36) default null comment '关注的内容，中文逗号分隔 彩妆，香水，护肤品',
+  `favourite` varchar(36) default null comment '关注的内容，中文逗号分隔 彩妆，香水，护肤',
   `signature` varchar(512) default null comment '个性签名',
   `create_time` datetime default null comment '创建日期',
   `update_time` datetime default null on update current_timestamp comment '更新时间',
@@ -29,7 +29,7 @@ create table comment (
   `comment_pid` varchar(36) default '0' comment '此评论的父类id，0-评测，其它uuid-留言',
   `user_id` varchar(36) not null comment '评论用户的id',
   `title` varchar(200) default null comment '标题',
-  `img_url` varchar(200) default null comment '图片链接地址',
+  `img_url` varchar(1000) default null comment '图片链接地址',
   `content` varchar(2048) default null comment '评论内容',
   `like_num` varchar(1024) default null comment '点赞人',
   `create_time` datetime default null comment '创建日期',

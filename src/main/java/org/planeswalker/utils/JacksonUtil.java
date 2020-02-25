@@ -37,6 +37,8 @@ public class JacksonUtil {
     public void setObjectMapper(ObjectMapper objectMapperFromSpring){
         // String转化为实体类时，忽略String中存在而实体类不存在的字段，防止报错
         objectMapperFromSpring.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // 序列化时，自定义Date类型的格式化方式
+        objectMapperFromSpring.setDateFormat(sdf);
         objectMapper = objectMapperFromSpring;
     }
 
@@ -87,7 +89,7 @@ public class JacksonUtil {
         }
     }
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     /**
      * 时间格式化
      * @param time

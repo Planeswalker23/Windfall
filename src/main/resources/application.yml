@@ -2,10 +2,13 @@
 server:
   port: 8081
 
-# 文件上传路径
+# 静态资源对外暴露的访问路径
+# 文件上传目录（注意Linux和Windows上的目录结构不同）
+# uploadFolder: classpath:/static/
 file:
-  # upload-path: E:\\拾柒美妆\\
-  upload-path: /Users/nanbei/Downloads/
+  staticAccessPath: /static/**
+  # E:\\拾柒美妆\\
+  uploadFolder: /Users/nanbei/Downloads/Beauty17/static/
 
 # spring配置
 spring:
@@ -34,11 +37,12 @@ spring:
     console:
       enabled: true
       path: /h2
-  # jackson序列化反序列化相关配置
-  jackson:
-    default-property-inclusion: NON_EMPTY
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    # 静态资源映射访问路径
+    static-path-pattern: /**
+  resources:
+    # 静态资源所在目录
+    static-locations: file:${file.uploadFolder},classpath:/static/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
 # 设置日志输出级别
 logging:

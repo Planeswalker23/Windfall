@@ -20,7 +20,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
      * 获取首页评测数
      * @return
      */
-    @Select("select goods_id, count(*) as commentsNum from comment where comment_pid='0' group by goods_id order by commentsNum limit 8")
+    @Select("select goods_id, count(*) as commentsNum from comment where comment_pid='0' group by goods_id order by commentsNum, title limit 8")
     List<IndexGoods> getIndexGoods();
 
 }

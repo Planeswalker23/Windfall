@@ -203,8 +203,8 @@
                       <span>香水</span>
                     </label>
                     <label class="lyear-checkbox checkbox-inline checkbox-primary" for="favourite3">
-                      <input type="checkbox" id="favourite3" name="favourite3" value="护肤品">
-                      <span>护肤品</span>
+                      <input type="checkbox" id="favourite3" name="favourite3" value="护肤">
+                      <span>护肤</span>
                     </label>
                   </div>
                 </div>
@@ -347,7 +347,7 @@ function insertInfo(userId) {
         } else {
           document.getElementById("favourite2").checked = false;
         }
-        if (fa!=null && fa.indexOf("护肤品")>-1) {
+        if (fa!=null && fa.indexOf("护肤")>-1) {
           document.getElementById("favourite3").checked = true;
         } else {
           document.getElementById("favourite3").checked = false;

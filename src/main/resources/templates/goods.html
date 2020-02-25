@@ -102,7 +102,7 @@
                       <ul class="dropdown-menu">
                         <li> <a tabindex="-1" href="javascript:void(0)" data-field="彩妆">彩妆</a> </li>
                         <li> <a tabindex="-1" href="javascript:void(0)" data-field="香水">香水</a> </li>
-                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="护肤品">护肤品</a> </li>
+                        <li> <a tabindex="-1" href="javascript:void(0)" data-field="护肤">护肤</a> </li>
                       </ul>
                     </div>
                     <input type="text" class="form-control" value="" id="keyword" name="keyword" placeholder="请输入关键字">
@@ -132,7 +132,7 @@
                     <tbody>
                       <tr th:each="goods:${pageInfo.list}">
                         <td th:text="${goods.no}"></td>
-                        <td th:text="${goods.goodsName}"></td>
+                        <td><a th:text="${goods.goodsName}" th:href="@{'http://localhost:8080/#/details?goodsId=' + ${goods.goodsId}}" target="view_window"></a></td>
                         <td th:text="${goods.brand}"></td>
                         <td th:text="${goods.type}"></td>
                         <td th:text="${goods.set}"></td>

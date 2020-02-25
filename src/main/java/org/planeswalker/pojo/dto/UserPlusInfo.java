@@ -30,7 +30,7 @@ public class UserPlusInfo implements Serializable {
     private String email;
 
     /**
-     * 关注的内容，中文逗号分隔 彩妆，香水，护肤品
+     * 关注的内容，中文逗号分隔 彩妆，香水，护肤
      */
     private String favourite;
 

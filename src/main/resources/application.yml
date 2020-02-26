@@ -37,12 +37,17 @@ spring:
     console:
       enabled: true
       path: /h2
-  mvc:
-    # 静态资源映射访问路径
-    static-path-pattern: /**
-  resources:
-    # 静态资源所在目录
-    static-locations: file:${file.uploadFolder},classpath:/static/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  # jackson序列化反序列化相关配置
+  jackson:
+    default-property-inclusion: NON_EMPTY
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+#  mvc:
+#    # 静态资源映射访问路径
+#    static-path-pattern: /**
+#  resources:
+#    # 静态资源所在目录
+#    static-locations: file:${file.uploadFolder},classpath:/static/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
 # 设置日志输出级别
 logging:

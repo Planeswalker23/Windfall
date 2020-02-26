@@ -85,7 +85,7 @@ public class GoodsController {
                 .like(Goods::getGoodsName, keyword)
                 .or().like(Goods::getBrand, keyword)
                 .or().like(Goods::getType, keyword)
-                .or().like(Goods::getSet, keyword)
+                .or().like(Goods::getSetNo, keyword)
                 .or().like(Goods::getRequirement, keyword));
         return Response.success(new PageInfo<>(goodsList));
     }

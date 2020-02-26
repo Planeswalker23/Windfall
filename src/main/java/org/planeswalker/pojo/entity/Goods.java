@@ -40,7 +40,7 @@ public class Goods implements Serializable {
     /**
      * 型号，系列号
      */
-    private String set;
+    private String setNo;
 
     /**
      * 需求，该产品是用于何处，或解决什么问题
@@ -60,7 +60,7 @@ public class Goods implements Serializable {
     /**
      * 产品使用方法
      */
-    private String usage;
+    private String usaging;
 
     /**
      * 图片 url

@@ -135,7 +135,7 @@
                         <td><a th:text="${goods.goodsName}" th:href="@{'http://localhost:8080/#/details?goodsId=' + ${goods.goodsId}}" target="view_window"></a></td>
                         <td th:text="${goods.brand}"></td>
                         <td th:text="${goods.type}"></td>
-                        <td th:text="${goods.set}"></td>
+                        <td th:text="${goods.setNo}"></td>
                         <td th:text="${goods.price}"></td>
                         <td th:text="${goods.createTimeString}"></td>
                         <td>
@@ -200,8 +200,8 @@
                     <input type="text" class="form-control" id="brand" />
                   </div>
                   <div class="form-group col-lg-4">
-                    <label for="set" class="control-label">型号</label>
-                    <input type="text" class="form-control" id="set" />
+                    <label for="setNo" class="control-label">型号</label>
+                    <input type="text" class="form-control" id="setNo" />
                   </div>
                 </div>
                 <div class="col-lg-12">
@@ -210,8 +210,8 @@
                     <input type="text" class="form-control" id="requirement" placeholder="该产品是用于何处，或解决什么问题" />
                   </div>
                   <div class="form-group col-lg-6">
-                    <label for="usage" class="control-label">使用方法</label>
-                    <input type="text" class="form-control" id="usage" />
+                    <label for="usaging" class="control-label">使用方法</label>
+                    <input type="text" class="form-control" id="usaging" />
                   </div>
                 </div>
                 <div class="col-lg-12">
@@ -239,8 +239,8 @@
                 </div>
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="usage" class="control-label">使用方法</label>
-                    <input type="text" class="form-control" id="usage" />
+                    <label for="usaging" class="control-label">使用方法</label>
+                    <input type="text" class="form-control" id="usaging" />
                   </div>
                 </div>
 
@@ -319,11 +319,11 @@ function changeLabel(label, userId) {
     document.getElementById("goodsName").value = null;
     document.getElementById("brand").value = null;
     document.getElementById("type").value = null;
-    document.getElementById("set").value = null;
+    document.getElementById("setNo").value = null;
     document.getElementById("requirement").value = null;
     document.getElementById("introduce").value = null;
     document.getElementById("description").value = null;
-    document.getElementById("usage").value = null;
+    document.getElementById("usaging").value = null;
     document.getElementById("img").value = null;
     document.getElementById("taoBaoUrl").value = null;
     document.getElementById("price").value = null;
@@ -352,11 +352,11 @@ function insertInfo(goodsId) {
         document.getElementById("goodsName").value = goods.goodsName===null?null:goods.goodsName;
         document.getElementById("brand").value = goods.brand===null?null:goods.brand;
         document.getElementById("type").value = goods.type===null?null:goods.type;
-        document.getElementById("set").value = goods.set===null?null:goods.set;
+        document.getElementById("setNo").value = goods.setNo===null?null:goods.setNo;
         document.getElementById("requirement").value = goods.requirement===null?null:goods.requirement;
         document.getElementById("introduce").value = goods.introduce===null?null:goods.introduce;
         document.getElementById("description").value = goods.description===null?null:goods.description;
-        document.getElementById("usage").value = goods.usage===null?null:goods.usage;
+        document.getElementById("usaging").value = goods.usaging===null?null:goods.usaging;
         document.getElementById("img").value = goods.img===null?null:goods.img;
         document.getElementById("taoBaoUrl").value = goods.taoBaoUrl===null?null:goods.taoBaoUrl;
         document.getElementById("price").value = goods.price===null?null:goods.price;
@@ -384,11 +384,11 @@ function editGoods() {
   let goodsNameInput = document.getElementById("goodsName").value;
   let brandInput = document.getElementById("brand").value;
   let typeInput = document.getElementById("type").value;
-  let setInput = document.getElementById("set").value;
+  let setNoInput = document.getElementById("setNo").value;
   let requirementInput = document.getElementById("requirement").value;
   let introduceInput = document.getElementById("introduce").value;
   let descriptionInput = document.getElementById("description").value;
-  let usageInput = document.getElementById("usage").value;
+  let usagingInput = document.getElementById("usaging").value;
   let imgInput = document.getElementById("img").value;
   let taoBaoUrlInput = document.getElementById("taoBaoUrl").value;
   let priceInput = document.getElementById("price").value;
@@ -409,11 +409,11 @@ function editGoods() {
       goodsName: goodsNameInput,
       brand: brandInput,
       type: typeInput,
-      set: setInput,
+      setNo: setNoInput,
       requirement: requirementInput,
       introduce: introduceInput,
       description: descriptionInput,
-      usage: usageInput,
+      usaging: usagingInput,
       img: imgInput,
       price: priceInput,
       taoBaoUrl: taoBaoUrlInput,

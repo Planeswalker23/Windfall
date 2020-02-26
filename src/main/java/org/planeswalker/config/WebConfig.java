@@ -1,8 +1,10 @@
 package org.planeswalker.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -43,5 +45,20 @@ public class WebConfig implements WebMvcConfigurer {
 //        registry.addInterceptor(new LoginInterceptor())
 //                .addPathPatterns("/**")
 //                .excludePathPatterns("/user/login", "/user/register", "/error", "/h2", "/codeImg", "/favicon.ico");
+    }
+
+    @Value("${file.staticAccessPath}")
+    private String staticAccessPath;
+    @Value("${file.uploadFolder}")
+    private String uploadFolder;
+
+    /**
+     * 配置访问staticAccessPath文件的重定向
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // 如果是Windows环境的话 file:=改为=》file:///
+        registry.addResourceHandler(staticAccessPath).addResourceLocations("file:" + uploadFolder);
     }
 }

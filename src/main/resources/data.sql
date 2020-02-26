@@ -32,7 +32,11 @@ insert into comment (comment_id, comment_pid, user_id, img_url, content, like_nu
 感谢大家看到这里
 
 试色千人千色，理性种草，理性看待个人色差，么么啾', '0', now(), now(), '欧莱雅小仙贝唇膏，偏光美的简直是魔鬼鬼！！', 'caizhuang1');
-insert into comment (comment_id, comment_pid, user_id, img_url, content, like_num, create_time, update_time, title, goods_id) values ('userComment2', '0', 'user', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582624353263&di=9a40d998d6f0fe2507a06cd5c0597fa3&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F10482569093%2F1000.jpg', '“Ambrosia”这个词源于希腊神话，译为希腊众神的寄托，据说喝下它就能得到永生。近日上市这款2019全新GUCCI Bloom 花悦馥意香水以“Ambrosia”为设计灵感，由调香大师Alberto Morillas调制，目前已经可在GUCCI中国官网购入，有50ml 和100ml 两中规格可选。复古红瓶，颜值上无可挑剔。GUCCI Bloom Ambrosia 花悦馥意延用GUCCI Bloom花悦系列香氛经典的瓶身设计，复古的深红色漆瓶玻璃与淡粉色标签完美融合。淡粉色包装盒饰有Bloom蜡叶印花图案，树叶、樱花枝与花卉与交相辉映，格外生动。古典味道代表着此款花悦馥意女香融入了全新且稀有的香调：鸢尾根茎和大马士革玫瑰。古希腊与罗马人都曾经用鸢尾花提炼精油，这一标志性的香调如今提炼于每年五月份盛开于托斯卡纳的鸢尾花，甚至比黄金还珍贵。大马士革玫瑰作为另一种全新的标志性香调，提炼于清晨采摘下的纯正玫瑰，可将玫瑰的芬芳完美再现。除了这两个香调外，还包含了印度野生晚香玉、清新淡绿调的茉莉花蕊和略带奶香的使君子。 ', '0', now(), now(), '复古红瓶、古典味道：GUCCI Bloom Ambrosia 花悦馥意 女士香水已于近日上市', 'xiangshui1');
+insert into comment (comment_id, comment_pid, user_id, img_url, content, like_num, create_time, update_time, title, goods_id) values ('userComment2', '0', 'user', 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582624353263&di=9a40d998d6f0fe2507a06cd5c0597fa3&imgtype=0&src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F10482569093%2F1000.jpg', '“Ambrosia”这个词源于希腊神话，译为希腊众神的寄托，据说喝下它就能得到永生。近日上市这款2019全新GUCCI Bloom 花悦馥意香水以“Ambrosia”为设计灵感，由调香大师Alberto Morillas调制，目前已经可在GUCCI中国官网购入，有50ml 和100ml 两中规格可选。
+
+复古红瓶，颜值上无可挑剔。GUCCI Bloom Ambrosia 花悦馥意延用GUCCI Bloom花悦系列香氛经典的瓶身设计，复古的深红色漆瓶玻璃与淡粉色标签完美融合。淡粉色包装盒饰有Bloom蜡叶印花图案，树叶、樱花枝与花卉与交相辉映，格外生动。
+
+古典味道代表着此款花悦馥意女香融入了全新且稀有的香调：鸢尾根茎和大马士革玫瑰。古希腊与罗马人都曾经用鸢尾花提炼精油，这一标志性的香调如今提炼于每年五月份盛开于托斯卡纳的鸢尾花，甚至比黄金还珍贵。大马士革玫瑰作为另一种全新的标志性香调，提炼于清晨采摘下的纯正玫瑰，可将玫瑰的芬芳完美再现。除了这两个香调外，还包含了印度野生晚香玉、清新淡绿调的茉莉花蕊和略带奶香的使君子。  ', '0', now(), now(), '复古红瓶、古典味道：GUCCI Bloom Ambrosia 花悦馥意 女士香水已于近日上市', 'xiangshui1');
 insert into comment (comment_id, comment_pid, user_id, img_url, content, like_num, create_time, update_time, title, goods_id) values ('userComment3', '0', 'user', 'https://img.alicdn.com/bao/uploaded/i1/O1CN01MZKHq72GJInX5Aote_!!0-rate.jpg_400x400.jpg', '总结：面膜很好，很滋润，好吸收，修复效果也很棒，用后皮肤细细滑滑的。商品不足：精华液稍少了点。商品优势：修复效果特别棒。', '0', now(), now(), '欧莱雅复颜积雪草微精华面膜使用总结', 'hufupin1');
 
 -- 留言

@@ -33,7 +33,7 @@ public class SessionUtil {
      * @throws NotLoginException
      */
     public static User getUserBean() throws NotLoginException {
-        User user = (User) getSession().getAttribute(Constant.USER_BEAN);
+        User user = (User) getSession().getAttribute(Constant.USER_IN_SESSION);
         if (user == null) {
             // 未登录，抛出异常
             throw new NotLoginException();
@@ -42,5 +42,15 @@ public class SessionUtil {
             log.info("获取登录信息成功，用户信息: {}", JacksonUtil.toJson(user));
             return user;
         }
+    }
+
+    /**
+     * 更新 session 信息
+     * @param target
+     * @param obj
+     */
+    public static void updateAttribute(String target, Object obj) {
+        HttpSession httpSession = getSession();
+        httpSession.setAttribute(target, obj);
     }
 }

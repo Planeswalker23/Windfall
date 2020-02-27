@@ -1,6 +1,6 @@
 package org.planeswalker.exception;
 
-import org.planeswalker.base.LoginErrors;
+import org.planeswalker.base.Errors;
 
 /**
  * 未登录异常
@@ -10,6 +10,6 @@ import org.planeswalker.base.LoginErrors;
 public class NotLoginException extends LoginException {
 
     public NotLoginException() {
-        super(LoginErrors.USER_NOT_LOGIN);
+        super(Errors.USER_NOT_LOGIN);
     }
 }

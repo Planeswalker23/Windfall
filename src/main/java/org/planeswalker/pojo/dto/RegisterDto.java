@@ -26,8 +26,8 @@ public class RegisterDto implements Serializable {
     private String password;
 
     /**
-     * 邮箱，不可修改
+     * 登录账号
      */
-    @NotEmpty(message = "邮箱不能为空")
-    private String email;
+    @NotEmpty(message = "登录账号不能为空")
+    private String account;
 }

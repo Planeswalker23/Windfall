@@ -1,1 +1,1 @@
-insert into user (user_id, user_name, password, email, create_time, update_time, version) values (uuid(), 'root', 'root', 'root@windfall.com', now(), now(), 0);
+insert into user (user_id, user_name, password, account, create_time, update_time) values (uuid(), '管理员', '1', 'root', now(), now());

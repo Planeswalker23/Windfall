@@ -31,7 +31,7 @@ public interface Constant {
     /**
      * session中存放user信息的key
      */
-    String USER_BEAN = "userBean";
+    String USER_IN_SESSION = "user";
     String USER_ID = "userId";
 
     /**

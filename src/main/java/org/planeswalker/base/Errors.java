@@ -7,11 +7,7 @@ package org.planeswalker.base;
  */
 public interface Errors {
 
-    String EDIT_FAILED = "未修改任何数据";
-
     String EMPTY_PARAMS = "参数为空";
-
-    String WRONG_DATA = "数据错误，请联系管理员";
 
     String SYSTEM_ERROR = "系统错误，请联系系统管理员";
 
@@ -23,7 +19,7 @@ public interface Errors {
 
     String REFLECT_ERROR = "通过反射解析对象失败";
 
-    String EMPTY_COLLECTION = "集合为空";
-
     String WRONG_REQUEST_METHOD = "请求方式异常，不支持此方式：";
+
+    String USER_NOT_LOGIN = "用户未登录";
 }

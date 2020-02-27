@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.planeswalker.base.Constant;
 import org.planeswalker.base.Errors;
 import org.planeswalker.base.Response;
-import org.planeswalker.base.ServicesEnum;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -31,7 +30,7 @@ public class WindfallExceptionHandler {
     @ExceptionHandler(value = {LoginException.class, NotLoginException.class})
     public Response loginExceptionHandler(LoginException e) {
         // 登录自定义异常
-        log.warn("[{}]: {}", ServicesEnum.LoginService.getServiceName(), e.getMessage(), e);
+        log.warn(e.getMessage(), e);
         return Response.failed(e.getMessage());
     }
 

@@ -11,6 +11,7 @@
 - 数据库: H2
 - 数据库连接池: HikariCP (SpringBoot 2.0 默认支持)
 - 持久层框架: MyBatis
+- 视图层：Thymeleaf
 - 快速开发框架:
     - lombok 
     - MyBatis-Plus

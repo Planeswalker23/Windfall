@@ -63,7 +63,7 @@ public class RootController {
         List<User> userList = userMapper.selectList(Wrappers.lambdaQuery(user));
         // 查询 user_info 表信息
         List<UserInfo> userInfoList = userInfoMapper.selectBatchIds(Lists.transform(userList, User::getUserId));
-        return Response.success(new PageInfo<>(this.bindData(userList, userInfoList)));
+        return Response.success(this.bindData(userList, userInfoList));
     }
 
     /**
@@ -72,7 +72,7 @@ public class RootController {
      * @param userInfoList
      * @return
      */
-    private List<RootUserInfo> bindData(List<User> userList, List<UserInfo> userInfoList) {
+    private PageInfo<RootUserInfo> bindData(List<User> userList, List<UserInfo> userInfoList) {
         Map<String, UserInfo> userInfoMap = Maps.uniqueIndex(userInfoList, UserInfo::getUserId);
         List<RootUserInfo> users = Lists.newArrayList();
         // 根据 userId 进行数据绑定
@@ -90,7 +90,11 @@ public class RootController {
             }
             users.add(rootUserInfo);
         }
-        return users;
+        PageInfo<RootUserInfo> resPageInfo = new PageInfo<>();
+        // new PageInfo<>(userList)对象是为了在内存中设置分页信息，然后复制给返回类
+        BeanUtils.copyProperties(new PageInfo<>(userList), resPageInfo);
+        resPageInfo.setList(users);
+        return resPageInfo;
     }
 
     /**
@@ -108,7 +112,7 @@ public class RootController {
                 .or().like(User::getUserName, keyword));
         // 查询 user_info 表信息
         List<UserInfo> userInfoList = userInfoMapper.selectBatchIds(Lists.transform(userList, User::getUserId));
-        return Response.success(new PageInfo<>(this.bindData(userList, userInfoList)));
+        return Response.success(this.bindData(userList, userInfoList));
     }
 
     @PostMapping("/root/user/delete")
@@ -157,7 +161,7 @@ public class RootController {
         PageHelper.startPage(pageMessage.getPageNum(), pageMessage.getPageSize());
         // 查询 user 表信息
         List<Goods> goodsList = goodsMapper.selectList(Wrappers.lambdaQuery(goods));
-        return Response.success(new PageInfo<>(this.bindGoods(goodsList)));
+        return Response.success(this.bindGoods(goodsList));
     }
 
     @GetMapping("/root/goods/search")
@@ -171,10 +175,10 @@ public class RootController {
                 .or().like(Goods::getType, keyword)
                 .or().like(Goods::getSetNo, keyword)
                 .or().like(Goods::getRequirement, keyword));
-        return Response.success(new PageInfo<>(this.bindGoods(goodsList)));
+        return Response.success(this.bindGoods(goodsList));
     }
 
-    private List<RootGoodsInfo> bindGoods(List<Goods> goodsList) {
+    private PageInfo<RootGoodsInfo> bindGoods(List<Goods> goodsList) {
         List<RootGoodsInfo> rootGoodsInfoList = Lists.newArrayList();
         for (int i = 0; i < goodsList.size(); i++) {
             Goods goodsDto = goodsList.get(i);
@@ -184,7 +188,11 @@ public class RootController {
             rootGoodsInfo.setNo(i+1);
             rootGoodsInfoList.add(rootGoodsInfo);
         }
-        return rootGoodsInfoList;
+        PageInfo<RootGoodsInfo> resPageInfo = new PageInfo<>();
+        // new PageInfo<>(goodsList)对象是为了在内存中设置分页信息，然后复制给返回类
+        BeanUtils.copyProperties(new PageInfo<>(goodsList), resPageInfo);
+        resPageInfo.setList(rootGoodsInfoList);
+        return resPageInfo;
     }
 
 

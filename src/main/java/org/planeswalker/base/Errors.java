@@ -22,4 +22,8 @@ public interface Errors {
     String WRONG_REQUEST_METHOD = "请求方式异常，不支持此方式：";
 
     String USER_NOT_LOGIN = "用户未登录";
+
+
+    String USER_WRONG_PASSWORD = "密码错误";
+    String USER_NOT_REGISTER = "该账户未注册";
 }

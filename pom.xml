@@ -64,12 +64,6 @@
 			<artifactId>mybatis-plus-boot-starter</artifactId>
 			<version>${mybatis-plus-starter.version}</version>
 		</dependency>
-		<!-- pagehelper -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-			<version>${pagehelper.version}</version>
-		</dependency>
 		<!-- guava -->
 		<dependency>
 			<groupId>com.google.guava</groupId>

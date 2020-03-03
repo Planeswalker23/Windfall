@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.planeswalker.pojo.dto.LoginDto;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -48,4 +49,9 @@ public class User implements Serializable {
      * 操作时间，写入数据库时自动更新
      */
     private Date updateTime;
+
+    public User(LoginDto loginDto) {
+        this.password = loginDto.getPassword();
+        this.account = loginDto.getAccount();
+    }
 }

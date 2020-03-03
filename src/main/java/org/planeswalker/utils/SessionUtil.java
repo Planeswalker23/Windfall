@@ -32,7 +32,7 @@ public class SessionUtil {
      * @return {@link javax.servlet.http.HttpSession}
      * @throws NotLoginException
      */
-    public static User getUserBean() throws NotLoginException {
+    public static User getUserBean() {
         User user = (User) getSession().getAttribute(Constant.USER_IN_SESSION);
         if (user == null) {
             // 未登录，抛出异常

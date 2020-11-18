@@ -24,6 +24,14 @@ spring:
   # 视图不使用缓存，开发时关闭
   thymeleaf:
     cache: false
+  redis:
+    host: 172.17.91.23
+    port: 6379
+    maxTotal: 100
+    maxIdle: 10
+    maxWaitMillis: 100000
+    timeout: 200
+    password:
 
 # 设置日志输出级别
 logging:

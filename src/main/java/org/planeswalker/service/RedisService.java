@@ -79,8 +79,8 @@ public class RedisService {
         valueInRedis = valueInRedis.replace(ServerSingle, "");
         long expiredTimeInValue = Long.parseLong(valueInRedis);
         // 未过期且为加锁方标识一致，设置为可重入锁，同时更新过期时间
-        long now = System.currentTimeMillis();
-        if (expiredTimeInValue > now && Boolean.TRUE.equals(redisTemplate.opsForValue().setIfPresent(redisKey, ServerSingle+now, 10, TimeUnit.SECONDS))) {
+        // 使用 setIfPresent 来避免锁过期
+        if (Boolean.TRUE.equals(redisTemplate.opsForValue().setIfPresent(redisKey, ServerSingle+redisValue, expireTime, timeUnit))) {
             log.info("Distributed Lock version 3 locking success, key existed but update its expired time, key-[{}], value-[{}]", redisKey, redisValue);
             return true;
         }

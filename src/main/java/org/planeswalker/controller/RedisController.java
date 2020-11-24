@@ -18,6 +18,14 @@ public class RedisController {
     @Resource
     private RedisService redisService;
 
+    /**
+     * http://127.0.0.1:8080/redis/lock?key=fanyidong&value=lock&version=3
+     * @param version
+     * @param key
+     * @param value
+     * @return
+     * @throws InterruptedException
+     */
     @GetMapping("/redis/lock")
     public Object lock(int version, String key, String value) throws InterruptedException {
         boolean islock = false;
@@ -40,12 +48,12 @@ public class RedisController {
         // 处理业务大于过期时间
 //        TimeUnit.SECONDS.sleep(11);
         // 解锁
-//        return redisService.unlock1(key);
-        return islock;
+        return redisService.unlock1(key);
     }
 
     /**
      * 测试可重入锁
+     * http://127.0.0.1:8080/redis/lockAgain?key=fanyidong
      * @param key
      * @return
      */
@@ -57,6 +65,11 @@ public class RedisController {
         return redisService.lock3(key, RedisService.ServerSingle + System.currentTimeMillis() + 10000, 10, TimeUnit.SECONDS);
     }
 
+    /**
+     * http://127.0.0.1:8080/redis/get?key=fanyidong
+     * @param key
+     * @return
+     */
     @GetMapping("/redis/get")
     public Object get(String key) {
         return redisService.get(key);

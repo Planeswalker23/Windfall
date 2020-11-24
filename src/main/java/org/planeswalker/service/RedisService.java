@@ -3,7 +3,7 @@ package org.planeswalker.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -73,17 +73,14 @@ public class RedisService {
         }
         String valueInRedis = redisTemplate.opsForValue().get(redisKey);
         // fix: 无法区分不同客户端操作的问题（Redis value中附带客户端标识）
-        if (valueInRedis==null || !valueInRedis.contains(ServerSingle)) {
-            log.info("Distributed Lock version 3 locking failed, key existed but value is null or don't lock by this server, key-[{}], value-[{}]", redisKey, redisValue);
+        if (!this.isLocalConsumer(valueInRedis)) {
             return false;
         }
         valueInRedis = valueInRedis.replace(ServerSingle, "");
         long expiredTimeInValue = Long.parseLong(valueInRedis);
         // 未过期且为加锁方标识一致，设置为可重入锁，同时更新过期时间
         long now = System.currentTimeMillis();
-        if (expiredTimeInValue > now) {
-            // todo 更新value 同时更新过期时间
-            redisTemplate.opsForValue().getAndSet(redisKey, ServerSingle+now);
+        if (expiredTimeInValue > now && Boolean.TRUE.equals(redisTemplate.opsForValue().setIfPresent(redisKey, ServerSingle+now, 10, TimeUnit.SECONDS))) {
             log.info("Distributed Lock version 3 locking success, key existed but update its expired time, key-[{}], value-[{}]", redisKey, redisValue);
             return true;
         }
@@ -97,17 +94,34 @@ public class RedisService {
      * @return
      */
     public boolean unlock1(String redisKey) {
-        Object redisValue = redisTemplate.opsForValue().get(redisKey);
-        if (StringUtils.isEmpty(redisValue)) {
+        String redisValue = redisTemplate.opsForValue().get(redisKey);
+        if (ObjectUtils.isEmpty(redisValue)) {
             log.info("Distributed Lock unlock failed, key not exist or key is expired, key-[{}], unlocked by-[{}]", redisKey, ServerSingle);
+            return false;
+        }
+        // fix: 无法区分不同客户端操作的问题（Redis value中附带客户端标识）
+        if (!this.isLocalConsumer(redisValue)) {
             return false;
         }
         if (Boolean.TRUE.equals(redisTemplate.opsForValue().getOperations().delete(redisKey))) {
             log.info("Distributed Lock unlock success, key-[{}], unlocked by-[{}]", redisKey, ServerSingle);
             return true;
-        } else {
-            log.info("Distributed Lock unlock failed, key not exist or key is expired, key-[{}], unlocked by-[{}]", redisKey, ServerSingle);
+        }
+        log.info("Distributed Lock unlock failed, key not exist or key is expired, key-[{}], unlocked by-[{}]", redisKey, ServerSingle);
+        return false;
+    }
+
+    /**
+     * 判断值是否为本客户端设置的
+     * @param valueInRedis
+     * @return boolean
+     */
+    private boolean isLocalConsumer(String valueInRedis) {
+        // fix: 无法区分不同客户端操作的问题（Redis value中附带客户端标识）
+        if (valueInRedis==null || !valueInRedis.contains(ServerSingle)) {
+            log.info("Distributed Lock does not exist or not lock by this server, value-[{}]", valueInRedis);
             return false;
         }
+        return true;
     }
 }

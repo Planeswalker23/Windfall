@@ -17,7 +17,7 @@
 		<h2.version>1.4.200</h2.version>
 		<lombok.version>1.18.8</lombok.version>
 		<mybatis-plus-starter.version>3.2.0</mybatis-plus-starter.version>
-		<guava.version>28.1-jre</guava.version>
+		<guava.version>29.0-jre</guava.version>
 		<pagehelper.version>5.1.11</pagehelper.version>
 	</properties>
 

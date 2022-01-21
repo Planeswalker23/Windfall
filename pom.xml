@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<springboot.version>2.2.2.RELEASE</springboot.version>
-		<h2.version>1.4.200</h2.version>
+		<h2.version>2.1.210</h2.version>
 		<lombok.version>1.18.8</lombok.version>
 		<mybatis-plus-starter.version>3.2.0</mybatis-plus-starter.version>
 		<guava.version>28.1-jre</guava.version>
